@@ -1,0 +1,24 @@
+# dependencies
+/node_modules
+
+# development
+/src
+/tests
+.gitignore
+tsconfig.json
+tsup.config.ts
+jest.config.ts
+eslint.config.mjs
+
+# misc
+.DS_Store
+*.pem
+
+# typescript
+*.tsbuildinfo
+
+# ESLint
+.eslintcache
+
+# IDEs
+.vscode

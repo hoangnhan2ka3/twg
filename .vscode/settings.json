@@ -1,0 +1,48 @@
+{
+    //! Disable the Prettier formatter
+    "prettier.enable": false,
+    //! General
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.stylelint": "explicit",
+        "source.organizeImports": "never",
+        "source.addMissingImports": "explicit"
+    },
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "javascript.format.insertSpaceBeforeFunctionParenthesis": false,
+    "typescript.format.insertSpaceBeforeFunctionParenthesis": false,
+    //! ESlint
+    "eslint.options": {
+        "overrideConfigFile": "./eslint.config.mjs"
+    },
+    "eslint.workingDirectories": [
+        {
+            "mode": "auto"
+        }
+    ],
+    "eslint.validate": [
+        "javascript",
+        "typescript",
+        "javascriptreact",
+        "typescriptreact",
+        "html",
+    ],
+    "eslint.quiet": false,
+    //! Spell Checker
+    "cSpell.words": [
+        "compat",
+        "modclasses",
+        "modother",
+        "modtclasses",
+        "modtother",
+        "tadditional",
+        "tclass",
+        "tclasses",
+        "tseslint",
+        "tsup"
+    ],
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+}
