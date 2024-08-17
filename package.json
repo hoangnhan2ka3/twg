@@ -25,7 +25,14 @@
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
     "exports": {
-        "./replacer": "./dist/replacer"
+        ".": {
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
+        },
+        "./replacer": {
+            "types": "./dist/replacer/index.d.ts",
+            "default": "./dist/replacer/index.js"
+        }
     },
     "devDependencies": {
         "@eslint/compat": "^1.1.1",
