@@ -37,7 +37,7 @@ function replacer({
                 .replace(replaceAndOr, "")
                 .replace(replaceTernary, '"$<m1> $<m2>"')
                 .trim()
-            console.log("result: ", paramsString)
+            // console.log("result: ", paramsString)
             const parsedArgs = twg({ separator })(
                 ...new Function(`return [${paramsString}]`)() as ClassValue[]
             )
