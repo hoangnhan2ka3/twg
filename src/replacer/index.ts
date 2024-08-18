@@ -1,6 +1,4 @@
-import { type ClassValue } from "src"
-import { extractArgumentsIndex, extractOuterObjects } from "src/replacer/extractors"
-import { createTwg } from "src/twg"
+import { type ClassValue, twg } from "src"
 
 export interface ReplacerOptions {
     callee?: string,
@@ -26,56 +24,27 @@ function replacer({
             return content
         }
 
-        const filteredContent = content.replace(replaceComment, "")
+        let filteredContent = content.replace(replaceComment, "")
 
-        const matchWholeFunction = RegExp(`${callee}\\((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*\\)`, "gis")
-        // callee( ... )
-        const calleeFunctionCalls = filteredContent.match(matchWholeFunction) ?? []
+        const calleeFunctionCalls = filteredContent.match(
+            RegExp(`${callee}\\((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*\\)`, "gis")
+        ) ?? [] // callee( ... )
 
-        const largestObjects = calleeFunctionCalls
-            .map(calleeFunctionCall => extractOuterObjects(
-                calleeFunctionCall.replace(replaceObjectsSeparator, ",")
-            ))
-            .filter(obj => obj !== "")
-            .join("\n")
+        calleeFunctionCalls.forEach(call => {
+            const paramsString = call
+                .slice(callee.length + 1, -1)
+                .replace(replaceObjectsSeparator, ",")
+                .replace(replaceAndOr, "")
+                .replace(replaceTernary, '"$<m1> $<m2>"')
+                .trim()
+            console.log("result: ", paramsString)
+            const parsedArgs = twg({ separator })(
+                ...new Function(`return [${paramsString}]`)() as ClassValue[]
+            )
+            filteredContent = filteredContent.replace(call, `"${parsedArgs}"`)
+        })
 
-        try {
-            return [...largestObjects.matchAll(objectIndex)].reduce((
-                acc: string, //*
-                matchArr: RegExpMatchArray
-            ) => {
-                const extractedArgs = extractArgumentsIndex(
-                    matchArr.index!,
-                    matchArr[0].length,
-                    largestObjects
-                )
-
-                const currentTransform = extractedArgs
-                    .replace(replaceAndOr, "")
-                    .replace(replaceTernary, '"$<m1> $<m2>"')
-                    .trim()
-
-                try {
-                    const parsedArgs = createTwg({ separator })(
-                        ...new Function(`return [${currentTransform}]`)() as ClassValue[]
-                    )
-                    return acc.replace(extractedArgs, `"${parsedArgs}"`)
-                } catch (errorParsing) {
-                    console.warn(`
-                        \n⚠️ Warning: Problem occurred:\n
-                        \n${(errorParsing as Error).message} in:\n- ${extractedArgs}
-                        \nTrying to be transformed into:\n+ ${currentTransform}
-                    `)
-                    return acc
-                }
-            }, filteredContent)
-        } catch (errorOnFile) {
-            console.error(`
-                \n❌ Error: Error occurred:\n
-                \n${(errorOnFile as Error).message} in file\n${content}\n
-            `)
-            return content
-        }
+        return filteredContent
     }
 }
 

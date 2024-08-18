@@ -4,25 +4,46 @@ import { extractOuterObjects } from "src/replacer/extractors"
 import { createTwg } from "src/twg"
 
 const content = /* js */ `
-    <div className={twg([
+    <div className={twg(
         "multiple classes",
         {
             // comments
             mod1: ["base", "other classes"],
             mod2: ["base", { "additional-mod": "other classes" }]
         }
-    ])} />
+    )} />
+    Some contents
+    <div className={twg(
+        "multiple classes",
+        {
+            mod1: ["class", "other classes"],
+            mod2: ["class", { "additional-mod": "other classes" }]
+        }
+    )} />
 ` as string
 
 const transformedContent = replacer()(content)
 
 console.log("1: ", transformedContent)
 
-function cn(...inputs: ClassValue[]) {
-    return twg({
-        separator: "h"
-    })(...inputs)
-}
+const content5 = `
+{
+            mod1: ["base", "other classes"],
+            mod2: ["base", { "additional-mod": "other classes" }]
+        }
+{
+            mod1: ["class", "other classes"],
+            mod2: ["class", { "additional-mod": "other classes" }]
+        }
+`
+
+// console.log("5: ", content5.slice(-1, 122 + 1))
+
+// function cn(...inputs: ClassValue[]) {
+//     return twg({
+//         separator: "h"
+//     })(...inputs)
+// }
 
 const content2 = [
     "multiple classes", { "var:": "class" }, { var: "multiple classes" }

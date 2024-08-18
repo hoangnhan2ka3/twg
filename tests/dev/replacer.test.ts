@@ -357,6 +357,81 @@ describe("replacer()", () => {
         })
     })
 
+    describe("More complex contents:", () => {
+        it.each([
+            {
+                contents: `
+                    <div className={cn([
+                        "multiple classes",
+                        {
+                            // comments
+                            mod1: ["base", "other classes"],
+                            mod2: ["base", { "additional-mod": "other classes" }]
+                        }
+                    ])} />
+                    Some contents
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={cn([
+                        "multiple classes",
+                        "mod1:base mod1:other mod1:classes mod2:base mod2:additional-mod:other mod2:additional-mod:classes"
+                    ])} />
+                    Some contents
+                    <div className={cn(
+                        "multiple classes",
+                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg([
+                        "multiple classes",
+                        {
+                            // comments
+                            mod1: ["base", "other classes"],
+                            mod2: ["base", { "additional-mod": "other classes" }]
+                        }
+                    ])} />
+                    Some contents
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={twg([
+                        "multiple classes",
+                        {
+                            mod1: ["base", "other classes"],
+                            mod2: ["base", { "additional-mod": "other classes" }]
+                        }
+                    ])} />
+                    Some contents
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer({ callee: "cn" })(contents)).toBe(expected)
+        })
+    })
+
     describe("Empty & plain text contents:", () => {
         it.each([
             { contents: "", expected: "" },
