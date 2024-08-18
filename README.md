@@ -64,7 +64,7 @@ Function | What it does
 `twg()`'s job is just transforming the object(s) inside itself to `map the key to each values`, outside the object and the rest processes are the job of `clsx`.
 
 ```jsx
-<div className={twg(
+<div className={twg()(
   "size-92 relative grid place-items-center", // <== clsx will handle outside the object
   {
     before: "absolute inset-0 bg-red-500",
@@ -95,7 +95,7 @@ More complex than `twg()`, `replacer()` uses `regex` and some `extractor` functi
 
 ```jsx
 // ...
-<div className={twg(
+<div className={twg()(
   "size-92 relative grid place-items-center", // <== don't care cuz it's already valid Tailwind classes
   {
     before: "absolute inset-0 bg-red-500",
@@ -111,7 +111,7 @@ Output (right before Tailwind starts to scan in all of our files):
 
 ```jsx
 //...
-<div className={twg(
+<div className={twg()(
   "size-92 relative grid place-items-center",
   "before:absolute before:inset-0 before:bg-red-500 aria-expanded:bg-red-500 aria-expanded:text-yellow-500",
 )}>
@@ -230,7 +230,8 @@ import { twg } from "twg"
 
 export function HelloWorld() {
   return (
-    <div className={twg(
+    // temporary using twg()(...inputs) syntax
+    <div className={twg()(
       "size-92 relative grid place-items-center px-4 py-2",
       {
         before: [
@@ -271,7 +272,8 @@ export function HelloWorld() {
   const [isTernary, setIsTernary] = useState("foo")
   // ...
   return (
-    <div className={twg(
+    // temporary using twg()(...inputs) syntax
+    <div className={twg()(
       "size-92 relative grid place-items-center px-4 py-2",
       {
         before: [
