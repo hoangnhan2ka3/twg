@@ -138,9 +138,7 @@ describe("replacer()", () => {
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer({ callee: "cn" })(contents)).toBe(expected)
         })
-    })
 
-    describe("Empty callee:", () => {
         it.each([
             {
                 contents: `
@@ -354,6 +352,80 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer({ separator: false })(contents)).toBe(expected)
+        })
+    })
+
+    describe("Custom matchFunction regex:", () => {
+        it.each([
+            {
+                contents: `
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer({ matchFunction: /^cn$/ })(contents)).toBe(expected)
+        })
+
+        it.each([
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer({ matchFunction: "/^twg$/g" })(contents)).toBe(expected)
+        })
+
+        it.each([
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer({ matchFunction: "" })(contents)).toBe(expected)
         })
     })
 

@@ -62,4 +62,4 @@ function twg(options?: TWGOptions) {
     }
 }
 
-export { type ClassValue, createTwg, twg, type TWGOptions }
+export { type ClassValue, twg, type TWGOptions }

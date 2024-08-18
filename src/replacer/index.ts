@@ -1,5 +1,6 @@
-import { type ClassValue, createTwg } from "src/index"
+import { type ClassValue } from "src"
 import { extractOuterObjects } from "src/replacer/extractors"
+import { createTwg } from "src/twg"
 
 interface ReplacerOptions {
     callee?: string,
@@ -16,14 +17,14 @@ interface ReplacerOptions {
 // })
 
 const replaceAndOr = /(?:!*?\w+)\s*(?:[=!]==?\s*[^&|?]*)?(?:&&|\|\||\?\?)\s*/gs // cond (=== prop) &&, ||, ??
-const replaceTernary = /(?:!*?\w+)\s*(?:[=!]==?\s*[^?:]*)?\?\s*(?<q1>['"`])(?<m1>.*?)\k<q1>\s*:\s*(?<q2>['"`])(?<m2>.*?)\k<q2>/gis // cond (=== prop) ? <m1> : <m2>
+const replaceTernary = /(?:!*?\w+)\s*(?:[=!]==?\s*[^?:]*)?\?\s*['"`](?<m1>.*?)['"`]\s*:\s*['"`](?<m2>.*?)['"`]/gis // cond (=== prop) ? <m1> : <m2>
 const replaceComment = /\s*((?<!https?:)\/\/.*|\{?\/\*+\s*\n?([^*]*|(\*(?!\/)))*\*\/\}?)/g // (// ... | /* ... */ | {/* ... */})
 const replaceObjectsSeparator = /,?\s*\}\s*,[^{}]*\{/gs // }, ... { => collapse multiple objects
 
 /**
  * Transforms the content before Tailwind scans its classes.
  * @param options see [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#replacer-options)
- * @param content The content provided by `content.files`
+ * @param content The content provided by `content.files` in `tailwind.config`
  */
 function replacer({
     callee = "twg",
@@ -41,9 +42,11 @@ function replacer({
         let calleeFunctionRegex = new RegExp(`${callee}\\((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*\\)`, "gis")
         if (matchFunction !== undefined) {
             if (typeof matchFunction === "string") {
-                const match = (/^\/(.+)\/([gimsuy]*)$/).exec(matchFunction)
+                const match = (/^\/(.+)\/([gimsuy]*)$/i).exec(matchFunction)
                 if (match !== null) {
                     calleeFunctionRegex = new RegExp(match[1] ?? "", match[2])
+                } else {
+                    console.warn("⚠️ Warning: `matchFunction` is not valid.")
                 }
             } else if (matchFunction instanceof RegExp) {
                 calleeFunctionRegex = matchFunction
@@ -83,7 +86,7 @@ function replacer({
             // DONE. Return the processed content
             return preprocessingContent
         } catch (errorOnFile) {
-            console.error(`\n❌ An Error occurred:\n${(errorOnFile as Error).message} in file\n${content}\n`)
+            console.error(`\n❌ An error occurred:\n${(errorOnFile as Error).message} in file\n${content}\n`)
             return content
         }
     }

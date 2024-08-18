@@ -17,7 +17,9 @@ const content = /* js */ `
     }
 ` as string
 
-const transformedContent = replacer()(content)
+const transformedContent = replacer({
+    matchFunction: ""
+})(content)
 
 // console.log("1: ", transformedContent)
 
@@ -78,4 +80,4 @@ const content6 = `
         }
     )
 `
-console.log("4: ", extractOuterObjects(content6.replace(/\s\s+/g, " ")))
+// console.log("4: ", extractOuterObjects(content6.replace(/\s\s+/g, " ")))

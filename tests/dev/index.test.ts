@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable no-constant-binary-expression */
 
-import { createTwg, twg } from "src"
+import { twg } from "src"
 
 describe("twg()", () => {
     describe("General cases:", () => {
@@ -47,6 +47,10 @@ describe("twg()", () => {
         const remoteMultipleClassesWithMultipleVars = [
             "multiple classes", { var: "class" }, { var: "multiple classes" }
         ]
+        const remoteMultipleClassesWithObjectOnly = [{ var: "multiple classes" }]
+        const remoteMultipleClassesAndVarsWithObjectOnly = [
+            { var1: "multiple classes", var2: ["class", { var3: "multiple classes" }] }
+        ]
 
         it.each([
             { args: remoteSingleClass, expected: "class" },
@@ -55,6 +59,30 @@ describe("twg()", () => {
             {
                 args: remoteMultipleClassesWithMultipleVars,
                 expected: "multiple classes var:class var:multiple var:classes"
+            },
+            { args: remoteMultipleClassesWithObjectOnly, expected: "var:multiple var:classes" },
+            {
+                args: remoteMultipleClassesAndVarsWithObjectOnly,
+                expected: "var1:multiple var1:classes var2:class var2:var3:multiple var2:var3:classes"
+            }
+        ])('"$expected"', ({ args, expected }) => {
+            expect(twg()(...args)).toBe(expected)
+        })
+    })
+
+    describe("Object only:", () => {
+        it.each([
+            {
+                args: [{ var: "class" }],
+                expected: "var:class"
+            },
+            {
+                args: [{ var: "multiple classes with var" }],
+                expected: "var:multiple var:classes var:with var:var"
+            },
+            {
+                args: [{ var1: ["multiple classes", { var2: "in array with var" }] }],
+                expected: "var1:multiple var1:classes var1:var2:in var1:var2:array var1:var2:with var1:var2:var"
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg()(...args)).toBe(expected)
