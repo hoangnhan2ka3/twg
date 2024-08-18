@@ -1,6 +1,6 @@
 {
     "name": "twg",
-    "version": "1.0.0-alpha.11",
+    "version": "1.0.0-alpha.12",
     "description": "A utility function for grouping TailwindCSS variants.",
     "author": "hoangnhan2ka3",
     "homepage": "https://github.com/hoangnhan2ka3/twg",
@@ -18,7 +18,8 @@
     "scripts": {
         "build": "tsup",
         "test": "jest",
-        "lint": "tsc"
+        "lint": "tsc",
+        "npm": "pnpm build && pnpm publish --access public"
     },
     "sideEffects": false,
     "main": "dist/index.js",
