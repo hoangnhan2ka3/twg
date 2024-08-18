@@ -1,6 +1,6 @@
 {
     "name": "twg",
-    "version": "1.0.0-alpha.4",
+    "version": "1.0.0-alpha.5",
     "description": "A utility function for grouping TailwindCSS variants.",
     "author": "hoangnhan2ka3",
     "homepage": "https://github.com/hoangnhan2ka3/twg",
@@ -27,11 +27,13 @@
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
-            "default": "./dist/index.js"
+            "default": "./dist/index.js",
+            "import": "./dist/index.mjs"
         },
         "./replacer": {
             "types": "./dist/replacer/index.d.ts",
-            "default": "./dist/replacer/index.js"
+            "default": "./dist/replacer/index.js",
+            "import": "./dist/replacer/index.mjs"
         }
     },
     "devDependencies": {

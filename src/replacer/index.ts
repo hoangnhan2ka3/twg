@@ -28,8 +28,9 @@ function replacer({
 
         const filteredContent = content.replace(replaceComment, "")
 
-        const matchWholeFunction = `${callee}\\((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*\\)` // callee( ... )
-        const calleeFunctionCalls = RegExp(matchWholeFunction, "gis").exec(filteredContent) ?? []
+        const matchWholeFunction = RegExp(`${callee}\\((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*\\)`, "gis")
+        // callee( ... )
+        const calleeFunctionCalls = filteredContent.match(matchWholeFunction) ?? []
 
         const largestObjects = calleeFunctionCalls
             .map(calleeFunctionCall => extractOuterObjects(
