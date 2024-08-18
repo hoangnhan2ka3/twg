@@ -10,6 +10,8 @@ describe("twg()", () => {
             { args: [], expected: "" },
             { args: [""], expected: "" },
             { args: ["t"], expected: "t" },
+            { args: ["1"], expected: "1" },
+            { args: ["."], expected: "." },
             { args: [null], expected: "" },
             { args: [undefined], expected: "" },
             { args: [null, undefined], expected: "" },

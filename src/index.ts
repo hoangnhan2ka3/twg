@@ -3,9 +3,9 @@ import { createTwg } from "src/twg"
 type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
 
 /**
+ * Handles several types of class values.
  * @borrows https://github.com/lukeed/clsx
  */
-
 function toVal(mix: ClassValue, separator?: string | false): string {
     let k: number,
         y: string,
@@ -36,6 +36,11 @@ interface TWGOptions {
     separator?: string | false
 }
 
+/**
+ * Utility function to transform the inputs on build time. Map key to each values inside the Object zones.
+ * @param options see [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options)
+ * @param inputs The inputs class values
+ */
 function twg(options?: TWGOptions) {
     return (...inputs: ClassValue[]) => {
         let i: number,

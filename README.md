@@ -209,17 +209,17 @@ transform: {
 
 ### `replacer()` options
 
-`options?` | Types | Default | Description
---- | --- | --- | ---
-`callee?` | string | "twg" | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `clsx`, `cx`, etc. _(Name it as unique as possible or you'll have conflicts)_
-`objectIndex?` | RegExp | /^\{/gm | The regex used to catch the `first curly brace` of the outer objects INSIDE callee's function for indexing. _(Shouldn't change this unless you know what you're doing)_
-`separator?`(*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `twg()` option.
+`options?` | Types | Default | Description | Status
+--- | --- | --- | --- | ---
+`callee?` | string | "twg" | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `clsx`, `cx`, etc. _(Name it as unique as possible or you'll have conflicts)_ | ✅
+`matchFunction?` | RegExp | /twg\\((?:[^()]\*\|\\((?:[^()]\*\|\\([^()]\*\\))\*\\))\*\\)/gis | The regex used to match the whole `callee function`. (Shouldn't change this unless you know what you're doing)_ | ⚒️
+`separator?`(*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `twg()` option. | ⚒️
 
 ### `twg()` options
 
-`options?` | Types | Default | Description
---- | --- | --- | ---
-`separator?`(*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `replacer()` option.
+`options?` | Types | Default | Description | Status
+--- | --- | --- | --- | ---
+`separator?`(_) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (_)Remember to sync this option with `separator` option in `replacer()` option. | ⚒️
 
 ## How to use
 

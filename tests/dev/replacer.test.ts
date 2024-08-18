@@ -432,6 +432,83 @@ describe("replacer()", () => {
         })
     })
 
+    describe("Misleading object:", () => {
+        it.each([
+            {
+                contents: "<div className={twg(badgeVariants({ variant }), className)} />",
+                expected: `<div className={twg(badgeVariants(""), className)} />`
+            },
+            {
+                contents: `<div className={twg(badgeVariants({ variant: "primary" }), className)} />`,
+                expected: `<div className={twg(badgeVariants("variant:primary"), className)} />`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        badgeVariants({ variant }),
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        badgeVariants(""),
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        badgeVariants({ variant: "primary" }),
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        badgeVariants("variant:primary"),
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={cn(
+                        "flex w-full",
+                        {
+                            before: [
+                                badgeVariants({ variant }),
+                                {
+                                    hover: "bg-red-500"
+                                }
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={cn(
+                        "flex w-full",
+                        {
+                            before: [
+                                badgeVariants({ variant }),
+                                {
+                                    hover: "bg-red-500"
+                                }
+                            ]
+                        },
+                        className
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer()(contents)).toBe(expected)
+        })
+    })
+
     describe("Empty & plain text contents:", () => {
         it.each([
             { contents: "", expected: "" },

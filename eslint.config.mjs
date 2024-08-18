@@ -85,7 +85,8 @@ export default tseslint.config(
             }],
             "@typescript-eslint/consistent-generic-constructors": 1,
             "@typescript-eslint/no-unnecessary-condition": 1,
-            "@typescript-eslint/no-unnecessary-template-expression": 1
+            "@typescript-eslint/no-unnecessary-template-expression": 1,
+            "@typescript-eslint/prefer-nullish-coalescing": 1
         }
     },
     //* JavaScript Plugin (Disable Type Checked)

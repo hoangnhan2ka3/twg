@@ -1,43 +1,25 @@
 import { type ClassValue, twg } from "src/index"
 import { replacer } from "src/replacer"
-// import { extractOuterObjects } from "src/replacer/extractors"
+import { extractOuterObjects } from "src/replacer/extractors"
 import { createTwg } from "src/twg"
 
 const content = /* js */ `
-    <ContextMenuPrimitive.SubContent
-        loop
-        sideOffset={sideOffset}
-        alignOffset={alignOffset}
-        ref={ref}
-        className={twg(
-            // "shadow-md shadow-mega-background/40",
-            "z-[9999999992] min-w-32 transition-transform duration-350 ease-vaul",
-            {
-                "data-state=closed": "duration-350 animate-out fade-out-0 slide-out-to-top-full"
-            },
-            className
-        )}
-        {...props}
-    >
-        <Squircle
-            directly
-            cornerRadius={14}
-            borderWidth={1.25}
-            className={twg(
-                "bg-mega-secondary/15 p-1",
-                {
-                    before: "bg-mega-tertiary"
-                }
-            )}
-        >
-            {children}
-        </Squircle>
-    </ContextMenuPrimitive.SubContent>
+    const Badge \\= ({ className, variant, ...props }: BadgeProps) => {
+        return (
+            <div
+                onClick={() => {
+                    router.push("/pricing")
+                }}
+                className={twg(badgeVariants({ variant }), className)}
+                {...props}
+            />
+        )
+    }
 ` as string
 
 const transformedContent = replacer()(content)
 
-console.log("1: ", transformedContent)
+// console.log("1: ", transformedContent)
 
 const content5 = `
 {
@@ -86,4 +68,14 @@ const content4 = `
         propClassName
     )
 `
-// console.log("4: ", extractOuterObjects(content4))
+
+const content6 = `
+    twg(
+        "multiple classes",
+        {
+            mod1: ["class", "other classes"],
+            mod2: ["class", { "additional-mod": "other classes" }]
+        }
+    )
+`
+console.log("4: ", extractOuterObjects(content6.replace(/\s\s+/g, " ")))
