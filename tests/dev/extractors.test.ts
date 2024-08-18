@@ -1,4 +1,4 @@
-import { extractArgumentsIndex, extractOuterObjects } from "src/replacer/extractors"
+import { extractOuterObjects } from "src/replacer/extractors"
 
 const replaceObjectsSeparator = /,?\s*\}\s*,[^{}]*\{/gs
 

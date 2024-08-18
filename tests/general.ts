@@ -1,12 +1,13 @@
 import { type ClassValue, twg } from "src/index"
 import { replacer } from "src/replacer"
-import { extractArgumentsIndex, extractOuterObjects } from "src/replacer/extractors"
+import { extractOuterObjects } from "src/replacer/extractors"
 import { createTwg } from "src/twg"
 
 const content = /* js */ `
     <div className={twg([
         "multiple classes",
         {
+            // comments
             mod1: ["base", "other classes"],
             mod2: ["base", { "additional-mod": "other classes" }]
         }
@@ -15,7 +16,7 @@ const content = /* js */ `
 
 const transformedContent = replacer()(content)
 
-// console.log("1: ", transformedContent)
+console.log("1: ", transformedContent)
 
 function cn(...inputs: ClassValue[]) {
     return twg({
@@ -51,4 +52,4 @@ const content4 = `
         propClassName
     )
 `
-console.log("4: ", extractOuterObjects(content4))
+// console.log("4: ", extractOuterObjects(content4))
