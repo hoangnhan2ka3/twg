@@ -9,7 +9,7 @@ export default defineConfig({
     dts: true,
     clean: true,
     shims: true,
-    // minify: "terser",
+    minify: "terser",
     splitting: false,
     skipNodeModulesBundle: true
 })

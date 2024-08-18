@@ -1,25 +1,38 @@
 import { type ClassValue, twg } from "src/index"
 import { replacer } from "src/replacer"
-import { extractOuterObjects } from "src/replacer/extractors"
+// import { extractOuterObjects } from "src/replacer/extractors"
 import { createTwg } from "src/twg"
 
 const content = /* js */ `
-    <div className={twg(
-        "multiple classes",
-        {
-            // comments
-            mod1: ["base", "other classes"],
-            mod2: ["base", { "additional-mod": "other classes" }]
-        }
-    )} />
-    Some contents
-    <div className={twg(
-        "multiple classes",
-        {
-            mod1: ["class", "other classes"],
-            mod2: ["class", { "additional-mod": "other classes" }]
-        }
-    )} />
+    <ContextMenuPrimitive.SubContent
+        loop
+        sideOffset={sideOffset}
+        alignOffset={alignOffset}
+        ref={ref}
+        className={twg(
+            // "shadow-md shadow-mega-background/40",
+            "z-[9999999992] min-w-32 transition-transform duration-350 ease-vaul",
+            {
+                "data-state=closed": "duration-350 animate-out fade-out-0 slide-out-to-top-full"
+            },
+            className
+        )}
+        {...props}
+    >
+        <Squircle
+            directly
+            cornerRadius={14}
+            borderWidth={1.25}
+            className={twg(
+                "bg-mega-secondary/15 p-1",
+                {
+                    before: "bg-mega-tertiary"
+                }
+            )}
+        >
+            {children}
+        </Squircle>
+    </ContextMenuPrimitive.SubContent>
 ` as string
 
 const transformedContent = replacer()(content)

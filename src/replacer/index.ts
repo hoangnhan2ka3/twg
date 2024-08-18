@@ -1,4 +1,5 @@
-import { type ClassValue, twg } from "src"
+import { type ClassValue, createTwg } from "src/index"
+import { extractOuterObjects } from "src/replacer/extractors"
 
 export interface ReplacerOptions {
     callee?: string,
@@ -25,23 +26,20 @@ function replacer({
         }
 
         let filteredContent = content.replace(replaceComment, "")
-
         const calleeFunctionCalls = filteredContent.match(
             RegExp(`${callee}\\((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*\\)`, "gis")
         ) ?? [] // callee( ... )
 
         calleeFunctionCalls.forEach(call => {
-            const paramsString = call
-                .slice(callee.length + 1, -1)
-                .replace(replaceObjectsSeparator, ",")
+            const largestObject = extractOuterObjects(call.replace(replaceObjectsSeparator, ","))
+            const paramsString = largestObject
                 .replace(replaceAndOr, "")
                 .replace(replaceTernary, '"$<m1> $<m2>"')
                 .trim()
-            // console.log("result: ", paramsString)
-            const parsedArgs = twg({ separator })(
+            const parsedArgs = createTwg({ separator })(
                 ...new Function(`return [${paramsString}]`)() as ClassValue[]
             )
-            filteredContent = filteredContent.replace(call, `"${parsedArgs}"`)
+            filteredContent = filteredContent.replace(largestObject, `"${parsedArgs}"`)
         })
 
         return filteredContent
