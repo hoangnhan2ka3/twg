@@ -1,6 +1,6 @@
 import { createTwg } from "src/twg"
 
-type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
+export type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
 
 /**
  * Handles several types of class values including string, number, object, array, conditionals and also itself.
@@ -33,8 +33,9 @@ function toVal(mix: ClassValue): string {
     return str
 }
 
-interface TWGOptions {
-    separator?: string | false
+export interface TWGOptions {
+    separator?: string | false,
+    tailwindPrefix?: string
 }
 
 /**
@@ -43,7 +44,7 @@ interface TWGOptions {
  * @param inputs The inputs class values
  * @author `clsx` [Luke Edwards] see <[reference](https://github.com/lukeed/clsx/blob/master/src/index.js#L30C1-L41C2)>
  */
-function twg(...inputs: ClassValue[]) {
+export function twg(...inputs: ClassValue[]) {
     let i = 0,
         tmp: ClassValue,
         x: string,
@@ -62,5 +63,4 @@ function twg(...inputs: ClassValue[]) {
     return str
 }
 
-export { type ClassValue, twg, type TWGOptions }
 export default twg

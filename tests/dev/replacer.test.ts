@@ -507,6 +507,7 @@ describe("replacer()", () => {
                     <div className={cn(
                         "multiple classes",
                         {
+                            // comments
                             mod1: ["class", "other classes"],
                             mod2: ["class", { "additional-mod": "other classes" }]
                         }
@@ -547,6 +548,7 @@ describe("replacer()", () => {
                     <div className={twg([
                         "multiple classes",
                         {
+                            // comments
                             mod1: ["base", "other classes"],
                             mod2: ["base", { "additional-mod": "other classes" }]
                         }
@@ -563,6 +565,59 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer({ callee: "cn" })(contents)).toBe(expected)
+        })
+    })
+
+    describe("Multiple outer objects:", () => {
+        it.each([
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: "class"
+                        },
+                        {
+                            var2: "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var1:class",
+                        "var2:multiple var2:classes",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: "class"
+                        },
+                        "other multiple classes",
+                        {
+                            var2: "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var1:class",
+                        "other multiple classes",
+                        "var2:multiple var2:classes",
+                        className
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer()(contents)).toBe(expected)
         })
     })
 
@@ -642,26 +697,6 @@ describe("replacer()", () => {
                         "multiple classes",
                         "var:multiple var:classes",
                         className
-                    )} />
-                `
-            },
-            {
-                contents: `
-                    <div className={twg(
-                        "multiple classes",
-                        {
-                            mod1: ["class", "other classes"],
-                            mod2: ["class", { "additional-mod": "other classes" }]
-                        }
-                    )} />
-                `,
-                expected: `
-                    <div className={twg(
-                        "multiple classes",
-                        {
-                            mod1: ["class", "other classes"],
-                            mod2: ["class", { "additional-mod": "other classes" }]
-                        }
                     )} />
                 `
             }

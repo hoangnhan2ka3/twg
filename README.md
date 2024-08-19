@@ -508,6 +508,51 @@ clsx(true ? "foo" : "", false ? "bar" : "", isTrue() ? "baz" : "")
 
 So no need to open a Object for nothing, right? You can't event use direct ternary inside the object.
 
+- Remote utilities:
+
+You cannot use remote utilities like this:
+
+```jsx
+const remoteUtil = "absolute inset-0 bg-red-500"
+
+<div className={twg(
+  "relative grid place-items-center",
+  {
+    before: remoteUtil
+  }
+)}>
+  Hello, World!
+</div>
+```
+
+If you try to use it, it will work in browser's inspect tool:
+
+```html
+<div class="relative grid place-items-center before:absolute before:inset-0 before:bg-red-500">
+  Hello, World!
+</div>
+```
+
+But no styles will be applied because the problem comes from the `replacer()` which cannot transform these remote utilities.
+
+Instead, you can end up with the whole object remote:
+
+```jsx
+const remoteObject = twg({
+  before: "absolute inset-0 bg-red-500"
+})
+
+<div className={twg(
+  "relative grid place-items-center",
+  remoteObject,
+  {
+    "aria-expanded": "bg-red-500 text-yellow-500"
+  }
+)}>
+  Hello, World!
+</div>
+```
+
 - Performance:
 
 Yes of course, `twg` is slower than vanilla `clsx` because it uses `regex` and `extractors` to find and replace the classes. But it's not that slow, it's still fast enough for you to use in your project. This project aim for the better developer-experience with Tailwind variants classes, not for the best performance.

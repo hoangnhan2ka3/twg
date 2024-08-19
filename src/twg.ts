@@ -37,7 +37,7 @@ function reducer(args: ClassValue[], separator: string | false | undefined) {
  * @param args The inputs class values
  * @author `easy-tailwind` [Noriller] see <[reference](https://github.com/Noriller/easy-tailwind/blob/master/src/index.ts#L57C1-L63C4)>
  */
-function createTwg(options?: TWGOptions) {
+export function createTwg(options?: TWGOptions) {
     const divider = (options?.separator !== undefined)
         ? typeof options.separator === "string"
             ? options.separator
@@ -56,4 +56,4 @@ function createTwg(options?: TWGOptions) {
     }) as Record<string, (...args: ClassValue[]) => string> & ((...args: ClassValue[]) => string)
 }
 
-export { createTwg }
+export default createTwg

@@ -9,7 +9,11 @@ const content = /* js */ `
             <div className={twg(
                 "multiple classes",
                 {
-                    var: conditional && "multiple classes",
+                    var1: "class"
+                },
+                "class",
+                {
+                    var2: "multiple classes"
                 },
                 className
             )} />
@@ -19,7 +23,7 @@ const content = /* js */ `
 
 const transformedContent = replacer()(content)
 
-console.log("1: ", transformedContent)
+// console.log("1: ", transformedContent)
 
 const content5 = `
 {
@@ -69,13 +73,17 @@ const content4 = `
     )
 `
 
-const content6 = `
-    twg(
-        "multiple classes",
-        {
-            mod1: ["class", "other classes"],
-            mod2: ["class", { "additional-mod": "other classes" }]
-        }
-    )
-`
-// console.log("4: ", extractOuterObjects(content6.replace(/\s\s+/g, " ")))
+// const content6 = `
+//     twg(
+//         "multiple classes",
+//         "multiple classes",
+//         {
+//             var1: "class"
+//         },
+//         {
+//             var2: "multiple classes"
+//         },
+//         className
+//     )
+// `
+// console.log("4: ", extractOuterObjects(content6)[1])

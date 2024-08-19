@@ -9,7 +9,7 @@ describe("extractOuterObjects()", () => {
                 contents: `
                     twg("multiple classes")
                 `,
-                expected: ""
+                expected: []
             },
             {
                 contents: `
@@ -18,7 +18,7 @@ describe("extractOuterObjects()", () => {
                         mod2: ["multiple classes"]
                     })
                 `,
-                expected: `{ mod1: ["class", "other classes"], mod2: ["multiple classes"] }`
+                expected: [`{ mod1: ["class", "other classes"], mod2: ["multiple classes"] }`]
             },
             {
                 contents: `
@@ -30,7 +30,7 @@ describe("extractOuterObjects()", () => {
                         }
                     )
                 `,
-                expected: `{ mod1: ["class", "other classes"], mod2: ["multiple classes"] }`
+                expected: [`{ mod1: ["class", "other classes"], mod2: ["multiple classes"] }`]
             },
             {
                 contents: `
@@ -42,10 +42,10 @@ describe("extractOuterObjects()", () => {
                         }
                     )
                 `,
-                expected: `{ mod1: ["class", "other classes"], mod2: ["class", { "additional-mod": "other classes" }] }`
+                expected: [`{ mod1: ["class", "other classes"], mod2: ["class", { "additional-mod": "other classes" }] }`]
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(extractOuterObjects(contents.replace(/\s\s+/g, " ").replace(replaceObjectsSeparator, ","))).toBe(expected)
+            expect(extractOuterObjects(contents.replace(/\s\s+/g, " "))).toStrictEqual(expected)
         })
     })
 })
