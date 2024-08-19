@@ -75,6 +75,8 @@ pnpm add twg
 
 import { type Config } from "tailwindcss"
 import { replacer } from "twg/replacer"
+// or
+import replacer from "twg"
 
 export default {
   content: {
@@ -109,13 +111,13 @@ transform: {
 --- | --- | --- | --- | ---
 `callee?` | string \| string[] | "twg" | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_ | ✅
 `matchFunction?` | RegExp \| string | /twg\\((?:[^()]\*\|\\((?:[^()]\*\|\\([^()]\*\\))\*\\))\*\\)/gis | The regex used to match the whole `callee function` (eg.: `twg(...)`) inside your actual code file. | ✅
-`separator?`(*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `twg` option. | 🚧
+`separator?`(*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `twg` option. | 🚧 Currently not available
 
 ### `twg` options
 
 `options?` | Types | Default | Description | Status
 --- | --- | --- | --- | ---
-`separator?`(\*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `replacer()` option. | 🚧
+`separator?`(\*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `replacer()` option. | 🚧 Currently not available
 
 ## How to use
 
@@ -330,6 +332,7 @@ const twMerge = extendTailwindMerge<...>({
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(twg({
+    // ⚠️ Currently not available, but I'm working on it.
     separator: "-"
   })(...inputs))
 }
