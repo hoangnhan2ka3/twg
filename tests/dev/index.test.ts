@@ -36,7 +36,7 @@ describe("twg()", () => {
                 expected: "multiple classes in array"
             }
         ])('"$expected"', ({ args, expected }) => {
-            expect(twg()(...args)).toBe(expected)
+            expect(twg(...args)).toBe(expected)
         })
     })
 
@@ -66,7 +66,7 @@ describe("twg()", () => {
                 expected: "var1:multiple var1:classes var2:class var2:var3:multiple var2:var3:classes"
             }
         ])('"$expected"', ({ args, expected }) => {
-            expect(twg()(...args)).toBe(expected)
+            expect(twg(...args)).toBe(expected)
         })
     })
 
@@ -85,7 +85,7 @@ describe("twg()", () => {
                 expected: "var1:multiple var1:classes var1:var2:in var1:var2:array var1:var2:with var1:var2:var"
             }
         ])('"$expected"', ({ args, expected }) => {
-            expect(twg()(...args)).toBe(expected)
+            expect(twg(...args)).toBe(expected)
         })
     })
 
@@ -104,7 +104,7 @@ describe("twg()", () => {
                 expected: "multiple classes var:multiple var:classes var:in var:array var:with var:var"
             }
         ])('"$expected"', ({ args, expected }) => {
-            expect(twg()(...args)).toBe(expected)
+            expect(twg(...args)).toBe(expected)
         })
     })
 
@@ -123,7 +123,7 @@ describe("twg()", () => {
                 expected: "var:multiple var:classes var:in var:array var:with var:var multiple classes"
             }
         ])('"$expected"', ({ args, expected }) => {
-            expect(twg()(...args)).toBe(expected)
+            expect(twg(...args)).toBe(expected)
         })
     })
 
@@ -142,7 +142,7 @@ describe("twg()", () => {
                 expected: "multiple classes var:multiple var:classes var:in var:array var:with var:var and behind-object class"
             }
         ])('"$expected"', ({ args, expected }) => {
-            expect(twg()(...args)).toBe(expected)
+            expect(twg(...args)).toBe(expected)
         })
     })
 
@@ -161,7 +161,7 @@ describe("twg()", () => {
                 expected: "doubled-quoted-var:multiple doubled-quoted-var:classes doubled-quoted-var:in doubled-quoted-var:array doubled-quoted-var:with doubled-quoted-var:var multiple classes"
             }
         ])('"$expected"', ({ args, expected }) => {
-            expect(twg()(...args)).toBe(expected)
+            expect(twg(...args)).toBe(expected)
         })
     })
 
@@ -180,7 +180,7 @@ describe("twg()", () => {
                 expected: "multiple classes doubled-quoted-var:multiple doubled-quoted-var:classes doubled-quoted-var:in doubled-quoted-var:array doubled-quoted-var:with doubled-quoted-var:var"
             }
         ])('"$expected"', ({ args, expected }) => {
-            expect(twg()(...args)).toBe(expected)
+            expect(twg(...args)).toBe(expected)
         })
     })
 
@@ -199,7 +199,7 @@ describe("twg()", () => {
                 expected: "multiple classes doubled-quoted-var:multiple doubled-quoted-var:classes doubled-quoted-var:in doubled-quoted-var:array doubled-quoted-var:with doubled-quoted-var:var and behind-object class"
             }
         ])('"$expected"', ({ args, expected }) => {
-            expect(twg()(...args)).toBe(expected)
+            expect(twg(...args)).toBe(expected)
         })
     })
 
@@ -218,7 +218,7 @@ describe("twg()", () => {
                 expected: "multiple vars class var1:class var2:class var2:other var2:classes var3:class var3:var4:other var3:var4:classes"
             }
         ])('"$expected"', ({ args, expected }) => {
-            expect(twg()(...args)).toBe(expected)
+            expect(twg(...args)).toBe(expected)
         })
     })
 
@@ -245,7 +245,7 @@ describe("twg()", () => {
                 expected: "multiple classes var1:class var2:multiple var2:classes wanna join in var3:class yes i am in"
             }
         ])('"$expected"', ({ args, expected }) => {
-            expect(twg()(...args)).toBe(expected)
+            expect(twg(...args)).toBe(expected)
         })
     })
 
@@ -276,7 +276,7 @@ describe("twg()", () => {
                 expected: "multiple classes var:class wanna join in var:multiple var:classes"
             }
         ])('"$expected"', ({ args, expected }) => {
-            expect(twg()(...args)).toBe(expected)
+            expect(twg(...args)).toBe(expected)
         })
     })
 
@@ -306,7 +306,7 @@ describe("twg()", () => {
                 expected: "var1:class var1:inside var1:object var1:and var1:one var1:var var1:and var1:within var1:one var1:single var1:array var1:And var1:within var1:a var1:array var1:inside var1:other var1:array"
             }
         ])('"$expected"', ({ args, expected }) => {
-            expect(twg()(...args)).toBe(expected)
+            expect(twg(...args)).toBe(expected)
         })
     })
 
@@ -317,7 +317,7 @@ describe("twg()", () => {
         /* cSpell:disable */
         it("Handles a really complex object:", () => {
             expect(
-                twg()(
+                twg(
                     "Lorem ipsum",
                     "dolor sit",
                     ["amet", "consectetur adipiscing elit"],
@@ -367,7 +367,7 @@ describe("twg()", () => {
         it.each([false && "anything", undefined && "anything", null && "anything"])(
             "Handles falsy values",
             (falsy) => {
-                expect(twg()(falsy)).toBe("")
+                expect(twg(falsy)).toBe("")
             }
         )
     })

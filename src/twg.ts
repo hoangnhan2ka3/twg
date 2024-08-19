@@ -1,5 +1,11 @@
 import { type ClassValue, type TWGOptions } from "src"
 
+/**
+ * Focusing on handling arrays and objects, looping them until all are flattened.
+ * @param args The inputs class values
+ * @param separator The separator used to join the classes
+ * @author `easy-tailwind` [Noriller] see <[reference](https://github.com/Noriller/easy-tailwind/blob/master/src/index.ts#L65C1-L89C2)>
+ */
 function reducer(args: ClassValue[], separator: string | false | undefined) {
     return (
         args.reduce<string[]>((acc: string[], cur: ClassValue) => {
@@ -25,16 +31,22 @@ function reducer(args: ClassValue[], separator: string | false | undefined) {
     ).flat(Infinity)
 }
 
+/**
+ * Transforms the inputs on build time. Map key to each values inside the Object zones.
+ * @param options see [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options)
+ * @param args The inputs class values
+ * @author `easy-tailwind` [Noriller] see <[reference](https://github.com/Noriller/easy-tailwind/blob/master/src/index.ts#L57C1-L63C4)>
+ */
 function createTwg(options?: TWGOptions) {
+    const divider = (options?.separator !== undefined)
+        ? typeof options.separator === "string"
+            ? options.separator
+            : ""
+        : ":"
     return new Proxy((...args: ClassValue[]) => {
-        return reducer(args, options?.separator).join(" ")
+        return reducer(args, divider).join(" ")
     }, {
         get: function (obj, key: string) {
-            const divider = (options?.separator !== undefined)
-                ? typeof options.separator === "string"
-                    ? options.separator
-                    : ""
-                : ":"
             return key ? (
                 ...args: ClassValue[]
             ) => reducer(args, divider).map((values) => (

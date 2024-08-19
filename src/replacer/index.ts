@@ -3,7 +3,7 @@ import { extractOuterObjects } from "src/replacer/extractors"
 import { createTwg } from "src/twg"
 
 interface ReplacerOptions {
-    callee?: string,
+    callee?: string | string[],
     matchFunction?: RegExp | string,
     separator?: string | false
 }
@@ -16,15 +16,15 @@ interface ReplacerOptions {
 //     matchFunction: RegExp | string,
 // })
 
-const replaceAndOr = /(?:!*?\w+)\s*(?:[=!]==?\s*[^&|?]*)?(?:&&|\|\||\?\?)\s*/gs // cond (=== prop) &&, ||, ??
-const replaceTernary = /(?:!*?\w+)\s*(?:[=!]==?\s*[^?:]*)?\?\s*['"`](?<m1>.*?)['"`]\s*:\s*['"`](?<m2>.*?)['"`]/gis // cond (=== prop) ? <m1> : <m2>
+const replaceAndOr = /(?:!*?\w+)\s*(?:[=!]==?\s*[^&|?]*)?(?:&&|\|\||\?\?)\s*/g // cond (=== prop) &&, ||, ??
+const replaceTernary = /(?:!*?\w+)\s*(?:[=!]==?\s*[^?:]*)?\?\s*['"`](?<if>.*?)['"`]\s*:\s*['"`](?<el>.*?)['"`]/gs // cond (=== prop) ? <if> : <el>
 const replaceComment = /\s*((?<!https?:)\/\/.*|\{?\/\*+\s*\n?([^*]*|(\*(?!\/)))*\*\/\}?)/g // (// ... | /* ... */ | {/* ... */})
-const replaceObjectsSeparator = /,?\s*\}\s*,[^{}]*\{/gs // }, ... { => collapse multiple objects
+const replaceObjectsSeparator = /,?\s*\}\s*,[^{}]*\{/g // }, ... { => collapse multiple objects
 
 /**
  * Transforms the content before Tailwind scans its classes.
  * @param options see [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#replacer-options)
- * @param content The content provided by `content.files` in `tailwind.config`
+ * @param content The content already provided by `content.files` in `tailwind.config`
  */
 function replacer({
     callee = "twg",
@@ -32,14 +32,23 @@ function replacer({
     separator = ":"
 }: ReplacerOptions = {}) {
     return (content: string) => {
-        // 0. Check if callee? is valid
+        // 0.1. Check if callee? is valid
         if (callee.length === 0) {
             console.warn("⚠️ Warning: `callee` is not valid.")
             return content
         }
 
-        // 0. Handle custom calleeFunctionRegex
-        let calleeFunctionRegex = new RegExp(`${callee}\\((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*\\)`, "gis")
+        // 0.2. Handle custom calleeFunctionRegex
+        let calleeFunctionRegex = new RegExp("")
+        const sharedRegex = "\\((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*\\)"
+        if (Array.isArray(callee)) {
+            const calleeRegexString = `(${callee.join("|")})`
+            calleeFunctionRegex = new RegExp(`${calleeRegexString}${sharedRegex}`, "gi")
+        } else if (typeof callee === "string") {
+            calleeFunctionRegex = new RegExp(`${callee}${sharedRegex}`, "gi")
+        }
+
+        // 0.3. Handle custom matchFunction
         if (matchFunction !== undefined) {
             if (typeof matchFunction === "string") {
                 const match = (/^\/(.+)\/([gimsuy]*)$/i).exec(matchFunction)
@@ -64,15 +73,16 @@ function replacer({
                 const largestObject = extractOuterObjects(call.replace(replaceObjectsSeparator, ","))
                 // 4. Parse conditional strings
                 if (largestObject) {
-                    const parsedString = largestObject.includes(":")
+                    const parsedString = (/[:]\s*['"`]/).exec(largestObject)
                         ? largestObject
                             .replace(replaceAndOr, "")
-                            .replace(replaceTernary, '"$<m1> $<m2>"')
+                            .replace(replaceTernary, '"$<if> $<el>"')
                             .trim()
                         : ""
                     try {
                         // 5. Parse the arguments inside the largest object
-                        const parsedArgs = createTwg({ separator })(
+                        // const parsedArgs = createTwg({ separator })(
+                        const parsedArgs = createTwg()(
                             ...new Function(`return [${parsedString}]`)() as ClassValue[]
                         )
                         // 6. Replace the old largest object with parsed one
@@ -93,3 +103,4 @@ function replacer({
 }
 
 export { replacer, type ReplacerOptions }
+export default replacer

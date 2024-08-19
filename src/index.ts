@@ -3,8 +3,8 @@ import { createTwg } from "src/twg"
 type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
 
 /**
- * Handles several types of class values.
- * @borrows https://github.com/lukeed/clsx
+ * Handles several types of class values including string, number, object, array, conditionals and also itself.
+ * @author `clsx` [Luke Edwards] see <[reference](https://github.com/lukeed/clsx/blob/master/src/index.js#L1C1-L28C2)>
  */
 function toVal(mix: ClassValue, separator?: string | false): string {
     let k: number,
@@ -40,26 +40,26 @@ interface TWGOptions {
  * Utility function to transform the inputs on build time. Map key to each values inside the Object zones.
  * @param options see [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options)
  * @param inputs The inputs class values
+ * @author `clsx` [Luke Edwards] see <[reference](https://github.com/lukeed/clsx/blob/master/src/index.js#L30C1-L41C2)>
  */
-function twg(options?: TWGOptions) {
-    return (...inputs: ClassValue[]) => {
-        let i: number,
-            tmp: ClassValue,
-            x: string,
-            str = ""
-        const len = inputs.length
-        for (i = 0; i < len; i++) {
-            tmp = inputs[i]
-            if (tmp) {
-                x = toVal(tmp, options?.separator)
-                if (x) {
-                    str && (str += " ")
-                    str += x
-                }
+function twg(...inputs: ClassValue[]) {
+    let i = 0,
+        tmp: ClassValue,
+        x: string,
+        str = ""
+    const len = inputs.length
+    for (; i < len; i++) {
+        tmp = inputs[i]
+        if (tmp) {
+            x = toVal(tmp)
+            if (x) {
+                str && (str += " ")
+                str += x
             }
         }
-        return str
     }
+    return str
 }
 
 export { type ClassValue, twg, type TWGOptions }
+export default twg
