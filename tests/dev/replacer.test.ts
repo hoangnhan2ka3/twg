@@ -625,6 +625,51 @@ describe("replacer()", () => {
         })
     })
 
+    describe("Conditional classes:", () => {
+        it.each([
+            {
+                contents: `
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            var: conditional && "multiple classes",
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={cn(
+                        "multiple classes",
+                        "var:multiple var:classes",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer({ callee: "cn" })(contents)).toBe(expected)
+        })
+    })
+
     describe("Empty & plain text contents:", () => {
         it.each([
             { contents: "", expected: "" },

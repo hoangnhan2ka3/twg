@@ -16,7 +16,7 @@ interface ReplacerOptions {
 //     matchFunction: RegExp | string,
 // })
 
-const replaceAndOr = /(?:!*?\w+)\s*(?:[=!]==?\s*[^&|?]*)?(?:&&|\|\||\?\?)\s*/g // cond (=== prop) &&, ||, ??
+const replaceAndOr = /(?:!*?\w+)\s*(?:[=!]==?\s*[^&|?]*)?(?:&&|\|\||\?\?)/g // cond (=== prop) &&, ||, ??
 const replaceTernary = /(?:!*?\w+)\s*(?:[=!]==?\s*[^?:]*)?\?\s*['"`](?<if>.*?)['"`]\s*:\s*['"`](?<el>.*?)['"`]/gs // cond (=== prop) ? <if> : <el>
 const replaceComment = /\s*((?<!https?:)\/\/.*|\{?\/\*+\s*\n?([^*]*|(\*(?!\/)))*\*\/\}?)/g // (// ... | /* ... */ | {/* ... */})
 const replaceObjectsSeparator = /,?\s*\}\s*,[^{}]*\{/g // }, ... { => collapse multiple objects
@@ -73,7 +73,7 @@ function replacer({
                 const largestObject = extractOuterObjects(call.replace(replaceObjectsSeparator, ","))
                 // 4. Parse conditional strings
                 if (largestObject) {
-                    const parsedString = (/[:]\s*['"`]/).exec(largestObject)
+                    const parsedString = (/[:].*['"`]/).exec(largestObject)
                         ? largestObject
                             .replace(replaceAndOr, "")
                             .replace(replaceTernary, '"$<if> $<el>"')

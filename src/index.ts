@@ -6,7 +6,7 @@ type ClassValue<T = string | string[] | number | boolean | null | undefined> = T
  * Handles several types of class values including string, number, object, array, conditionals and also itself.
  * @author `clsx` [Luke Edwards] see <[reference](https://github.com/lukeed/clsx/blob/master/src/index.js#L1C1-L28C2)>
  */
-function toVal(mix: ClassValue, separator?: string | false): string {
+function toVal(mix: ClassValue): string {
     let k: number,
         y: string,
         str = ""
@@ -18,7 +18,7 @@ function toVal(mix: ClassValue, separator?: string | false): string {
             const len = mix.length
             for (k = 0; k < len; k++) {
                 if (mix[k]) {
-                    y = toVal(mix[k] as ClassValue, separator)
+                    y = toVal(mix[k] as ClassValue)
                     if (y) {
                         str && (str += " ")
                         str += y
@@ -26,7 +26,8 @@ function toVal(mix: ClassValue, separator?: string | false): string {
                 }
             }
         } else {
-            str += createTwg({ separator })(mix)
+            // str += createTwg({ separator })(mix)
+            str += createTwg()(mix)
         }
     }
     return str

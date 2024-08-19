@@ -6,22 +6,20 @@ import { createTwg } from "src/twg"
 const content = /* js */ `
     const Badge \\= ({ className, variant, ...props }: BadgeProps) => {
         return (
-            <div
-                onClick={() => {
-                    router.push("/pricing")
-                }}
-                className={twg(badgeVariants({ variant }), className)}
-                {...props}
-            />
+            <div className={twg(
+                "multiple classes",
+                {
+                    var: conditional && "multiple classes",
+                },
+                className
+            )} />
         )
     }
 ` as string
 
-const transformedContent = replacer({
-    matchFunction: ""
-})(content)
+const transformedContent = replacer()(content)
 
-// console.log("1: ", transformedContent)
+console.log("1: ", transformedContent)
 
 const content5 = `
 {

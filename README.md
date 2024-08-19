@@ -24,7 +24,7 @@
   - [`twg` options](#twg-options)
 - [How to use](#how-to-use)
   - [Basic usage](#basic-usage)
-  - [Complex as ☠️ usage](#complex-as-&#x2620;&#xfe0f;-usage)
+  - [Complex as ☠️ usage](#complex-as-%EF%B8%8F-usage)
   - [Conditional Classes](#conditional-classes)
 - [Custom `options`](#custom-options)
   - [Custom `callee`](#custom-callee)
