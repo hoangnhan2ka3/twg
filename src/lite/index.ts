@@ -1,6 +1,5 @@
+import { type ClassValue } from "src/index"
 import { createTwg } from "src/lite/twg"
-
-export type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
 
 function toVal(mix: ClassValue): string {
     let k: number,
@@ -45,3 +44,5 @@ export function twg(...inputs: ClassValue[]) {
     }
     return str
 }
+
+export { type ClassValue }

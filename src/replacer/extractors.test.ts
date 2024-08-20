@@ -1,7 +1,5 @@
 import { extractOuterObjects } from "src/replacer/extractors"
 
-const replaceObjectsSeparator = /,?\s*\}\s*,[^{}]*\{/gs
-
 describe("extractOuterObjects()", () => {
     describe("General cases:", () => {
         it.each([

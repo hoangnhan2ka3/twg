@@ -8,11 +8,12 @@
 - ✅ Very easy setup.
 - ✅ Support for multiple objects parsing.
 - ✅ Support for nesting multiple functions, objects, and arrays.
-- ✅ Support for conditional classes _(not conditional objects, for now)_.
+- ✅ Support for conditional classes _(not conditional objects)_.
 - ✅ Customizable `callee` name and `separator`.
 - ✅ Compatible with wrappers like [`twMerge`](https://github.com/dcastil/tailwind-merge).
 - ✅ "Base" support for Tailwind CSS IntelliSense (IDEs extension), also [Hover Preview](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss#hover-preview).
 - ✅ Lite version.
+- 🔥 Partial support for conditional objects _(only outer/largest object)_.
 
 ## Table of Contents
 
