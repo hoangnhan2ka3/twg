@@ -773,6 +773,97 @@ describe("replacer()", () => {
         })
     })
 
+    describe("Conditional objects:", () => {
+        it.each([
+            { // --- Conditional of outer objects
+                contents: `
+                    <div className={cn(
+                        "multiple classes",
+                        isTernary === "anything" ? {
+                            var2: "multiple classes"
+                        } : {
+                            var2: [
+                                "multiple classes",
+                                isAndOr && "another class",
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={cn(
+                        "multiple classes",
+                        isTernary === "anything" ? "var2:multiple var2:classes" : "var2:multiple var2:classes var2:another var2:class",
+                        className
+                    )} />
+                `
+            },
+            { // --- Conditional of multiple outer objects
+                contents: `
+                    <div className={cn(
+                        "multiple classes",
+                        isTernary === "anything" ? {
+                            var2: "multiple classes"
+                        } : {
+                            var2: [
+                                "multiple classes",
+                                isAndOr && "another class",
+                            ]
+                        },
+                        isTernary2 === "else" ? {
+                            var2: "multiple classes"
+                        } : {
+                            var2: [
+                                "multiple classes",
+                                isAndOr2 && "another class",
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={cn(
+                        "multiple classes",
+                        isTernary === "anything" ? "var2:multiple var2:classes" : "var2:multiple var2:classes var2:another var2:class",
+                        isTernary2 === "else" ? "var2:multiple var2:classes" : "var2:multiple var2:classes var2:another var2:class",
+                        className
+                    )} />
+                `
+            },
+            { // --- Conditional inside outer objects
+                contents: `
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "multiple classes",
+                                isTernary === "anything" ? {
+                                    var2: "multiple classes"
+                                } : {
+                                    var2: [
+                                        "multiple classes",
+                                        isAndOr && "another class",
+                                    ]
+                                }
+                            ],
+                            "var-3": "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={cn(
+                        "multiple classes",
+                        "var1:multiple var1:classes var1:var2:multiple var1:var2:classes var1:var2:another var1:var2:class var-3:multiple var-3:classes",
+                        className
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer({ callee: "cn" })(contents)).toBe(expected)
+        })
+    })
+
     describe("Empty & plain text contents:", () => {
         it.each([
             { contents: "", expected: "" },

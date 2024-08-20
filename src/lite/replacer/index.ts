@@ -6,7 +6,7 @@ export interface ReplacerLiteOption {
     callee?: string | string[]
 }
 
-const replaceAndOr = /!*?\w+\s*([=!]==?[\s\S]+)?(&&|\|\||\?\?)/g
+const replaceAndOr = /!*?\w+\s*([=!]==?[\s\S]+)?(&&|\|\||\?\?)\s*/g
 const replaceTernary = /!*?\w+\s*([=!]==?[\s\S]+)?\?\s*(['"`])(.*?)\2\s*:\s*\2(.*?)\2/gs
 
 export default function replacer(option: ReplacerLiteOption = { callee: "twg" }) {
@@ -23,7 +23,7 @@ export default function replacer(option: ReplacerLiteOption = { callee: "twg" })
                 const largestObjects = extractOuterObjects(call)
 
                 return largestObjects.reduce((acc, largestObject) => {
-                    const filteredObject = (/[:].*['"`]/).exec(largestObject)
+                    const filteredObject = (/:.*['"`]/s).exec(largestObject)
                         ? largestObject.replace(replaceAndOr, "").replace(replaceTernary, '"$3 $4"')
                         : ""
 

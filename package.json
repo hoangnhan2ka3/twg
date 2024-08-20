@@ -1,6 +1,6 @@
 {
     "name": "twg",
-    "version": "1.0.0-beta.4",
+    "version": "1.0.0-beta.5",
     "description": "A utility function for grouping TailwindCSS variants.",
     "author": "hoangnhan2ka3",
     "homepage": "https://github.com/hoangnhan2ka3/twg",
@@ -26,36 +26,36 @@
     "types": "dist/index.d.ts",
     "exports": {
         ".": {
-            "require": "./dist/index.js",
+            "types": "./dist/index.d.ts",
             "import": "./dist/index.mjs",
-            "types": "./dist/index.d.ts"
+            "require": "./dist/index.js"
         },
         "./replacer": {
-            "require": "./dist/replacer/index.js",
+            "types": "./dist/replacer/index.d.ts",
             "import": "./dist/replacer/index.mjs",
-            "types": "./dist/replacer/index.d.ts"
+            "require": "./dist/replacer/index.js"
         },
         "./lite": {
-            "require": "./dist/lite/index.js",
+            "types": "./dist/lite/index.d.ts",
             "import": "./dist/lite/index.mjs",
-            "types": "./dist/lite/index.d.ts"
+            "require": "./dist/lite/index.js"
         },
         "./lite/replacer": {
-            "require": "./dist/lite/replacer/index.js",
+            "types": "./dist/lite/replacer/index.d.ts",
             "import": "./dist/lite/replacer/index.mjs",
-            "types": "./dist/lite/replacer/index.d.ts"
+            "require": "./dist/lite/replacer/index.js"
         }
     },
     "devDependencies": {
         "@eslint/compat": "^1.1.1",
         "@eslint/eslintrc": "^3.1.0",
         "@eslint/js": "^9.9.0",
-        "@stylistic/eslint-plugin": "^2.6.2",
+        "@stylistic/eslint-plugin": "^2.6.4",
         "@types/eslint": "^9.6.0",
         "@types/jest": "^29.5.12",
-        "@types/node": "^22.3.0",
-        "@typescript-eslint/eslint-plugin": "^8.1.0",
-        "@typescript-eslint/parser": "^8.1.0",
+        "@types/node": "^22.4.1",
+        "@typescript-eslint/eslint-plugin": "^8.2.0",
+        "@typescript-eslint/parser": "^8.2.0",
         "eslint": "^9.9.0",
         "eslint-import-resolver-typescript": "^3.6.1",
         "eslint-plugin-import": "^2.29.1",
@@ -67,7 +67,7 @@
         "ts-node": "^10.9.2",
         "tsup": "^8.2.4",
         "typescript": "^5.5.4",
-        "typescript-eslint": "^8.1.0"
+        "typescript-eslint": "^8.2.0"
     },
     "keywords": [
         "tailwindcss",

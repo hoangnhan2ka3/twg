@@ -15,7 +15,7 @@ export interface ReplacerOptions {
 //     matchFunction: RegExp | string,
 // })
 
-const replaceAndOr = /!*?\w+\s*([=!]==?[\s\S]+)?(&&|\|\||\?\?)/g // cond (=== prop) &&, ||, ??
+const replaceAndOr = /!*?\w+\s*([=!]==?[\s\S]+)?(&&|\|\||\?\?)\s*/g // cond (=== prop) &&, ||, ??
 const replaceTernary = /!*?\w+\s*([=!]==?[\s\S]+)?\?\s*(['"`])(.*?)\2\s*:\s*\2(.*?)\2/gs // cond (=== prop) ? $2 : $3
 
 /**
@@ -64,7 +64,7 @@ export function replacer(options = {
                 // 2. Loop through each largest Object
                 return largestObjects.reduce((acc, largestObject) => {
                     // 2.5. Parse conditional
-                    const filteredObject = (/[:].*['"`]/).exec(largestObject)
+                    const filteredObject = (/:.*['"`]/s).exec(largestObject)
                         ? largestObject
                             .replace(replaceAndOr, "")
                             .replace(replaceTernary, '"$3 $4"')

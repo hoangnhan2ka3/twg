@@ -45,7 +45,7 @@ Same as default version, but:
 
 - Without any options API except for custom `callee` in [`replacer()` options](#replacer-options).
 - No `debug messages` (no `console.warn` or `console.error`).
-- A bit lighter.
+- 30 ~ 40% lighter.
 
 ## Quick Intro
 

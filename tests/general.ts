@@ -6,11 +6,20 @@ import { createTwg } from "src/twg"
 const content = `
     const Badge \\= ({ className, variant, ...props }: BadgeProps) => {
         return (
-            <div className={twg(
+            <div className={cn(
                 "multiple classes",
                 {
-                    var: conditional && \`multiple
-                    classes\`,
+                    var1: [
+                        "multiple classes",
+                        {
+                            var2: "multiple classes"
+                            var2: [
+                                "multiple classes",
+                                isAndOr && "another class",
+                            ]
+                        }
+                    ],
+                    "var-3": "multiple classes"
                 },
                 className
             )} />
@@ -18,9 +27,9 @@ const content = `
     }
 ` as string
 
-const transformedContent = replacer()(content)
+const transformedContent = replacer({ callee: "cn" })(content)
 
-console.log("1: ", transformedContent)
+// console.log("1: ", transformedContent)
 
 const content5 = `
 {
