@@ -1,4 +1,4 @@
-import { type ClassValue, type TWGOptions } from "src"
+import { type ClassValue, type TWGOptions } from "src/index"
 
 /**
  * Focusing on handling arrays and objects, looping them until all are flattened.

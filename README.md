@@ -255,6 +255,42 @@ Output (html):
 
 You can use conditional like `&& | || | ??` _(and/or)_ or `isFooBar === "twg" ? "..." : "..."` _(ternary)_ as well:
 
+- Conditional classes:
+
+```jsx
+// HelloWorld.tsx
+
+import { twg } from "twg"
+import { useState } from "react"
+
+export function HelloWorld() {
+  const [isAndOr, setIsAndOr] = useState(false)
+  const [isTernary, setIsTernary] = useState("foo")
+  // ...
+  return (
+    <div className={twg(
+      "size-92 relative px-4 py-2",
+      isTernary === "bar" ? "grid place-items-center" : "flex items-center justify-center",
+      {
+        before: [
+          "absolute inset-0",
+          isTernary === "foo" ? "bg-red-500" : "bg-green-500",
+          hover: [
+            "bg-blue-500 text-yellow-500",
+            isAndOr && "border-2 border-white"
+          ]
+        ],
+        "aria-expanded": isAndOr ?? "bg-red-500 text-yellow-500"
+      }
+    )}>
+      Hello, World!
+    </div>
+  )
+}
+```
+
+- Conditional objects (⚠️ Not supported yet):
+
 ```jsx
 // HelloWorld.tsx
 
