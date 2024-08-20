@@ -7,6 +7,7 @@
 *.test.ts
 *.spec.ts
 .gitignore
+.editorconfig
 tsconfig.json
 tsup.config.ts
 jest.config.ts

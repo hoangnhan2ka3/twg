@@ -1,6 +1,5 @@
-import twg, { type ClassValue } from "src"
+import { type ClassValue, twg } from "src/index"
 import { extractOuterObjects } from "src/replacer/extractors"
-import { createTwg } from "src/twg"
 
 export interface ReplacerOptions {
     callee?: string | string[],
