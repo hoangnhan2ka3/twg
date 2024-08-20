@@ -26,7 +26,7 @@
 - [How to use](#how-to-use)
   - [Basic usage](#basic-usage)
   - [Complex as ☠️ usage](#complex-as-%EF%B8%8F-usage)
-  - [Conditional Classes](#conditional-classes)
+  - [Conditionals](#conditionals)
 - [Custom `options`](#custom-options)
   - [Custom `callee`](#custom-callee)
 - [Combination](#combination)
@@ -251,7 +251,7 @@ Output (html):
 </div>
 ```
 
-### Conditional classes
+### Conditionals
 
 You can use conditional like `&& | || | ??` _(and/or)_ or `isFooBar === "twg" ? "..." : "..."` _(ternary)_ as well:
 
