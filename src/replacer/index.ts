@@ -1,4 +1,4 @@
-import { type ClassValue } from "src"
+import twg, { type ClassValue } from "src"
 import { extractOuterObjects } from "src/replacer/extractors"
 import { createTwg } from "src/twg"
 
@@ -16,82 +16,79 @@ export interface ReplacerOptions {
 //     matchFunction: RegExp | string,
 // })
 
-const replaceAndOr = /(?:!*?\w+)\s*(?:[=!]==?\s*[^&|?]*)?(?:&&|\|\||\?\?)/g // cond (=== prop) &&, ||, ??
-const replaceTernary = /(?:!*?\w+)\s*(?:[=!]==?\s*[^?:]*)?\?\s*['"`](?<if>.*?)['"`]\s*:\s*['"`](?<el>.*?)['"`]/gs // cond (=== prop) ? <if> : <el>
+const replaceAndOr = /!*?\w+\s*([=!]==?[\s\S]+)?(&&|\|\||\?\?)/g // cond (=== prop) &&, ||, ??
+const replaceTernary = /!*?\w+\s*([=!]==?[\s\S]+)?\?\s*(['"`])(.*?)\2\s*:\s*\2(.*?)\2/gs // cond (=== prop) ? $2 : $3
 
 /**
  * Transforms the content before Tailwind scans/extracting its classes.
  * @param options see [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-content#replacer-options)
  * @param content The content already provided by `content.files` in `tailwind.config`
  */
-export function replacer({
-    callee = "twg",
-    matchFunction,
-    separator = ":"
-}: ReplacerOptions = {}) {
+export function replacer(options = {
+    callee: "twg",
+    matchFunction: /twg\((?:[^()]*|\((?:[^()]*|\([^()]*\))*\))*\)/gis,
+    separator: ":"
+} as ReplacerOptions) {
     return (content: string) => {
         // 0.1. Check whether callee? is valid
-        if (!callee || callee.length === 0) {
+        if (options.callee === undefined || options.callee.length === 0) {
             console.warn("⚠️ Warning: `callee` is not valid.")
             return content
         }
 
         // 0.2. Handle custom calleeFunctionRegex
-        const sharedRegex = "\\((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*\\)"
-        let calleeFunctionRegex = Array.isArray(callee)
-            ? new RegExp(`(${callee.join("|")})${sharedRegex}`, "gi")
-            : new RegExp(`${callee}${sharedRegex}`, "gi")
+        const tailRegex = "\\((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*\\)"
+        let calleeFunctionRegex = new RegExp(
+            `${Array.isArray(options.callee) ? `(${options.callee.join("|")})` : options.callee}${tailRegex}`, "gi"
+        )
 
         // 0.3. Handle custom matchFunction
-        if (matchFunction !== undefined) {
-            if (typeof matchFunction === "string") {
-                const match = (/^\/(.+)\/([gimsuy]*)$/i).exec(matchFunction)
+        if (options.matchFunction !== undefined) {
+            if (typeof options.matchFunction === "string") {
+                const match = (/^\/(.+)\/([gimsuy]*)$/i).exec(options.matchFunction)
                 if (match) {
                     calleeFunctionRegex = new RegExp(match[1] ?? "", match[2])
                 } else {
                     console.warn("⚠️ Warning: `matchFunction` is not valid.")
                 }
-            } else if (matchFunction instanceof RegExp) {
-                calleeFunctionRegex = matchFunction
+            } else if (options.matchFunction instanceof RegExp) {
+                calleeFunctionRegex = options.matchFunction
             }
         }
 
+        let tmpContent = content
         try {
-            // 1. Remove comments in content for easier processing
-            let preprocessingContent = content
-
-            preprocessingContent = preprocessingContent.replace(calleeFunctionRegex, (call) => {
-                // 2. Find the Array of all callee function calls
+            tmpContent = tmpContent.replace(calleeFunctionRegex, (call) => {
+                // 1. Find the Array of all callee function calls
                 const largestObjects = extractOuterObjects(call)
 
-                // 3. Loop through each largest Object
+                // 2. Loop through each largest Object
                 return largestObjects.reduce((acc, largestObject) => {
-                    // 3.5. Parse conditional
+                    // 2.5. Parse conditional
                     const filteredObject = (/[:].*['"`]/).exec(largestObject)
                         ? largestObject
                             .replace(replaceAndOr, "")
-                            .replace(replaceTernary, '"$<if> $<el>"')
-                            .trim()
+                            .replace(replaceTernary, '"$3 $4"')
                         : ""
 
                     try {
-                        // 4. Parse the arguments inside through `twg()` API
-                        const parsedObject = createTwg({ separator })(
+                        // 3. Parse the arguments inside through `twg()` API
+                        const parsedObject = twg(
                             ...new Function(`return [${filteredObject}]`)() as ClassValue[]
                         )
-                        // 5. Replace the old largest object with parsed one
+                        // 4. Replace the old largest object with parsed one
                         return acc.replace(largestObject, `"${parsedObject}"`)
                     } catch (errorParsing) {
-                        console.warn(`\n⚠️ TWG: Problem occurred:\n${((errorParsing as Error).message)} in:\n- ${largestObject}\nTrying to be transformed into:\n+ ${filteredObject}`)
+                        console.warn(`\n⚠️ TWG: Problem occurred on \`replacer()\`:\n${((errorParsing as Error).message)} in:\n- ${largestObject}\nTrying to be transformed into:\n+ ${filteredObject}`)
                         return acc
                     }
                 }, call)
             })
 
             // DONE. Return the processed content
-            return preprocessingContent
+            return tmpContent
         } catch (errorOnContent) {
-            console.error(`\n❌ TWG: Error occurred:\n${((errorOnContent as Error).message)} in content:\n${content}\n`)
+            console.error(`\n❌ TWG: Error occurred on \`replacer()\`:\n${((errorOnContent as Error).message)} in content:\n${content}\n`)
             return content
         }
     }

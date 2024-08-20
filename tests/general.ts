@@ -3,17 +3,14 @@ import { replacer } from "src/replacer"
 import { extractOuterObjects } from "src/replacer/extractors"
 import { createTwg } from "src/twg"
 
-const content = /* js */ `
+const content = `
     const Badge \\= ({ className, variant, ...props }: BadgeProps) => {
         return (
             <div className={twg(
                 "multiple classes",
                 {
-                    var1: "class"
-                },
-                "class",
-                {
-                    var2: "multiple classes"
+                    var: conditional && \`multiple
+                    classes\`,
                 },
                 className
             )} />
@@ -23,7 +20,7 @@ const content = /* js */ `
 
 const transformedContent = replacer()(content)
 
-// console.log("1: ", transformedContent)
+console.log("1: ", transformedContent)
 
 const content5 = `
 {

@@ -460,7 +460,10 @@ describe("replacer()", () => {
                 expected: `
                     <div className={twg(
                         "multiple classes",
-                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
                     )} />
                 `
             }
@@ -482,7 +485,10 @@ describe("replacer()", () => {
                 expected: `
                     <div className={twg(
                         "multiple classes",
-                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
                     )} />
                 `
             }
@@ -696,6 +702,68 @@ describe("replacer()", () => {
                     <div className={cn(
                         "multiple classes",
                         "var:multiple var:classes",
+                        className
+                    )} />
+                `
+            },
+            { //*
+                contents: `
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            var1: \`multiple
+                            classes\`,
+                            var2: [
+                            "multiple classes", {
+                                var3: \`other
+                                class\`
+                            }]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={cn(
+                        "multiple classes",
+                        "var1:multiple var1:classes var2:multiple var2:classes var2:var3:other var2:var3:class",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            var1: conditional1 ? "multiple classes" : "other multiple classes",
+                            var2: conditional2 === "true" ? "multiple classes" : "other multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={cn(
+                        "multiple classes",
+                        "var1:multiple var1:classes var1:other var1:multiple var1:classes var2:multiple var2:classes var2:other var2:multiple var2:classes",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            var1: conditional1 ? " multiple classes  " : "other    multiple  classes",
+                            var2: conditional2 === "true" ? "multiple classes" : "other multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={cn(
+                        "multiple classes",
+                        "var1:multiple var1:classes var1:other var1:multiple var1:classes var2:multiple var2:classes var2:other var2:multiple var2:classes",
                         className
                     )} />
                 `

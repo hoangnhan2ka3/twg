@@ -49,8 +49,8 @@ export function createTwg(options?: TWGOptions) {
         get: function (obj, key: string) {
             return key ? (
                 ...args: ClassValue[]
-            ) => reducer(args, divider).map((values) => (
-                `${key}${divider}${values}`
+            ) => reducer(args, divider).filter(values => values.trim() !== "").map((values) => (
+                `${key}${divider}${values}`.trim()
             )) : obj
         }
     }) as Record<string, (...args: ClassValue[]) => string> & ((...args: ClassValue[]) => string)

@@ -4,6 +4,8 @@
 # development
 /src
 /tests
+*.test.ts
+*.spec.ts
 .gitignore
 tsconfig.json
 tsup.config.ts

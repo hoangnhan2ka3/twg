@@ -1,6 +1,6 @@
 {
     "name": "twg",
-    "version": "1.0.0-beta.2",
+    "version": "1.0.0-beta.3",
     "description": "A utility function for grouping TailwindCSS variants.",
     "author": "hoangnhan2ka3",
     "homepage": "https://github.com/hoangnhan2ka3/twg",
@@ -21,7 +21,6 @@
         "lint": "tsc",
         "npm": "pnpm build && pnpm publish --access public"
     },
-    "sideEffects": false,
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
@@ -35,6 +34,16 @@
             "require": "./dist/replacer/index.js",
             "import": "./dist/replacer/index.mjs",
             "types": "./dist/replacer/index.d.ts"
+        },
+        "./lite": {
+            "require": "./dist/lite/index.js",
+            "import": "./dist/lite/index.mjs",
+            "types": "./dist/lite/index.d.ts"
+        },
+        "./lite/replacer": {
+            "require": "./dist/lite/replacer/index.js",
+            "import": "./dist/lite/replacer/index.mjs",
+            "types": "./dist/lite/replacer/index.d.ts"
         }
     },
     "devDependencies": {
@@ -60,7 +69,6 @@
         "typescript": "^5.5.4",
         "typescript-eslint": "^8.1.0"
     },
-    "license": "MIT",
     "keywords": [
         "tailwindcss",
         "tailwind",
@@ -72,5 +80,6 @@
         "twg",
         "clsx",
         "classnames"
-    ]
+    ],
+    "license": "MIT"
 }

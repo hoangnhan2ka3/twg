@@ -31,8 +31,8 @@ export function extractOuterObjects(content: string): string[] {
             }
         } else if (char === "}" && expressionDepth === 0) {
             if (depth === 1 && objectStart !== -1) {
-                objects.push(content.slice(objectStart, i + 1)) // Thêm object vào mảng
-                objectStart = -1 // Reset objectStart cho object tiếp theo
+                objects.push(content.slice(objectStart, i + 1))
+                objectStart = -1
             }
             depth--
         }

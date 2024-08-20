@@ -11,6 +11,7 @@
 - ✅ Customizable `callee` name and `separator`.
 - ✅ Compatible with wrappers like [`twMerge`](https://github.com/dcastil/tailwind-merge).
 - ✅ "Base" support for Tailwind CSS IntelliSense (IDEs extension), also [Hover Preview](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss#hover-preview).
+- ✅ Lite version.
 - 🔥 Partial support for multiple objects. _(For now, just don't put any string between two objects.)_
 
 ## Table of Contents
@@ -35,6 +36,16 @@
   - [Explanation](#explanation)
   - [Trade-offs](#trade-offs)
 - [Contributing](#contributing)
+
+## New
+
+- ✅ Lite version.
+
+Same as default version, but:
+
+- Without any options API except for custom `callee` in [`replacer()` options](#replacer-options).
+- No `debug messages` (no `console.warn` or `console.error`).
+- A bit lighter.
 
 ## Quick Intro
 
@@ -92,6 +103,16 @@ export default {
 } satisfies Config
 ```
 
+Lite version:
+
+```js
+// tailwind.config.ts
+
+import replacer from "twg/lite/replacer"
+
+// Rest like above
+```
+
 If you need to override default `replacer` options:
 
 ```js
@@ -107,17 +128,17 @@ transform: {
 
 ### `replacer()` options
 
-`options?` | Types | Default | Description | Status
---- | --- | --- | --- | ---
-`callee?` | string \| string[] | "twg" | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_ | ✅
-`matchFunction?` | RegExp \| string | /twg\\((?:[^()]\*\|\\((?:[^()]\*\|\\([^()]\*\\))\*\\))\*\\)/gis | The regex used to match the whole `callee function` (eg.: `twg(...)`) inside your actual code file. | ✅
-`separator?`(*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `twg` option. | 🚧 Currently not available
+`options?` | Types | Default | Description | Lite | Status
+--- | --- | --- | --- | --- | ---
+`callee?` | string \| string[] | "twg" | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_ | ✅ | ✅
+`matchFunction?` | RegExp \| string | /twg\\((?:[^()]\*\|\\((?:[^()]\*\|\\([^()]\*\\))\*\\))\*\\)/gis | The regex used to match the whole `callee function` (eg.: `twg(...)`) inside your actual code file. | x | ✅
+`separator?`(*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `twg` option. | x | 🚧 Currently not available
 
 ### `twg` options
 
-`options?` | Types | Default | Description | Status
---- | --- | --- | --- | ---
-`separator?`(\*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `replacer()` option. | 🚧 Currently not available
+`options?` | Types | Default | Description | Lite | Status
+--- | --- | --- | --- | --- | ---
+`separator?`(\*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `replacer()` option. | x | 🚧 Currently not available
 
 ## How to use
 
@@ -125,6 +146,12 @@ transform: {
 import { twg } from "twg"
 // or
 import twg from "twg"
+```
+
+Lite version:
+
+```jsx
+import { twg } from "twg/lite"
 ```
 
 ### Basic usage
@@ -272,9 +299,10 @@ export function HelloWorld() {
 First change the `callee` option `replacer()` to the callee's name you want, eg. with `cn`:
 
 ```js
+// tailwind.config.ts
+
 transform: {
   DEFAULT: replacer({
-    // Define options here, eg.:
     callee: "cn"
   })
 }
@@ -340,6 +368,8 @@ export function cn(...inputs: ClassValue[]) {
 
 ## API
 
+💥 Default version:
+
 ### `replacer({ options })(content)`
 
 Returns: `string`
@@ -375,6 +405,42 @@ interface TWGOptions {
   separator?: string | false
 }
 ```
+
+_@param_ — **inputs**
+
+Types: `ClassValue[]`
+
+```js
+type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
+```
+
+---
+
+💥 Light version:
+
+### `replacer({ option })(content)`
+
+Returns: `string`
+
+_@param_ — **[options](#replacer-options)**
+
+Types: `ReplacerOptions`
+
+```js
+interface ReplacerOption {
+  callee?: string | string[],
+}
+```
+
+_@param_ — **content**
+
+Types: `string`
+
+---
+
+### `twg(...inputs)`
+
+Returns: `string`
 
 _@param_ — **inputs**
 
