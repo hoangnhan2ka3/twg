@@ -536,6 +536,10 @@ export function cn(...inputs: ClassValue[]) {
 
 ## API
 
+<details>
+
+<summary>Click to expand/collapse this section</summary>
+
 💥 Default version:
 
 ### `replacer({ options })(content)`
@@ -611,6 +615,8 @@ Types: `ClassValue[]`
 ```js
 type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
 ```
+
+</details>
 
 ## Deeper explanation
 

@@ -39,8 +39,7 @@ function toVal(mix: ClassValue, options?: TWGOptions): string {
 
 /**
  * Utility function to transform the inputs on build time. Map key to each values inside the Object zones.
- * @param options see [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options)
- * @param inputs The inputs class values
+ * @param inputs The inputs class values and the last Object is the [options](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options)
  * @author `clsx` [Luke Edwards] see <[reference](https://github.com/lukeed/clsx/blob/master/src/index.js#L30C1-L41C2)>
  */
 export function twg(...inputs: (ClassValue | TWGOptions)[]) {
