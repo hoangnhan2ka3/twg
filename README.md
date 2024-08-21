@@ -1,11 +1,12 @@
 ![twg_thumbnail](public/twg_thumbnail.webp)
 
 <p align="center">
+  <a href="https://github.com/hoangnhan2ka3/twg/actions"><img src="https://img.shields.io/github/actions/workflow/status/hoangnhan2ka3/twg/ci.yml?branch=main" alt="Build Status"></a>
   <a href="https://bundlephobia.com/result?p=twg"><img src="https://img.shields.io/bundlephobia/min/twg?label=bundle" alt="Bundle Size"></a>
-  <a href="https://bundlephobia.com/result?p=twg"><img src="https://img.shields.io/bundlephobia/minzip/twg?label=gzip" alt="Gzip Size"></a>
+  <a href="https://bundlephobia.com/result?p=twg"><img src="https://img.shields.io/bundlephobia/minzip/twg?label=gzip&colorB=8a2be2" alt="Gzip Size"></a>
   <a href="https://www.npmjs.com/package/twg"><img src="https://img.shields.io/npm/dt/twg.svg" alt="Total Downloads"></a>
-  <a href="https://www.npmjs.com/package/twg"><img src="https://img.shields.io/npm/v/twg.svg" alt="Latest Release"></a>
-  <a href="https://github.com/twg/twg/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/twg.svg" alt="License"></a>
+  <a href="https://www.npmjs.com/package/twg"><img src="https://img.shields.io/npm/v/twg.svg?colorB=bc3433" alt="Latest Release"></a>
+  <a href="https://github.com/twg/twg/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/twg.svg?colorB=d0bb76" alt="License"></a>
 </p>
 
 <p align="center">
