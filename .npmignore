@@ -5,14 +5,12 @@
 /src
 /tests
 *.test.ts
-*.spec.ts\
+*.spec.ts
 .github
 .gitignore
 .editorconfig
 tsconfig.json
-tsup.config.ts
-jest.config.ts
-eslint.config.mjs
+*.config.*
 
 # misc
 .DS_Store
