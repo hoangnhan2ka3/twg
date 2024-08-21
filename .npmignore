@@ -5,7 +5,8 @@
 /src
 /tests
 *.test.ts
-*.spec.ts
+*.spec.ts\
+.github
 .gitignore
 .editorconfig
 tsconfig.json
