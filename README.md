@@ -1,6 +1,16 @@
 ![twg_thumbnail](public/twg_thumbnail.webp)
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/twg"><img src="https://img.shields.io/npm/dt/twg.svg" alt="Total Downloads"></a>
+  <a href="https://github.com/twg/twg/releases"><img src="https://img.shields.io/npm/v/twg.svg" alt="Latest Release"></a>
+  <a href="https://github.com/twg/twg/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/twg.svg" alt="License"></a>
+</p>
+
+<p align="center">
 A more elegant way of writing Tailwind classes. Never need to repeating the same variants over and over again 🤯.
+</p>
+
+---
 
 ## Features
 
