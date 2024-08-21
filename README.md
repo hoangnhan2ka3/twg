@@ -8,8 +8,6 @@
   <a href="https://github.com/twg/twg/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/twg.svg" alt="License"></a>
 </p>
 
-[![Build Size](https://img.shields.io/bundlephobia/minzip/twg?label=bundle%20size&style=flat&colorA=000000&colorB=000000)](https://bundlephobia.com/result?p=twg)
-
 <p align="center">
 A more elegant way of writing Tailwind classes. Never need to repeating the same variants over and over again 🤯.
 </p>
