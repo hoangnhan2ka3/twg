@@ -1,10 +1,14 @@
 ![twg_thumbnail](public/twg_thumbnail.webp)
 
 <p align="center">
+  <a href="https://bundlephobia.com/result?p=twg"><img src="https://img.shields.io/bundlephobia/min/twg?label=bundle" alt="Bundle Size"></a>
+  <a href="https://bundlephobia.com/result?p=twg"><img src="https://img.shields.io/bundlephobia/minzip/twg?label=gzip" alt="Gzip Size"></a>
   <a href="https://www.npmjs.com/package/twg"><img src="https://img.shields.io/npm/dt/twg.svg" alt="Total Downloads"></a>
-  <a href="https://github.com/twg/twg/releases"><img src="https://img.shields.io/npm/v/twg.svg" alt="Latest Release"></a>
+  <a href="https://www.npmjs.com/package/twg"><img src="https://img.shields.io/npm/v/twg.svg" alt="Latest Release"></a>
   <a href="https://github.com/twg/twg/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/twg.svg" alt="License"></a>
 </p>
+
+[![Build Size](https://img.shields.io/bundlephobia/minzip/twg?label=bundle%20size&style=flat&colorA=000000&colorB=000000)](https://bundlephobia.com/result?p=twg)
 
 <p align="center">
 A more elegant way of writing Tailwind classes. Never need to repeating the same variants over and over again 🤯.
@@ -16,6 +20,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 - ✅ Elegant.
 - ✅ Very easy setup.
+- ✅ No dependencies.
 - ✅ Support for multiple objects parsing.
 - ✅ Support for nesting multiple functions, objects, and arrays.
 - ✅ Support for conditional classes and objects.
