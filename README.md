@@ -1,6 +1,6 @@
-# tailwind-variants-grouping
+![twg_thumbnail](public/twg_thumbnail.jpg)
 
-> A more elegant way of writing Tailwind classes. Never need to repeating the same variants over and over again 🤯.
+A more elegant way of writing Tailwind classes. Never need to repeating the same variants over and over again 🤯.
 
 ## Features
 
