@@ -352,7 +352,7 @@ export function HelloWorld() {
 > **In short:**
 > Just use `twg` as the way you use `clsx` or `classnames`, except for the `object zones` which you can use the `twg` way.
 
-## Custom `options`
+## Custom options
 
 ### Custom `callee`
 

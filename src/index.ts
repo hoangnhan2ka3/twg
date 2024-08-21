@@ -47,6 +47,7 @@ export function twg(...inputs: (ClassValue | TWGOptions)[]) {
     const lastInput = inputs[inputs.length - 1]
     if (typeof lastInput === "object" && lastInput !== null && !Array.isArray(lastInput) && "separator" in lastInput) {
         options = lastInput as TWGOptions
+        // Omit the last Object if it's the options
         inputs.pop()
     }
 

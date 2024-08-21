@@ -49,6 +49,7 @@ export function createTwg(options?: TWGOptions) {
         get: function (obj, key: string) {
             return key ? (
                 ...args: ClassValue[]
+                // filter out empty strings/spaces
             ) => reducer(args, options).filter(values => values.trim() !== "").map((values) => (
                 `${key}${divider}${values}`.trim()
             )) : obj

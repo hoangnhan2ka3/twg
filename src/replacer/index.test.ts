@@ -744,11 +744,94 @@ describe("replacer()", () => {
         })
     })
 
-    describe("Conditional objects:", () => {
+    describe("And-or conditional objects:", () => {
         it.each([
-            { // --- Conditional of outer objects
+            { // --- And-or condition of outer objects
                 contents: `
-                    <div className={cn(
+                    <div className={twg(
+                        "multiple classes",
+                        isAndOr && {
+                            var: [
+                                "multiple classes",
+                                isAndOr && "another class",
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        isAndOr && "var:multiple var:classes var:another var:class",
+                        className
+                    )} />
+                `
+            },
+            { // --- And-or condition of multiple outer objects
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        isAndOr1 || {
+                            var1: [
+                                "multiple classes",
+                                isAndOr && "another class",
+                            ]
+                        },
+                        isAndOr2 ?? {
+                            var2: [
+                                "multiple classes",
+                                isAndOr && "another class",
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        isAndOr1 || "var1:multiple var1:classes var1:another var1:class",
+                        isAndOr2 ?? "var2:multiple var2:classes var2:another var2:class",
+                        className
+                    )} />
+                `
+            },
+            { // --- And-or condition object inside outer objects
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "multiple classes",
+                                isAndOr ?? {
+                                    var2: [
+                                        "multiple classes",
+                                        isAndOr && "another class",
+                                    ]
+                                }
+                            ],
+                            "var-3": "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var1:multiple var1:classes var1:var2:multiple var1:var2:classes var1:var2:another var1:var2:class var-3:multiple var-3:classes",
+                        className
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer()(contents)).toBe(expected)
+        })
+    })
+
+    describe("Ternary conditional objects:", () => {
+        it.each([
+            { // --- Ternary condition of outer objects
+                contents: `
+                    <div className={twg(
                         "multiple classes",
                         isTernary === "anything" ? {
                             var2: "multiple classes"
@@ -762,16 +845,16 @@ describe("replacer()", () => {
                     )} />
                 `,
                 expected: `
-                    <div className={cn(
+                    <div className={twg(
                         "multiple classes",
                         isTernary === "anything" ? "var2:multiple var2:classes" : "var2:multiple var2:classes var2:another var2:class",
                         className
                     )} />
                 `
             },
-            { // --- Conditional of multiple outer objects
+            { // --- Ternary condition of multiple outer objects
                 contents: `
-                    <div className={cn(
+                    <div className={twg(
                         "multiple classes",
                         isTernary === "anything" ? {
                             var2: "multiple classes"
@@ -793,7 +876,7 @@ describe("replacer()", () => {
                     )} />
                 `,
                 expected: `
-                    <div className={cn(
+                    <div className={twg(
                         "multiple classes",
                         isTernary === "anything" ? "var2:multiple var2:classes" : "var2:multiple var2:classes var2:another var2:class",
                         isTernary2 === "else" ? "var2:multiple var2:classes" : "var2:multiple var2:classes var2:another var2:class",
@@ -801,9 +884,9 @@ describe("replacer()", () => {
                     )} />
                 `
             },
-            { // --- Conditional inside outer objects
+            { // --- Ternary condition object inside outer objects
                 contents: `
-                    <div className={cn(
+                    <div className={twg(
                         "multiple classes",
                         {
                             var1: [
@@ -823,7 +906,7 @@ describe("replacer()", () => {
                     )} />
                 `,
                 expected: `
-                    <div className={cn(
+                    <div className={twg(
                         "multiple classes",
                         "var1:multiple var1:classes var1:var2:multiple var1:var2:classes var1:var2:multiple var1:var2:classes var1:var2:another var1:var2:class var-3:multiple var-3:classes",
                         className
@@ -831,7 +914,7 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ callee: "cn" })(contents)).toBe(expected)
+            expect(replacer()(contents)).toBe(expected)
         })
     })
 
