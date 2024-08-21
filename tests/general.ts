@@ -7,9 +7,32 @@ const content = `
     <div className={twg(
         "multiple classes",
         {
-            mod1: ["class", "other classes"],
-            mod2: ["class", { "additional-mod": "other classes" }]
-        }
+            var1: [
+                "multiple classes",
+                isTernary1 === "anything1" ? {
+                    var2: "multiple classes"
+                } : {
+                    var2: [
+                        "multiple classes",
+                        isAndOr && "another class",
+                        isTernary2 === "anything2" ? {
+                            var3: [
+                                "class",
+                                isTernary3 === "anything3" ? {
+                                    var4: "multiple classes"
+                                } : {
+                                    var4: ["multiple classes"]
+                                }
+                            ]
+                        } : {
+                            var3: ["multiple classes"]
+                        }
+                    ]
+                }
+            ],
+            "var-5": "multiple classes"
+        },
+        className
     )} />
 ` as string
 

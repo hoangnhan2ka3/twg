@@ -363,6 +363,62 @@ export function HelloWorld() {
 }
 ```
 
+- Or even crazy conditional objects:
+
+```jsx
+// HelloWorld.tsx
+
+import { twg } from "twg"
+import { useState } from "react"
+
+export function HelloWorld() {
+  const [isAndOr, setIsAndOr] = useState(false)
+  const [isTernary, setIsTernary] = useState("foo")
+  // ...
+  return (
+    <div className={twg(
+      "multiple classes",
+      {
+        var1: [
+          "multiple classes",
+          isTernary1 === "anything1" ? {
+            var2: "multiple classes"
+          } : {
+            var2: [
+              "multiple classes",
+              isAndOr && "another class",
+              isTernary2 === "anything2" ? {
+                var3: [
+                  "class",
+                  isTernary3 === "anything3" ? {
+                    var4: "multiple classes"
+                  } : {
+                    var4: ["multiple classes"]
+                  }
+                ]
+              } : {
+                var3: ["multiple classes"]
+              }
+            ]
+          }
+        ],
+        "var-5": "multiple classes"
+      }
+    )} />
+      Hello, World!
+    </div>
+  )
+}
+```
+
+Output _(what Tailwind will scan, not in browser's inspect tool)_:
+
+```html
+<div class="multiple classes var1:multiple var1:classes var1:var2:multiple var1:var2:classes var1:var2:multiple var1:var2:classes var1:var2:another var1:var2:class var1:var2:var3:class var1:var2:var3:var4:multiple var1:var2:var3:var4:classes var1:var2:var3:var4:multiple var1:var2:var3:var4:classes var1:var2:var3:multiple var1:var2:var3:classes var-5:multiple var-5:classes">
+  Hello, World!
+</div>
+```
+
 > **In short:**
 > Just use `twg` as the way you use `clsx` or `classnames`, except for the `object zones` which you can use the `twg` way.
 

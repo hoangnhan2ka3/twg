@@ -10,9 +10,9 @@ export interface ReplacerOptions {
 
 const defaultCallee = "twg"
 
-const replaceAndOr = /(?:!*?\w+)\s*(?:[=!]==?[^&|?]+)?(?:&&|\|\||\?\?)\s*/g // cond (=== prop) &&, ||, ??
 const replaceTernaryClasses = /!*?\w+\s*(?:[=!]==?[^&|?]+)?\?\s*(['"`])(.*?)\1\s*:\s*\1(.*?)\1/gs // cond (=== prop) ? $2 : $3
-const replaceTernaryObjects = /!*?\w+\s*(?:[=!]==?[^&|?]+)?\?\s*(\{.*?\})\s*:\s*(\{.*?\})/gs // cond (=== prop) ? {$1} : {$2}
+const replaceAndOrConsequent = /!*?\w+\s*(?:[=!]==?[^&|?]+)?(?:&&|\|\||\?\?|\?)\s*/g // cond (=== prop) &&, ||, ??, ?
+const replaceAlternative = /\}\s*:\s*\{/gs // } : {
 
 /**
  * Transforms the content before Tailwind scans/extracting its classes.
@@ -58,9 +58,9 @@ export function replacer(options: ReplacerOptions = {}) {
                     // 2.5. Parse conditional
                     const filteredObject = (/:.*['"`]/s).exec(largestObject)
                         ? largestObject
-                            .replace(replaceAndOr, "")
                             .replace(replaceTernaryClasses, '"$2 $3"')
-                            .replace(replaceTernaryObjects, "$1, $2")
+                            .replace(replaceAndOrConsequent, "")
+                            .replace(replaceAlternative, "}, {")
                         : ""
 
                     try {

@@ -912,6 +912,122 @@ describe("replacer()", () => {
                         className
                     )} />
                 `
+            },
+            { // --- Ternary condition object inside other ternary condition object inside outer objects
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "multiple classes",
+                                isTernary === "anything" ? {
+                                    var2: "multiple classes"
+                                } : {
+                                    var2: [
+                                        "multiple classes",
+                                        isAndOr && "another class",
+                                        isTernary === "anything" ? {
+                                            var3: "multiple classes"
+                                        } : {
+                                            var3: ["multiple classes"]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "var-4": "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var1:multiple var1:classes var1:var2:multiple var1:var2:classes var1:var2:multiple var1:var2:classes var1:var2:another var1:var2:class var1:var2:var3:multiple var1:var2:var3:classes var1:var2:var3:multiple var1:var2:var3:classes var-4:multiple var-4:classes",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "multiple classes",
+                                isTernary === "anything" ? {
+                                    var2: "multiple classes"
+                                } : {
+                                    var2: [
+                                        "multiple classes",
+                                        isAndOr && "another class",
+                                        isTernary === "anything" ? {
+                                            var3: [
+                                                "class",
+                                                isTernary === "anything" ? {
+                                                    var4: "multiple classes"
+                                                } : {
+                                                    var4: ["multiple classes"]
+                                                }
+                                            ]
+                                        } : {
+                                            var3: ["multiple classes"]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "var-5": "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var1:multiple var1:classes var1:var2:multiple var1:var2:classes var1:var2:multiple var1:var2:classes var1:var2:another var1:var2:class var1:var2:var3:class var1:var2:var3:var4:multiple var1:var2:var3:var4:classes var1:var2:var3:var4:multiple var1:var2:var3:var4:classes var1:var2:var3:multiple var1:var2:var3:classes var-5:multiple var-5:classes",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "multiple classes",
+                                isTernary1 === "anything1" ? {
+                                    var2: "multiple classes"
+                                } : {
+                                    var2: [
+                                        "multiple classes",
+                                        isAndOr && "another class",
+                                        isTernary2 === "anything2" ? {
+                                            var3: [
+                                                "class",
+                                                isTernary3 === "anything3" ? {
+                                                    var4: "multiple classes"
+                                                } : {
+                                                    var4: ["multiple classes"]
+                                                }
+                                            ]
+                                        } : {
+                                            var3: ["multiple classes"]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "var-5": "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var1:multiple var1:classes var1:var2:multiple var1:var2:classes var1:var2:multiple var1:var2:classes var1:var2:another var1:var2:class var1:var2:var3:class var1:var2:var3:var4:multiple var1:var2:var3:var4:classes var1:var2:var3:var4:multiple var1:var2:var3:var4:classes var1:var2:var3:multiple var1:var2:var3:classes var-5:multiple var-5:classes",
+                        className
+                    )} />
+                `
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)

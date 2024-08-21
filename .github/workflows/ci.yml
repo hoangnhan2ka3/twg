@@ -2,7 +2,12 @@ name: CI
 
 on:
     push:
+        branches:
+            - main
     pull_request:
+        branches:
+            - main
+            - next
 
 permissions:
     contents: read
@@ -14,7 +19,7 @@ jobs:
             matrix:
                 node-version: [20]
                 runner: [ubuntu-latest, windows-latest]
-    
+
         runs-on: ${{ matrix.runner }}
         timeout-minutes: 15
 
