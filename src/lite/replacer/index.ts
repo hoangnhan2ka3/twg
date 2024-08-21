@@ -6,8 +6,9 @@ export interface ReplacerLiteOption {
     callee?: string | string[]
 }
 
-const replaceAndOr = /!*?\w+\s*([=!]==?[\s\S]+)?(&&|\|\||\?\?)\s*/g
-const replaceTernary = /!*?\w+\s*([=!]==?[\s\S]+)?\?\s*(['"`])(.*?)\2\s*:\s*\2(.*?)\2/gs
+const replaceAndOr = /(?:!*?\w+)\s*(?:[=!]==?[^&|?]+)?(?:&&|\|\||\?\?)\s*/g
+const replaceTernaryClasses = /!*?\w+\s*(?:[=!]==?[^&|?]+)?\?\s*(['"`])(.*?)\1\s*:\s*\1(.*?)\1/gs
+const replaceTernaryObjects = /!*?\w+\s*(?:[=!]==?[^&|?]+)?\?\s*(\{.*?\})\s*:\s*(\{.*?\})/gs
 
 export default function replacer(option: ReplacerLiteOption = { callee: "twg" }) {
     return (content: string) => {
@@ -24,7 +25,7 @@ export default function replacer(option: ReplacerLiteOption = { callee: "twg" })
 
                 return largestObjects.reduce((acc, largestObject) => {
                     const filteredObject = (/:.*['"`]/s).exec(largestObject)
-                        ? largestObject.replace(replaceAndOr, "").replace(replaceTernary, '"$3 $4"')
+                        ? largestObject.replace(replaceAndOr, "").replace(replaceTernaryClasses, '"$2 $3"').replace(replaceTernaryObjects, "$1, $2")
                         : ""
 
                     try {

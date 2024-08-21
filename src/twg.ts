@@ -6,7 +6,7 @@ import { type ClassValue, type TWGOptions } from "src/index"
  * @param separator The separator used to join the classes
  * @author `easy-tailwind` [Noriller] see <[reference](https://github.com/Noriller/easy-tailwind/blob/master/src/index.ts#L65C1-L89C2)>
  */
-function reducer(args: ClassValue[], separator: string | false | undefined) {
+function reducer(args: ClassValue[], options?: TWGOptions) {
     return (
         args.reduce<string[]>((acc: string[], cur: ClassValue) => {
             if (cur === undefined || cur === null || cur === false) return acc
@@ -14,7 +14,7 @@ function reducer(args: ClassValue[], separator: string | false | undefined) {
                 acc.push(...cur.filter(Boolean).map(String))
             } else if (typeof cur === "object") {
                 Object.entries(cur).forEach(([key, values]) => {
-                    const func = createTwg({ separator })[key] as (...args: ClassValue[]) => string
+                    const func = createTwg(options)[key] as (...args: ClassValue[]) => string
                     if (Array.isArray(values)) {
                         values.flat(Infinity).forEach((value: ClassValue) => {
                             acc.push(func(value))
@@ -44,12 +44,12 @@ export function createTwg(options?: TWGOptions) {
             : ""
         : ":"
     return new Proxy((...args: ClassValue[]) => {
-        return reducer(args, divider).join(" ")
+        return reducer(args, options).join(" ")
     }, {
         get: function (obj, key: string) {
             return key ? (
                 ...args: ClassValue[]
-            ) => reducer(args, divider).filter(values => values.trim() !== "").map((values) => (
+            ) => reducer(args, options).filter(values => values.trim() !== "").map((values) => (
                 `${key}${divider}${values}`.trim()
             )) : obj
         }

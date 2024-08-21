@@ -8,12 +8,11 @@
 - ✅ Very easy setup.
 - ✅ Support for multiple objects parsing.
 - ✅ Support for nesting multiple functions, objects, and arrays.
-- ✅ Support for conditional classes _(not conditional objects)_.
+- ✅ Support for conditional classes and objects.
 - ✅ Customizable `callee` name and `separator`.
 - ✅ Compatible with wrappers like [`twMerge`](https://github.com/dcastil/tailwind-merge).
 - ✅ "Base" support for Tailwind CSS IntelliSense (IDEs extension), also [Hover Preview](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss#hover-preview).
 - ✅ Lite version.
-- 🔥 Partial support for conditional objects _(only outer/largest object)_.
 
 ## Table of Contents
 
@@ -21,6 +20,7 @@
 - [Getting Started](#getting-started)
   - [1. Install the package](#1-install-the-package)
   - [2. Setup](#2-setup)
+  - [3. Use](#3-use)
 - [Options](#options)
   - [`replacer()` options](#replacer-options)
   - [`twg` options](#twg-options)
@@ -28,8 +28,10 @@
   - [Basic usage](#basic-usage)
   - [Complex as ☠️ usage](#complex-as-%EF%B8%8F-usage)
   - [Conditionals](#conditionals)
-- [Custom `options`](#custom-options)
+- [Custom options](#custom-options)
   - [Custom `callee`](#custom-callee)
+  - [Custom `matchFunction`](#custom-matchfunction)
+  - [Custom `separator`](#custom-separator)
 - [Combination](#combination)
 - [API](#api)
 - [Deeper explanation](#deeper-explanation)
@@ -45,8 +47,10 @@
 Same as default version, but:
 
 - Without any options API except for custom `callee` in [`replacer()` options](#replacer-options).
-- No `debug messages` (no `console.warn` or `console.error`).
+- No `debug messages` (no console messages).
 - 30 ~ 40% lighter.
+
+> When you tested using with default version, and everything's OK. So you could want to use lite version, for better performance.
 
 ## Quick Intro
 
@@ -114,7 +118,7 @@ import replacer from "twg/lite/replacer"
 // Rest like above
 ```
 
-If you need to override default `replacer` options:
+If you need to override default `replacer()` options:
 
 ```js
 transform: {
@@ -125,23 +129,7 @@ transform: {
 }
 ```
 
-## Options
-
-### `replacer()` options
-
-`options?` | Types | Default | Description | Lite | Status
---- | --- | --- | --- | --- | ---
-`callee?` | string \| string[] | "twg" | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_ | ✅ | ✅
-`matchFunction?` | RegExp \| string | /twg\\((?:[^()]\*\|\\((?:[^()]\*\|\\([^()]\*\\))\*\\))\*\\)/gis | The regex used to match the whole `callee function` (eg.: `twg(...)`) inside your actual code file. | x | ✅
-`separator?`(*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `twg` option. | x | 🚧 Currently not available
-
-### `twg` options
-
-`options?` | Types | Default | Description | Lite | Status
---- | --- | --- | --- | --- | ---
-`separator?`(\*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `replacer()` option. | x | 🚧 Currently not available
-
-## How to use
+### 3. Use
 
 ```jsx
 import { twg } from "twg"
@@ -154,6 +142,41 @@ Lite version:
 ```jsx
 import { twg } from "twg/lite"
 ```
+
+If you need to override default `twg()` options:
+
+```js
+twg(
+  //...,
+  {
+    separator: "-" // Always be the last Object
+  }
+)
+```
+
+For more information, consider reading [custom options](#custom-options) and [best practice](#best-practice-with-twmerge).
+
+## Options
+
+### `replacer()` options
+
+`options?` | Types | Default | Description | Lite | Status
+--- | --- | --- | --- | --- | ---
+`callee?` | string \| string[] | "twg" | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_ | ✅ | ✅
+`matchFunction?` | RegExp \| string | /twg\\((?:[^()]\*\|\\((?:[^()]\*\|\\([^()]\*\\))\*\\))\*\\)/gi | The regex used to match the whole `callee function` (eg.: `twg(...)`) inside your actual code file. | x | ✅
+`separator?`(*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `twg` option. | x | ✅
+
+See [how to use](#custom-options).
+
+### `twg` options
+
+Options | Types | Default | Description | Lite | Status
+--- | --- | --- | --- | --- | ---
+`separator?`(\*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `replacer()` option. | x | ✅
+
+See [how to use](#custom-separator).
+
+## How to use
 
 ### Basic usage
 
@@ -290,7 +313,7 @@ export function HelloWorld() {
 }
 ```
 
-- Conditional objects (⚠️ Not supported yet):
+- Conditional objects:
 
 ```jsx
 // HelloWorld.tsx
@@ -366,9 +389,118 @@ import { cn } from "@/lib/utils"
 
 Option 3: [Use with wrapper like `twMerge` 👇](#best-practice-with-twmerge).
 
+### Custom `matchFunction`
+
+_There will be no example for this option and you should not change it at all._
+
+### Custom `separator`
+
+Example with separator as "_", you must define the `separator` option to both `twg()` and `replacer()`:
+
+**1. In `replacer()` options:**
+
+```js
+// tailwind.config.ts
+
+import { type Config } from "tailwindcss"
+import { replacer } from "twg/replacer"
+// or
+import replacer from "twg"
+
+export default {
+  content: {
+    files: [
+      "./src/app/**/*.{ts,tsx}",
+      "./src/components/**/*.{ts,tsx}",
+    ],
+    transform: {
+      DEFAULT: replacer({
+        callee: "cn",
+        separator: "_" // Define `separator` here
+      })
+    }
+  },
+  // Other configurations...
+} satisfies Config
+```
+
+**2. In `twg()` options:**
+
+```js
+// src/lib/utils.ts
+
+import { twg, type ClassValue } from "twg"
+import { extendTailwindMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twg(...inputs, {
+    separator: "_" // Always be the last Object
+  })
+}
+```
+
+**3. Example:**
+
+```jsx
+// HelloWorld.tsx
+
+import { cn } from "@/lib/utils"
+
+export function HelloWorld() {
+  return (
+    <div className={cn(
+      "size-92 relative grid place-items-center px-4 py-2",
+      {
+        before: [
+          "absolute inset-0 bg-red-500",
+          {
+            hover: "bg-blue-500 text-yellow-500"
+          }
+        ],
+        "aria-expanded": "bg-red-500 text-yellow-500",
+      }
+    )}>
+      Hello, World!
+    </div>
+  )
+}
+```
+
+Output (html):
+
+```html
+<div class="size-92 relative grid place-items-center before_absolute before_inset-0 before_bg-red-500 before_hover_bg-blue-500 before_hover_text-yellow-500 aria-expanded_bg-red-500 aria-expanded_text-yellow-500">
+  Hello, World!
+</div>
+```
+
 ## Combination
 
 ### Best practice with [`twMerge`](https://github.com/dcastil/tailwind-merge)
+
+```js
+// tailwind.config.ts
+
+import { type Config } from "tailwindcss"
+import { replacer } from "twg/replacer"
+// or
+import replacer from "twg"
+
+export default {
+  content: {
+    files: [
+      "./src/app/**/*.{ts,tsx}",
+      "./src/components/**/*.{ts,tsx}",
+    ],
+    transform: {
+      DEFAULT: replacer({
+        callee: "cn"
+      })
+    }
+  },
+  // Other configurations...
+} satisfies Config
+```
 
 Default:
 
@@ -396,10 +528,9 @@ const twMerge = extendTailwindMerge<...>({
 })
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(twg({
-    // ⚠️ Currently not available, but I'm working on it.
-    separator: "-"
-  })(...inputs))
+  return twMerge(twg(...inputs, {
+    separator: "-" // Always be the last Object
+  }))
 }
 ```
 
@@ -418,7 +549,7 @@ Types: `ReplacerOptions`
 ```js
 interface ReplacerOptions {
   callee?: string | string[],
-  matchFunction?: RegExp | string,
+  matchFunction?: RegExp | string, // higher-order than regex generated from `callee` option
   separator?: string | false
 }
 ```
@@ -429,26 +560,20 @@ Types: `string`
 
 ---
 
-### `twg({ options })(...inputs)`
+### `twg(...inputs)`
 
 Returns: `string`
 
-_@param_ — **[options](#twg-options)**
-
-Types: `TWGOptions`
-
-```js
-interface TWGOptions {
-  separator?: string | false
-}
-```
-
 _@param_ — **inputs**
 
-Types: `ClassValue[]`
+Types: `(ClassValue | TWGOptions)[]`
 
 ```js
 type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
+
+interface TWGOptions {
+  separator?: string | false
+}
 ```
 
 ---
@@ -488,6 +613,10 @@ type ClassValue<T = string | string[] | number | boolean | null | undefined> = T
 ```
 
 ## Deeper explanation
+
+<details>
+
+<summary>Click to expand/collapse this section</summary>
 
 ### What is `twg`?
 
@@ -659,6 +788,8 @@ const remoteObject = twg({
 - Performance:
 
 Yes of course, `twg` is slower than vanilla `clsx` because it uses `regex` and `extractors` to find and replace the classes. But it's not that slow, it's still fast enough for you to use in your project. This project aim for the better developer-experience with Tailwind variants classes, not for the best performance.
+
+</details>
 
 ## Contributing
 

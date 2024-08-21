@@ -212,10 +212,7 @@ describe("replacer()", () => {
                 expected: `
                     <div className={twg(
                         "multiple classes",
-                        {
-                            mod1: ["class", "other classes"],
-                            mod2: ["class", { "additional-mod": "other classes" }]
-                        }
+                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
                     )} />
                 `
             }
@@ -224,176 +221,156 @@ describe("replacer()", () => {
         })
     })
 
-    // describe("Custom separator:", () => {
-    //     it.each([
-    //         {
-    //             contents: `
-    //                 <div className={twg(
-    //                     "multiple classes",
-    //                     {
-    //                         mod1: ["class", "other classes"],
-    //                         mod2: ["class", { "additional-mod": "other classes" }]
-    //                     }
-    //                 )} />
-    //             `,
-    //             expected: `
-    //                 <div className={twg(
-    //                     "multiple classes",
-    //                     "mod1class mod1other mod1classes mod2class mod2additional-modother mod2additional-modclasses"
-    //                 )} />
-    //             `
-    //         },
-    //         {
-    //             contents: `
-    //                 <div className={cn(
-    //                     "multiple classes",
-    //                     {
-    //                         mod1: ["class", "other classes"],
-    //                         mod2: ["class", { "additional-mod": "other classes" }]
-    //                     }
-    //                 )} />
-    //             `,
-    //             expected: `
-    //                 <div className={cn(
-    //                     "multiple classes",
-    //                     {
-    //                         mod1: ["class", "other classes"],
-    //                         mod2: ["class", { "additional-mod": "other classes" }]
-    //                     }
-    //                 )} />
-    //             `
-    //         }
-    //     ])('"$expected"', ({ contents, expected }) => {
-    //         expect(replacer({ separator: "" })(contents)).toBe(expected)
-    //     })
+    describe("Custom separator:", () => {
+        it.each([
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "mod1class mod1other mod1classes mod2class mod2additional-modother mod2additional-modclasses"
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer({ separator: "" })(contents)).toBe(expected)
+        })
 
-    //     it.each([
-    //         {
-    //             contents: `
-    //                 <div className={twg(
-    //                     "multiple classes",
-    //                     {
-    //                         mod1: ["class", "other classes"],
-    //                         mod2: ["class", { "additional-mod": "other classes" }]
-    //                     }
-    //                 )} />
-    //             `,
-    //             expected: `
-    //                 <div className={twg(
-    //                     "multiple classes",
-    //                     "mod1-class mod1-other mod1-classes mod2-class mod2-additional-mod-other mod2-additional-mod-classes"
-    //                 )} />
-    //             `
-    //         },
-    //         {
-    //             contents: `
-    //                 <div className={cn(
-    //                     "multiple classes",
-    //                     {
-    //                         mod1: ["class", "other classes"],
-    //                         mod2: ["class", { "additional-mod": "other classes" }]
-    //                     }
-    //                 )} />
-    //             `,
-    //             expected: `
-    //                 <div className={cn(
-    //                     "multiple classes",
-    //                     {
-    //                         mod1: ["class", "other classes"],
-    //                         mod2: ["class", { "additional-mod": "other classes" }]
-    //                     }
-    //                 )} />
-    //             `
-    //         }
-    //     ])('"$expected"', ({ contents, expected }) => {
-    //         expect(replacer({ separator: "-" })(contents)).toBe(expected)
-    //     })
+        it.each([
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "mod1-class mod1-other mod1-classes mod2-class mod2-additional-mod-other mod2-additional-mod-classes"
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer({ separator: "-" })(contents)).toBe(expected)
+        })
 
-    //     it.each([
-    //         {
-    //             contents: `
-    //                 <div className={twg(
-    //                     "multiple classes",
-    //                     {
-    //                         mod1: ["class", "other classes"],
-    //                         mod2: ["class", { "additional-mod": "other classes" }]
-    //                     }
-    //                 )} />
-    //             `,
-    //             expected: `
-    //                 <div className={twg(
-    //                     "multiple classes",
-    //                     "mod1tclass mod1tother mod1tclasses mod2tclass mod2tadditional-modtother mod2tadditional-modtclasses"
-    //                 )} />
-    //             `
-    //         },
-    //         {
-    //             contents: `
-    //                 <div className={cn(
-    //                     "multiple classes",
-    //                     {
-    //                         mod1: ["class", "other classes"],
-    //                         mod2: ["class", { "additional-mod": "other classes" }]
-    //                     }
-    //                 )} />
-    //             `,
-    //             expected: `
-    //                 <div className={cn(
-    //                     "multiple classes",
-    //                     {
-    //                         mod1: ["class", "other classes"],
-    //                         mod2: ["class", { "additional-mod": "other classes" }]
-    //                     }
-    //                 )} />
-    //             `
-    //         }
-    //     ])('"$expected"', ({ contents, expected }) => {
-    //         expect(replacer({ separator: "t" })(contents)).toBe(expected)
-    //     })
+        it.each([
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "mod1tclass mod1tother mod1tclasses mod2tclass mod2tadditional-modtother mod2tadditional-modtclasses"
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer({ separator: "t" })(contents)).toBe(expected)
+        })
 
-    //     it.each([
-    //         {
-    //             contents: `
-    //                 <div className={twg(
-    //                     "multiple classes",
-    //                     {
-    //                         mod1: ["class", "other classes"],
-    //                         mod2: ["class", { "additional-mod:": "other classes" }],
-    //                         "mod3-": "multiple classes"
-    //                     }
-    //                 )} />
-    //             `,
-    //             expected: `
-    //                 <div className={twg(
-    //                     "multiple classes",
-    //                     "mod1class mod1other mod1classes mod2class mod2additional-mod:other mod2additional-mod:classes mod3-multiple mod3-classes"
-    //                 )} />
-    //             `
-    //         },
-    //         {
-    //             contents: `
-    //                 <div className={cn(
-    //                     "multiple classes",
-    //                     {
-    //                         mod1: ["class", "other classes"],
-    //                         mod2: ["class", { "additional-mod": "other classes" }]
-    //                     }
-    //                 )} />
-    //             `,
-    //             expected: `
-    //                 <div className={cn(
-    //                     "multiple classes",
-    //                     {
-    //                         mod1: ["class", "other classes"],
-    //                         mod2: ["class", { "additional-mod": "other classes" }]
-    //                     }
-    //                 )} />
-    //             `
-    //         }
-    //     ])('"$expected"', ({ contents, expected }) => {
-    //         expect(replacer({ separator: false })(contents)).toBe(expected)
-    //     })
-    // })
+        it.each([
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod:": "other classes" }],
+                            "mod3-": "multiple classes"
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "mod1class mod1other mod1classes mod2class mod2additional-mod:other mod2additional-mod:classes mod3-multiple mod3-classes"
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer({ separator: false })(contents)).toBe(expected)
+        })
+    })
 
     describe("Custom matchFunction regex:", () => {
         it.each([
@@ -460,10 +437,7 @@ describe("replacer()", () => {
                 expected: `
                     <div className={twg(
                         "multiple classes",
-                        {
-                            mod1: ["class", "other classes"],
-                            mod2: ["class", { "additional-mod": "other classes" }]
-                        }
+                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
                     )} />
                 `
             }
@@ -485,10 +459,7 @@ describe("replacer()", () => {
                 expected: `
                     <div className={twg(
                         "multiple classes",
-                        {
-                            mod1: ["class", "other classes"],
-                            mod2: ["class", { "additional-mod": "other classes" }]
-                        }
+                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
                     )} />
                 `
             }
@@ -854,7 +825,7 @@ describe("replacer()", () => {
                 expected: `
                     <div className={cn(
                         "multiple classes",
-                        "var1:multiple var1:classes var1:var2:multiple var1:var2:classes var1:var2:another var1:var2:class var-3:multiple var-3:classes",
+                        "var1:multiple var1:classes var1:var2:multiple var1:var2:classes var1:var2:multiple var1:var2:classes var1:var2:another var1:var2:class var-3:multiple var-3:classes",
                         className
                     )} />
                 `

@@ -4,32 +4,18 @@ import { extractOuterObjects } from "src/replacer/extractors"
 import { createTwg } from "src/twg"
 
 const content = `
-    const Badge \\= ({ className, variant, ...props }: BadgeProps) => {
-        return (
-            <div className={cn(
-                "multiple classes",
-                {
-                    var1: [
-                        "multiple classes",
-                        {
-                            var2: "multiple classes"
-                            var2: [
-                                "multiple classes",
-                                isAndOr && "another class",
-                            ]
-                        }
-                    ],
-                    "var-3": "multiple classes"
-                },
-                className
-            )} />
-        )
-    }
+    <div className={twg(
+        "multiple classes",
+        {
+            mod1: ["class", "other classes"],
+            mod2: ["class", { "additional-mod": "other classes" }]
+        }
+    )} />
 ` as string
 
-const transformedContent = replacer({ callee: "cn" })(content)
+const transformedContent = replacer({ matchFunction: "" })(content)
 
-// console.log("1: ", transformedContent)
+console.log("1: ", transformedContent)
 
 const content5 = `
 {
@@ -44,16 +30,16 @@ const content5 = `
 
 // console.log("5: ", content5.slice(-1, 122 + 1))
 
-// function cn(...inputs: ClassValue[]) {
-//     return twg({
-//         separator: "h"
-//     })(...inputs)
-// }
+function cn(...inputs: ClassValue[]) {
+    return twg(...inputs)
+}
 
 const content2 = [
     "multiple classes", { "var:": "class" }, { var: "multiple classes" }
 ] as string[]
-// console.log("2: ", cn(content2))
+// console.log("2: ", twg(content2, {
+//     separator: false
+// }))
 
 const content3 = `
     "multiple classes", { "var:": "class" }, { var: "multiple classes" }
