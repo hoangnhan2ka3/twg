@@ -34,7 +34,7 @@ jobs:
                 cache: "pnpm"
 
             - name: Install dependencies
-              run: pnpm install -D @types/jest jest
+              run: pnpm install
 
             - name: Run tests
               run: pnpm test
