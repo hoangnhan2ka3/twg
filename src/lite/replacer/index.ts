@@ -10,12 +10,11 @@ const replaceTernaryClasses = /!*?\w+\s*(?:[=!]==?[^&|?]+)?\?\s*(['"`])(.*?)\1\s
 const replaceAndOrConsequent = /!*?\w+\s*(?:[=!]==?[^&|?]+)?(?:&&|\|\||\?\?|\?)\s*/g
 const replaceAlternative = /\}\s*:\s*\{/gs
 
-export default function replacer(option: ReplacerLiteOption = { callee: "twg" }) {
+export default function replacer({ callee = "twg" }: ReplacerLiteOption = {}) {
     return (content: string) => {
-        if (option.callee === undefined || option.callee.length === 0) return content
-
+        if (callee.length === 0) callee = "twg"
         const calleeFunctionRegex = new RegExp(
-            `${Array.isArray(option.callee) ? `(${option.callee.join("|")})` : option.callee}\\((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*\\)`, "gi"
+            `${Array.isArray(callee) ? `(${callee.join("|")})` : callee}\\((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*\\)`, "gi"
         )
 
         let tmpContent = content

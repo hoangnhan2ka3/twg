@@ -8,42 +8,43 @@ export interface ReplacerOptions {
     separator?: string | false
 }
 
-const defaultCallee = "twg"
-
 const replaceTernaryClasses = /!*?\w+\s*(?:[=!]==?[^&|?]+)?\?\s*(['"`])(.*?)\1\s*:\s*\1(.*?)\1/gs // cond (=== prop) ? $2 : $3
 const replaceAndOrConsequent = /!*?\w+\s*(?:[=!]==?[^&|?]+)?(?:&&|\|\||\?\?|\?)\s*/g // cond (=== prop) &&, ||, ??, ?
 const replaceAlternative = /\}\s*:\s*\{/gs // } : {
 
 /**
  * Transforms the content before Tailwind scans/extracting its classes.
- * @param options see [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-content#replacer-options)
- * @param content The content already provided by `content.files` in `tailwind.config`
+ * @param options callee, matchFunction, separator. See [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-content#replacer-options).
+ * @param content The content already provided by `content.files` in `tailwind.config`.
  */
-export function replacer(options: ReplacerOptions = {}) {
+export function replacer({
+    callee = "twg",
+    matchFunction,
+    separator = ":"
+}: ReplacerOptions = {}) {
     return (content: string) => {
         // 0.1. Check whether callee? is valid
-        if (options.callee === undefined || options.callee.length === 0) {
-            options.callee = defaultCallee
+        if (callee.length === 0) {
+            callee = "twg"
             console.warn("⚠️ Warning: `callee` is not valid. Using default value.")
         }
 
         // 0.2. Handle custom calleeFunctionRegex
-        const tailRegex = "\\((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*\\)"
         let calleeFunctionRegex = new RegExp(
-            `${Array.isArray(options.callee) ? `(${options.callee.join("|")})` : options.callee}${tailRegex}`, "gi"
+            `${Array.isArray(callee) ? `(${callee.join("|")})` : callee}\\((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*\\)`, "gi"
         )
 
         // 0.3. Handle custom matchFunction
-        if (options.matchFunction !== undefined) {
-            if (typeof options.matchFunction === "string") {
-                const match = (/^\/(.+)\/([gimsuy]{0,6})$/i).exec(options.matchFunction)
+        if (matchFunction !== undefined) {
+            if (typeof matchFunction === "string") {
+                const match = (/^\/(.+)\/([gimsuy]{0,6})$/i).exec(matchFunction)
                 if (match?.[1]) {
                     calleeFunctionRegex = new RegExp(match[1], match[2])
                 } else {
                     console.warn("⚠️ Warning: `matchFunction` is not valid. Using default value.")
                 }
-            } else if (options.matchFunction instanceof RegExp) {
-                calleeFunctionRegex = options.matchFunction
+            } else if (matchFunction instanceof RegExp) {
+                calleeFunctionRegex = matchFunction
             }
         }
 
@@ -65,7 +66,7 @@ export function replacer(options: ReplacerOptions = {}) {
 
                     try {
                         // 3. Parse the arguments inside through `twg()` API
-                        const parsedObject = createTwg({ separator: options.separator })(
+                        const parsedObject = createTwg({ separator: separator })(
                             ...new Function(`return [${filteredObject}]`)() as ClassValue[]
                         )
                         // 4. Replace the old largest object with parsed one

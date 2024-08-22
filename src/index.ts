@@ -14,7 +14,6 @@ function toVal(mix: ClassValue, options?: TWGOptions): string {
     let k: number,
         y: string,
         str = ""
-    // console.log(divider)
     if (typeof mix === "string" || typeof mix === "number") {
         str += mix.toString()
     } else if (typeof mix === "object" && mix !== null) {
@@ -30,7 +29,6 @@ function toVal(mix: ClassValue, options?: TWGOptions): string {
                 }
             }
         } else {
-            // str += createTwg({ separator })(mix)
             str += createTwg(options)(mix)
         }
     }
@@ -47,7 +45,7 @@ export function twg(...inputs: (ClassValue | TWGOptions)[]) {
     const lastInput = inputs[inputs.length - 1]
     if (typeof lastInput === "object" && lastInput !== null && !Array.isArray(lastInput) && "separator" in lastInput) {
         options = lastInput as TWGOptions
-        // Omit the last Object if it's the options
+        // Omit the last Object if it is the options
         inputs.pop()
     }
 

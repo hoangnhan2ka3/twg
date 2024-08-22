@@ -33,7 +33,7 @@ function reducer(args: ClassValue[], options?: TWGOptions) {
 
 /**
  * Transforms the inputs on build time. Map key to each values inside the Object zones.
- * @param options see [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options)
+ * @param options see [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options).
  * @param args The inputs class values
  * @author `easy-tailwind` [Noriller] see <[reference](https://github.com/Noriller/easy-tailwind/blob/master/src/index.ts#L57C1-L63C4)>
  */

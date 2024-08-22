@@ -174,7 +174,7 @@ For more information, consider reading [custom options](#custom-options) and [be
 
 ### `replacer()` options
 
-`options?` | Types | Default | Description | Lite | Status
+Options | Types | Default | Description | Lite | Status
 --- | --- | --- | --- | --- | ---
 `callee?` | string \| string[] | "twg" | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_ | ✅ | ✅
 `matchFunction?` | RegExp \| string | /twg\\((?:[^()]\*\|\\((?:[^()]\*\|\\([^()]\*\\))\*\\))\*\\)/gi | The regex used to match the whole `callee function` (eg.: `twg(...)`) inside your actual code file. | x | ✅
@@ -182,7 +182,7 @@ For more information, consider reading [custom options](#custom-options) and [be
 
 See [how to use](#custom-options).
 
-### `twg` options
+### `twg()` options
 
 Options | Types | Default | Description | Lite | Status
 --- | --- | --- | --- | --- | ---
@@ -612,11 +612,11 @@ export function cn(...inputs: ClassValue[]) {
 
 💥 Default version:
 
-### `replacer({ options })(content)`
+### `replacer({ /* options */ })(content)`
 
 Returns: `string`
 
-_@param_ — **[options](#replacer-options)**
+_@param_ — **[options](#replacer-options)**: callee, matchFunction, separator
 
 Types: `ReplacerOptions`
 
@@ -654,11 +654,11 @@ interface TWGOptions {
 
 💥 Light version:
 
-### `replacer({ option })(content)`
+### `replacer({ /* option */ })(content)`
 
 Returns: `string`
 
-_@param_ — **[options](#replacer-options)**
+_@param_ — **[options](#replacer-options)**: callee
 
 Types: `ReplacerOptions`
 

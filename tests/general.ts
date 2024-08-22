@@ -36,7 +36,7 @@ const content = `
     )} />
 ` as string
 
-const transformedContent = replacer({ matchFunction: "" })(content)
+const transformedContent = replacer({ callee: [] })(content)
 
 console.log("1: ", transformedContent)
 
