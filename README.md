@@ -1,7 +1,7 @@
 ![twg_thumbnail](public/twg_thumbnail.webp)
 
 <p align="center">
-  <a href="https://github.com/hoangnhan2ka3/twg/actions"><img src="https://img.shields.io/github/actions/workflow/status/hoangnhan2ka3/twg/ci.yml?branch=main&label=tests" alt="Build Status"></a>
+  <a href="https://github.com/hoangnhan2ka3/twg/actions"><img src="https://img.shields.io/github/actions/workflow/status/hoangnhan2ka3/twg/tests.yml?branch=main&label=tests" alt="Build Status"></a>
   <a href="https://bundlephobia.com/result?p=twg"><img src="https://img.shields.io/bundlephobia/min/twg?label=bundle" alt="Bundle Size"></a>
   <a href="https://bundlephobia.com/result?p=twg"><img src="https://img.shields.io/bundlephobia/minzip/twg?label=gzip&colorB=8a2be2" alt="Gzip Size"></a>
   <a href="https://www.npmjs.com/package/twg"><img src="https://img.shields.io/npm/dt/twg.svg?colorB=f279b6" alt="Total Downloads"></a>
