@@ -932,5 +932,3 @@ Function | What it does
 ### License
 
 MIT © [Nguyễn Hoàng Nhân](https://hoangnhanne.id.vn)
-
-# ❤️

@@ -12,6 +12,7 @@
 .editorconfig
 tsconfig.json
 *.config.*
+CHANGELOG.md
 
 # misc
 .DS_Store

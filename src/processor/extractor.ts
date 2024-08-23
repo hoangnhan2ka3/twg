@@ -22,17 +22,18 @@ export function extractor(
     for (let i = 0; i < content.length; i++) {
         const char = content[i]
 
-        // Xử lý template literals
+        // Handle template literals
         if (char === "`") {
             inTemplateLiteral = !inTemplateLiteral
             continue
         }
 
+        // Skip template literals
         if (inTemplateLiteral) {
             continue
         }
 
-        // Xác định nếu ký tự hiện tại nằm trong bất kỳ hàm gọi nào trong calleeList
+        // Check if the current char is in any of the calleeList
         for (const calleeName of calleeList) {
             if (content.slice(i, i + calleeName.length + 1) === `${calleeName}(`) {
                 inCallee = true
@@ -43,6 +44,7 @@ export function extractor(
         }
 
         if (inCallee) {
+            // Handle callee
             if (char === "(") {
                 calleeDepth++
             } else if (char === ")") {
@@ -52,7 +54,7 @@ export function extractor(
                 }
             }
 
-            // Xử lý đối tượng bên trong hàm gọi
+            // Handle objects
             if (char === "{") {
                 if (depth === 0) {
                     objectStart = i
