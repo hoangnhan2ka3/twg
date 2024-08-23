@@ -10,10 +10,6 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/sponsors/hoangnhan2ka3"><img src="https://img.shields.io/static/v1?label=Donation&message=&#x2764;&#xfe0f;&style=social" alt="Funding"></a>
-</p>
-
-<p align="center">
 A more elegant way of writing Tailwind classes. Never need to repeating the same variants over and over again 🤯.
 </p>
 
@@ -928,6 +924,10 @@ Function | What it does
 ### Project starts on
 
 - August 15, 2024
+
+### Funding
+
+[![Donate me](https://img.shields.io/static/v1?label=Donate%20me&message=❤️&style=social)](https://github.com/sponsors/hoangnhan2ka3)
 
 ### License
 
