@@ -1,5 +1,5 @@
 import { type ClassValue } from "src/index"
-import { createTwg } from "src/lite/twg"
+import { parser } from "src/lite/lite-processor/parser"
 
 function toVal(mix: ClassValue): string {
     let k: number,
@@ -20,7 +20,7 @@ function toVal(mix: ClassValue): string {
                 }
             }
         } else {
-            str += createTwg(mix)
+            str += parser(mix)
         }
     }
     return str

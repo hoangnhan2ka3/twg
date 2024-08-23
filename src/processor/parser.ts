@@ -4,6 +4,7 @@ import { type ClassValue, type TWGOptions } from "src/index"
  * Focusing on handling arrays and objects, looping them until all are flattened.
  * @param args The inputs class values
  * @param separator The separator used to join the classes
+ * @returns string[]
  * @author `easy-tailwind` [Noriller] see <[reference](https://github.com/Noriller/easy-tailwind/blob/master/src/index.ts#L65C1-L89C2)>
  */
 function reducer(args: ClassValue[], options?: TWGOptions) {
@@ -14,7 +15,7 @@ function reducer(args: ClassValue[], options?: TWGOptions) {
                 acc.push(...cur.filter(Boolean).map(String))
             } else if (typeof cur === "object") {
                 Object.entries(cur).forEach(([key, values]) => {
-                    const func = createTwg(options)[key] as (...args: ClassValue[]) => string
+                    const func = parser(options)[key] as (...args: ClassValue[]) => string
                     if (Array.isArray(values)) {
                         values.flat(Infinity).forEach((value: ClassValue) => {
                             acc.push(func(value))
@@ -28,16 +29,17 @@ function reducer(args: ClassValue[], options?: TWGOptions) {
             }
             return acc
         }, [])
-    ).flat(Infinity)
+    ).flat()
 }
 
 /**
- * Transforms the inputs on build time. Map key to each values inside the Object zones.
+ * Transforms the inputs. Map key to each values inside the Object zones.
  * @param options see [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options).
  * @param args The inputs class values
+ * @returns string
  * @author `easy-tailwind` [Noriller] see <[reference](https://github.com/Noriller/easy-tailwind/blob/master/src/index.ts#L57C1-L63C4)>
  */
-export function createTwg(options?: TWGOptions) {
+export function parser(options?: TWGOptions) {
     const divider = (options?.separator !== undefined)
         ? typeof options.separator === "string"
             ? options.separator
@@ -57,4 +59,4 @@ export function createTwg(options?: TWGOptions) {
     }) as Record<string, (...args: ClassValue[]) => string> & ((...args: ClassValue[]) => string)
 }
 
-export default createTwg
+export default parser

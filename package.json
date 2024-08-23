@@ -1,8 +1,8 @@
 {
     "name": "twg",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "description": "A utility function for grouping TailwindCSS variants.",
-    "author": "hoangnhan2ka3",
+    "author": "Nguyễn Hoàng Nhân <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)",
     "homepage": "https://github.com/hoangnhan2ka3/twg",
     "repository": {
         "type": "git",
@@ -10,6 +10,10 @@
     },
     "bugs": {
         "url": "https://github.com/hoangnhan2ka3/twg/issues"
+    },
+    "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/hoangnhan2ka3"
     },
     "packageManager": "pnpm@9.7.1+sha256.46f1bbc8f8020aa9869568c387198f1a813f21fb44c82f400e7d1dbde6c70b40",
     "engines": {
@@ -19,11 +23,12 @@
         "build": "tsup",
         "test": "jest",
         "lint": "tsc",
-        "npm": "pnpm build && pnpm publish --access public"
+        "npm": "pnpm build && pnpm publish --access public",
+        "npm:beta": "pnpm build && pnpm publish --access public --tag beta"
     },
-    "main": "dist/index.js",
-    "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
+    "module": "dist/index.mjs",
+    "main": "dist/index.js",
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
@@ -53,7 +58,7 @@
         "@stylistic/eslint-plugin": "^2.6.4",
         "@types/eslint": "^9.6.0",
         "@types/jest": "^29.5.12",
-        "@types/node": "^22.4.1",
+        "@types/node": "^22.5.0",
         "@typescript-eslint/eslint-plugin": "^8.2.0",
         "@typescript-eslint/parser": "^8.2.0",
         "eslint": "^9.9.0",

@@ -8,7 +8,7 @@ function reducer(args: ClassValue[]) {
                 acc.push(...cur.filter(Boolean).map(String))
             } else if (typeof cur === "object") {
                 Object.entries(cur).forEach(([key, values]) => {
-                    const func = createTwg[key] as (...args: ClassValue[]) => string
+                    const func = parser[key] as (...args: ClassValue[]) => string
                     if (Array.isArray(values)) {
                         values.flat(Infinity).forEach((value: ClassValue) => {
                             acc.push(func(value))
@@ -22,10 +22,10 @@ function reducer(args: ClassValue[]) {
             }
             return acc
         }, [])
-    ).flat(Infinity)
+    ).flat()
 }
 
-export const createTwg = new Proxy((...args: ClassValue[]) => {
+export const parser = new Proxy((...args: ClassValue[]) => {
     return reducer(args).join(" ")
 }, {
     get: function (obj, key: string) {

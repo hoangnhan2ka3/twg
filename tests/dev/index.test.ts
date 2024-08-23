@@ -6,7 +6,6 @@ import { twg } from "src"
 describe("twg()", () => {
     describe("General cases:", () => {
         it.each([
-            // --- General cases
             { args: [], expected: "" },
             { args: [""], expected: "" },
             { args: ["t"], expected: "t" },
@@ -22,6 +21,10 @@ describe("twg()", () => {
             { args: ["multiple Classes"], expected: "multiple Classes" },
             {
                 args: [["multiple classes", "in", "one array"]],
+                expected: "multiple classes in one array"
+            },
+            { // --- Max array depth: 3 (refer to `ClassValue` type)
+                args: [[["multiple classes", "in", "one array"]]],
                 expected: "multiple classes in one array"
             },
             {

@@ -153,45 +153,6 @@ describe("replacer()", () => {
                 expected: `
                     <div className={cn(
                         "multiple classes",
-                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
-                    )} />
-                `
-            },
-            {
-                contents: `
-                    <div className={twg(
-                        "multiple classes",
-                        {
-                            mod1: ["class", "other classes"],
-                            mod2: ["class", { "additional-mod": "other classes" }]
-                        }
-                    )} />
-                `,
-                expected: `
-                    <div className={twg(
-                        "multiple classes",
-                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
-                    )} />
-                `
-            }
-        ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ callee: ["twg", "cn"] })(contents)).toBe(expected)
-        })
-
-        it.each([
-            {
-                contents: `
-                    <div className={cn(
-                        "multiple classes",
-                        {
-                            mod1: ["class", "other classes"],
-                            mod2: ["class", { "additional-mod": "other classes" }]
-                        }
-                    )} />
-                `,
-                expected: `
-                    <div className={cn(
-                        "multiple classes",
                         {
                             mod1: ["class", "other classes"],
                             mod2: ["class", { "additional-mod": "other classes" }]
@@ -369,102 +330,6 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer({ separator: false })(contents)).toBe(expected)
-        })
-    })
-
-    describe("Custom matchFunction regex:", () => {
-        it.each([
-            {
-                contents: `
-                    <div className={cn(
-                        "multiple classes",
-                        {
-                            mod1: ["class", "other classes"],
-                            mod2: ["class", { "additional-mod": "other classes" }]
-                        }
-                    )} />
-                `,
-                expected: `
-                    <div className={cn(
-                        "multiple classes",
-                        {
-                            mod1: ["class", "other classes"],
-                            mod2: ["class", { "additional-mod": "other classes" }]
-                        }
-                    )} />
-                `
-            }
-        ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ matchFunction: /^cn$/ })(contents)).toBe(expected)
-        })
-
-        it.each([
-            {
-                contents: `
-                    <div className={twg(
-                        "multiple classes",
-                        {
-                            mod1: ["class", "other classes"],
-                            mod2: ["class", { "additional-mod": "other classes" }]
-                        }
-                    )} />
-                `,
-                expected: `
-                    <div className={twg(
-                        "multiple classes",
-                        {
-                            mod1: ["class", "other classes"],
-                            mod2: ["class", { "additional-mod": "other classes" }]
-                        }
-                    )} />
-                `
-            }
-        ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ matchFunction: "/^twg$/g" })(contents)).toBe(expected)
-        })
-
-        it.each([
-            {
-                contents: `
-                    <div className={twg(
-                        "multiple classes",
-                        {
-                            mod1: ["class", "other classes"],
-                            mod2: ["class", { "additional-mod": "other classes" }]
-                        }
-                    )} />
-                `,
-                expected: `
-                    <div className={twg(
-                        "multiple classes",
-                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
-                    )} />
-                `
-            }
-        ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ matchFunction: "" })(contents)).toBe(expected)
-        })
-
-        it.each([
-            {
-                contents: `
-                    <div className={twg(
-                        "multiple classes",
-                        {
-                            mod1: ["class", "other classes"],
-                            mod2: ["class", { "additional-mod": "other classes" }]
-                        }
-                    )} />
-                `,
-                expected: `
-                    <div className={twg(
-                        "multiple classes",
-                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
-                    )} />
-                `
-            }
-        ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ matchFunction: undefined })(contents)).toBe(expected)
         })
     })
 
@@ -657,6 +522,217 @@ describe("replacer()", () => {
         })
     })
 
+    describe("Misleading template literal:", () => {
+        it.each([
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var: [
+                                "multiple classes",
+                                \`other \${(!directly && borderWidth) ? "class" : ""}\`
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var:multiple var:classes var:other var:class",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var: [
+                                "multiple classes",
+                                \`any \${!(!directly && borderWidth) ? "other" : "class"}\`
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var:multiple var:classes var:any var:other var:class",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var: [
+                                "multiple classes",
+                                \`any \${!((!directly) && (borderWidth)) ? "other" : "class"}\`
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var:multiple var:classes var:any var:other var:class",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var: [
+                                "multiple classes",
+                                \`any \${!(!(directly) && (borderWidth) || !borderWidth && (directly)) ? "other" : "class"}\`
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var:multiple var:classes var:any var:other var:class",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var: [
+                                "multiple classes",
+                                \`any \${!(!(directly) && (!borderWidth) || !borderWidth && (directly)) ? "other" : "class"}\`
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var:multiple var:classes var:any var:other var:class",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var: [
+                                "multiple classes",
+                                \`any \${!(!(!directly) && (borderWidth)) ? "other" : "class"}\`
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var:multiple var:classes var:any var:other var:class",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        absolute ? "absolute" : fixed ? "fixed" : "relative",
+                        isTernary
+                            ? \`before:-z-1 \${(!directly && borderWidth) ? "after:-z-2" : ""}\`
+                            : \`\${force ? "" : ""} after:-z-1\`,
+                        {
+                            before: "absolute inset-0 block"
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        absolute ? "absolute" : fixed ? "fixed" : "relative",
+                        isTernary
+                            ? \`before:-z-1 \${(!directly && borderWidth) ? "after:-z-2" : ""}\`
+                            : \`\${force ? "" : ""} after:-z-1\`,
+                        "before:absolute before:inset-0 before:block"
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        absolute ? "absolute" : fixed ? "fixed" : "relative",
+                        isTernary
+                            ? \`before:-z-1 \${(!directly && borderWidth) ? "after:-z-2" : ""}\`
+                            : \`\${force ? "" : ""} after:-z-1\`,
+                        {
+                            before: [
+                                "absolute inset-0 block",
+                                \`z-1 \${(!directly && borderWidth) ? "z-2" : ""}\`
+                            ]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        absolute ? "absolute" : fixed ? "fixed" : "relative",
+                        isTernary
+                            ? \`before:-z-1 \${(!directly && borderWidth) ? "after:-z-2" : ""}\`
+                            : \`\${force ? "" : ""} after:-z-1\`,
+                        "before:absolute before:inset-0 before:block before:z-1 before:z-2"
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer()(contents)).toBe(expected)
+        })
+    })
+
+    describe("Multiple lines classes:", () => {
+        it.each([
+            { //*
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: \`multiple
+                            classes\`,
+                            var2: [
+                            "multiple classes", {
+                                var3: \`other
+                                class\`
+                            }]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var1:multiple var1:classes var2:multiple var2:classes var2:var3:other var2:var3:class",
+                        className
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer()(contents)).toBe(expected)
+        })
+    })
+
     describe("Conditional classes:", () => {
         it.each([
             {
@@ -673,30 +749,6 @@ describe("replacer()", () => {
                     <div className={cn(
                         "multiple classes",
                         "var:multiple var:classes",
-                        className
-                    )} />
-                `
-            },
-            { //*
-                contents: `
-                    <div className={cn(
-                        "multiple classes",
-                        {
-                            var1: \`multiple
-                            classes\`,
-                            var2: [
-                            "multiple classes", {
-                                var3: \`other
-                                class\`
-                            }]
-                        },
-                        className
-                    )} />
-                `,
-                expected: `
-                    <div className={cn(
-                        "multiple classes",
-                        "var1:multiple var1:classes var2:multiple var2:classes var2:var3:other var2:var3:class",
                         className
                     )} />
                 `
@@ -741,6 +793,51 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer({ callee: "cn" })(contents)).toBe(expected)
+        })
+    })
+
+    describe("Multiple conditional classes:", () => {
+        it.each([
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: condition1 && !condition2 ? "multiple classes" : "other multiple classes",
+                            var2: (condition2 || condition3 ?? !condition4) ? "multiple classes" : "other multiple classes",
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var1:multiple var1:classes var1:other var1:multiple var1:classes var2:multiple var2:classes var2:other var2:multiple var2:classes",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: condition1 && !condition2 ? "multiple classes" : "other multiple classes",
+                            var2: !(condition2 || condition3 ?? !condition4) ? "multiple classes" : "other multiple classes",
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var1:multiple var1:classes var1:other var1:multiple var1:classes var2:multiple var2:classes var2:other var2:multiple var2:classes",
+                        className
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer()(contents)).toBe(expected)
         })
     })
 

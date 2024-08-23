@@ -1,4 +1,4 @@
-import { extractOuterObjects } from "src/replacer/extractors"
+import { extractor } from "src/processor/extractor"
 
 describe("extractOuterObjects()", () => {
     describe("General cases:", () => {
@@ -43,7 +43,7 @@ describe("extractOuterObjects()", () => {
                 expected: [`{ mod1: ["class", "other classes"], mod2: ["class", { "additional-mod": "other classes" }] }`]
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(extractOuterObjects(contents.replace(/\s\s+/g, " "))).toStrictEqual(expected)
+            expect(extractor(contents.replace(/\s\s+/g, " "), "twg")).toStrictEqual(expected)
         })
     })
 })
