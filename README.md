@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/sponsors/hoangnhan2ka3"><img src="https://img.shields.io/static/v1?label=Donation&message=❤️&style=social" alt="Funding"></a>
+  <a href="https://github.com/sponsors/hoangnhan2ka3"><img src="https://img.shields.io/static/v1?label=Donation&message=&#x2764;&#xfe0f;&style=social" alt="Funding"></a>
 </p>
 
 <p align="center">
@@ -40,7 +40,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
   - [1. Install the package](#1-install-the-package)
   - [2. Setup](#2-setup)
   - [3. Use](#3-use)
-- [Options](#-options)
+- [Options](#%EF%B8%8F-options)
   - [`replacer()` options](#replacer-options)
   - [`twg` options](#twg-options)
 - [How to use](#-how-to-use)
@@ -53,11 +53,11 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
   - [Turn off `debug`](#turn-off-debug)
 - [Combination](#-combination)
 - [API](#-api)
-- [Deeper explanation](#-deeper-explanation)
+- [Deeper explanation](#%EF%B8%8F-deeper-explanation)
   - [What is `twg`?](#what-is-twg)
   - [Explanation](#explanation)
   - [Trade-offs](#trade-offs)
-- [Contributing](#-contributing)
+- [Contributing](#%EF%B8%8F-contributing)
 - [Credits](#-credits)
 
 ## 📰 News
@@ -932,3 +932,5 @@ Function | What it does
 ### License
 
 MIT © [Nguyễn Hoàng Nhân](https://hoangnhanne.id.vn)
+
+# ❤️
