@@ -1,4 +1,4 @@
-![twg_thumbnail](public/twg_thumbnail.webp)
+![twg_thumbnail](../public/twg_thumbnail.webp)
 
 <p align="center">
   <a href="https://github.com/hoangnhan2ka3/twg/actions"><img src="https://img.shields.io/github/actions/workflow/status/hoangnhan2ka3/twg/tests.yml?branch=main&label=tests" alt="Tests Status"></a>
