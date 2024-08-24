@@ -26,8 +26,8 @@ export function replacer({
     return (content: string) => {
         // 0. Check whether callee? is valid
         if (callee.length === 0) {
-            callee = "twg"
-            debug && console.warn("⚠️ Warning: `callee` is not valid. Using default value.")
+            debug && console.warn("⚠️ TWG - Warning: `callee` is not valid.")
+            return content
         }
 
         try {
@@ -49,14 +49,14 @@ export function replacer({
                     // 4. Replace the old largest object with parsed one
                     content = content.replace(largestObject, `"${parsedObject}"`)
                 } catch (errorParsing) {
-                    debug && console.warn(`\n⚠️ TWG: Problem occurred on \`replacer()\`:\n${((errorParsing as Error).message)} in:\n- ${largestObject}\nTrying to be transformed into:\n+ ${filteredObject}`)
+                    debug && console.warn(`\n⚠️ TWG - Problem occurred on \`replacer()\`:\n${((errorParsing as Error).message)} in:\n- ${largestObject}\nTrying to be transformed into:\n+ ${filteredObject}`)
                 }
             })
 
             // DONE. Return the processed content
             return content
         } catch (errorOnContent) {
-            debug && console.error(`\n❌ TWG: Error occurred on \`replacer()\`:\n${((errorOnContent as Error).message)} in content:\n${content}\n`)
+            debug && console.error(`\n❌ TWG - Error occurred on \`replacer()\`:\n${((errorOnContent as Error).message)} in content:\n${content}\n`)
             return content
         }
     }

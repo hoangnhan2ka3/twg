@@ -12,7 +12,7 @@ const replaceAlternative = /\}\s*:\s*\{/gs
 
 export function replacer({ callee = "twg" }: ReplacerLiteOption = {}) {
     return (content: string) => {
-        if (callee.length === 0) callee = "twg"
+        if (callee.length === 0) return content
 
         try {
             extractor(content, callee).forEach(largestObject => {
@@ -24,7 +24,7 @@ export function replacer({ callee = "twg" }: ReplacerLiteOption = {}) {
                     : ""
 
                 try {
-                    const parsedObject = parser()(
+                    const parsedObject = parser(
                         ...new Function(`return [${filteredObject}]`)() as ClassValue[]
                     )
                     content = content.replace(largestObject, `"${parsedObject}"`)

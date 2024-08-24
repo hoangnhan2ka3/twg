@@ -10,19 +10,17 @@ export function extractor(
     content: string,
     callee: ReplacerOptions["callee"] = "twg"
 ): string[] {
-    let depth = 0,
+    let calleeDepth = 0,
+        objectDepth = 0,
         objectStart = -1,
         inTemplateLiteral = false,
-        inCallee = false,
-        calleeDepth = 0
+        inCallee = false
 
     const objects = []
 
     for (let i = 0; i < content.length; i++) {
-        const char = content[i]
-
         // Handle template literals
-        if (char === "`") {
+        if (content[i] === "`") {
             inTemplateLiteral = !inTemplateLiteral
             continue
         }
@@ -30,7 +28,7 @@ export function extractor(
         // Skip template literals
         if (inTemplateLiteral) continue
 
-        // Check if the current char is in any of the calleeList
+        // Check if the current content[i] is in any of the calleeList
         for (const calleeName of Array.isArray(callee) ? callee : [callee]) {
             if (content.slice(i, i + calleeName.length + 1) === `${calleeName}(`) {
                 inCallee = true
@@ -42,9 +40,9 @@ export function extractor(
 
         if (inCallee) {
             // Handle callee
-            if (char === "(") {
+            if (content[i] === "(") {
                 calleeDepth++
-            } else if (char === ")") {
+            } else if (content[i] === ")") {
                 calleeDepth--
                 if (calleeDepth === 0) {
                     inCallee = false
@@ -52,14 +50,12 @@ export function extractor(
             }
 
             // Handle objects
-            if (char === "{") {
-                if (depth === 0) {
-                    objectStart = i
-                }
-                depth++
-            } else if (char === "}") {
-                depth--
-                if (depth === 0 && objectStart !== -1) {
+            if (content[i] === "{") {
+                if (objectDepth === 0) objectStart = i
+                objectDepth++
+            } else if (content[i] === "}") {
+                objectDepth--
+                if (objectDepth === 0 && objectStart !== -1) {
                     objects.push(content.slice(objectStart, i + 1))
                     objectStart = -1
                 }

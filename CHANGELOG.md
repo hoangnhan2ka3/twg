@@ -21,6 +21,22 @@ Undocumented APIs should be considered internal and may change without warning.
     - A bit slower, especially on the first time, when nothing is cached.
     - 4 more dependencies.
 
+## [1.2.5] - 2024-08-24
+
+### Core change
+
+- Return original `content` whenever `callee` option is not valid, instead of being overridden by default value.
+
+### Refactor
+
+- Revert `v1.2.3` refactor, because `reducer()` doesn't need to regenerate every time the `parser()` is called.
+- Fixed debug message duplicated ":" typo.
+
+### Chore
+
+- Fixed some test cases in context of core change.
+- Temporarily remove Ko-fi funding button in README, because of PayPal error.
+
 ## [1.2.4] - 2024-08-24
 
 ### Refactor

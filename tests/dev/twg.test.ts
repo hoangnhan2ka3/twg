@@ -40,7 +40,7 @@ describe("twg()", () => {
                 expected: "multiple classes in array"
             }
         ])('"$expected"', ({ args, expected }) => {
-            expect(twg({}, ...args)).toBe(expected)
+            expect(twg(...args)).toBe(expected)
             expect(liteTwg(...args)).toBe(expected)
         })
     })
@@ -444,8 +444,7 @@ describe("twg()", () => {
      */
     describe("Falsy cases:", () => {
         it.each([false && "anything", undefined && "anything", null && "anything"])(
-            "Handles falsy values",
-            (falsy) => {
+            "Handles falsy values", (falsy) => {
                 expect(twg(falsy)).toBe("")
                 expect(liteTwg(falsy)).toBe("")
             }

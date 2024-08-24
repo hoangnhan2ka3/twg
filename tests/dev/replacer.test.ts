@@ -253,7 +253,10 @@ describe("replacer()", () => {
                 expected: `
                     <div className={twg(
                         "multiple classes",
-                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
                     )} />
                 `
             }
@@ -778,6 +781,28 @@ describe("replacer()", () => {
                             ? \`before:-z-1 \${(!directly && borderWidth) ? "after:-z-2" : ""}\`
                             : \`\${force ? "" : ""} after:-z-1\`,
                         "before:absolute before:inset-0 before:block before:z-1 before:z-2"
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        absolute ? "absolute" : fixed ? "fixed" : "relative",
+                        {
+                            before: "absolute inset-0 block"
+                        }
+                        isTernary
+                            ? \`before:-z-1 \${(!directly && borderWidth) ? "after:-z-2" : ""}\`
+                            : \`\${force ? "" : ""} after:-z-1\`,
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        absolute ? "absolute" : fixed ? "fixed" : "relative",
+                        "before:absolute before:inset-0 before:block"
+                        isTernary
+                            ? \`before:-z-1 \${(!directly && borderWidth) ? "after:-z-2" : ""}\`
+                            : \`\${force ? "" : ""} after:-z-1\`,
                     )} />
                 `
             }
