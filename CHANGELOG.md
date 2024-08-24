@@ -4,6 +4,12 @@
 
 Undocumented APIs should be considered internal and may change without warning.
 
+## [1.2.2] - 2024-08-24
+
+### Chore
+
+- Move GitHub README to `.github` to reduce package size on `npm`.
+
 ## [1.2.1] - 2024-08-23
 
 ### Chore
