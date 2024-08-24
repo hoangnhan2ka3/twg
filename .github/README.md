@@ -27,7 +27,6 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 - ✅ Compatible with wrappers like [`twMerge`](https://github.com/dcastil/tailwind-merge).
 - ✅ "Base" support for Tailwind CSS IntelliSense (IDEs extension), also [Hover Preview](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss#hover-preview).
 - ✅ Lite version.
-- 🔥 Partial support for complex template literal with conditionals.
 
 ## 📖 Table of Contents
 
@@ -450,7 +449,10 @@ import { after, before } from "node:test"
 import { version } from "os"
 import { join } from "path"
 import { start } from "repl"
-import it:
+import itimport { debug } from "console"
+import { on } from "events"
+import { off } from "process"
+:
 
 - **Option 1:**
 
