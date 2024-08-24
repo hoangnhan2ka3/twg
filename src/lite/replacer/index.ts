@@ -10,13 +10,13 @@ const replaceTernaryClasses = /(?:!*\(*)*\w+[)\s]*(?:[=!]==?[^&|?]+)?\?\s*(['"`]
 const replaceAndOrConsequent = /(?:!*\(*)*\w+[)\s]*(?:[=!]==?[^&|?]+)?(?:&&|\|\||\?\?|\?)\s*/g
 const replaceAlternative = /\}\s*:\s*\{/gs
 
-export default function replacer({ callee = "twg" }: ReplacerLiteOption = {}) {
+export function replacer({ callee = "twg" }: ReplacerLiteOption = {}) {
     return (content: string) => {
         if (callee.length === 0) callee = "twg"
 
         try {
             extractor(content, callee).forEach(largestObject => {
-                const filteredObject = largestObject
+                const filteredObject = (/['"`]/).test(largestObject)
                     ? largestObject
                         .replace(replaceTernaryClasses, '"$2 $3"')
                         .replace(replaceAndOrConsequent, "")
@@ -24,7 +24,7 @@ export default function replacer({ callee = "twg" }: ReplacerLiteOption = {}) {
                     : ""
 
                 try {
-                    const parsedObject = parser(
+                    const parsedObject = parser()(
                         ...new Function(`return [${filteredObject}]`)() as ClassValue[]
                     )
                     content = content.replace(largestObject, `"${parsedObject}"`)

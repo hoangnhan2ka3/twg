@@ -10,7 +10,7 @@ export interface ReplacerOptions {
 
 const replaceTernaryClasses = /(?:!*\(*)*\w+[)\s]*(?:[=!]==?[^&|?]+)?\?\s*(['"`])(.*?)\1\s*:\s*\1(.*?)\1/gs // cond (=== prop) ? $2 : $3
 const replaceAndOrConsequent = /(?:!*\(*)*\w+[)\s]*(?:[=!]==?[^&|?]+)?(?:&&|\|\||\?\?|\?)\s*/g // cond (=== prop) &&, ||, ??, ?
-const replaceAlternative = /\}\s*:\s*\{/gs // } : {
+const replaceAlternative = /\}\s*:\s*\{/g // } : {
 
 /**
  * Transforms the content before Tailwind scans/extracting its classes.

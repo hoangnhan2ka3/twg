@@ -20,7 +20,7 @@ function toVal(mix: ClassValue): string {
                 }
             }
         } else {
-            str += parser(mix)
+            str += parser()(mix)
         }
     }
     return str

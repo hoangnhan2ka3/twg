@@ -2,6 +2,7 @@
 /* eslint-disable no-constant-binary-expression */
 
 import { twg } from "src"
+import { twg as liteTwg } from "src/lite"
 
 describe("twg()", () => {
     describe("General cases:", () => {
@@ -40,6 +41,7 @@ describe("twg()", () => {
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg({}, ...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
         })
     })
 
@@ -71,6 +73,7 @@ describe("twg()", () => {
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
         })
     })
 
@@ -90,6 +93,7 @@ describe("twg()", () => {
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
         })
     })
 
@@ -109,6 +113,7 @@ describe("twg()", () => {
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
         })
     })
 
@@ -128,6 +133,7 @@ describe("twg()", () => {
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
         })
     })
 
@@ -147,6 +153,7 @@ describe("twg()", () => {
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
         })
     })
 
@@ -166,6 +173,7 @@ describe("twg()", () => {
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
         })
     })
 
@@ -185,6 +193,7 @@ describe("twg()", () => {
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
         })
     })
 
@@ -204,6 +213,7 @@ describe("twg()", () => {
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
         })
     })
 
@@ -223,6 +233,7 @@ describe("twg()", () => {
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
         })
     })
 
@@ -250,6 +261,7 @@ describe("twg()", () => {
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
         })
     })
 
@@ -281,6 +293,7 @@ describe("twg()", () => {
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
         })
     })
 
@@ -311,6 +324,7 @@ describe("twg()", () => {
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
         })
     })
 
@@ -378,9 +392,9 @@ describe("twg()", () => {
      */
     describe("Complex cases:", () => {
         /* cSpell:disable */
-        it("Handles a really complex object:", () => {
-            expect(
-                twg(
+        it.each([
+            {
+                args: [
                     "Lorem ipsum",
                     "dolor sit",
                     ["amet", "consectetur adipiscing elit"],
@@ -414,10 +428,12 @@ describe("twg()", () => {
                             }
                         ]
                     }
-                )
-            ).toBe(
-                "Lorem ipsum dolor sit amet consectetur adipiscing elit Sed sit amet ligula ex Ut var1:in var1:suscipit var1:metus var2:vel var2:accumsan var2:orci var2:Vivamus var2:sapien var2:neque var2:dictum var2:vel var2:felis var2:maximus var3:luctus var3:var4:lorem var5:Fusce var5:malesuada var5:massa var5:eu var5:turpis var5:finibus var5:var6:mollis var5:var6:var7:In var5:var6:var7:augue var5:var6:var7:tortor var5:var6:var7:var8:porta var5:var6:var7:var8:eu var5:var6:var7:var8:erat var5:var6:var7:var8:sit var5:var6:var7:var8:amet var5:var6:var7:var8:tristique var5:var6:var7:var8:ullamcorper var5:var6:var7:var8:arcu"
-            )
+                ],
+                expected: "Lorem ipsum dolor sit amet consectetur adipiscing elit Sed sit amet ligula ex Ut var1:in var1:suscipit var1:metus var2:vel var2:accumsan var2:orci var2:Vivamus var2:sapien var2:neque var2:dictum var2:vel var2:felis var2:maximus var3:luctus var3:var4:lorem var5:Fusce var5:malesuada var5:massa var5:eu var5:turpis var5:finibus var5:var6:mollis var5:var6:var7:In var5:var6:var7:augue var5:var6:var7:tortor var5:var6:var7:var8:porta var5:var6:var7:var8:eu var5:var6:var7:var8:erat var5:var6:var7:var8:sit var5:var6:var7:var8:amet var5:var6:var7:var8:tristique var5:var6:var7:var8:ullamcorper var5:var6:var7:var8:arcu"
+            }
+        ])("Handles a really complex object:", ({ args, expected }) => {
+            expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
         })
 
         /* cSpell:enable */
@@ -431,6 +447,7 @@ describe("twg()", () => {
             "Handles falsy values",
             (falsy) => {
                 expect(twg(falsy)).toBe("")
+                expect(liteTwg(falsy)).toBe("")
             }
         )
     })

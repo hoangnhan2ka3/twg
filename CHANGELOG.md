@@ -1,8 +1,41 @@
 # Changelog
 
-[`twg`](https://github.com/hoangnhan2ka3/twg) adheres to [Semantic Versioning](http://semver.org/).
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 Undocumented APIs should be considered internal and may change without warning.
+
+## [Unreleased]
+
+### Core change
+
+- Use `@babel` AST to parse all conditional classes or conditional objects.
+  - **Pros:**
+    - More accurate, more trust in processing.
+    - Reduce several complex regex use to parse condition.
+    - Lighter bundle.
+  - **Cons:**
+    - Currently work on (.jsx, .tsx file) only.
+    - A bit slower, especially on the first time, when nothing is cached.
+    - 4 more dependencies.
+
+## [1.2.3] - 2024-08-24
+
+### Core change
+
+- Collapses `reducer()` into `parser()` function.
+- Improves `reducer()` function, does not need to handle Array anymore.
+
+### Refactor
+
+- Refactor lite `parser()` function.
+
+### Chore
+
+- Test also lite `replacer()` and `twg()` function.
+- Add more test cases.
 
 ## [1.2.2] - 2024-08-24
 
@@ -19,7 +52,7 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [1.2.0] - 2024-08-23
 
-### Core changes
+### Core change
 
 - Change the behavior of `extractor()` to scan also callee function and outer object(s) inside it.
 - Doesn't need regex to match `callee` function anymore.

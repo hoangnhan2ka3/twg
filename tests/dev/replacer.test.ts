@@ -1,3 +1,4 @@
+import { replacer as liteReplacer } from "src/lite/replacer"
 import { replacer } from "src/replacer"
 
 describe("replacer()", () => {
@@ -93,6 +94,7 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)
+            expect(liteReplacer()(contents)).toBe(expected)
         })
     })
 
@@ -137,6 +139,84 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer({ callee: "cn" })(contents)).toBe(expected)
+            expect(liteReplacer({ callee: "cn" })(contents)).toBe(expected)
+        })
+
+        it.each([
+            {
+                contents: `
+                    <div className={cn(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={cn(
+                        "multiple classes",
+                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={clsx(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={clsx(
+                        "multiple classes",
+                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={cx(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `,
+                expected: `
+                    <div className={cx(
+                        "multiple classes",
+                        {
+                            mod1: ["class", "other classes"],
+                            mod2: ["class", { "additional-mod": "other classes" }]
+                        }
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer({ callee: ["cn", "twg", "clsx"] })(contents)).toBe(expected)
+            expect(liteReplacer({ callee: ["cn", "twg", "clsx"] })(contents)).toBe(expected)
         })
 
         it.each([
@@ -179,6 +259,7 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer({ callee: "" })(contents)).toBe(expected)
+            expect(liteReplacer({ callee: "" })(contents)).toBe(expected)
         })
     })
 
@@ -407,6 +488,7 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer({ callee: "cn" })(contents)).toBe(expected)
+            expect(liteReplacer({ callee: "cn" })(contents)).toBe(expected)
         })
     })
 
@@ -460,6 +542,7 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)
+            expect(liteReplacer()(contents)).toBe(expected)
         })
     })
 
@@ -519,6 +602,7 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)
+            expect(liteReplacer()(contents)).toBe(expected)
         })
     })
 
@@ -699,6 +783,7 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)
+            expect(liteReplacer()(contents)).toBe(expected)
         })
     })
 
@@ -730,6 +815,7 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)
+            expect(liteReplacer()(contents)).toBe(expected)
         })
     })
 
@@ -793,6 +879,7 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer({ callee: "cn" })(contents)).toBe(expected)
+            expect(liteReplacer({ callee: "cn" })(contents)).toBe(expected)
         })
     })
 
@@ -838,6 +925,7 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)
+            expect(liteReplacer()(contents)).toBe(expected)
         })
     })
 
@@ -921,6 +1009,7 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)
+            expect(liteReplacer()(contents)).toBe(expected)
         })
     })
 
@@ -1128,6 +1217,7 @@ describe("replacer()", () => {
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)
+            expect(liteReplacer()(contents)).toBe(expected)
         })
     })
 
@@ -1137,6 +1227,7 @@ describe("replacer()", () => {
             { contents: "anything", expected: "anything" }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)
+            expect(liteReplacer()(contents)).toBe(expected)
         })
     })
 })
