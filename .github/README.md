@@ -184,7 +184,7 @@ For more information, consider reading [custom options](#-custom-options) and [b
 Options | Types | Default | Description | Lite | Status
 --- | --- | --- | --- | --- | ---
 `callee?` | string \| string[] | "twg" | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_ | ✅ | ✅
-`separator?`(*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `twg` option. | x | ✅
+`separator?`(*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `twg()` option. | x | ✅
 `debug` | boolean | true | Printing debug messages in console if there are any warnings or errors. If `false`, it will be silent | x | ✅
 
 See [how to use](#-custom-options).
