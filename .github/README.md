@@ -844,11 +844,11 @@ Function | What it does
 
   Yes, it does, but just base support. You can just use the [Hover Preview](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss#hover-preview) like this:
 
-  ![tailwindcss_intellisense_1](public/tailwindcss_intellisense_1.webp)
+  ![tailwindcss_intellisense_1](../public/tailwindcss_intellisense_1.webp)
 
   Anyway, it's fine but the `Hover Preview` does not working with full parsed classes like you typed it manually:
 
-  ![tailwindcss_intellisense_2](public/tailwindcss_intellisense_2.webp)
+  ![tailwindcss_intellisense_2](../public/tailwindcss_intellisense_2.webp)
 
   At least it works? Right? So if you're OK with that, you're good to go.
 
