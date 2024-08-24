@@ -35,3 +35,5 @@ export function replacer({ callee = "twg" }: ReplacerLiteOption = {}) {
         } catch (e) { return content }
     }
 }
+
+export default replacer

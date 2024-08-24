@@ -130,6 +130,8 @@ Lite version:
 ```js
 // tailwind.config.ts
 
+import { replacer } from "twg/lite/replacer"
+// or
 import replacer from "twg/lite/replacer"
 
 // Rest like above
@@ -676,7 +678,7 @@ interface TWGOptions {
 
 ---
 
-💥 Light version:
+💥 Lite version:
 
 ### `replacer({ /* option */ })(content)`
 

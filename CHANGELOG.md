@@ -21,6 +21,18 @@ Undocumented APIs should be considered internal and may change without warning.
     - A bit slower, especially on the first time, when nothing is cached.
     - 4 more dependencies.
 
+## [1.2.4] - 2024-08-24
+
+### Refactor
+
+- Refactor `extractor()` function.
+- Export `replacer()` as both `default` and `named` export.
+
+### Chore
+
+- Fixed typo in README.
+- Update bundle shield links in npm README.
+
 ## [1.2.3] - 2024-08-24
 
 ### Core change
