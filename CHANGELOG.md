@@ -21,6 +21,17 @@ Undocumented APIs should be considered internal and may change without warning.
     - A bit slower, especially on the first time, when nothing is cached.
     - 4 more dependencies.
 
+## [1.2.6] - 2024-08-24
+
+### Refactor
+
+- Revert `const char = content[i]` in `v1.2.4` refactor of `extractor()` function, which caused error on `v1.2.5`.
+
+### Chore
+
+- Add more test cases for `extractor()` function.
+- Update npm README.
+
 ## [1.2.5] - 2024-08-24
 
 ### Core change

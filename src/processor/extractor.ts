@@ -19,8 +19,9 @@ export function extractor(
     const objects = []
 
     for (let i = 0; i < content.length; i++) {
+        const char = content[i]
         // Handle template literals
-        if (content[i] === "`") {
+        if (char === "`") {
             inTemplateLiteral = !inTemplateLiteral
             continue
         }
@@ -28,7 +29,7 @@ export function extractor(
         // Skip template literals
         if (inTemplateLiteral) continue
 
-        // Check if the current content[i] is in any of the calleeList
+        // Check if the current char is in any of the calleeList
         for (const calleeName of Array.isArray(callee) ? callee : [callee]) {
             if (content.slice(i, i + calleeName.length + 1) === `${calleeName}(`) {
                 inCallee = true
@@ -40,9 +41,9 @@ export function extractor(
 
         if (inCallee) {
             // Handle callee
-            if (content[i] === "(") {
+            if (char === "(") {
                 calleeDepth++
-            } else if (content[i] === ")") {
+            } else if (char === ")") {
                 calleeDepth--
                 if (calleeDepth === 0) {
                     inCallee = false
@@ -50,10 +51,10 @@ export function extractor(
             }
 
             // Handle objects
-            if (content[i] === "{") {
+            if (char === "{") {
                 if (objectDepth === 0) objectStart = i
                 objectDepth++
-            } else if (content[i] === "}") {
+            } else if (char === "}") {
                 objectDepth--
                 if (objectDepth === 0 && objectStart !== -1) {
                     objects.push(content.slice(objectStart, i + 1))
