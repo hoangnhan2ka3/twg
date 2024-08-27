@@ -37,8 +37,8 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
     twg({ foo: true, bar: false, baz: isTrue() });
     //=> "foo baz"
 
-    twg({ "you are my": true, not: false, "destiny": isTrue() });
-    //=> "you are my destiny"
+    twg({ "you are": true, not: false, m_y: 1, "destiny": isTrue() });
+    //=> "you are m_y destiny"
     ```
 
   - Use `@babel` AST to parse all conditional classes, objects, arrays or even both string and array.
