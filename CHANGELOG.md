@@ -9,6 +9,12 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
+## [2.0.1] - 2024-08-27
+
+### Chore
+
+- Remove unused console.log in `src/processor/ast.ts`.
+
 ## [2.0.0] - 2024-08-27
 
 ### Core change

@@ -31,7 +31,3 @@ export function transformConditional(code: string): string {
     const { code: transformedCode } = generate(ast)
     return transformedCode
 }
-
-const text = `<div className={twg({ "class": isAndOr1 })} />`
-
-console.log(transformConditional(text))
