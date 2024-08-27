@@ -1,6 +1,6 @@
 import { type ClassValue } from "src/lite"
 import { parser } from "src/lite/lite-processor/parser"
-import { transformConditional } from "src/processor/ast"
+import { transformer } from "src/processor/ast"
 import { extractor } from "src/processor/extractor"
 
 export interface ReplacerLiteOption {
@@ -11,7 +11,7 @@ export function replacer({ callee = "twg" }: ReplacerLiteOption = {}) {
     return (content: string) => {
         if (callee.length === 0) return content
 
-        content = transformConditional(content)
+        content = transformer(content)
         try {
             extractor(content, callee).forEach(largestObject => {
                 const filteredObject = (/['"`]/).test(largestObject)

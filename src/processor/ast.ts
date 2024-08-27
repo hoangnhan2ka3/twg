@@ -8,9 +8,9 @@ import * as types from "@babel/types"
  * @param code input as string
  * @returns string
  */
-export function transformConditional(code: string): string {
+export function transformer(code: string) {
     const ast = parser.parse(code, {
-        sourceType: "unambiguous",
+        sourceType: "module",
         plugins: ["jsx", "typescript"]
     })
 
@@ -28,6 +28,6 @@ export function transformConditional(code: string): string {
             path.replaceWith(path.node.right)
         }
     })
-    const { code: transformedCode } = generate(ast)
-    return transformedCode
+
+    return generate(ast).code
 }

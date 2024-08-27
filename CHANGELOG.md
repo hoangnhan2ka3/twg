@@ -9,6 +9,13 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
+## [2.0.3] - 2024-08-27
+
+### Chore
+
+- Shorten the `return` of AST transformer.
+- Rename `transformConditional()` to `transformer()` in `src/processor/ast.ts`.
+
 ## [2.0.2] - 2024-08-27
 
 ### Chore

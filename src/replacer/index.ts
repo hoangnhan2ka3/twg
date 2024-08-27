@@ -1,5 +1,5 @@
 import { type ClassValue } from "src/index"
-import { transformConditional } from "src/processor/ast"
+import { transformer } from "src/processor/ast"
 import { extractor } from "src/processor/extractor"
 import { parser } from "src/processor/parser"
 
@@ -28,7 +28,7 @@ export function replacer({
         }
 
         // 1. Parse conditionals
-        content = transformConditional(content)
+        content = transformer(content)
         try {
             // 2. Loop through each largest Objects inside the callee function
             extractor(content, callee).forEach(largestObject => {
