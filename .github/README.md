@@ -19,14 +19,48 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 - ✅ Elegant.
 - ✅ Easy setup.
-- ✅ No dependencies.
 - ✅ Support for multiple objects parsing.
 - ✅ Support for nesting multiple objects, arrays, and itself functions.
-- ✅ Support for (multiple) conditional classes and objects.
+- ✅ Support for (multiple) conditional classes, objects, and arrays.
 - ✅ Customizable `callee` name and `separator`.
 - ✅ Compatible with wrappers like [`twMerge`](https://github.com/dcastil/tailwind-merge).
 - ✅ "Base" support for Tailwind CSS IntelliSense (IDEs extension), also [Hover Preview](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss#hover-preview).
 - ✅ Lite version.
+
+## 📰 News
+
+- ✅ Major update `v2`:
+
+  - Supports native objects behavior like `clsx` (Key as classes and value as conditionals)
+
+    ```jsx
+    twg({ foo: true, bar: false, baz: isTrue() });
+    //=> "foo baz"
+
+    twg({ "you are my": true, not: false, "destiny": isTrue() });
+    //=> "you are my destiny"
+    ```
+
+  - Use `@babel` AST to parse all conditional classes, objects, arrays or even both string and array.
+    - **Pros:**
+      - More accurate, more trust in processing.
+      - Works perfectly even with complex conditionals like nested ternary and inside template literal.
+      - Reduce several complex regex use to parse condition.
+      - Lighter bundle.
+    - **Cons:**
+      - Currently work on _(.js, .ts, .jsx, .tsx)_ file only.
+      - A bit slower, especially on the first time, when nothing is cached.
+      - 4 more dependencies 😢
+
+- ✅ Lite version:
+
+  Same as default version, but:
+
+  - Without any options API except for custom `callee` in [`replacer()` options](#replacer-options).
+  - No `debug messages` (no console messages).
+  - 30 ~ 40% lighter.
+
+  > When you tested using with default version, and everything's OK. So you could want to use lite version, for better performance.
 
 ## 📖 Table of Contents
 
@@ -54,18 +88,6 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
   - [Trade-offs](#trade-offs)
 - [Contributing](#%EF%B8%8F-contributing)
 - [Credits](#-credits)
-
-## 📰 News
-
-- ✅ Lite version.
-
-Same as default version, but:
-
-- Without any options API except for custom `callee` in [`replacer()` options](#replacer-options).
-- No `debug messages` (no console messages).
-- 30 ~ 40% lighter.
-
-> When you tested using with default version, and everything's OK. So you could want to use lite version, for better performance.
 
 ## 🚨 Quick Intro
 
@@ -805,42 +827,6 @@ Function | What it does
   Then Tailwind can start extracting this `temp` code as they are our "expected classes" now 😉.
 
 ### Trade-offs
-
-- With `clsx`:
-
-  In `clsx`, this is an example of what you can do inside the `object zones` (taken from clsx's README):
-
-  ```jsx
-  // Objects
-  clsx({ foo: true, bar: false, baz: isTrue() });
-  //=> 'foo baz'
-
-  // Objects (variadic)
-  clsx({ foo: true }, { bar: false }, null, { '--foobar': 'hello' });
-  //=> 'foo --foobar'
-  ```
-
-  If you're someone who likes to write conditionals like the example above, perhaps you should change the way you use in `twg`. Above example violates the `twg` [convention](#twg).
-
-  > **POV:** I think there's nothing useful to do with `Objects` inside utility function like `clsx` so they handle it as:
-
-  ```jsx
-  clsx({ foo: true, bar: false, baz: isTrue() })
-  //=> 'foo baz'
-  ```
-
-  Although someone would like that, but why not write it as:
-
-  ```jsx
-  clsx(true && "foo", false && "bar", isTrue() && "baz")
-  //=> 'foo baz'
-
-  //? Easily change to ternary if needed
-  clsx(true ? "foo" : "", false ? "bar" : "", isTrue() ? "baz" : "")
-  //=> 'foo baz'
-  ```
-
-  So no need to open a Object for nothing, right? You can't event use direct ternary inside the object.
 
 - With `Tailwind CSS IntelliSense`:
 

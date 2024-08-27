@@ -9,17 +9,32 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
+## [2.0.0] - 2024-08-27
+
 ### Core change
 
-- Use `@babel` AST to parse all conditional classes or conditional objects.
+- Use `@babel` AST to parse all conditional classes, objects, arrays or even both string and array.
   - **Pros:**
     - More accurate, more trust in processing.
+    - Works perfectly even with complex conditionals like nested ternary and inside template literal.
     - Reduce several complex regex use to parse condition.
     - Lighter bundle.
   - **Cons:**
-    - Currently work on (.jsx, .tsx file) only.
+    - Currently work on _(.js, .ts, .jsx, .tsx)_ file only.
     - A bit slower, especially on the first time, when nothing is cached.
-    - 4 more dependencies.
+    - 4 more dependencies 😢
+- Supports native objects behavior like `clsx` (Key as classes and value as conditionals) [[docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#-news)].
+- Refactor lite version of `parser()` function to accept new objects behavior.
+
+### Chore
+
+- Add more test cases for new objects behavior.
+- Fixed npm README's shields links.
+- Bump dependencies version.
+
+### Misc
+
+- Deleted unused `(e)` in catch block of lite version of `replacer()` function.
 
 ## [1.2.6] - 2024-08-24
 

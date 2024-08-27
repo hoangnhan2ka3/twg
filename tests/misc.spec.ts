@@ -1,47 +1,21 @@
 import { type ClassValue, twg } from "src/index"
+import { replacer as liteReplacer } from "src/lite/replacer"
 import { extractor } from "src/processor/extractor"
 import { parser } from "src/processor/parser"
 import { replacer } from "src/replacer"
 
 const content = `
-    <div className={twg(
-        "multiple classes",
-        {
-            var: [
-                "multiple classes",
-                \`any \${!(!(!directly) && (borderWidth)) ? "other" : "class"}\`
-            ]
-        },
-        className
-    )} />
-     <div className={twg(
-        "multiple classes",
-        {
-            var: [
-                "multiple classes",
-                \`any \${!(!(!directly) && (borderWidth)) ? "other" : "class"}\`
-            ]
-        },
-        className
-    )} />
+    <div className={twg({ "class": isAndOr1 })} />
 ` as string
 
-const transformedContent = replacer()(content)
+const transformedContent = liteReplacer()(content)
 
 console.log("1: ", transformedContent)
 
-const content5 = `
-{
-            mod1: ["base", "other classes"],
-            mod2: ["base", { "additional-mod": "other classes" }]
-        }
-{
-            mod1: ["class", "other classes"],
-            mod2: ["class", { "additional-mod": "other classes" }]
-        }
-`
+const isAndOr = false
+const content5 = [{ "class": isAndOr, var: "multiple classes" }]
 
-// console.log("5: ", content5.slice(-1, 122 + 1))
+// console.log("5: ", twg(...content5))
 
 function cn(...inputs: ClassValue[]) {
     return twg(...inputs)
@@ -92,3 +66,21 @@ const content4 = `
 //     )
 // `
 // console.log("4: ", extractOuterObjects(content6)[1])
+
+// ConditionalExpression(path) {
+//     if (path.findParent((parent) => parent.isTemplateLiteral())) {
+//         const templateLiteral = types.templateLiteral(
+//             [
+//                 types.templateElement({ raw: "" }, true),
+//                 types.templateElement({ raw: "" }, false),
+//                 types.templateElement({ raw: "" }, true)
+//             ],
+//             [path.node.consequent, path.node.alternate]
+//         )
+
+//         path.replaceWith(templateLiteral)
+//     } else {
+//         const combinedExpression = types.arrayExpression([path.node.consequent, path.node.alternate])
+//         path.replaceWith(combinedExpression)
+//     }
+// }

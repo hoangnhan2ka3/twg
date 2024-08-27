@@ -77,11 +77,160 @@ describe("twg()", () => {
         })
     })
 
+    describe("Conditionals classes:", () => {
+        const isAndOr1 = true
+        const isAndOr2 = false
+        const is_Ternary_1 = true
+        const is_Ternary_2 = false
+        const isUndefined = undefined
+        it.each([
+            { args: ["multiple classes", { var: isAndOr1 && "class" }], expected: "multiple classes var:class" },
+            { args: ["multiple classes", { var: isAndOr2 && "class" }], expected: "multiple classes" },
+            {
+                args: ["multiple classes", { var1: isAndOr1 && "multiple classes", var2: isAndOr2 && "class" }],
+                expected: "multiple classes var1:multiple var1:classes"
+            },
+            { //*
+                args: ["multiple classes", { var: isAndOr1 && isAndOr2 && "class" }],
+                expected: "multiple classes"
+            },
+            {
+                args: ["multiple classes", { var: is_Ternary_1 ? "class" : "multiple classes" }],
+                expected: "multiple classes var:class"
+            },
+            {
+                args: ["multiple classes", { var: is_Ternary_2 ? "class" : "multiple classes" }],
+                expected: "multiple classes var:multiple var:classes"
+            },
+            {
+                args: ["multiple classes", { var: (is_Ternary_1 && is_Ternary_2) ? "class" : "multiple classes" }],
+                expected: "multiple classes var:multiple var:classes"
+            },
+            {
+                args: [
+                    "multiple classes",
+                    isUndefined ?? {
+                        var: [
+                            "multiple classes",
+                            isAndOr2 && "another class"
+                        ]
+                    }
+                ],
+                expected: "multiple classes var:multiple var:classes"
+            },
+            {
+                args: [
+                    "multiple classes",
+                    null ?? {
+                        var: [
+                            "multiple classes",
+                            isAndOr2 && "another class"
+                        ]
+                    }
+                ],
+                expected: "multiple classes var:multiple var:classes"
+            },
+            {
+                args: [
+                    "multiple classes",
+                    is_Ternary_2 ?? {
+                        var: [
+                            "multiple classes",
+                            isAndOr2 && "another class"
+                        ]
+                    }
+                ],
+                expected: "multiple classes"
+            }
+        ])('"$expected"', ({ args, expected }) => {
+            expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
+        })
+    })
+
+    describe("Conditionals classes with arrays:", () => {
+        const is_Ternary_1 = true
+        const is_Ternary_2 = false
+        const is_Ternary_3 = "foo" as string
+        it.each([
+            {
+                args: [
+                    "multiple classes",
+                    {
+                        var1: is_Ternary_1 ? "multiple classes" : [
+                            "other multiple classes",
+                            {
+                                var2: "multiple classes"
+                            }
+                        ],
+                        var3: (is_Ternary_3 === "foo") ? "multiple classes" : ("other multiple classes"),
+                        var4: (is_Ternary_3 === "bar") ? ("multiple classes") : ("other multiple classes")
+                    }
+                ],
+                expected: "multiple classes var1:multiple var1:classes var3:multiple var3:classes var4:other var4:multiple var4:classes"
+            },
+            {
+                args: [
+                    "multiple classes",
+                    {
+                        var1: is_Ternary_2 ? "multiple classes" : [
+                            "other multiple classes",
+                            {
+                                var2: "multiple classes"
+                            }
+                        ],
+                        var3: (is_Ternary_3 === "bar") ? "multiple classes" : ("other multiple classes"),
+                        var4: (is_Ternary_3 === "foo") ? ("multiple classes") : ("other multiple classes")
+                    }
+                ],
+                expected: "multiple classes var1:other var1:multiple var1:classes var1:var2:multiple var1:var2:classes var3:other var3:multiple var3:classes var4:multiple var4:classes"
+            }
+        ])('"$expected"', ({ args, expected }) => {
+            expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
+        })
+    })
+
+    describe("Key as classes and value as conditionals:", () => {
+        const isAndOr1 = true
+        const isAndOr2 = false
+        const is_And_Or_1 = true
+        const is_And_Or_2 = false
+        it.each([
+            { args: [{ "class": isAndOr1 }], expected: "class" },
+            { args: [{ "class": isAndOr2 }], expected: "" },
+            { args: [{ "class": is_And_Or_1 }], expected: "class" },
+            { args: [{ "class": is_And_Or_1 && isAndOr1 }], expected: "class" },
+            { args: [{ "class": is_And_Or_1 && isAndOr2 }], expected: "" },
+            { args: [{ "class": is_And_Or_2 && isAndOr1 }], expected: "" },
+            { args: [{ "class": is_And_Or_2 && isAndOr2 }], expected: "" },
+            {
+                args: [{ "class": isAndOr1 }, { "multiple classes": is_And_Or_2 }],
+                expected: "class"
+            },
+            {
+                args: [{ "class": isAndOr1 }, { "multiple classes": true }],
+                expected: "class multiple classes"
+            }
+        ])('"$expected"', ({ args, expected }) => {
+            expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
+        })
+    })
+
     describe("Object only:", () => {
         it.each([
             {
                 args: [{ var: "class" }],
                 expected: "var:class"
+            },
+            {
+                args: [{ "var": "class" }],
+                expected: "var:class"
+            },
+            { //*
+                args: [{ "var1 var2": "class" }],
+                expected: "var1 var2:class"
             },
             {
                 args: [{ var: "multiple classes with var" }],

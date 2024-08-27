@@ -20,6 +20,7 @@ export function extractor(
 
     for (let i = 0; i < content.length; i++) {
         const char = content[i]
+
         // Handle template literals
         if (char === "`") {
             inTemplateLiteral = !inTemplateLiteral

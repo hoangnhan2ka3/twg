@@ -87,7 +87,8 @@ export default tseslint.config(
             "@typescript-eslint/no-unnecessary-condition": 1,
             "@typescript-eslint/no-unnecessary-template-expression": 1,
             "@typescript-eslint/prefer-nullish-coalescing": 1,
-            "@typescript-eslint/no-unnecessary-type-parameters": 1
+            "@typescript-eslint/no-unnecessary-type-parameters": 1,
+            "@typescript-eslint/prefer-regexp-exec": 1
         }
     },
     //* JavaScript Plugin (Disable Type Checked)

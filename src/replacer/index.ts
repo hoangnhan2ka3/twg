@@ -1,4 +1,5 @@
 import { type ClassValue } from "src/index"
+import { transformConditional } from "src/processor/ast"
 import { extractor } from "src/processor/extractor"
 import { parser } from "src/processor/parser"
 
@@ -7,10 +8,6 @@ export interface ReplacerOptions {
     separator?: string | false,
     debug?: boolean
 }
-
-const replaceTernaryClasses = /(?:!*\(*)*\w+[)\s]*(?:[=!]==?[^&|?]+)?\?\s*(['"`])(.*?)\1\s*:\s*\1(.*?)\1/gs // cond (=== prop) ? $2 : $3
-const replaceAndOrConsequent = /(?:!*\(*)*\w+[)\s]*(?:[=!]==?[^&|?]+)?(?:&&|\|\||\?\?|\?)\s*/g // cond (=== prop) &&, ||, ??, ?
-const replaceAlternative = /\}\s*:\s*\{/g // } : {
 
 /**
  * Transforms the content before Tailwind scans/extracting its classes.
@@ -30,20 +27,18 @@ export function replacer({
             return content
         }
 
+        // 1. Parse conditionals
+        content = transformConditional(content)
         try {
-            // 1. Loop through each largest Object
+            // 2. Loop through each largest Objects inside the callee function
             extractor(content, callee).forEach(largestObject => {
-                // 2. Parse conditional
                 const filteredObject = (/['"`]/).test(largestObject)
-                    ? largestObject
-                        .replace(replaceTernaryClasses, '"$2 $3"')
-                        .replace(replaceAndOrConsequent, "")
-                        .replace(replaceAlternative, "}, {")
+                    ? largestObject.replace(/:[\s\w(!)&|?]+(?=\s*,|\s*\})/g, ": 1")
                     : ""
 
                 try {
-                    // 3. Parse the arguments inside through `twg()` API
-                    const parsedObject = parser({ separator })(
+                    // 3. Parse the Object inside
+                    const parsedObject = parser({ separator, flatten: true })(
                         ...new Function(`return [${filteredObject}]`)() as ClassValue[]
                     )
                     // 4. Replace the old largest object with parsed one
