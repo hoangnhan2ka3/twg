@@ -58,6 +58,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
   - Without any options API except for custom `callee` in [`replacer()` options](#replacer-options).
   - No `debug messages` (no console messages).
+  - No `JSDoc` comments for each function.
   - 30 ~ 40% lighter.
 
   > When you tested using with default version, and everything's OK. So you could want to use lite version, for better performance.
