@@ -9,6 +9,12 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
+## [2.0.2] - 2024-08-27
+
+### Chore
+
+- Fix `exports` in `package.json` to resolve right import.
+
 ## [2.0.1] - 2024-08-27
 
 ### Chore
