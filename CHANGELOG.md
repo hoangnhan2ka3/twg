@@ -9,6 +9,18 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
+## [2.0.4] - 2024-08-27
+
+### Core change
+
+- Move the parsing logic of `Key as classes and value as conditionals` in objects to AST transformer.
+
+### Chore
+
+- Pure `console.log` with `terser` minify options to avoid accidentally logging in production.
+- Add more context to performance section in `Trade-offs` of README about `v2`.
+- Add more test cases for new objects behavior.
+
 ## [2.0.3] - 2024-08-27
 
 ### Chore

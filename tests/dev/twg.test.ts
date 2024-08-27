@@ -194,11 +194,21 @@ describe("twg()", () => {
     describe("Key as classes and value as conditionals:", () => {
         const isAndOr1 = true
         const isAndOr2 = false
+        const isAndOr3 = {
+            truthy: true,
+            falsy: false
+        }
         const is_And_Or_1 = true
         const is_And_Or_2 = false
         it.each([
             { args: [{ "class": isAndOr1 }], expected: "class" },
             { args: [{ "class": isAndOr2 }], expected: "" },
+            { args: [{ "class": isAndOr3.truthy }], expected: "class" },
+            { args: [{ "class": isAndOr3.falsy }], expected: "" },
+            /* eslint-disable @typescript-eslint/dot-notation */
+            { args: [{ "class": isAndOr3["truthy"] }], expected: "class" },
+            { args: [{ "class": isAndOr3["falsy"] }], expected: "" },
+            /* eslint-enable @typescript-eslint/dot-notation */
             { args: [{ "class": is_And_Or_1 }], expected: "class" },
             { args: [{ "class": is_And_Or_1 && isAndOr1 }], expected: "class" },
             { args: [{ "class": is_And_Or_1 && isAndOr2 }], expected: "" },

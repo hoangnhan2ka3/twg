@@ -28,13 +28,11 @@ export function replacer({
         }
 
         // 1. Parse conditionals
-        content = transformer(content)
+        content = transformer(content, callee)
         try {
             // 2. Loop through each largest Objects inside the callee function
             extractor(content, callee).forEach(largestObject => {
-                const filteredObject = (/['"`]/).test(largestObject)
-                    ? largestObject.replace(/:[\s\w(!)&|?]+(?=\s*,|\s*\})/g, ": 1")
-                    : ""
+                const filteredObject = (/['"`]/).test(largestObject) ? largestObject : ""
 
                 try {
                     // 3. Parse the Object inside
@@ -51,7 +49,7 @@ export function replacer({
             // DONE. Return the processed content
             return content
         } catch (errorOnContent) {
-            debug && console.error(`\n❌ TWG - Error occurred on \`replacer()\`:\n${((errorOnContent as Error).message)} in content:\n${content}\n`)
+            debug && console.error(`\n⛔ TWG - Error occurred on \`replacer()\`:\n${((errorOnContent as Error).message)} in content:\n${content}\n`)
             return content
         }
     }

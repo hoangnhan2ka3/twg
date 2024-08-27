@@ -5,7 +5,16 @@ import { parser } from "src/processor/parser"
 import { replacer } from "src/replacer"
 
 const content = `
-    <div className={twg({ "class": isAndOr1 })} />
+    <div className={twg(
+        "multiple classes",
+        {
+            var: [
+                "multiple classes",
+                \`other \${(!directly && borderWidth) ? "class" : "abc"}\`
+            ]
+        },
+        className
+    )} />
 ` as string
 
 const transformedContent = liteReplacer()(content)

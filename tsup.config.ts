@@ -12,6 +12,11 @@ export default defineConfig({
     clean: true,
     shims: true,
     minify: "terser",
+    terserOptions: {
+        compress: {
+            pure_funcs: ["console.log"]
+        }
+    },
     splitting: false,
     skipNodeModulesBundle: true
 })

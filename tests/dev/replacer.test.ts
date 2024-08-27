@@ -337,6 +337,21 @@ describe("replacer()", () => {
                     )} />
                 `,
                 expected: `<div className={twg("multiple classes", "var:multiple var:classes var:other var:class", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var: [
+                                "multiple classes",
+                                \`other \${(!directly && borderWidth) ? "class" : "multiple classes"}\`
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var:multiple var:classes var:other var:class var:multiple var:classes", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)
@@ -467,6 +482,14 @@ describe("replacer()", () => {
             },
             {
                 contents: `<div className={twg({ "class": isAndOr1() })} />`,
+                expected: `<div className={twg("class")} />;`
+            },
+            {
+                contents: `<div className={twg({ "class": isAndOr1.truthy })} />`,
+                expected: `<div className={twg("class")} />;`
+            },
+            {
+                contents: `<div className={twg({ "class": isAndOr1["false"] })} />`,
                 expected: `<div className={twg("class")} />;`
             },
             {

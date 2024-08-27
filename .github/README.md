@@ -892,6 +892,8 @@ Function | What it does
 
   Yes of course, `twg` is slower than vanilla `clsx` because it uses `regex`s and `extractors` to find and replace the classes. But it's not that slow, it's still fast enough for you to use in your project. This project aim for the better developer-experience with Tailwind variants classes, not for the best performance.
 
+  In `v2`, the `regex` is not used anymore, but it come with `@babel` AST, and it's a little bit slower than the `regex` method, especially for the first time classes was parsed and nothing was cached.
+
 </details>
 
 ## 🎗️ Contributing

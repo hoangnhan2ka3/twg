@@ -11,12 +11,10 @@ export function replacer({ callee = "twg" }: ReplacerLiteOption = {}) {
     return (content: string) => {
         if (callee.length === 0) return content
 
-        content = transformer(content)
+        content = transformer(content, callee)
         try {
             extractor(content, callee).forEach(largestObject => {
-                const filteredObject = (/['"`]/).test(largestObject)
-                    ? largestObject.replace(/:[\s\w(!)&|?]+(?=\s*,|\s*\})/g, ": 1")
-                    : ""
+                const filteredObject = (/['"`]/).test(largestObject) ? largestObject : ""
 
                 try {
                     const parsedObject = parser({ flatten: true })(
