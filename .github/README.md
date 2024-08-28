@@ -120,13 +120,13 @@ Output (html):
 ```
 
 > [!NOTE]\
-> Tested conditions
+> Tested conditions:
 
-No. | Framework/Lib | Version | Additional info | Tester | Status
---- | --- | --- | --- | --- | ---
-1\. | next | 15.0.0-canary.132 | with `--turbo` flag and `babel-plugin-react-compiler` enabled. | author | ✅
-2\. | tailwindcss | 3.4.10 |  | author | ✅
-3\. | tailwind-merge | 2.5.2 |  | author | ✅
+No. | Framework/Lib  | Version           | Additional info                                                | Tester | Status
+----|----------------|-------------------|----------------------------------------------------------------|--------|-------
+1\. | next           | 15.0.0-canary.132 | with `--turbo` flag and `babel-plugin-react-compiler` enabled. | author | ✅
+2\. | tailwindcss    | 3.4.10            |                                                                | author | ✅
+3\. | tailwind-merge | 2.5.2             |                                                                | author | ✅
 
 ## 🚀 Getting started
 
@@ -216,19 +216,19 @@ For more information, consider reading [custom options](#-custom-options) and [b
 
 ### `replacer()` options
 
-Options | Types | Default | Description | Lite | Status
---- | --- | --- | --- | --- | ---
-`callee?` | string \| string[] | "twg" | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_ | ✅ | ✅
-`separator?`(*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `twg()` option. | x | ✅
-`debug` | boolean | true | Printing debug messages in console if there are any warnings or errors. If `false`, it will be silent | x | ✅
+Options          | Types              | Default | Description                                                                                                                                                                                                              | Lite | Status
+-----------------|--------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------|-------
+`callee?`        | string \| string[] | "twg"   | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_ | ✅   | ✅
+`separator?`(\*) | string \| false    | ":"     | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `twg()` option.                       | x    | ✅
+`debug`          | boolean            | true    | Printing debug messages in console if there are any warnings or errors. If `false`, it will be silent                                                                                                                    | x    | ✅
 
 See [how to use](#-custom-options).
 
 ### `twg()` options
 
-Options | Types | Default | Description | Lite | Status
---- | --- | --- | --- | --- | ---
-`separator?`(\*) | string \| false | ":" | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `replacer()` option. | x | ✅
+Options          | Types           | Default | Description                                                                                                                                                                                             | Lite | Status
+-----------------|-----------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------|-------
+`separator?`(\*) | string \| false | ":"     | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `replacer()` option. | x    | ✅
 
 See [how to use](#custom-separator).
 
@@ -813,9 +813,9 @@ type ClassValue<T = string | string[] | number | boolean | null | undefined> = T
 
 `twg` package has 02 main parts, same job but different purpose:
 
-Function | What it does
---- | ---
-`twg` | Transform classes you typed in dev code to html classes in development or production env.
+Function     | What it does
+-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+`twg`        | Transform classes you typed in dev code to html classes in development or production env.
 `replacer()` | Transform classes you typed in dev code to normal classes and save in temp that Tailwind can scan _(the transformed code of this function does not affect anything in your end, just for Tailwind)_.
 
 > So, as example, if you want to use custom `separator` instead of default `":"`, you must provide the `separator` option to both `twg` and `replacer()`. One for your actual code and one for Tailwind. Got the idea 😉.
