@@ -119,6 +119,15 @@ Output (html):
 </div>
 ```
 
+> [!NOTE]\
+> Tested conditions
+
+No. | Framework/Lib | Version | Additional info | Status
+--- | --- | --- | --- | ---
+1\. | next | 15.0.0-canary.132 | with `--turbo` flag and `babel-plugin-react-compiler` enabled. | ✅
+2\. | tailwindcss | 3.4.10 |  | ✅
+3\. | tailwind-merge | 2.5.2 |  | ✅
+
 ## 🚀 Getting started
 
 ### 1. Install the package
