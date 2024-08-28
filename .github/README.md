@@ -628,7 +628,7 @@ Output (html):
 Printing debug messages in console if there are any warnings or errors, eg.:
 
 ```bash
-⚠️ TWG: Problem occurred on `replacer()`:
+⚠️ TWG - Problem occurred on `replacer()`:
 utilities is not defined in:
 - { utilities }
 Trying to be transformed into:
