@@ -20,6 +20,8 @@ Undocumented APIs should be considered internal and may change without warning.
 - Update `callee` option types of `transformer()`.
 - Update `debug` message for error `callee` in `replacer()`.
 
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v2.0.6...v2.0.7>
+
 ## [2.0.6] - 2024-08-28
 
 ### Refactor
@@ -29,6 +31,8 @@ Undocumented APIs should be considered internal and may change without warning.
 ### Chore
 
 - Remove unused `@returns` value in `extractor()` function.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v2.0.5...v2.0.6>
 
 ## [2.0.5] - 2024-08-28
 
@@ -48,6 +52,8 @@ Undocumented APIs should be considered internal and may change without warning.
 - Update example for `conditional string and array` in README.
 - Fix `complex conditional objects` example.
 
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v2.0.4...v2.0.5>
+
 ## [2.0.4] - 2024-08-27
 
 ### Core change
@@ -60,6 +66,8 @@ Undocumented APIs should be considered internal and may change without warning.
 - Add more context to performance section in `Trade-offs` of README about `v2`.
 - Add more test cases for new objects behavior.
 
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v2.0.3...v2.0.4>
+
 ## [2.0.3] - 2024-08-27
 
 ### Chore
@@ -67,17 +75,23 @@ Undocumented APIs should be considered internal and may change without warning.
 - Shorten the `return` of AST transformer.
 - Rename `transformConditional()` to `transformer()` in `src/processor/ast.ts`.
 
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v2.0.2...v2.0.3>
+
 ## [2.0.2] - 2024-08-27
 
 ### Chore
 
 - Fix `exports` in `package.json` to resolve right import.
 
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v2.0.1...v2.0.2>
+
 ## [2.0.1] - 2024-08-27
 
 ### Chore
 
 - Remove unused console.log in `src/processor/ast.ts`.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v2.0.0...v2.0.1>
 
 ## [2.0.0] - 2024-08-27
 
@@ -106,6 +120,8 @@ Undocumented APIs should be considered internal and may change without warning.
 
 - Deleted unused `(e)` in catch block of lite version of `replacer()` function.
 
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v1.2.6...v2.0.0>
+
 ## [1.2.6] - 2024-08-24
 
 ### Refactor
@@ -116,6 +132,8 @@ Undocumented APIs should be considered internal and may change without warning.
 
 - Add more test cases for `extractor()` function.
 - Update npm README.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v1.2.5...v1.2.6>
 
 ## [1.2.5] - 2024-08-24
 
@@ -133,6 +151,8 @@ Undocumented APIs should be considered internal and may change without warning.
 - Fixed some test cases in context of core change.
 - Temporarily remove Ko-fi funding button in README, because of PayPal error.
 
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v1.2.4...v1.2.5>
+
 ## [1.2.4] - 2024-08-24
 
 ### Refactor
@@ -144,6 +164,8 @@ Undocumented APIs should be considered internal and may change without warning.
 
 - Fixed typo in README.
 - Update bundle shield links in npm README.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v1.2.3...v1.2.4>
 
 ## [1.2.3] - 2024-08-24
 
@@ -161,11 +183,15 @@ Undocumented APIs should be considered internal and may change without warning.
 - Test also lite `replacer()` and `twg()` function.
 - Add more test cases.
 
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v1.2.2...v1.2.3>
+
 ## [1.2.2] - 2024-08-24
 
 ### Chore
 
 - Move GitHub README to `.github` to reduce package size on `npm`.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v1.2.1...v1.2.2>
 
 ## [1.2.1] - 2024-08-23
 
@@ -173,6 +199,8 @@ Undocumented APIs should be considered internal and may change without warning.
 
 - Update `.npmignore` to ignore `/public` folder.
 - Update funding button in README.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v1.2.0...v1.2.1>
 
 ## [1.2.0] - 2024-08-23
 
@@ -197,6 +225,8 @@ Undocumented APIs should be considered internal and may change without warning.
 
 - Update all packages to latest version, delete unused files.
 
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v1.1.2...v1.2.0>
+
 ## [1.1.2] - 2024-08-22
 
 ### Core change
@@ -207,6 +237,8 @@ Undocumented APIs should be considered internal and may change without warning.
 ### Chore
 
 - Refactor JSDoc for functions and fix typo.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v1.1.1...v1.1.2>
 
 ## [1.1.1] - 2024-08-21
 
@@ -222,6 +254,10 @@ Undocumented APIs should be considered internal and may change without warning.
 
 - Update more example for `nesting conditional objects`.
 
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v1.1.0...v1.1.1>
+
 ## [1.1.0] - 2024-08-21
 
 ### 🚀 First stable release
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v1.0.0-beta.7...v1.1.0>
