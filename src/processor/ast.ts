@@ -2,21 +2,23 @@ import generate from "@babel/generator"
 import * as parser from "@babel/parser"
 import traverse from "@babel/traverse"
 import * as types from "@babel/types"
+import { type ReplacerOptions } from "src/replacer"
 
 /**
  * Use AST to transform the conditionals, especially the `nesting` Object conditionals or `nesting` kinds of ternary conditionals.
  * @param code input as string
  * @returns string
  */
-export function transformer(code: string, callee?: string | string[]) {
+export function transformer(code: string, callee: ReplacerOptions["callee"] = "twg") {
     const ast = parser.parse(code, {
         sourceType: "module",
         plugins: ["jsx", "typescript"]
     })
 
-    const callees = typeof callee === "string" ? [callee] : callee ?? ["twg"]
+    const callees = typeof callee === "string" ? [callee] : callee
 
     callees.forEach((name) => {
+        if (!name) return
         traverse(ast, {
             CallExpression(path) {
                 if (path.get("callee").isIdentifier({ name })) {

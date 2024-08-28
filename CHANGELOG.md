@@ -9,6 +9,17 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
+## [2.0.7] - 2024-08-28
+
+### Refactor
+
+- Refactor invalid `callee` detection logic.
+
+### Misc
+
+- Update `callee` option types of `transformer()`.
+- Update `debug` message for error `callee` in `replacer()`.
+
 ## [2.0.6] - 2024-08-28
 
 ### Refactor

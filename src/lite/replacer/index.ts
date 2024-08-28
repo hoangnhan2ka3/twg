@@ -9,7 +9,7 @@ export interface ReplacerLiteOption {
 
 export function replacer({ callee = "twg" }: ReplacerLiteOption = {}) {
     return (content: string) => {
-        if (callee.length === 0) return content
+        if (!callee) return content
 
         content = transformer(content, callee)
         try {

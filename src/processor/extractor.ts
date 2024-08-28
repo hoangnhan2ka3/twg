@@ -32,6 +32,7 @@ export function extractor(
 
         // Check if the current char is in any of the calleeList
         for (const calleeName of Array.isArray(callee) ? callee : [callee]) {
+            if (!calleeName) break
             if (content.slice(i, i + calleeName.length + 1) === `${calleeName}(`) {
                 inCallee = true
                 calleeDepth = 1

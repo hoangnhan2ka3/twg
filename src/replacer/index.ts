@@ -22,8 +22,8 @@ export function replacer({
 }: ReplacerOptions = {}) {
     return (content: string) => {
         // 0. Check whether callee? is valid
-        if (callee.length === 0) {
-            debug && console.warn("⚠️ TWG - Warning: `callee` is not valid.")
+        if (!callee) {
+            debug && console.error("⛔ TWG - Error: `callee` is not valid.")
             return content
         }
 
