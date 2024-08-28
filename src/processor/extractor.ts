@@ -9,7 +9,7 @@ import { type ReplacerOptions } from "src/replacer"
 export function extractor(
     content: string,
     callee: ReplacerOptions["callee"] = "twg"
-): string[] {
+) {
     let calleeDepth = 0,
         objectDepth = 0,
         objectStart = -1,

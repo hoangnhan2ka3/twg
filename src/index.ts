@@ -14,7 +14,7 @@ export interface TWGOptions {
  * @author `clsx` [Luke Edwards] see <[reference](https://github.com/lukeed/clsx/blob/master/src/index.js#L1C1-L28C2)>
  */
 function toVal(mix: ClassValue, options?: TWGOptions): string {
-    let k: number,
+    let k = 0,
         y: string,
         str = ""
     if (typeof mix === "string" || typeof mix === "number") {
@@ -22,7 +22,7 @@ function toVal(mix: ClassValue, options?: TWGOptions): string {
     } else if (typeof mix === "object" && mix !== null) {
         if (Array.isArray(mix)) {
             const len = mix.length
-            for (k = 0; k < len; k++) {
+            for (; k < len; k++) {
                 if (mix[k]) {
                     y = toVal(mix[k] as ClassValue, options)
                     if (y) {

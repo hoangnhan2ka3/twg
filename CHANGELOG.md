@@ -9,6 +9,16 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
+## [2.0.6] - 2024-08-28
+
+### Refactor
+
+- Shorten `toVal()` function of both versions.
+
+### Chore
+
+- Remove unused `@returns` value in `extractor()` function.
+
 ## [2.0.5] - 2024-08-28
 
 ### Core change

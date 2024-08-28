@@ -2,7 +2,7 @@ import { type ClassValue } from "src/index"
 import { parser } from "src/lite/lite-processor/parser"
 
 function toVal(mix: ClassValue): string {
-    let k: number,
+    let k = 0,
         y: string,
         str = ""
     if (typeof mix === "string" || typeof mix === "number") {
@@ -10,7 +10,7 @@ function toVal(mix: ClassValue): string {
     } else if (typeof mix === "object" && mix !== null) {
         if (Array.isArray(mix)) {
             const len = mix.length
-            for (k = 0; k < len; k++) {
+            for (; k < len; k++) {
                 if (mix[k]) {
                     y = toVal(mix[k] as ClassValue)
                     if (y) {
