@@ -49,7 +49,7 @@ export function replacer({
             // DONE. Return the processed content
             return content
         } catch (errorOnContent) {
-            debug && console.error(`\n⛔ TWG - Error occurred on \`replacer()\`:\n${((errorOnContent as Error).message)} in content:\n${content}\n`)
+            debug && console.error(`\n⛔ TWG - Error occurred on \`replacer()\`:\n${((errorOnContent as Error).message)} in file:\n${content}\n`)
             return content
         }
     }

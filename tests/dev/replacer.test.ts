@@ -241,11 +241,12 @@ describe("replacer()", () => {
                         {
                             mod1: ["class", "other classes"],
                             mod2: ["class", { "additional-mod:": "other classes" }],
-                            "mod3-": "multiple classes"
+                            "mod3-": "multiple classes",
+                            "mod4:": ["class", { "additional_mod:": "other classes" }]
                         }
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", "mod1class mod1other mod1classes mod2class mod2additional-mod:other mod2additional-mod:classes mod3-multiple mod3-classes")} />;`
+                expected: `<div className={twg("multiple classes", "mod1class mod1other mod1classes mod2class mod2additional-mod:other mod2additional-mod:classes mod3-multiple mod3-classes mod4:class mod4:additional_mod:other mod4:additional_mod:classes")} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer({ separator: false })(contents)).toBe(expected)

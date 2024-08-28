@@ -14,13 +14,12 @@ export function replacer({ callee = "twg" }: ReplacerLiteOption = {}) {
         content = transformer(content, callee)
         try {
             extractor(content, callee).forEach(largestObject => {
-                const filteredObject = (/['"`]/).test(largestObject) ? largestObject : ""
-
                 try {
-                    const parsedObject = parser({ flatten: true })(
-                        ...new Function(`return [${filteredObject}]`)() as ClassValue[]
-                    )
-                    content = content.replace(largestObject, `"${parsedObject}"`)
+                    content = content.replace(largestObject, `"${parser({ flatten: true })(
+                        ...new Function(
+                            `return [${(/['"`]/).test(largestObject) ? largestObject : ""}]`
+                        )() as ClassValue[]
+                    )}"`)
                 } catch { /* empty */ }
             })
 

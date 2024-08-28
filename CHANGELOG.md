@@ -9,6 +9,19 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
+## [2.0.5] - 2024-08-28
+
+### Core change
+
+- Shorten lite version of `replacer()` function.
+
+### Chore
+
+- Bump `pnpm` version to `9.9.0`.
+- Bump package versions.
+- Fix typo in debug message of `replacer()` function.
+- Add more context in test case.
+
 ## [2.0.4] - 2024-08-27
 
 ### Core change
