@@ -67,8 +67,8 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 ## 📖 Table of Contents
 
-- [Quick Intro](#-quick-intro)
-- [Getting Started](#-getting-started)
+- [Quick intro](#-quick-intro)
+- [Getting started](#-getting-started)
   - [1. Install the package](#1-install-the-package)
   - [2. Setup](#2-setup)
   - [3. Use](#3-use)
@@ -92,8 +92,9 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 - [Contributing](#%EF%B8%8F-contributing)
 - [Credits](#-credits)
 
-## 🚨 Quick Intro
+## 🚨 Quick intro
 
+> [!TIP]\
 > Simply open an Object, put the `variant` as key, and classes you want to map to that `variant` as each value.
 
 Example:
@@ -118,7 +119,7 @@ Output (html):
 </div>
 ```
 
-## 🚀 Getting Started
+## 🚀 Getting started
 
 ### 1. Install the package
 
