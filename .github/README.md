@@ -46,7 +46,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
       - More accurate, more trust in processing.
       - Works perfectly even with complex conditionals like nested ternary and inside template literal.
       - Reduce several complex regex use to parse condition.
-      - Lighter bundle.
+      - Resolve all outstanding issues related to any kind of conditionals, nested conditionals.
     - **Cons:**
       - Currently work on _(.js, .ts, .jsx, .tsx)_ file only.
       - A bit slower, especially on the first time, when nothing is cached.
