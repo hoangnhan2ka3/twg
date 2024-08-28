@@ -468,6 +468,28 @@ describe("replacer()", () => {
                     )} />
                 `,
                 expected: `<div className={twg("multiple classes", "var1:multiple var1:classes var1:other var1:multiple var1:classes var1:var2:multiple var1:var2:classes var3:multiple var3:classes var4:multiple var4:classes", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "size-92 relative grid place-items-center px-4 py-2",
+                        {
+                            before: isTernary === "foo" ? [
+                                "absolute inset-0 bg-red-500",
+                                {
+                                    hover: isTernary ? "bg-blue-500 text-yellow-500" : [
+                                        "bg-blue-500 text-yellow-500",
+                                        isAndOr && "border-2 border-white"
+                                    ]
+                                }
+                            ] : [
+                                "fixed inset-0 bg-yellow-500",
+                            ],
+                            "aria-expanded": "bg-red-500 text-yellow-500",
+                        }
+                    )} />
+                `,
+                expected: `<div className={twg("size-92 relative grid place-items-center px-4 py-2", "before:absolute before:inset-0 before:bg-red-500 before:hover:bg-blue-500 before:hover:text-yellow-500 before:hover:bg-blue-500 before:hover:text-yellow-500 before:hover:border-2 before:hover:border-white before:fixed before:inset-0 before:bg-yellow-500 aria-expanded:bg-red-500 aria-expanded:text-yellow-500")} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)

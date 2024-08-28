@@ -411,16 +411,16 @@ You can use conditional like `&& | || | ??` _(and/or)_ or `isFooBar === "twg" ? 
         {
           var1: [
             "multiple classes",
-            isTernary1 === "anything1" ? {
+            isTernary === "foo" ? {
               var2: "multiple classes"
             } : {
               var2: [
                 "multiple classes",
                 isAndOr && "another class",
-                isTernary2 === "anything2" ? {
+                isTernary === "bar" ? {
                   var3: [
                     "class",
-                    isTernary3 === "anything3" ? {
+                    isTernary === "baz" ? {
                       var4: "multiple classes"
                     } : {
                       var4: ["multiple classes"]
@@ -444,12 +444,56 @@ You can use conditional like `&& | || | ??` _(and/or)_ or `isFooBar === "twg" ? 
   Output _(what Tailwind will scan, not in browser's inspect tool)_:
 
   ```html
-  <div class="multiple classes var1:multiple var1:classes var1:var2:multiple var1:var2:classes var1:var2:multiple var1:var2:classes var1:var2:another var1:var2:class var1:var2:var3:class var1:var2:var3:var4:multiple var1:var2:var3:var4:classes var1:var2:var3:var4:multiple var1:var2:var3:var4:classes var1:var2:var3:multiple var1:var2:var3:classes var-5:multiple var-5:classes">
+  <div className="multiple classes var1:multiple var1:classes var1:var2:multiple var1:var2:classes var1:var2:multiple var1:var2:classes var1:var2:another var1:var2:class var1:var2:var3:class var1:var2:var3:var4:multiple var1:var2:var3:var4:classes var1:var2:var3:var4:multiple var1:var2:var3:var4:classes var1:var2:var3:multiple var1:var2:var3:classes var-5:multiple var-5:classes">
     Hello, World!
   </div>
   ```
 
-> **In short:**
+- Conditional with string and array:
+
+  ```jsx
+  // HelloWorld.tsx
+
+  import { twg } from "twg"
+  import { useState } from "react"
+
+  export function HelloWorld() {
+    const [isAndOr, setIsAndOr] = useState(false)
+    const [isTernary, setIsTernary] = useState("foo")
+    // ...
+    return (
+      <div className={twg(
+        "size-92 relative grid place-items-center px-4 py-2",
+        {
+          before: isTernary === "foo" ? [
+            "absolute inset-0 bg-red-500",
+            {
+              hover: isTernary ? "bg-blue-500 text-yellow-500" : [
+                "bg-blue-500 text-yellow-500",
+                isAndOr && "border-2 border-white"
+              ]
+            }
+          ] : [
+            "fixed inset-0 bg-yellow-500",
+          ],
+          "aria-expanded": "bg-red-500 text-yellow-500",
+        }
+      )}>
+        Hello, World!
+      </div>
+    )
+  }
+  ```
+
+  Output _(what Tailwind will scan, not in browser's inspect tool)_:
+
+  ```html
+  <div className="size-92 relative grid place-items-center px-4 py-2 before:absolute before:inset-0 before:bg-red-500 before:hover:bg-blue-500 before:hover:text-yellow-500 before:hover:bg-blue-500 before:hover:text-yellow-500 before:hover:border-2 before:hover:border-white before:fixed before:inset-0 before:bg-yellow-500 aria-expanded:bg-red-500 aria-expanded:text-yellow-500">
+    Hello, World!
+  </div>
+  ```
+
+> [!TIP]\
 > Just use `twg` as the way you use `clsx` or `classnames`, except for the `object zones` which you can use the `twg` way.
 
 ## 🔧 Custom options

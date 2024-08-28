@@ -6,14 +6,21 @@ import { replacer } from "src/replacer"
 
 const content = `
     <div className={twg(
-        "multiple classes",
+        "size-92 relative grid place-items-center px-4 py-2",
         {
-            var: [
-                "multiple classes",
-                \`other \${(!directly && borderWidth) ? "class" : "abc"}\`
-            ]
-        },
-        className
+            before: isTernary === "foo" ? [
+                "absolute inset-0 bg-red-500",
+                {
+                    hover: isTernary ? "bg-blue-500 text-yellow-500" : [
+                        "bg-blue-500 text-yellow-500",
+                        isAndOr && "border-2 border-white"
+                    ]
+                }
+            ] : [
+                "fixed inset-0 bg-yellow-500",
+            ],
+            "aria-expanded": "bg-red-500 text-yellow-500",
+        }
     )} />
 ` as string
 
