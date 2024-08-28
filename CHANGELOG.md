@@ -22,6 +22,11 @@ Undocumented APIs should be considered internal and may change without warning.
 - Fix typo in debug message of `replacer()` function.
 - Add more context in test case.
 
+### Misc
+
+- Update example for `conditional string and array` in README.
+- Fix `complex conditional objects` example.
+
 ## [2.0.4] - 2024-08-27
 
 ### Core change
