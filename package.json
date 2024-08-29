@@ -31,6 +31,7 @@
     ],
     "main": "dist/index.js",
     "module": "dist/index.mjs",
+    "cjs": "dist/index.js",
     "types": "dist/index.d.ts",
     "exports": {
         ".": {
