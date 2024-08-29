@@ -60,7 +60,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
   - No `debug messages` (no console messages).
   - No `JSDoc` comments for each function.
   - 30 ~ 40% lighter.
-  - 500 ~ 1000ms faster.
+  - 300 ~ 400ms faster.
 
 > [!TIP]\
 > When you tested using with default version, and everything's OK. So you could want to use lite version, for better performance.
