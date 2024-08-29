@@ -6,31 +6,22 @@ import { replacer } from "src/replacer"
 const content = `
     <div className={twg(
         "multiple classes",
-        twg(
-            "other class",
-            {
-                var1: [
-                    "in object with var",
-                    twg(
-                        "other class",
-                        {
-                            var3: "in other object with var"
-                        }
-                    )
-                ]
-            }
-        ),
         {
-            var2: [
-                "multiple classes",
-                cn("other class")
+            before: [
+                "bg-mega-secondary opacity-10 transition-opacity",
+                {
+                    dark: "bg-mega-loading",
+                    hover: "opacity-20 duration-0"
+                }
             ]
         },
-        className
-    )} />
+        {
+            dark: "bg-mega-loading",
+        }
+    ) />
 ` as string
 
-const transformedContent = replacer({ callee: "twg" })(content)
+const transformedContent = replacer()(content)
 
 console.log("1: ", transformedContent)
 

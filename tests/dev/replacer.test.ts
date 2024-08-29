@@ -563,6 +563,80 @@ describe("replacer()", () => {
         })
     })
 
+    describe("Misleading object inside not related object:", () => {
+        it.each([
+            {
+                contents: `
+                    const [toastButtons, setToastButtons] = useState<ToastButtonProps[]>([
+                        {
+                            idx: "1",
+                            message: "Successful Toast",
+                            type: toast.success,
+                            styles: twg(
+                                "col-start-1", {
+                                before: [
+                                    "bg-mega-secondary opacity-10 transition-opacity",
+                                    {
+                                        dark: "bg-mega-success",
+                                        hover: "opacity-20 duration-0"
+                                    }
+                                ]
+                            }),
+                            icon: <FaCircleCheck size={28} className="size-7 dark:fill-mega-success" />
+                        }
+                    ])
+                `,
+                expected:
+                    `const [toastButtons, setToastButtons] = useState<ToastButtonProps[]>([{
+  idx: "1",
+  message: "Successful Toast",
+  type: toast.success,
+  styles: twg("col-start-1", "before:bg-mega-secondary before:opacity-10 before:transition-opacity before:dark:bg-mega-success before:hover:opacity-20 before:hover:duration-0"),
+  icon: <FaCircleCheck size={28} className="size-7 dark:fill-mega-success" />
+}]);`
+            },
+            {
+                contents: `
+                    const [toastButtons, setToastButtons] = useState<ToastButtonProps[]>([
+                        {
+                            idx: "1",
+                            message: "Successful Toast",
+                            type: toast.success,
+                            styles: {
+                                before: "abc",
+                                after: twg(
+                                    "col-start-1", {
+                                    before: [
+                                        "bg-mega-secondary opacity-10 transition-opacity",
+                                        {
+                                            dark: "bg-mega-success",
+                                            hover: "opacity-20 duration-0"
+                                        }
+                                    ]
+                                })
+                            },
+                            icon: <FaCircleCheck size={28} className="size-7 dark:fill-mega-success" />
+                        }
+                    ])
+                `,
+                expected:
+                    `const [toastButtons, setToastButtons] = useState<ToastButtonProps[]>([{
+  idx: "1",
+  message: "Successful Toast",
+  type: toast.success,
+  styles: {
+    before: "abc",
+    after: twg("col-start-1", "before:bg-mega-secondary before:opacity-10 before:transition-opacity before:dark:bg-mega-success before:hover:opacity-20 before:hover:duration-0")
+  },
+  icon: <FaCircleCheck size={28} className="size-7 dark:fill-mega-success" />
+}]);`
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer()(contents)).toBe(expected)
+            expect(liteReplacer()(contents)).toBe(expected)
+        })
+    })
+
     describe("Misleading object:", () => {
         it.each([
             {

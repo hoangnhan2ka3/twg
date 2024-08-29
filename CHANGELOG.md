@@ -9,6 +9,16 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
+## [3.0.1] - 2024-08-29
+
+### Fixed
+
+- Fixed problem in AST cause misleading finding parent object which lead to wrong outermost object parsing in `v3.0.0`.
+
+### Chore
+
+- Add test case for `misleading object inside not related object`.
+
 ## [3.0.0] - 2024-08-29
 
 ### Core change

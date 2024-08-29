@@ -33,39 +33,45 @@ export function transformer(
                     })
 
                     path.traverse({
-                        ObjectExpression(path) {
+                        ObjectExpression(innerPath) {
                             try {
-                                if (!path.findParent((parentPath) => parentPath.isObjectExpression())) {
-                                    path.traverse({
-                                        ConditionalExpression(path) {
-                                            if (path.findParent((parent) => parent.isTemplateLiteral())) {
-                                                path.replaceWith([
-                                                    path.node.consequent, types.stringLiteral(" "), path.node.alternate
+                                // 2. Find outer Object(s) inside callee function
+                                if (!innerPath.findParent(parentPath => parentPath.isObjectExpression() && parentPath.node === innerPath.node)) {
+                                    // 3. First parse ternary and logical conditionals
+                                    innerPath.traverse({
+                                        ConditionalExpression(innerPath) {
+                                            if (innerPath.findParent((parent) => parent.isTemplateLiteral())) {
+                                                innerPath.replaceWith([
+                                                    innerPath.node.consequent, types.stringLiteral(" "), innerPath.node.alternate
                                                 ].reduce((acc, current) => types.binaryExpression("+", acc, current)))
                                             } else {
-                                                path.replaceWith(
-                                                    types.arrayExpression([path.node.consequent, path.node.alternate])
+                                                innerPath.replaceWith(
+                                                    types.arrayExpression([innerPath.node.consequent, innerPath.node.alternate])
                                                 )
                                             }
                                         },
-                                        LogicalExpression(path) {
-                                            path.replaceWith(path.node.right)
+                                        LogicalExpression(innerPath) {
+                                            innerPath.replaceWith(innerPath.node.right)
                                         }
                                     })
 
-                                    path.traverse({
-                                        ObjectProperty(path) {
+                                    // 4. And parse the values if it is conditional
+                                    innerPath.traverse({
+                                        ObjectProperty(innerPath) {
                                             if (
-                                                !path.node.shorthand
-                                                && !types.isStringLiteral(path.node.value)
-                                                && !types.isArrayExpression(path.node.value)
-                                                && !types.isTemplateLiteral(path.node.value)
-                                            ) path.node.value = types.numericLiteral(1)
+                                                !innerPath.node.shorthand
+                                                && !types.isStringLiteral(innerPath.node.value)
+                                                && !types.isArrayExpression(innerPath.node.value)
+                                                && !types.isTemplateLiteral(innerPath.node.value)
+                                            ) innerPath.node.value = types.numericLiteral(1)
                                         }
                                     })
 
-                                    const largestObject = generate(path.node).code
-                                    path.replaceWith(types.stringLiteral(
+                                    // 5. Then take the outer Object(s) out
+                                    const largestObject = generate(innerPath.node).code
+
+                                    // DONE. Final replace the original outer Object(s) with parsed one
+                                    innerPath.replaceWith(types.stringLiteral(
                                         parser(...new Function(
                                             `return [${(/['"`]|:\s*1/g).test(largestObject) ? largestObject : ""}]`
                                         )() as ClassValue[])
