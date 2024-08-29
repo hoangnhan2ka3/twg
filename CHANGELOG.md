@@ -9,6 +9,21 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
+## [3.0.3] - 2024-08-29
+
+### Refactor
+
+- Refactor `debug` message to be lead to `Usage / Use cases` section in docs.
+
+### Chore
+
+- Update `Usage / Use cases` section in docs:
+  - Add `Nesting callee functions` section on Usage.
+  - Refactor this section to expand/collapse panel for clearer reading.
+- Ignore `misc.spec.ts` file in `.gitignore`.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v3.0.2...v3.0.3>
+
 ## [3.0.2] - 2024-08-29
 
 ### Chore

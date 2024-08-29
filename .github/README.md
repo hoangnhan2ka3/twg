@@ -75,10 +75,11 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 - [Options](#%EF%B8%8F-options)
   - [`replacer()` options](#replacer-options)
   - [`twg` options](#twg-options)
-- [How to use](#-how-to-use)
-  - [Basic usage](#basic-usage)
-  - [Complex as ☠️ usage](#complex-as-%EF%B8%8F-usage)
-  - [Conditionals](#conditionals)
+- [Usage / Use cases](#-usage--use-cases)
+  - [Basic usage](#-basic-usage)
+  - [Complex as ☠️ usage](#-complex-as-%EF%B8%8F-usage)
+  - [Conditionals](#-conditionals)
+  - [Nesting callee functions](#-nesting-callee-functions)
 - [Custom options](#-custom-options)
   - [Custom `callee`](#custom-callee)
   - [Custom `separator`](#custom-separator)
@@ -232,9 +233,13 @@ Options          | Types           | Default | Description                      
 
 See [how to use](#custom-separator).
 
-## 💡 How to use
+## 💡 Usage / Use cases
 
-### Basic usage
+### ⏩ Basic usage
+
+<details>
+
+<summary>Click to expand/collapse this section</summary>
 
 ```jsx
 // HelloWorld.tsx
@@ -271,7 +276,13 @@ Output (html):
 </div>
 ```
 
-### Complex as ☠️ usage
+</details>
+
+### ⏩ Complex as ☠️ usage
+
+<details>
+
+<summary>Click to expand/collapse this section</summary>
 
 ```jsx
 // HelloWorld.tsx
@@ -331,7 +342,13 @@ Output (html):
 </div>
 ```
 
-### Conditionals
+</details>
+
+### ⏩ Conditionals
+
+<details>
+
+<summary>Click to expand/collapse this section</summary>
 
 You can use conditional like `&& | || | ??` _(and/or)_ or `isFooBar === "twg" ? "..." : "..."` _(ternary)_ as well:
 
@@ -505,8 +522,159 @@ You can use conditional like `&& | || | ??` _(and/or)_ or `isFooBar === "twg" ? 
   </div>
   ```
 
+</details>
+
+### ⏩ Nesting callee functions
+
+<details>
+
+<summary>Click to expand/collapse this section</summary>
+
+  ```jsx
+  // HelloWorld.tsx
+
+  import { twg } from "twg"
+  import { useState } from "react"
+
+  export function HelloWorld() {
+    const [isAndOr, setIsAndOr] = useState(false)
+    const [isTernary, setIsTernary] = useState("foo")
+    // ...
+    return (
+      <div className={twg(
+        "size-92 relative grid place-items-center px-4 py-2",
+        {
+          before: [
+            "absolute inset-0",
+            twg(
+              "bg-red-500",
+              {
+                hover: [
+                  "bg-blue-500 text-yellow-500",
+                  {
+                    active: "border-2 border-white"
+                  }
+                ]
+              }
+            )
+          ]
+        }
+      )}>
+        Hello, World!
+      </div>
+    )
+  }
+  ```
+
+  Output _(what Tailwind will scan, not in browser's inspect tool)_:
+
+  ```html
+  <div className="size-92 relative grid place-items-center px-4 py-2 before:absolute before:inset-0 before:bg-red-500 before:hover:bg-blue-500 before:hover:text-yellow-500 before:hover:active:border-2 before:hover:active:border-white">
+    Hello, World!
+  </div>
+  ```
+
+  Or even more complex:
+
+  ```jsx
+  // HelloWorld.tsx
+
+  import { twg } from "twg"
+  import { useState } from "react"
+
+  export function HelloWorld() {
+    const [isAndOr, setIsAndOr] = useState(false)
+    const [isTernary, setIsTernary] = useState("foo")
+    // ...
+    return (
+      <div className={twg(
+        "size-92 relative grid place-items-center px-4 py-2",
+        {
+          before: [
+            "absolute inset-0",
+            twg(
+              "bg-red-500",
+              {
+                hover: [
+                  "bg-blue-500 text-yellow-500",
+                  twg(
+                    "border-0 border-purple-500",
+                    {
+                      active: "border-2 border-white"
+                    }
+                  )
+                ]
+              }
+            )
+          ]
+        }
+      )}>
+        Hello, World!
+      </div>
+    )
+  }
+  ```
+
+  Output _(what Tailwind will scan, not in browser's inspect tool)_:
+
+  ```html
+  <div className="size-92 relative grid place-items-center px-4 py-2 before:absolute before:inset-0 before:bg-red-500 before:hover:bg-blue-500 before:hover:text-yellow-500 before:hover:border-0 before:hover:border-purple-500 before:hover:active:border-2 before:hover:active:border-white">
+    Hello, World!
+  </div>
+  ```
+
+> [!CAUTION]\
+> You cannot nested other than the `callee` function you chose.
+
+  ```jsx
+  // HelloWorld.tsx
+
+  import clsx from "clsx"
+  import { twg } from "twg"
+  import { useState } from "react"
+
+  export function HelloWorld() {
+    const [isAndOr, setIsAndOr] = useState(false)
+    const [isTernary, setIsTernary] = useState("foo")
+    // ...
+    return (
+      <div className={twg(
+        "size-92 relative grid place-items-center px-4 py-2",
+        {
+          before: [
+            "absolute inset-0",
+            clsx(
+        //  ^^^^ DON'T DO THIS
+              "bg-red-500",
+              "hover:bg-blue-500 hover:text-yellow-500",
+              "active:border-2 active:border-white"
+            )
+          ]
+        }
+      )}>
+        Hello, World!
+      </div>
+    )
+  }
+  ```
+
+  Output:
+
+  ```bash
+  ⚠️ TWG - Problem occurred on `replacer()`, please read the `Usage / Use cases` section on the docs carefully:
+  clsx is not defined in:
+  twg("size-92 relative grid place-items-center px-4 py-2", {
+    before: ["absolute inset-0", clsx("bg-red-500", "hover:bg-blue-500 hover:text-yellow-500", "active:border-2 active:border-white")]
+  })
+  ```
+
+> [!IMPORTANT]\
+> `twg()` behavior is similar to `clsx()` or `classnames()`, so you should not mix the use of them in order to avoid any unexpected behavior.
+
+</details>
+
 > [!TIP]\
-> Just use `twg` as the way you use `clsx` or `classnames`, except for the `object zones` which you can use the `twg` way.
+> In short, just use `twg` as the way you use `clsx` or `classnames`, except for the `object zones` which you can use the `twg` way.
 
 ## 🔧 Custom options
 
@@ -524,16 +692,7 @@ transform: {
 }
 ```
 
-Then use several ways to import { match } from "assert"
-import { write } from "fs"
-import { after, before } from "node:test"
-import { version } from "os"
-import { join } from "path"
-import { start } from "repl"
-import itimport { debug } from "console"
-import { on } from "events"
-import { off } from "process"
-:
+Then use several ways to import it:
 
 - **Option 1:**
 

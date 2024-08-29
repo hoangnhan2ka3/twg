@@ -1,6 +1,9 @@
 # dependencies
 /node_modules
 
+# testing
+misc.spec.ts
+
 # production
 /dist
 

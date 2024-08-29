@@ -85,7 +85,7 @@ export function transformer(
                                     ))
                                 }
                             } catch (e) {
-                                options.debug && console.warn(`\n⚠️ TWG - Problem occurred on \`replacer()\`, please read the docs carefully:\n${((e as Error).message)} in:\n${generate(path.node).code}`)
+                                options.debug && console.warn(`\n⚠️ TWG - Problem occurred on \`replacer()\`, please read the \`Usage / Use cases\` section on the docs carefully:\n${((e as Error).message)} in:\n${generate(path.node).code}`)
                                 return code
                             }
                         }
