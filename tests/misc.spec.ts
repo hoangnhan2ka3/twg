@@ -1,20 +1,36 @@
 import { type ClassValue, twg } from "src/index"
 import { replacer as liteReplacer } from "src/lite/replacer"
-import { extractor } from "src/processor/extractor"
 import { parser } from "src/processor/parser"
 import { replacer } from "src/replacer"
 
 const content = `
-    <div className={cn(
+    <div className={twg(
         "multiple classes",
+        twg(
+            "other class",
+            {
+                var1: [
+                    "in object with var",
+                    twg(
+                        "other class",
+                        {
+                            var3: "in other object with var"
+                        }
+                    )
+                ]
+            }
+        ),
         {
-            mod1: ["class", "other classes"],
-            mod2: ["class", { "additional-mod": "other classes" }]
-        }
+            var2: [
+                "multiple classes",
+                cn("other class")
+            ]
+        },
+        className
     )} />
 ` as string
 
-const transformedContent = replacer({ callee: [] })(content)
+const transformedContent = replacer({ callee: "twg" })(content)
 
 console.log("1: ", transformedContent)
 

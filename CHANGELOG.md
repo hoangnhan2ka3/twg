@@ -9,6 +9,26 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
+## [3.0.0] - 2024-08-29
+
+### Core change
+
+- Deprecated `extractor()` function due to AST `transformer()`. Now `replacer()` is almost base on AST.
+- Change the behavior of `debug message` as limited AST output.
+
+### Refactor
+
+- Refactor AST `transformer()` to handle nested callee functions.
+- Refactor `twg()` and its lite version to handle native Object behavior.
+- Refactor `parser()` to reduce complexity and better handle native Object behavior.
+
+### Chore
+
+- Remove `extractor()` function test.
+- Add more test cases for nested callee functions, native Object behavior.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v2.0.7...v3.0.0>
+
 ## [2.0.7] - 2024-08-28
 
 ### Refactor

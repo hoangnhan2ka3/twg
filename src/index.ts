@@ -8,17 +8,18 @@ export interface TWGOptions {
 
 /**
  * Handles several types of class values including string, number, object, array, conditionals and also itself.
- * @param mix The inputs class values
+ * @param mix The inputs class values.
  * @param options see [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options).
  * @returns string
  * @author `clsx` [Luke Edwards] see <[reference](https://github.com/lukeed/clsx/blob/master/src/index.js#L1C1-L28C2)>
  */
 function toVal(mix: ClassValue, options?: TWGOptions): string {
     let k = 0,
+        i = false,
         y: string,
         str = ""
     if (typeof mix === "string" || typeof mix === "number") {
-        str += mix.toString()
+        str += String(mix)
     } else if (typeof mix === "object" && mix !== null) {
         if (Array.isArray(mix)) {
             const len = mix.length
@@ -32,7 +33,19 @@ function toVal(mix: ClassValue, options?: TWGOptions): string {
                 }
             }
         } else {
-            str += parser(options)(mix)
+            for (y in mix) {
+                if (mix[y] && typeof mix[y] !== "string" && typeof mix[y] !== "object") {
+                    str && (str += " ")
+                    str += y
+                } else {
+                    i = true
+                }
+            }
+
+            if (i) {
+                str && (str += " ")
+                str += parser(options)(mix)
+            }
         }
     }
     return str
@@ -40,7 +53,7 @@ function toVal(mix: ClassValue, options?: TWGOptions): string {
 
 /**
  * Utility function to transform the inputs on build time. Map key to each values inside the Object zones.
- * @param inputs The inputs class values and the last Object is the [options](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options)
+ * @param inputs The inputs class values and the last Object is the [options](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options).
  * @returns string
  * @author `clsx` [Luke Edwards] see <[reference](https://github.com/lukeed/clsx/blob/master/src/index.js#L30C1-L41C2)>
  */

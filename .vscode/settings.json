@@ -33,6 +33,7 @@
     "eslint.quiet": false,
     //! Spell Checker
     "cSpell.words": [
+        "barser",
         "compat",
         "modclasses",
         "modother",

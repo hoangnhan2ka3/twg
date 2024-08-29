@@ -253,6 +253,277 @@ describe("replacer()", () => {
         })
     })
 
+    describe("Nesting callee functions:", () => {
+        it.each([
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "class",
+                                {
+                                    var2: [
+                                        "multiple classes",
+                                        twg(
+                                            "multiple classes",
+                                            {
+                                                var1: [
+                                                    "class",
+                                                    {
+                                                        var2: [
+                                                            "multiple classes",
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                var3: "multiple classes"
+                                            }
+                                        )
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            var3: "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var1:class var1:var2:multiple var1:var2:classes var1:var2:multiple var1:var2:classes var1:var2:var1:class var1:var2:var1:var2:multiple var1:var2:var1:var2:classes var1:var2:var3:multiple var1:var2:var3:classes", "var3:multiple var3:classes", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "multiple classes",
+                                twg(
+                                    "other class",
+                                    {
+                                        var2: [
+                                            "in object with var",
+                                            twg(
+                                                "other class",
+                                                {
+                                                    var3: "in other object with var"
+                                                }
+                                            )
+                                        ]
+                                    }
+                                )
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var1:multiple var1:classes var1:other var1:class var1:var2:in var1:var2:object var1:var2:with var1:var2:var var1:var2:other var1:var2:class var1:var2:var3:in var1:var2:var3:other var1:var2:var3:object var1:var2:var3:with var1:var2:var3:var", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "multiple classes",
+                                twg(
+                                    "other class",
+                                    {
+                                        var2: [
+                                            "in object with var",
+                                            cn(
+                                                "other class",
+                                                {
+                                                    var3: "in other object with var"
+                                                }
+                                            )
+                                        ]
+                                    }
+                                )
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "multiple classes",
+                                twg(
+                                    "other class",
+                                    {
+                                        var2: [
+                                            "in object with var",
+                                            cn(
+                                                "other class",
+                                                {
+                                                    var3: "in other object with var"
+                                                }
+                                            )
+                                        ]
+                                    }
+                                )
+                            ]
+                        },
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        twg(
+                            "other class",
+                            {
+                                var1: [
+                                    "in object with var",
+                                    twg(
+                                        "other class",
+                                        {
+                                            var3: "in other object with var"
+                                        }
+                                    )
+                                ]
+                            }
+                        ),
+                        {
+                            var2: [
+                                "multiple classes",
+                                twg("other class")
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", ["other class", "var1:in var1:object var1:with var1:var var1:other var1:class var1:var3:in var1:var3:other var1:var3:object var1:var3:with var1:var3:var"], "var2:multiple var2:classes var2:other var2:class", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        twg(
+                            "other class",
+                            {
+                                var1: [
+                                    "in object with var",
+                                    twg(
+                                        "other class",
+                                        {
+                                            var3: "in other object with var"
+                                        }
+                                    )
+                                ]
+                            }
+                        ),
+                        {
+                            var2: [
+                                "multiple classes",
+                                cn("other class")
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        twg(
+                            "other class",
+                            {
+                                var1: [
+                                    "in object with var",
+                                    twg(
+                                        "other class",
+                                        {
+                                            var3: "in other object with var"
+                                        }
+                                    )
+                                ]
+                            }
+                        ),
+                        {
+                            var2: [
+                                "multiple classes",
+                                cn("other class")
+                            ]
+                        },
+                        className
+                    )} />
+                `
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer()(contents)).toBe(expected)
+            expect(liteReplacer()(contents)).toBe(expected)
+        })
+    })
+
+    describe("Native object:", () => {
+        it.each([
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: true
+                        },
+                        {
+                            var2: 0
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var1", "var2", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: true,
+                            var2: "multiple classes",
+                            var3: true,
+                            var4: true
+                        },
+                        {
+                            var6: "class",
+                            var5: 0
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var1 var2:multiple var2:classes var3 var4", "var6:class var5", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "class",
+                                {
+                                    var2: isAndOr
+                                }
+                            ]
+                        },
+                        {
+                            var3: 0
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var1:class var1:var2", "var3", className)} />;`
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer()(contents)).toBe(expected)
+            expect(liteReplacer()(contents)).toBe(expected)
+        })
+    })
+
     describe("Multiple outer objects:", () => {
         it.each([
             {
@@ -306,15 +577,81 @@ describe("replacer()", () => {
             {
                 // const style = "primary"
                 contents: "<div className={twg(badgeVariants({ variant: style }), className)} />",
-                expected: `<div className={twg(badgeVariants(""), className)} />;`
+                expected: `<div className={twg(badgeVariants("variant"), className)} />;`
             },
             {
                 contents: `<div className={twg("multiple classes", badgeVariants({ variant }), className)} />`,
                 expected: `<div className={twg("multiple classes", badgeVariants(""), className)} />;`
             },
             {
+                contents: `<div className={twg("multiple classes", badgeVariants({ variant }), "other class", className)} />`,
+                expected: `<div className={twg("multiple classes", badgeVariants(""), "other class", className)} />;`
+            },
+            {
                 contents: `<div className={twg("multiple classes", badgeVariants({ variant: "primary" }), className)} />`,
                 expected: `<div className={twg("multiple classes", badgeVariants("variant:primary"), className)} />;`
+            },
+            {
+                contents: `<div className={twg("multiple classes", badgeVariants({ variant: "primary" }), "other class", className)} />`,
+                expected: `<div className={twg("multiple classes", badgeVariants("variant:primary"), "other class", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: "class"
+                        },
+                        badgeVariants({ variant }),
+                        {
+                            var2: "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var1:class", badgeVariants(""), "var2:multiple var2:classes", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "class",
+                                {
+                                    var2: [
+                                        "multiple classes",
+                                        badgeVariants({ variant })
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            var3: "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "class",
+                                {
+                                    var2: [
+                                        "multiple classes",
+                                        badgeVariants({ variant })
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            var3: "multiple classes"
+                        },
+                        className
+                    )} />
+                `
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)
@@ -500,6 +837,10 @@ describe("replacer()", () => {
     describe("Key as classes and value as conditionals:", () => {
         it.each([
             {
+                contents: "<div className={twg({ class: isAndOr1 })} />",
+                expected: `<div className={twg("class")} />;`
+            },
+            {
                 contents: `<div className={twg({ "class": isAndOr1 })} />`,
                 expected: `<div className={twg("class")} />;`
             },
@@ -513,6 +854,10 @@ describe("replacer()", () => {
             },
             {
                 contents: `<div className={twg({ "class": isAndOr1["false"] })} />`,
+                expected: `<div className={twg("class")} />;`
+            },
+            {
+                contents: "<div className={twg({ class: isAndOr1() && isAndOr2 })} />",
                 expected: `<div className={twg("class")} />;`
             },
             {
@@ -538,11 +883,12 @@ describe("replacer()", () => {
             {
                 contents: `
                     <div className={twg(
-                        {"multiple classes": isAndOr1() && isAndOr2 },
-                        {"other class": isAndOr3 || isAndOr4() },
+                        { class: isAndOr1() && isAndOr2 },
+                        { "multiple classes": isAndOr1() && isAndOr2 },
+                        { "other class": isAndOr3 || isAndOr4() },
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", "other class")} />;`
+                expected: `<div className={twg("class", "multiple classes", "other class")} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)
@@ -586,7 +932,7 @@ describe("replacer()", () => {
                         className
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", "var:multiple var:classes var:another var:class", className)} />;`
+                expected: `<div className={twg("multiple classes", isAndOr && "var:multiple var:classes var:another var:class", className)} />;`
             },
             { // --- And-or condition of multiple outer objects
                 contents: `
@@ -607,7 +953,7 @@ describe("replacer()", () => {
                         className
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", "var1:multiple var1:classes var1:another var1:class", "var2:multiple var2:classes var2:another var2:class", className)} />;`
+                expected: `<div className={twg("multiple classes", isAndOr1 || "var1:multiple var1:classes var1:another var1:class", isAndOr2 ?? "var2:multiple var2:classes var2:another var2:class", className)} />;`
             },
             { // --- And-or condition object inside outer objects
                 contents: `
@@ -695,7 +1041,7 @@ describe("replacer()", () => {
                         className
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", ["var2:multiple var2:classes", "var2:multiple var2:classes var2:another var2:class"], className)} />;`
+                expected: `<div className={twg("multiple classes", isTernary === "anything" ? "var2:multiple var2:classes" : "var2:multiple var2:classes var2:another var2:class", className)} />;`
             },
             { // --- Ternary condition of multiple outer objects
                 contents: `
@@ -720,7 +1066,7 @@ describe("replacer()", () => {
                         className
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", ["var2:multiple var2:classes", "var2:multiple var2:classes var2:another var2:class"], ["var2:multiple var2:classes", "var2:multiple var2:classes var2:another var2:class"], className)} />;`
+                expected: `<div className={twg("multiple classes", isTernary === "anything" ? "var2:multiple var2:classes" : "var2:multiple var2:classes var2:another var2:class", isTernary2 === "else" ? "var2:multiple var2:classes" : "var2:multiple var2:classes var2:another var2:class", className)} />;`
             },
             { // --- Ternary condition object inside outer objects
                 contents: `

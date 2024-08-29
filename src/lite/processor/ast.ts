@@ -2,32 +2,25 @@ import generate from "@babel/generator"
 import * as barser from "@babel/parser"
 import traverse from "@babel/traverse"
 import * as types from "@babel/types"
-import { type ClassValue } from "src"
-import { type ReplacerOptions } from "src/replacer"
+import { type ClassValue } from "src/lite"
+import { parser } from "src/lite/processor/parser"
+import { type ReplacerLiteOption } from "src/lite/replacer"
 
-import { parser } from "./parser"
-
-/**
- * Use AST to transform the conditionals, especially the `nesting` Object conditionals or `nesting` kinds of ternary conditionals.
- * @param code input as string
- * @returns string
- */
 export function transformer(
     code: string,
-    options: ReplacerOptions
+    callee: ReplacerLiteOption["callee"] = "twg"
 ) {
     const ast = barser.parse(code, {
         sourceType: "module",
         plugins: ["jsx", "typescript"]
     })
 
-    const callees = typeof options.callee === "string" ? [options.callee] : options.callee ?? ["twg"]
+    const callees = typeof callee === "string" ? [callee] : callee
 
     callees.forEach((name) => {
         if (!name) return
         traverse(ast, {
             CallExpression(path) {
-                // 1. Find callee function
                 if (path.get("callee").isIdentifier({ name })) {
                     path.traverse({
                         CallExpression(path) {
@@ -42,9 +35,7 @@ export function transformer(
                     path.traverse({
                         ObjectExpression(path) {
                             try {
-                                // 2. Find outer Object(s) inside callee function
                                 if (!path.findParent((parentPath) => parentPath.isObjectExpression())) {
-                                    // 3. First parse ternary and logical conditionals
                                     path.traverse({
                                         ConditionalExpression(path) {
                                             if (path.findParent((parent) => parent.isTemplateLiteral())) {
@@ -62,7 +53,6 @@ export function transformer(
                                         }
                                     })
 
-                                    // 4. And parse the values if it is conditional
                                     path.traverse({
                                         ObjectProperty(path) {
                                             if (
@@ -74,20 +64,14 @@ export function transformer(
                                         }
                                     })
 
-                                    // 5. Then take the outer Object(s) out
                                     const largestObject = generate(path.node).code
-
-                                    // DONE. Final replace the original outer Object(s) with parsed one
                                     path.replaceWith(types.stringLiteral(
-                                        parser(options)(...new Function(
+                                        parser(...new Function(
                                             `return [${(/['"`]|:\s*1/g).test(largestObject) ? largestObject : ""}]`
                                         )() as ClassValue[])
                                     ))
                                 }
-                            } catch (e) {
-                                options.debug && console.warn(`\n⚠️ TWG - Problem occurred on \`replacer()\`, please read the docs carefully:\n${((e as Error).message)} in:\n${generate(path.node).code}`)
-                                return code
-                            }
+                            } catch { return code }
                         }
                     })
                 }

@@ -10,6 +10,7 @@ describe("twg()", () => {
             { args: [], expected: "" },
             { args: [""], expected: "" },
             { args: ["t"], expected: "t" },
+            { args: [1], expected: "1" },
             { args: ["1"], expected: "1" },
             { args: ["."], expected: "." },
             { args: [null], expected: "" },
@@ -228,19 +229,84 @@ describe("twg()", () => {
         })
     })
 
-    describe("Object only:", () => {
+    describe("Nesting callee functions:", () => {
         it.each([
             {
-                args: [{ var: "class" }],
-                expected: "var:class"
+                args: [
+                    "multiple classes",
+                    {
+                        var1: [
+                            "multiple classes",
+                            twg(
+                                "other class",
+                                {
+                                    var2: "in object with var"
+                                }
+                            )
+                        ]
+                    }
+                ],
+                expected: "multiple classes var1:multiple var1:classes var1:other var1:class var1:var2:in var1:var2:object var1:var2:with var1:var2:var"
             },
             {
-                args: [{ "var": "class" }],
-                expected: "var:class"
+                args: [
+                    "multiple classes",
+                    {
+                        var1: [
+                            "multiple classes",
+                            twg(
+                                "other class",
+                                {
+                                    var2: [
+                                        "in object with var",
+                                        twg(
+                                            "other class",
+                                            {
+                                                var3: "in other object with var"
+                                            }
+                                        )
+                                    ]
+                                }
+                            )
+                        ]
+                    }
+                ],
+                expected: "multiple classes var1:multiple var1:classes var1:other var1:class var1:var2:in var1:var2:object var1:var2:with var1:var2:var var1:var2:other var1:var2:class var1:var2:var3:in var1:var2:var3:other var1:var2:var3:object var1:var2:var3:with var1:var2:var3:var"
             },
+            {
+                args: [
+                    "multiple classes",
+                    {
+                        var1: [
+                            "multiple classes",
+                            twg(
+                                "other class",
+                                {
+                                    var2: true
+                                }
+                            )
+                        ]
+                    }
+                ],
+                expected: "multiple classes var1:multiple var1:classes var1:other var1:class var1:var2"
+            }
+        ])('"$expected"', ({ args, expected }) => {
+            expect(twg(...args)).toBe(expected)
+            expect(liteTwg(...args)).toBe(expected)
+        })
+    })
+
+    describe("Object only:", () => {
+        it.each([
+            { args: [{ var: 0 }], expected: "" },
+            { args: [{ var: 1 }], expected: "var" },
+            { args: [{ var: "class" }], expected: "var:class" },
+            { args: [{ "var": "class" }], expected: "var:class" },
             { //*
-                args: [{ "var1 var2": "class" }],
-                expected: "var1 var2:class"
+                args: [{ "var1 var2": "class" }], expected: "var1 var2:class"
+            },
+            {
+                args: [{ "var1 var2": true }], expected: "var1 var2"
             },
             {
                 args: [{ var: "multiple classes with var" }],

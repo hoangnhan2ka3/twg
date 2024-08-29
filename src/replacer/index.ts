@@ -1,7 +1,4 @@
-import { type ClassValue } from "src/index"
 import { transformer } from "src/processor/ast"
-import { extractor } from "src/processor/extractor"
-import { parser } from "src/processor/parser"
 
 export interface ReplacerOptions {
     callee?: string | string[],
@@ -27,31 +24,9 @@ export function replacer({
             return content
         }
 
-        // 1. Parse conditionals
-        content = transformer(content, callee)
         try {
-            // 2. Loop through each largest Objects inside the callee function
-            extractor(content, callee).forEach(largestObject => {
-                const filteredObject = (/['"`]/).test(largestObject) ? largestObject : ""
-
-                try {
-                    // 3. Parse the Object inside
-                    const parsedObject = parser({ separator, flatten: true })(
-                        ...new Function(`return [${filteredObject}]`)() as ClassValue[]
-                    )
-                    // 4. Replace the old largest object with parsed one
-                    content = content.replace(largestObject, `"${parsedObject}"`)
-                } catch (errorParsing) {
-                    debug && console.warn(`\n⚠️ TWG - Problem occurred on \`replacer()\`:\n${((errorParsing as Error).message)} in:\n- ${largestObject}\nTrying to be transformed into:\n+ ${filteredObject}`)
-                }
-            })
-
-            // DONE. Return the processed content
-            return content
-        } catch (errorOnContent) {
-            debug && console.error(`\n⛔ TWG - Error occurred on \`replacer()\`:\n${((errorOnContent as Error).message)} in file:\n${content}\n`)
-            return content
-        }
+            return transformer(content, { callee, separator, debug })
+        } catch { return content }
     }
 }
 
