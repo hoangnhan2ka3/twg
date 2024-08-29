@@ -15,6 +15,13 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 ---
 
+Entry point         | Bundle | Gzip
+--------------------|--------|-----
+`twg`               | 1.07kB  | 581B
+`twg/lite`          | 825B   | 468B
+`twg/replacer`      | 816B   | 201B
+`twg/lite/replacer` | 816B   | 201B
+
 ## 🗝️ Features
 
 - ✅ Elegant.
