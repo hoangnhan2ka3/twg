@@ -17,7 +17,9 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ### Chore
 
-- Add test case for `misleading object inside not related object`.
+- Add test cases for `misleading object inside not related object`.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v3.0.0...v3.0.1>
 
 ## [3.0.0] - 2024-08-29
 
