@@ -97,31 +97,3 @@ export function transformer(
 
     return generate(ast).code
 }
-
-const text = `
-    const [toastButtons, setToastButtons] = useState<ToastButtonProps[]>([
-        {
-            idx: "1",
-            message: "Successful Toast",
-            type: toast.success,
-            styles: {
-                before: "abc",
-                after: cn(
-                    "col-start-1", {
-                    before: [
-                        "bg-mega-secondary opacity-10 transition-opacity",
-                        {
-                            dark: "bg-mega-success",
-                            hover: "opacity-20 duration-0"
-                        }
-                    ]
-                })
-            },
-            icon: <FaCircleCheck size={28} className="size-7 dark:fill-mega-success" />
-        }
-    ])
-`
-
-console.log(transformer(text, {
-    callee: "cn"
-}))
