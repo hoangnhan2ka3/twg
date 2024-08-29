@@ -15,6 +15,8 @@ Undocumented APIs should be considered internal and may change without warning.
 
 - Remove accidentally test code in `transformer()` function.
 
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v3.0.1...v3.0.2>
+
 ## [3.0.1] - 2024-08-29
 
 ### Fixed
