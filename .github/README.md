@@ -29,7 +29,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 ## 📰 News
 
-- ✅ Major update `v2`:
+- ✅ From `v2`:
 
   - Supports native objects behavior like `clsx` (Key as classes and value as conditionals)
 
