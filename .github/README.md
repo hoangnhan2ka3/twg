@@ -89,7 +89,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
   - No `debug messages` (no console messages).
   - No `JSDoc` comments for each function.
   - 20 ~ 30% lighter.
-  - 200 ~ 300ms faster.
+  - Compile 200 ~ 300ms faster.
 
 > [!TIP]\
 > When you tested using with default version, and everything's OK. So you could want to use lite version, for better performance.
@@ -164,7 +164,13 @@ No. | Framework/Lib    | Version           | Additional info                    
 ### 1. Install the package
 
 ```bash
-pnpm add twg
+pnpm add twg --save
+```
+
+or
+
+```bash
+npm install twg --save
 ```
 
 ### 2. Setup
