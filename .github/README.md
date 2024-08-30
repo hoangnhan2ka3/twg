@@ -19,10 +19,10 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 ✅ Entry point         | 📦 Bundle |  📦 Gzip
 -----------------------|:---------:|:--------:
-`twg`                  |   1.1kB   | **582B**
-`twg/lite` 🪶          |   825B    | **468B**
+`twg`                  |   1.1kB   | **593B**
+`twg/lite` 🪶          |   855B    | **479B**
 `twg/replacer`         |   2.3kB   | **1.1kB**
-`twg/lite/replacer` 🪶 |   1.7kB   | **819B**
+`twg/lite/replacer` 🪶 |   1.7kB   | **821B**
 
 </div>
 
