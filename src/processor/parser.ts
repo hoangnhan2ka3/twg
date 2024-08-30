@@ -2,8 +2,8 @@ import { type ClassValue, type TWGOptions } from "src/index"
 
 /**
  * Focusing on handling arrays and objects, looping them until all are flattened.
- * @param args The inputs class values.
- * @param separator The separator used to join the classes.
+ * @param {ClassValue[]} args The inputs class values.
+ * @param {TWGOptions} [options = {separator=":"}] separator. See [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options).
  * @returns string[]
  */
 function reducer(args: ClassValue[], options?: TWGOptions) {
@@ -26,8 +26,8 @@ function reducer(args: ClassValue[], options?: TWGOptions) {
 
 /**
  * Transforms the inputs. Map key to each values inside the Object zones.
- * @param options see [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options).
- * @param args The inputs class values.
+ * @param {TWGOptions} [options = {separator=":"}] separator. See [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options).
+ * @param {ClassValue[]} args The inputs class values.
  * @returns string
  */
 export function parser(options?: TWGOptions) {

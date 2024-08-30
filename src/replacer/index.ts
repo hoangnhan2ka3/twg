@@ -8,8 +8,8 @@ export interface ReplacerOptions {
 
 /**
  * Transforms the content before Tailwind scans/extracting its classes.
- * @param options callee, matchFunction, separator. See [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-content#replacer-options).
- * @param content The content already provided by `content.files` in `tailwind.config`.
+ * @param {ReplacerOptions} [options = {callee="twg", separator=":", debug=true}] callee, separator, debug. See [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-content#replacer-options).
+ * @param {string} content The content already provided by `content.files` in `tailwind.config`.
  * @returns string
  */
 export function replacer({

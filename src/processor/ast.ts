@@ -9,7 +9,7 @@ import { parser } from "./parser"
 
 /**
  * Use AST to transform the conditionals, especially the `nesting` Object conditionals or `nesting` kinds of ternary conditionals.
- * @param code input as string
+ * @param {string} code input code.
  * @returns string
  */
 export function transformer(

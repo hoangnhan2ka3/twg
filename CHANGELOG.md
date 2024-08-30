@@ -9,6 +9,15 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
+## [3.0.4] - 2024-08-30
+
+### Chore
+
+- Refactor JSDoc for functions and fix typo.
+- Bump `@babel` dependencies version to `7.25.6`.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v3.0.3...v3.0.4>
+
 ## [3.0.3] - 2024-08-29
 
 ### Refactor
