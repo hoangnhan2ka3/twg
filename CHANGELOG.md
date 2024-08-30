@@ -11,6 +11,25 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [3.1.0] - 2024-08-30
+
+### Core change
+
+- Added `nestingCallee` option to `replacer()` function. Now you can choose which callee function to allow nesting inside the callee function you defined in `callee` option. (Affect only default version)
+
+### Refactor
+
+- Refactor filter logic of nested callee in the lite version of `transformer()` function.
+- Refactor default version of `transformer()` function to handle new `nestingCallee` option.
+
+### Chore
+
+- Update docs for `nestingCallee` option.
+- Refactor some style in docs.
+- Add more test cases for `nestingCallee` option.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v3.0.4...v3.1.0>
+
 ## [3.0.4] - 2024-08-30
 
 ### Chore

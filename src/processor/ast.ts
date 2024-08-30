@@ -31,11 +31,14 @@ export function transformer(
                 if (path.get("callee").isIdentifier({ name })) {
                     path.traverse({
                         CallExpression(innerPath) {
-                            if (innerPath.get("callee").isIdentifier({ name })) {
-                                innerPath.replaceWith(
-                                    types.arrayExpression(innerPath.node.arguments as types.Expression[])
-                                )
-                            }
+                            const nestingCallees = typeof options.nestingCallee === "string" ? [options.nestingCallee] : options.nestingCallee ?? callees
+                            nestingCallees.forEach((name) => {
+                                if (innerPath.get("callee").isIdentifier({ name })) {
+                                    innerPath.replaceWith(
+                                        types.arrayExpression(innerPath.node.arguments as types.Expression[])
+                                    )
+                                }
+                            })
                         }
                     })
 

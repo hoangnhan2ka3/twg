@@ -42,7 +42,23 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 ## 📰 News
 
-- ✅ From `v2`:
+- ✅ From `v3.1.0`:
+
+  - Supports nesting custom callee functions through `nestingCallee` option _(default version only)_.
+
+    ```js
+    transform: {
+      DEFAULT: replacer({
+        // Define options here, eg.:
+        callee: "twg",
+        nestingCallee: ["clsx", "twg"]
+      })
+    }
+    ```
+
+    **Usage:** see [custom `nestingCallee`](#custom-nestingcallee).
+
+- ✅ From `v2.0.0`:
 
   - Supports native objects behavior like `clsx` (Key as classes and value as conditionals)
 
@@ -72,8 +88,8 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
   - Without any options API except for custom `callee` in [`replacer()` options](#replacer-options).
   - No `debug messages` (no console messages).
   - No `JSDoc` comments for each function.
-  - 30 ~ 40% lighter.
-  - 300 ~ 400ms faster.
+  - 20 ~ 30% lighter.
+  - 200 ~ 300ms faster.
 
 > [!TIP]\
 > When you tested using with default version, and everything's OK. So you could want to use lite version, for better performance.
@@ -95,6 +111,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
   - [Nesting callee functions](#-nesting-callee-functions)
 - [Custom options](#-custom-options)
   - [Custom `callee`](#custom-callee)
+  - [Custom `nestingCallee`](#custom-nestingcallee)
   - [Custom `separator`](#custom-separator)
   - [Turn off `debug`](#turn-off-debug)
 - [Combination](#-combination)
@@ -211,7 +228,7 @@ Lite version:
 import { twg } from "twg/lite"
 ```
 
-See [how to use](#-how-to-use).
+See [how to use](#-usage--use-cases).
 
 If you need to override default `twg()` options:
 
@@ -230,11 +247,12 @@ For more information, consider reading [custom options](#-custom-options) and [b
 
 ### `replacer()` options
 
-Options          | Types              | Default | Description                                                                                                                                                                                                              | Lite | Status
------------------|--------------------|:-------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:-----:
-`callee?`        | string \| string[] |  "twg"  | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_ |  ✅  |   ✅
-`separator?`(\*) | string \| false    |   ":"   | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `twg()` option.                       |  x   |   ✅
-`debug`          | boolean            |  true   | Printing debug messages in console if there are any warnings or errors. If `false`, it will be silent                                                                                                                    |  x   |   ✅
+Options          | Types              |       Default        | Description                                                                                                                                                                                                                                | Lite | Status
+-----------------|--------------------|:--------------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:-----:
+`callee?`        | string \| string[] |        "twg"         | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_                   |  ✅  |   ✅
+`nestingCallee?` | string \| string[] | `callee?` \|\| "twg" | The callee name that allow to be nested inside the main callee function. Useful when you have another custom utility function that handle specific kind of arguments. Default allows `"twg"` or the callee you defined in `callee` option. |  x   |   🧪
+`separator?`(\*) | string \| false    |         ":"          | The separator used to join the classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. (*)Remember to sync this option with `separator` option in `twg()` option.                                         |  x   |   ✅
+`debug`          | boolean            |         true         | Printing debug messages in console if there are any warnings or errors. If `false`, it will be silent                                                                                                                                      |  x   |   ✅
 
 See [how to use](#-custom-options).
 
@@ -636,20 +654,15 @@ You can use conditional like `&& | || | ??` _(and/or)_ or `isFooBar === "twg" ? 
   </div>
   ```
 
-> [!CAUTION]\
-> You cannot nested other than the `callee` function you chose.
+  If you wan to nest other than the `callee` function you chose.
 
   ```jsx
   // HelloWorld.tsx
 
   import clsx from "clsx"
   import { twg } from "twg"
-  import { useState } from "react"
 
   export function HelloWorld() {
-    const [isAndOr, setIsAndOr] = useState(false)
-    const [isTernary, setIsTernary] = useState("foo")
-    // ...
     return (
       <div className={twg(
         "size-92 relative grid place-items-center px-4 py-2",
@@ -671,7 +684,7 @@ You can use conditional like `&& | || | ??` _(and/or)_ or `isFooBar === "twg" ? 
   }
   ```
 
-  Output:
+  You will receive the following error unless you define the [`nestingCallee`](#custom-nestingcallee) option:
 
   ```bash
   ⚠️ TWG - Problem occurred on `replacer()`, please read the `Usage / Use cases` section on the docs carefully:
@@ -693,19 +706,19 @@ You can use conditional like `&& | || | ??` _(and/or)_ or `isFooBar === "twg" ? 
 
 ### Custom `callee`
 
-First, change the `callee` option `replacer()` to the callee's name you want, eg. with `cn`:
+**1. Change the `callee` option `replacer()` to the callee's name you want, eg. with `cn`:**
 
-```js
-// tailwind.config.ts
+  ```js
+  // tailwind.config.ts
 
-transform: {
-  DEFAULT: replacer({
-    callee: "cn"
-  })
-}
-```
+  transform: {
+    DEFAULT: replacer({
+      callee: "cn"
+    })
+  }
+  ```
 
-Then use several ways to import it:
+**2. Use several ways to import it:**
 
 - **Option 1:**
 
@@ -726,98 +739,152 @@ Then use several ways to import it:
 
 - **Option 3:** [Use with wrapper like `twMerge` 👇](#best-practice-with-twmerge).
 
+### Custom `nestingCallee`
+
+**1. Change the `nestingCallee` option on `replacer()` to the callee's name you want, eg.:**
+
+  ```js
+  transform: {
+    DEFAULT: replacer({
+      // Define options here, eg.:
+      callee: "twg",
+      nestingCallee: ["clsx", "twg"]
+    })
+  }
+  ```
+
+**2. Example:**
+
+  ```jsx
+  // HelloWorld.tsx
+
+  import clsx from "clsx"
+  import { twg } from "twg"
+
+  export function HelloWorld() {
+    return (
+      <div className={twg(
+        "size-92 relative grid place-items-center px-4 py-2",
+        {
+          before: [
+            "absolute inset-0",
+            clsx(
+              "bg-red-500",
+              "hover:bg-blue-500 hover:text-yellow-500",
+              "active:border-2 active:border-white"
+            )
+          ]
+        }
+      )}>
+        Hello, World!
+      </div>
+    )
+  }
+  ```
+
+  Output _(what Tailwind will scan, not in browser's inspect tool)_:
+
+  ```html
+  <div className="size-92 relative grid place-items-center px-4 py-2 before:absolute before:inset-0 before:bg-red-500 before:hover:bg-blue-500 before:hover:text-yellow-500 before:active:border-2 before:active:border-white">
+    Hello, World!
+  </div>
+  ```
+
 ### Custom `separator`
 
-Example with separator as "_", you must define the `separator` option to both `twg()` and `replacer()`:
+Example with separator as `"_"`:
+
+> [!IMPORTANT]\
+> You must define the `separator` option to **BOTH** `twg()` and `replacer()`.
 
 **1. In `replacer()` options:**
 
-```js
-// tailwind.config.ts
+  ```js
+  // tailwind.config.ts
 
-import { type Config } from "tailwindcss"
-import { replacer } from "twg/replacer"
-// or
-import replacer from "twg"
+  import { type Config } from "tailwindcss"
+  import { replacer } from "twg/replacer"
+  // or
+  import replacer from "twg"
 
-export default {
-  content: {
-    files: [
-      "./src/app/**/*.{ts,tsx}",
-      "./src/components/**/*.{ts,tsx}",
-    ],
-    transform: {
-      DEFAULT: replacer({
-        callee: "cn",
-        separator: "_" // Define `separator` here
-      })
-    }
-  },
-  // Other configurations...
-} satisfies Config
-```
+  export default {
+    content: {
+      files: [
+        "./src/app/**/*.{ts,tsx}",
+        "./src/components/**/*.{ts,tsx}",
+      ],
+      transform: {
+        DEFAULT: replacer({
+          callee: "cn",
+          separator: "_" // Define `separator` here
+        })
+      }
+    },
+    // Other configurations...
+  } satisfies Config
+  ```
 
 **2. In `twg()` options:**
 
-```js
-// src/lib/utils.ts
+  ```js
+  // src/lib/utils.ts
 
-import { twg, type ClassValue } from "twg"
-import { extendTailwindMerge } from "tailwind-merge"
+  import { twg, type ClassValue } from "twg"
+  import { extendTailwindMerge } from "tailwind-merge"
 
-export function cn(...inputs: ClassValue[]) {
-  return twg(...inputs, {
-    separator: "_" // Always be the last Object
-  })
-}
-```
+  export function cn(...inputs: ClassValue[]) {
+    return twg(...inputs, {
+      separator: "_" // Always be the last Object
+    })
+  }
+  ```
 
 **3. Example:**
 
-```jsx
-// HelloWorld.tsx
+  ```jsx
+  // HelloWorld.tsx
 
-import { cn } from "@/lib/utils"
+  import { cn } from "@/lib/utils"
 
-export function HelloWorld() {
-  return (
-    <div className={cn(
-      "size-92 relative grid place-items-center px-4 py-2",
-      {
-        before: [
-          "absolute inset-0 bg-red-500",
-          {
-            hover: "bg-blue-500 text-yellow-500"
-          }
-        ],
-        "aria-expanded": "bg-red-500 text-yellow-500",
-      }
-    )}>
-      Hello, World!
-    </div>
-  )
-}
-```
+  export function HelloWorld() {
+    return (
+      <div className={cn(
+        "size-92 relative grid place-items-center px-4 py-2",
+        {
+          before: [
+            "absolute inset-0 bg-red-500",
+            {
+              hover: "bg-blue-500 text-yellow-500"
+            }
+          ],
+          "aria-expanded": "bg-red-500 text-yellow-500",
+        }
+      )}>
+        Hello, World!
+      </div>
+    )
+  }
+  ```
 
 Output (html):
 
-```html
-<div class="size-92 relative grid place-items-center before_absolute before_inset-0 before_bg-red-500 before_hover_bg-blue-500 before_hover_text-yellow-500 aria-expanded_bg-red-500 aria-expanded_text-yellow-500">
-  Hello, World!
-</div>
-```
+  ```html
+  <div class="size-92 relative grid place-items-center before_absolute before_inset-0 before_bg-red-500 before_hover_bg-blue-500 before_hover_text-yellow-500 aria-expanded_bg-red-500 aria-expanded_text-yellow-500">
+    Hello, World!
+  </div>
+  ```
 
 ### Turn off `debug`
 
 Printing debug messages in console if there are any warnings or errors, eg.:
 
-```bash
-⚠️ TWG - Problem occurred on `replacer()`:
-utilities is not defined in:
-- { utilities }
-Trying to be transformed into:
-+ { utilities }
-```
+  ```bash
+  ⚠️ TWG - Problem occurred on `replacer()`:
+  utilities is not defined in:
+  - { utilities }
+  Trying to be transformed into:
+  + { utilities }
+  ```
 
 If set to `false`, it will not print any debug messages.
 

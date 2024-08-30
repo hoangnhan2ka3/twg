@@ -1,6 +1,6 @@
 import generate from "@babel/generator"
 import * as barser from "@babel/parser"
-import traverse from "@babel/traverse"
+import traverse, { type NodePath } from "@babel/traverse"
 import * as types from "@babel/types"
 import { type ClassValue } from "src/lite"
 import { parser } from "src/lite/processor/parser"
@@ -21,10 +21,11 @@ export function transformer(
         if (!name) return
         traverse(ast, {
             CallExpression(path) {
-                if (path.get("callee").isIdentifier({ name })) {
+                const chosenCallee = (path: NodePath<types.CallExpression>) => path.get("callee").isIdentifier({ name })
+                if (chosenCallee(path)) {
                     path.traverse({
                         CallExpression(path) {
-                            if (path.get("callee").isIdentifier({ name })) {
+                            if (chosenCallee(path)) {
                                 path.replaceWith(
                                     types.arrayExpression(path.node.arguments as types.Expression[])
                                 )

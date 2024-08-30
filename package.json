@@ -1,6 +1,6 @@
 {
     "name": "twg",
-    "version": "3.0.4",
+    "version": "3.1.0",
     "description": "A utility function for grouping TailwindCSS variants.",
     "author": "Nguyễn Hoàng Nhân <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)",
     "homepage": "https://github.com/hoangnhan2ka3/twg",
