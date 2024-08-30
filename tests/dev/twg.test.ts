@@ -455,6 +455,18 @@ describe("twg()", () => {
                     }
                 ],
                 expected: "multiple vars class var1:class var2:class var2:other var2:classes var3:class var3:var4:other var3:var4:classes"
+            },
+            {
+                args: [
+                    "multiple vars",
+                    {
+                        "": "multiple classes", //*
+                        var1: ["class"],
+                        var2: ["class", "other classes"],
+                        var3: ["class", { "var4": "other classes" }]
+                    }
+                ],
+                expected: "multiple vars multiple classes var1:class var2:class var2:other var2:classes var3:class var3:var4:other var3:var4:classes"
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)

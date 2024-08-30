@@ -61,7 +61,7 @@ export function transformer(
                                                 && !types.isStringLiteral(innerPath.node.value)
                                                 && !types.isArrayExpression(innerPath.node.value)
                                                 && !types.isTemplateLiteral(innerPath.node.value)
-                                            ) innerPath.node.value = types.numericLiteral(1)
+                                            ) innerPath.node.value = types.stringLiteral("NaN")
                                         }
                                     })
 

@@ -11,6 +11,20 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [3.1.1] - 2024-08-30
+
+### Refactor
+
+- Change `reducer()` logic from `forEach` to `for...of` loop.
+- Change `native object` detect convention from `"1"` to `"NaN"`.
+
+### Chore
+
+- Add more test for `Misleading key`.
+- Update `CHANGELOG.md` & `README.md`.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v3.1.0...v3.1.1>
+
 ## [3.1.0] - 2024-08-30
 
 ### Core change

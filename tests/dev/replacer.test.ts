@@ -620,8 +620,67 @@ describe("replacer()", () => {
         })
     })
 
+    describe("Misleading key:", () => {
+        it.each([
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            "": "other class",
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "other class", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            "": false
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "NaN", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            "": "other class",
+                            "": false
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "NaN", className)} />;`
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer()(contents)).toBe(expected)
+        })
+    })
+
     describe("Native object:", () => {
         it.each([
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            "var1": true,
+                        },
+                        {
+                            var2: 0
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var1", "var2", className)} />;`
+            },
             {
                 contents: `
                     <div className={twg(
@@ -676,6 +735,56 @@ describe("replacer()", () => {
                     )} />
                 `,
                 expected: `<div className={twg("multiple classes", "var1:class var1:var2", "var3", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "class",
+                                {
+                                    var2: isAndOr(),
+                                    var3: 1,
+                                    var4: false
+                                }
+                            ]
+                        },
+                        {
+                            var5: 0
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var1:class var1:var2 var1:var3 var1:var4", "var5", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "class",
+                                {
+                                    var2: isAndOr(),
+                                    var3: 10000,
+                                    var4: [
+                                        "multiple classes",
+                                        {
+                                            var5: false
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            var6: 0.1,
+                            var7: 0.00001
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var1:class var1:var2 var1:var3 var1:var4:multiple var1:var4:classes var1:var4:var5", "var6 var7", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)
