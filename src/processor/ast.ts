@@ -73,7 +73,7 @@ export function transformer(
                                                 && !types.isStringLiteral(innerPath.node.value)
                                                 && !types.isArrayExpression(innerPath.node.value)
                                                 && !types.isTemplateLiteral(innerPath.node.value)
-                                            ) innerPath.node.value = types.stringLiteral("NaN")
+                                            ) innerPath.node.value = types.stringLiteral("🚀")
                                         }
                                     })
 
@@ -83,7 +83,7 @@ export function transformer(
                                     // DONE. Final replace the original outer Object(s) with parsed one
                                     innerPath.replaceWith(types.stringLiteral(
                                         parser(options)(...new Function(
-                                            `return [${(/['"`]|:\s*1/g).test(largestObject) ? largestObject : ""}]`
+                                            `return [${(/:/g).test(largestObject) ? largestObject : ""}]`
                                         )() as ClassValue[])
                                     ))
                                 }
@@ -100,3 +100,19 @@ export function transformer(
 
     return generate(ast).code
 }
+
+const text = `
+    <div className={twg(
+        "multiple classes",
+        {
+            var1: "class"
+        },
+        badgeVariants({ variant }),
+        {
+            var2: "multiple classes"
+        },
+        className
+    )} />
+`
+
+console.log(transformer(text, { callee: "twg" }))

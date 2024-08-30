@@ -25,7 +25,7 @@ export const parser = new Proxy((...args: ClassValue[]) => {
         return key ? (
             ...args: ClassValue[]
         ) => reducer(args).map((values) => (
-            values === "NaN" ? key : `${key}:${values}`.trim()
+            values === "🚀" ? key : `${key}:${values}`.trim()
         )) : obj
     }
 }) as Record<string, (...args: ClassValue[]) => string> & ((...args: ClassValue[]) => string)

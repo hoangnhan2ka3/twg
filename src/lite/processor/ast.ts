@@ -61,7 +61,7 @@ export function transformer(
                                                 && !types.isStringLiteral(innerPath.node.value)
                                                 && !types.isArrayExpression(innerPath.node.value)
                                                 && !types.isTemplateLiteral(innerPath.node.value)
-                                            ) innerPath.node.value = types.stringLiteral("NaN")
+                                            ) innerPath.node.value = types.stringLiteral("🚀")
                                         }
                                     })
 
@@ -69,7 +69,7 @@ export function transformer(
 
                                     innerPath.replaceWith(types.stringLiteral(
                                         parser(...new Function(
-                                            `return [${(/['"`]|:\s*1/g).test(largestObject) ? largestObject : ""}]`
+                                            `return [${(/['"`]/g).test(largestObject) ? largestObject : ""}]`
                                         )() as ClassValue[])
                                     ))
                                 }

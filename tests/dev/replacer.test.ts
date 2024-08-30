@@ -644,7 +644,7 @@ describe("replacer()", () => {
                         className
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", "NaN", className)} />;`
+                expected: `<div className={twg("multiple classes", "\\uD83D\\uDE80", className)} />;`
             },
             {
                 contents: `
@@ -657,10 +657,75 @@ describe("replacer()", () => {
                         className
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", "NaN", className)} />;`
+                expected: `<div className={twg("multiple classes", "\\uD83D\\uDE80", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer()(contents)).toBe(expected)
+            expect(liteReplacer()(contents)).toBe(expected)
+        })
+    })
+
+    describe("Misleading convention:", () => {
+        it.each([
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            "var1": 🚀,
+                        },
+                        {
+                            var2: 0
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            "var1": 🚀,
+                        },
+                        {
+                            var2: 0
+                        },
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            "var1": "🚀",
+                        },
+                        {
+                            var2: 0
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var1", "var2", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            "var1": "🚀",
+                        },
+                        {
+                            var2: 0
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var1", "var2", className)} />;`
+            }
+        ])('"$expected"', ({ contents, expected }) => {
+            expect(replacer()(contents)).toBe(expected)
+            expect(liteReplacer()(contents)).toBe(expected)
         })
     })
 

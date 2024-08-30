@@ -44,7 +44,7 @@ export function parser(options?: TWGOptions) {
             return key ? (
                 ...args: ClassValue[]
             ) => reducer(args, options).map((values) => (
-                values === "NaN" ? key : `${key}${divider}${values}`.trim()
+                values === "🚀" ? key : `${key}${divider}${values}`.trim()
             )) : obj
         }
     }) as Record<string, (...args: ClassValue[]) => string> & ((...args: ClassValue[]) => string)
