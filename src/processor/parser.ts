@@ -27,7 +27,7 @@ function reducer(args: ClassValue[], options?: TWGOptions) {
 /**
  * Transforms the inputs. Map key to each values inside the Object zones.
  * @param {TWGOptions} [options = {separator=":"}] separator. See [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options).
- * @param {ClassValue[]} args The inputs class values.
+ * @param {...ClassValue[]} args The inputs class values.
  * @returns string
  */
 export function parser(options?: TWGOptions) {

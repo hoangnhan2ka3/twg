@@ -35,9 +35,7 @@ export function transformer(
                     path.traverse({
                         ObjectExpression(innerPath) {
                             try {
-                                // 2. Find outer Object(s) inside callee function
                                 if (!innerPath.findParent(parentPath => parentPath.isObjectExpression() && parentPath.node === innerPath.node)) {
-                                    // 3. First parse ternary and logical conditionals
                                     innerPath.traverse({
                                         ConditionalExpression(innerPath) {
                                             if (innerPath.findParent((parent) => parent.isTemplateLiteral())) {
@@ -55,7 +53,6 @@ export function transformer(
                                         }
                                     })
 
-                                    // 4. And parse the values if it is conditional
                                     innerPath.traverse({
                                         ObjectProperty(innerPath) {
                                             if (
@@ -67,10 +64,8 @@ export function transformer(
                                         }
                                     })
 
-                                    // 5. Then take the outer Object(s) out
                                     const largestObject = generate(innerPath.node).code
 
-                                    // DONE. Final replace the original outer Object(s) with parsed one
                                     innerPath.replaceWith(types.stringLiteral(
                                         parser(...new Function(
                                             `return [${(/['"`]|:\s*1/g).test(largestObject) ? largestObject : ""}]`

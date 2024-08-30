@@ -472,12 +472,13 @@ describe("replacer()", () => {
                             var1: true
                         },
                         {
-                            var2: 0
+                            var2: 0,
+                            var3: 1
                         },
                         className
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", "var1", "var2", className)} />;`
+                expected: `<div className={twg("multiple classes", "var1", "var2 var3", className)} />;`
             },
             {
                 contents: `
@@ -486,7 +487,7 @@ describe("replacer()", () => {
                         {
                             var1: true,
                             var2: "multiple classes",
-                            var3: true,
+                            var3: 1,
                             var4: true
                         },
                         {
