@@ -1122,6 +1122,8 @@ Function     | What it does
 
   In `v2`, the `regex` is not used anymore, but it come with `@babel` AST, and it's a little bit slower than the `regex` method, especially for the first time classes was parsed and nothing was cached.
 
+  Other, if you see your style was apply so slow, consider also other plugin that intervene in the process of Tailwind, eg.: wrapper like `twMerge`, which can cause the slowness.
+
 </details>
 
 ## 🎗️ Contributing
