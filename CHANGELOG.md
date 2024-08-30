@@ -9,6 +9,8 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
+Nothing yet!
+
 ## [3.0.4] - 2024-08-30
 
 ### Chore
