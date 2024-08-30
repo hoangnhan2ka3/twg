@@ -138,7 +138,7 @@ Output (html):
 
 No. | Framework/Lib    | Version           | Additional info                                                | Tester | Status
 :--:|------------------|-------------------|----------------------------------------------------------------|--------|:-----:
-1\. | `next`           | 15.0.0-canary.132 | with `--turbo` flag and `babel-plugin-react-compiler` enabled. | author |   ✅
+1\. | `next`           | 15.0.0-canary.135 | With `--turbo` flag and `babel-plugin-react-compiler` enabled. | author |   ✅
 2\. | `tailwindcss`    | 3.4.10            |                                                                | author |   ✅
 3\. | `tailwind-merge` | 2.5.2             |                                                                | author |   ✅
 
