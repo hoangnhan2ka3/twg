@@ -42,7 +42,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 ## 📰 News
 
-- ✅ From `v3.1.0`:
+- 🔥 From `v3.1.0`:
 
   - Supports nesting custom callee functions through `nestingCallee` option _(default version only)_.
 
@@ -58,7 +58,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
     **Usage:** see [custom `nestingCallee`](#custom-nestingcallee).
 
-- ✅ From `v2.0.0`:
+- 🔥 From `v2.0.0`:
 
   - Supports native objects behavior like `clsx` (Key as classes and value as conditionals)
 
@@ -81,7 +81,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
       - A bit slower, especially on the first time, when nothing is cached.
       - 4 more dependencies 😢
 
-- ✅ Lite version:
+- 🔥 Lite version:
 
   Same as default version, but:
 
