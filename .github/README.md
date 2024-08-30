@@ -17,12 +17,12 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 <div align="center">
 
-✅ Entry point      | 📦 Bundle | 📦 Gzip
---------------------|:---------:|:-------:
-`twg`               |  1.07kB   | **581B**
-`twg/lite`          |   825B    | **468B**
-`twg/replacer`      |   816B    | **201B**
-`twg/lite/replacer` |   816B    | **201B**
+✅ Entry point         | 📦 Bundle |  📦 Gzip
+-----------------------|:---------:|:--------:
+`twg`                  |   1.1kB   | **582B**
+`twg/lite` 🪶          |   825B    | **468B**
+`twg/replacer`         |   2.3kB   | **1.1kB**
+`twg/lite/replacer` 🪶 |   1.7kB   | **819B**
 
 </div>
 
