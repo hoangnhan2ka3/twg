@@ -498,14 +498,24 @@ export function cn(...inputs: ClassValue[]) {
 
 ---
 
-<div style="display: flex; justify-content: space-between; align-items: center;">
-  <p align="start">
-    <a href="../docs/README.md">< Back to docs</a>
-  </p>
-  <p align="center">
-    MIT © <a href="https://github.com/hoangnhan2ka3">Nguyễn Hoàng Nhân</a>
-  </p>
-  <p align="end">
-    <a href="#">Scroll to top</a>
-  </p>
+<div align="center" width="100%">
+  <table>
+    <tr>
+      <th width="500px">
+        <div align="start">
+          <a href="../docs/README.md">< Back to docs</a>
+        </div>
+      </th>
+      <th width="500px">
+        <div align="center">
+          MIT © <a href="https://github.com/hoangnhan2ka3">Nguyễn Hoàng Nhân</a>
+        </div>
+      </th>
+      <th width="500px">
+        <div align="end">
+          <a href="#">Scroll to top</a>
+        </div>
+      </th>
+    </tr>
+  </table>
 </div>

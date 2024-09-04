@@ -19,20 +19,15 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 <table>
 <tr>
-  <th style="font-size: 1.5rem; text-align: center; padding: 13px !important">
-    <code>default</code> version
+  <th>
+    <h3 align="center"><code>default</code> version</h3>
   </th>
-  <th style="font-size: 1.5rem; text-align: center; padding: 13px !important">
-    <code>extend</code> version
+  <th>
+    <h3 align="center"><code>extend</code> version</h3>
   </th>
 </tr>
 <tr>
 <td>
-
-<style>
-  table table { margin-bottom: 0px !important }
-  td { padding: 8px !important }
-</style>
 
 | 📍 Entry point                | 📦 Bundle | 📦 Gzip  |
 |-------------------------------|:---------:|:---------:|
@@ -75,9 +70,9 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 <div align="center">
 
-<p align="center" style="font-size: 1.5rem; font-weight: bold;">
+<h3 align="center">
 Version comparison
-</p>
+</h3>
 
 | Features                                                                                               | `default` | `default/lite` | `extend` | `extend/lite` |
 |--------------------------------------------------------------------------------------------------------|:---------:|:--------------:|:--------:|:-------------:|
@@ -94,13 +89,30 @@ Version comparison
 | Fully customizable                                                                                     |     ✓     |    partial     |    ✓     |    partial    |
 | [Options](../docs/options.md) ↗️                                                                        |     3     |       1        |    4     |       1       |
 
-<p align="center" style="font-size: 1.5rem; font-weight: bold;">
+<h3 align="center">
 My recommendation
-</p>
+</h3>
 
-<p align="center" style="font-size: 1.5rem; font-weight: bold;">
+<div id="image-table" align="center">
+  <table>
+    <tr>
+      <td>
+        <ul>
+          <li align="start">
+            <code>default</code> version seems to be suitable for almost base cases, promise that you don't need to handle very complex conditions, template literals or nesting itself/custom functions.
+          </li>
+          <li align="start">
+            In the other hand, <code>extend</code> version is the most stable and powerful, it can handle almost any cases you can imagine (if not, please open an issue), your only trade-off is that it's a bit slower than <code>default</code> version (because of AST parsing).
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<h3 align="center">
 Tested conditions
-</p>
+</h3>
 
 | No. | Framework/Lib    | Version           | Additional info                                                | Tester | Status |
 |:---:|------------------|-------------------|----------------------------------------------------------------|:------:|:------:|
@@ -450,14 +462,24 @@ See [CHANGELOG.md](../CHANGELOG.md).
 
 ---
 
-<div style="display: flex; justify-content: space-between; align-items: center;">
-  <p align="start">
-    <a href="#-getting-started">Getting started</a>
-  </p>
-  <p align="center">
-    MIT © <a href="https://github.com/hoangnhan2ka3">Nguyễn Hoàng Nhân</a>
-  </p>
-  <p align="end">
-    <a href="#">Scroll to top</a>
-  </p>
+<div align="center" width="100%">
+  <table>
+    <tr>
+      <th width="500px">
+        <div align="start">
+          <a href="#-getting-started">Getting started</a>
+        </div>
+      </th>
+      <th width="500px">
+        <div align="center">
+          MIT © <a href="https://github.com/hoangnhan2ka3">Nguyễn Hoàng Nhân</a>
+        </div>
+      </th>
+      <th width="500px">
+        <div align="end">
+          <a href="#">Scroll to top</a>
+        </div>
+      </th>
+    </tr>
+  </table>
 </div>
