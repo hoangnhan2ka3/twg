@@ -1,11 +1,11 @@
-import { type ClassValue } from "src/lite"
+import { type ClassValue } from "src/extend/lite"
 
 function reducer(args: ClassValue[]) {
     return args.reduce<string[]>((acc, cur) => {
-        if (!cur && cur !== 0) return acc
+        if (!cur) return acc
         if (typeof cur === "object") {
             for (const [key, values] of Object.entries(cur)) {
-                (Array.isArray(values) ? values.flat(1 / 0) : [values]).forEach(
+                (Array.isArray(values) ? values.flat(Infinity) : [values]).forEach(
                     value => acc.push(
                         (parser[key] as (...args: ClassValue[]) => string)(value as ClassValue)
                     )
@@ -22,6 +22,10 @@ export const parser = new Proxy((...args: ClassValue[]) => {
     return reducer(args).join(" ")
 }, {
     get: function (obj, key: string) {
-        return key ? (...args: ClassValue[]) => reducer(args).map(values => `${key}:${values}`.trim()) : obj
+        return key ? (
+            ...args: ClassValue[]
+        ) => reducer(args).map((values) => (
+            values === "🚀" ? key : `${key}:${values}`.trim()
+        )) : obj
     }
 }) as Record<string, (...args: ClassValue[]) => string> & ((...args: ClassValue[]) => string)

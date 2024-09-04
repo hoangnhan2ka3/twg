@@ -1,4 +1,4 @@
-import { parser } from "src/processor/parser"
+import { parser } from "src/extend/processor/parser"
 
 export type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
 
@@ -15,6 +15,7 @@ export interface TWGOptions {
  */
 function toVal(mix: ClassValue, options?: TWGOptions): string {
     let k = 0,
+        i = false,
         y: string,
         str = ""
     if (typeof mix === "string" || typeof mix === "number") {
@@ -32,7 +33,19 @@ function toVal(mix: ClassValue, options?: TWGOptions): string {
                 }
             }
         } else {
-            str += parser(options)(mix)
+            for (y in mix) {
+                if (mix[y] && typeof mix[y] !== "string" && !Array.isArray(mix[y])) {
+                    str && (str += " ")
+                    str += y
+                } else {
+                    i = true
+                }
+            }
+
+            if (i) {
+                str && (str += " ")
+                str += parser(options)(mix)
+            }
         }
     }
     return str

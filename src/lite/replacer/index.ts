@@ -1,15 +1,31 @@
-import { transformer } from "src/lite/processor/ast"
+import { type ClassValue } from "src"
+import { parser } from "src/lite/processor/parser"
+import { combiner } from "src/processor/combiner"
+import { extractor } from "src/processor/extractor"
 
-export interface ReplacerLiteOption {
+export interface ReplacerOptions {
     callee?: string | string[]
 }
 
-export function replacer({ callee = "twg" }: ReplacerLiteOption = {}) {
+export function replacer({ callee = "twg" }: ReplacerOptions = {}) {
     return (content: string) => {
         if (!callee) return content
 
         try {
-            return transformer(content, callee)
+            extractor(content, callee).forEach(largestObject => {
+                const filteredObject = (/:\s*(?:\d|[[('"`]|true|false)/g).test(largestObject)
+                    ? combiner(largestObject)
+                    : ""
+
+                try {
+                    const parsedObject = parser(
+                        ...new Function(`return [${filteredObject}]`)() as ClassValue[]
+                    )
+                    content = content.replace(largestObject, `"${parsedObject}"`)
+                } catch { /* empty */ }
+            })
+
+            return content
         } catch { return content }
     }
 }

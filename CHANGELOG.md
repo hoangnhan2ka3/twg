@@ -11,6 +11,42 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [4.0.0 🎉] - 2024-09-04
+
+### Breaking change
+
+- Make `extend` version (which previously called **AST** version) as optional entry point. From now if you want to use `extend` version, you need to install 4 more `@babel` dependencies, refer to docs.
+- Default version now using `combiner()` which written in native JS to parse conditionals (use with limitations).
+
+### Core change
+
+- Bring back `v1` version of `replacer()` and `twg()` function.
+- Add `combiner()` function for helping to parse conditionals.
+- Improve filtering logic of outermost object(s) inside callee function.
+
+### Refactor
+
+- Refactor outermost object filter logic from regex to checking for `shorthand` by AST in `replacer()` function of `extend` version.
+- Improve ternary conditional parsing in `replacer()` function of `extend` version.
+
+### Docs
+
+- Separate `README.md` into multiple files located in `docs/` folder, remaining `Quick intro`, `Getting started` and few other related sections.
+
+### Chore
+
+- Update folder structure.
+- Update `.npmignore` to ignore `docs/` folder.
+- Update `tsconfig.json`, `eslint.config.js` and `tsup.config.ts`.
+- Add more test cases.
+- Separate tests for 2 versions.
+
+### Misc
+
+- Make 4 `@babel` dependencies as peerDependencies.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v3.1.1...v4.0.0>
+
 ## [3.1.1] - 2024-08-30
 
 ### Refactor
@@ -25,7 +61,7 @@ Nothing yet!
 
 **Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v3.1.0...v3.1.1>
 
-## [3.1.0] - 2024-08-30
+## [3.1.0 🎉] - 2024-08-30
 
 ### Core change
 
@@ -88,7 +124,7 @@ Nothing yet!
 
 **Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v3.0.0...v3.0.1>
 
-## [3.0.0] - 2024-08-29
+## [3.0.0 🎉] - 2024-08-29
 
 ### Core change
 
@@ -192,7 +228,7 @@ Nothing yet!
 
 **Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v2.0.0...v2.0.1>
 
-## [2.0.0] - 2024-08-27
+## [2.0.0 🎉] - 2024-08-27
 
 ### Core change
 
@@ -301,7 +337,7 @@ Nothing yet!
 
 **Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v1.2.0...v1.2.1>
 
-## [1.2.0] - 2024-08-23
+## [1.2.0 🎉] - 2024-08-23
 
 ### Core change
 
@@ -355,7 +391,7 @@ Nothing yet!
 
 **Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v1.1.0...v1.1.1>
 
-## [1.1.0] - 2024-08-21
+## [1.1.0 🎉] - 2024-08-21
 
 ### 🚀 First stable release
 

@@ -26,7 +26,6 @@
     },
     "include": [
         "**/*.ts",
-        "tests/dev/index.mts",
     ],
     "exclude": [
         "node_modules",

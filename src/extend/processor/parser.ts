@@ -1,4 +1,4 @@
-import { type ClassValue, type TWGOptions } from "src/index"
+import { type ClassValue, type TWGOptions } from "src/extend"
 
 /**
  * Focusing on handling arrays and objects, looping them until all are flattened.
@@ -8,10 +8,10 @@ import { type ClassValue, type TWGOptions } from "src/index"
  */
 function reducer(args: ClassValue[], options?: TWGOptions) {
     return args.reduce<string[]>((acc, cur) => {
-        if (!cur && cur !== 0) return acc
+        if (!cur) return acc
         if (typeof cur === "object") {
             for (const [key, values] of Object.entries(cur)) {
-                (Array.isArray(values) ? values.flat(1 / 0) : [values]).forEach(
+                (Array.isArray(values) ? values.flat(Infinity) : [values]).forEach(
                     value => acc.push(
                         (parser(options)[key] as (...args: ClassValue[]) => string)(value as ClassValue)
                     )
@@ -41,9 +41,11 @@ export function parser(options?: TWGOptions) {
         return reducer(args, options).join(" ")
     }, {
         get: function (obj, key: string) {
-            return key ? (...args: ClassValue[]) => reducer(args, options).map(
-                values => `${key}${divider}${values}`.trim()
-            ) : obj
+            return key ? (
+                ...args: ClassValue[]
+            ) => reducer(args, options).map((values) => (
+                values === "🚀" ? key : `${key}${divider}${values}`.trim()
+            )) : obj
         }
     }) as Record<string, (...args: ClassValue[]) => string> & ((...args: ClassValue[]) => string)
 }

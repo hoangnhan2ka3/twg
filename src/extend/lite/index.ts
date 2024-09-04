@@ -1,9 +1,10 @@
-import { type ClassValue } from "src/index"
-import { parser } from "src/lite/processor/parser"
+import { type ClassValue } from "src/extend/index"
+import { parser } from "src/extend/lite/processor/parser"
 
 function toVal(mix: ClassValue): string {
     let k = 0,
         y: string,
+        i = false,
         str = ""
     if (typeof mix === "string" || typeof mix === "number") {
         str += mix.toString()
@@ -20,7 +21,19 @@ function toVal(mix: ClassValue): string {
                 }
             }
         } else {
-            str += parser(mix)
+            for (y in mix) {
+                if (mix[y] && typeof mix[y] !== "string" && typeof mix[y] !== "object") {
+                    str && (str += " ")
+                    str += y
+                } else {
+                    i = true
+                }
+            }
+
+            if (i) {
+                str && (str += " ")
+                str += parser(mix)
+            }
         }
     }
     return str

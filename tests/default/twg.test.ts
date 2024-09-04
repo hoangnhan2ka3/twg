@@ -192,6 +192,7 @@ describe("twg()", () => {
         })
     })
 
+    // Only for testing, not for real usage because replacer() cannot handle remote booleans
     describe("Key as classes and value as conditionals:", () => {
         const isAndOr1 = true
         const isAndOr2 = false
@@ -202,26 +203,26 @@ describe("twg()", () => {
         const is_And_Or_1 = true
         const is_And_Or_2 = false
         it.each([
-            { args: [{ "class": isAndOr1 }], expected: "class" },
+            { args: [{ "class": isAndOr1 }], expected: "class:true" },
             { args: [{ "class": isAndOr2 }], expected: "" },
-            { args: [{ "class": isAndOr3.truthy }], expected: "class" },
+            { args: [{ "class": isAndOr3.truthy }], expected: "class:true" },
             { args: [{ "class": isAndOr3.falsy }], expected: "" },
             /* eslint-disable @typescript-eslint/dot-notation */
-            { args: [{ "class": isAndOr3["truthy"] }], expected: "class" },
+            { args: [{ "class": isAndOr3["truthy"] }], expected: "class:true" },
             { args: [{ "class": isAndOr3["falsy"] }], expected: "" },
             /* eslint-enable @typescript-eslint/dot-notation */
-            { args: [{ "class": is_And_Or_1 }], expected: "class" },
-            { args: [{ "class": is_And_Or_1 && isAndOr1 }], expected: "class" },
+            { args: [{ "class": is_And_Or_1 }], expected: "class:true" },
+            { args: [{ "class": is_And_Or_1 && isAndOr1 }], expected: "class:true" },
             { args: [{ "class": is_And_Or_1 && isAndOr2 }], expected: "" },
             { args: [{ "class": is_And_Or_2 && isAndOr1 }], expected: "" },
             { args: [{ "class": is_And_Or_2 && isAndOr2 }], expected: "" },
             {
                 args: [{ "class": isAndOr1 }, { "multiple classes": is_And_Or_2 }],
-                expected: "class"
+                expected: "class:true"
             },
             {
                 args: [{ "class": isAndOr1 }, { "multiple classes": true }],
-                expected: "class multiple classes"
+                expected: "class:true multiple classes:true"
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
@@ -288,7 +289,7 @@ describe("twg()", () => {
                         ]
                     }
                 ],
-                expected: "multiple classes var1:multiple var1:classes var1:other var1:class var1:var2"
+                expected: "multiple classes var1:multiple var1:classes var1:other var1:class var1:var2:true"
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
@@ -298,15 +299,15 @@ describe("twg()", () => {
 
     describe("Object only:", () => {
         it.each([
-            { args: [{ var: 0 }], expected: "" },
-            { args: [{ var: 1 }], expected: "var" },
+            { args: [{ var: 0 }], expected: "var:0" },
+            { args: [{ var: 1 }], expected: "var:1" },
             { args: [{ var: "class" }], expected: "var:class" },
             { args: [{ "var": "class" }], expected: "var:class" },
             { //*
                 args: [{ "var1 var2": "class" }], expected: "var1 var2:class"
             },
             {
-                args: [{ "var1 var2": true }], expected: "var1 var2"
+                args: [{ "var1 var2": true }], expected: "var1 var2:true"
             },
             {
                 args: [{ var: "multiple classes with var" }],

@@ -1,5 +1,5 @@
-import { replacer as liteReplacer } from "src/lite/replacer"
-import { replacer } from "src/replacer"
+import { replacer as liteReplacer } from "src/extend/lite/replacer"
+import { replacer } from "src/extend/replacer"
 
 describe("replacer()", () => {
     describe("Default options:", () => {
@@ -974,7 +974,10 @@ describe("replacer()", () => {
         it.each([
             {
                 contents: "<div className={twg(badgeVariants({ variant }), className)} />",
-                expected: `<div className={twg([""], className)} />;`
+                expected:
+                    `<div className={twg([{
+  variant
+}], className)} />;`
             },
             {
                 contents: `<div className={twg(badgeVariants({ variant: "primary" }), className)} />`,
@@ -988,11 +991,17 @@ describe("replacer()", () => {
             },
             {
                 contents: `<div className={twg("multiple classes", badgeVariants({ variant }), className)} />`,
-                expected: `<div className={twg("multiple classes", [""], className)} />;`
+                expected:
+                    `<div className={twg("multiple classes", [{
+  variant
+}], className)} />;`
             },
             {
                 contents: `<div className={twg("multiple classes", badgeVariants({ variant }), "other class", className)} />`,
-                expected: `<div className={twg("multiple classes", [""], "other class", className)} />;`
+                expected:
+                    `<div className={twg("multiple classes", [{
+  variant
+}], "other class", className)} />;`
             },
             {
                 contents: `<div className={twg("multiple classes", badgeVariants({ variant: "primary" }), className)} />`,
@@ -1016,7 +1025,10 @@ describe("replacer()", () => {
                         className
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", "var1:class", [""], "var2:multiple var2:classes", className)} />;`
+                expected:
+                    `<div className={twg("multiple classes", "var1:class", [{
+  variant
+}], "var2:multiple var2:classes", className)} />;`
             },
             {
                 contents: `
@@ -1069,7 +1081,10 @@ describe("replacer()", () => {
         it.each([
             {
                 contents: "<div className={twg(badgeVariants({ variant }), className)} />",
-                expected: `<div className={twg(badgeVariants(""), className)} />;`
+                expected:
+                    `<div className={twg(badgeVariants({
+  variant
+}), className)} />;`
             },
             {
                 contents: `<div className={twg(badgeVariants({ variant: "primary" }), className)} />`,
@@ -1083,11 +1098,17 @@ describe("replacer()", () => {
             },
             {
                 contents: `<div className={twg("multiple classes", badgeVariants({ variant }), className)} />`,
-                expected: `<div className={twg("multiple classes", badgeVariants(""), className)} />;`
+                expected:
+                    `<div className={twg("multiple classes", badgeVariants({
+  variant
+}), className)} />;`
             },
             {
                 contents: `<div className={twg("multiple classes", badgeVariants({ variant }), "other class", className)} />`,
-                expected: `<div className={twg("multiple classes", badgeVariants(""), "other class", className)} />;`
+                expected:
+                    `<div className={twg("multiple classes", badgeVariants({
+  variant
+}), "other class", className)} />;`
             },
             {
                 contents: `<div className={twg("multiple classes", badgeVariants({ variant: "primary" }), className)} />`,
@@ -1111,7 +1132,10 @@ describe("replacer()", () => {
                         className
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", "var1:class", badgeVariants(""), "var2:multiple var2:classes", className)} />;`
+                expected:
+                    `<div className={twg("multiple classes", "var1:class", badgeVariants({
+  variant
+}), "var2:multiple var2:classes", className)} />;`
             },
             {
                 contents: `
@@ -1185,6 +1209,48 @@ describe("replacer()", () => {
                             var: [
                                 "multiple classes",
                                 \`other \${(!directly && borderWidth) ? "class" : "multiple classes"}\`
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var:multiple var:classes var:other var:class var:multiple var:classes", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var: [
+                                "multiple classes",
+                                \`other \${
+                                    (
+                                        !directly
+                                        && borderWidth
+                                    ) ? "class" : "multiple classes"
+                                }\`
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var:multiple var:classes var:other var:class var:multiple var:classes", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var: [
+                                "multiple classes",
+                                \`other \${
+                                    (
+                                        !directly
+                                        && borderWidth
+                                    )
+                                        ? "class"
+                                        : "multiple classes"
+                                }\`
                             ]
                         },
                         className

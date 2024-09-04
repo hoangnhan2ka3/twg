@@ -1,6 +1,6 @@
 {
     "name": "twg",
-    "version": "3.1.1",
+    "version": "4.0.0",
     "description": "A utility function for grouping TailwindCSS variants.",
     "author": "Nguyễn Hoàng Nhân <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)",
     "homepage": "https://github.com/hoangnhan2ka3/twg",
@@ -73,15 +73,59 @@
                 "types": "./dist/lite/replacer/index.d.ts",
                 "default": "./dist/lite/replacer/index.js"
             }
+        },
+        "./extend": {
+            "import": {
+                "types": "./dist/extend/index.d.mts",
+                "default": "./dist/extend/index.mjs"
+            },
+            "require": {
+                "types": "./dist/extend/index.d.ts",
+                "default": "./dist/extend/index.js"
+            }
+        },
+        "./extend/replacer": {
+            "import": {
+                "types": "./dist/extend/replacer/index.d.mts",
+                "default": "./dist/extend/replacer/index.mjs"
+            },
+            "require": {
+                "types": "./dist/extend/replacer/index.d.ts",
+                "default": "./dist/extend/replacer/index.js"
+            }
+        },
+        "./extend/lite": {
+            "import": {
+                "types": "./dist/extend/lite/index.d.mts",
+                "default": "./dist/extend/lite/index.mjs"
+            },
+            "require": {
+                "types": "./dist/extend/lite/index.d.ts",
+                "default": "./dist/extend/lite/index.js"
+            }
+        },
+        "./extend/lite/replacer": {
+            "import": {
+                "types": "./dist/extend/lite/replacer/index.d.mts",
+                "default": "./dist/lite/replacer/index.mjs"
+            },
+            "require": {
+                "types": "./dist/extend/lite/replacer/index.d.ts",
+                "default": "./dist/extend/lite/replacer/index.js"
+            }
         }
     },
-    "dependencies": {
+    "peerDependencies": {
+        "@babel/generator": "^7",
+        "@babel/parser": "^7",
+        "@babel/traverse": "^7",
+        "@babel/types": "^7"
+    },
+    "devDependencies": {
         "@babel/generator": "^7.25.6",
         "@babel/parser": "^7.25.6",
         "@babel/traverse": "^7.25.6",
-        "@babel/types": "^7.25.6"
-    },
-    "devDependencies": {
+        "@babel/types": "^7.25.6",
         "@eslint/compat": "^1.1.1",
         "@eslint/eslintrc": "^3.1.0",
         "@eslint/js": "^9.9.1",
