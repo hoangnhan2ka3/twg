@@ -28,6 +28,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 </tr>
 <tr>
 <td>
+
 <style>
   table table { margin-bottom: 0px !important }
   td { padding: 8px !important }
@@ -92,6 +93,10 @@ Version comparison
 | Compatible with wrappers                                                                               |     ✓     |       ✓        |    ✓     |       ✓       |
 | Fully customizable                                                                                     |     ✓     |    partial     |    ✓     |    partial    |
 | [Options](../docs/options.md) ↗️                                                                        |     3     |       1        |    4     |       1       |
+
+<p align="center" style="font-size: 1.5rem; font-weight: bold;">
+My recommendation
+</p>
 
 <p align="center" style="font-size: 1.5rem; font-weight: bold;">
 Tested conditions
