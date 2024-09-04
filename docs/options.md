@@ -260,7 +260,7 @@ If set to `false`, it will not print any debug messages.
       </th>
       <th width="500px">
         <div align="end">
-          <a href="#">Scroll to top</a>
+          <a href="#%EF%B8%8F-options">Scroll to top</a>
         </div>
       </th>
     </tr>

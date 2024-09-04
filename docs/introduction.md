@@ -190,7 +190,7 @@ Function     | What it does
       </th>
       <th width="500px">
         <div align="end">
-          <a href="#">Scroll to top</a>
+          <a href="#-introduction">Scroll to top</a>
         </div>
       </th>
     </tr>

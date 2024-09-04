@@ -513,7 +513,7 @@ export function cn(...inputs: ClassValue[]) {
       </th>
       <th width="500px">
         <div align="end">
-          <a href="#">Scroll to top</a>
+          <a href="#-usage--use-cases">Scroll to top</a>
         </div>
       </th>
     </tr>

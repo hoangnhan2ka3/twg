@@ -38,8 +38,8 @@
         </div>
       </th>
       <th width="500px">
-        <div align="end">
-          <a href="#">Scroll to top</a>
+        <div align="enđ">
+          <a href="#-getting-started">Getting started</a>
         </div>
       </th>
     </tr>
