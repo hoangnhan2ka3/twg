@@ -38,8 +38,8 @@
         </div>
       </th>
       <th width="500px">
-        <div align="enđ">
-          <a href="#-getting-started">Getting started</a>
+        <div align="end">
+          <a href="../.github/README.md#-getting-started">Getting started</a>
         </div>
       </th>
     </tr>
