@@ -117,11 +117,12 @@ What version should I use?
 Tested conditions
 </h3>
 
-| No. | Framework/Lib    | Version           | Additional info                                                | Tester | Status |
-|:---:|------------------|-------------------|----------------------------------------------------------------|:------:|:------:|
-| 1\. | `next`           | 15.0.0-canary.135 | With `--turbo` flag and `babel-plugin-react-compiler` enabled. | author |   ✅   |
-| 2\. | `tailwindcss`    | 3.4.10            |                                                                | author |   ✅   |
-| 3\. | `tailwind-merge` | 2.5.2             |                                                                | author |   ✅   |
+| No. | Framework/Lib    | Version                     | Additional info                                                | Tester | Status |
+|:---:|------------------|-----------------------------|----------------------------------------------------------------|:------:|:------:|
+| 1\. | `next`           | 15.0.0-canary.141           | With `--turbo` flag and `babel-plugin-react-compiler` enabled. | author |   ✅   |
+| 2\. | `react`          | 19.0.0-rc-d1afcb43-20240903 |                                                                | author |   ✅   |
+| 3\. | `tailwindcss`    | 3.4.10                      |                                                                | author |   ✅   |
+| 4\. | `tailwind-merge` | 2.5.2                       |                                                                | author |   ✅   |
 
 </div>
 
