@@ -2,6 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/hoangnhan2ka3/twg/actions"><img src="https://img.shields.io/github/actions/workflow/status/hoangnhan2ka3/twg/tests.yml?branch=main&label=tests" alt="Tests Status"></a>
+  <a href="https://github.com/hoangnhan2ka3/twg"><img src="https://img.shields.io/github/stars/hoangnhan2ka3/twg?style=flat&colorB=eb9234" alt="Repository stars"></a>
   <a href="https://bundlephobia.com/result?p=twg"><img src="https://img.shields.io/bundlephobia/min/twg?label=bundle" alt="Bundle Size"></a>
   <a href="https://bundlephobia.com/result?p=twg"><img src="https://img.shields.io/bundlephobia/minzip/twg?label=gzip&colorB=8a2be2" alt="Gzip Size"></a>
   <a href="https://www.npmjs.com/package/twg"><img src="https://img.shields.io/npm/dt/twg.svg?colorB=f279b6" alt="Total Downloads"></a>
@@ -75,7 +76,7 @@ Version comparison
 </h3>
 
 | Features                                                                                               | `default` | `default/lite` | `extend` | `extend/lite` |
-|--------------------------------------------------------------------------------------------------------|:---------:|:--------------:|:--------:|:-------------:|
+|:-------------------------------------------------------------------------------------------------------|:---------:|:--------------:|:--------:|:-------------:|
 | Accept string, number, array, object                                                                   |     ✓     |       ✓        |    ✓     |       ✓       |
 | Accept template literal                                                                                |  partial  |    partial     |    ✓     |       ✓       |
 | Accept multiple outermost objects                                                                      |     ✓     |       ✓        |    ✓     |       ✓       |
