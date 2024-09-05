@@ -33,7 +33,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 |-------------------------------|:---------:|:---------:|
 | `twg`                         |    1kB    | **558B**  |
 | `twg/lite` 🪶                 |   763B    | **444B**  |
-| `twg/replacer`                |   2.6kB   | **1.4kB** |
+| `twg/replacer`                |   2.7kB   | **1.4kB** |
 | `twg/lite/replacer` 🪶        |   2.2kB   | **1.2kB** |
 
 </td>
@@ -90,7 +90,7 @@ Version comparison
 | [Options](../docs/options.md) ↗️                                                                        |     3     |       1        |    4     |       1       |
 
 <h3 align="center">
-My recommendation
+What version should I use?
 </h3>
 
 <div id="image-table" align="center">
@@ -103,6 +103,9 @@ My recommendation
           </li>
           <li align="start">
             In the other hand, <code>extend</code> version is the most stable and powerful, it can handle almost any cases you can imagine (if not, please open an issue), your only trade-off is that it's a bit slower than <code>default</code> version (because of AST parsing).
+          </li>
+          <li align="start">
+            I'm currently using <code>extend/lite</code> version.
           </li>
         </ul>
       </td>

@@ -1058,6 +1058,46 @@ describe("replacer()", () => {
                     <div className={twg(
                         "multiple classes",
                         {
+                            var1: conditional1 && "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var1:multiple var1:classes",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: conditional1 && "multiple classes"
+                        },
+                        {
+                            var2: 0
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        "var1:multiple var1:classes",
+                        "var2:0",
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
                             var1: conditional1 && "multiple classes",
                             var2: (conditional2) && "multiple classes",
                             var3: (conditional3) && ("multiple classes")

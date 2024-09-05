@@ -11,6 +11,24 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [4.0.1] - 2024-09-05
+
+### Fixed
+
+- Fixed `replacer()` function in `default` version has no effect on 'no cover brackets' logical conditions classes.
+
+### Docs
+
+- Add author own opinions in `What version should I use` (previously named `My recommendation`).
+- Update entry point size in docs.
+- Delete unsupported `inline-styles` in `options.md`.
+
+### Chore
+
+- Add more test cases for `replacer()` function in `default` version.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v4.0.0...v4.0.1>
+
 ## [4.0.0 🎉] - 2024-09-04
 
 ### Breaking change

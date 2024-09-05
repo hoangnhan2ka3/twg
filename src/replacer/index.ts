@@ -31,13 +31,9 @@ export function replacer({
         try {
             // 1. Loop through each largest Object
             extractor(content, callee).forEach(largestObject => {
-                // 2. Parse conditional
-                const filteredObject = (/:\s*(?:\d|[[('"`]|true|false)/g).test(largestObject)
-                    ? combiner(largestObject)
-                    : ""
-
+                const filteredObject = combiner(largestObject)
                 try {
-                    // 3. Parse the arguments inside through `twg()` API
+                    // 3. Parse the arguments inside through `parser()` API
                     const parsedObject = parser({ separator })(
                         ...new Function(`return [${filteredObject}]`)() as ClassValue[]
                     )
@@ -51,7 +47,7 @@ export function replacer({
             // DONE. Return the processed content
             return content
         } catch (errorOnContent) {
-            debug && console.error(`\n❌ TWG - Error occurred on \`replacer()\`:\n${((errorOnContent as Error).message)} in content:\n${content}\n`)
+            debug && console.error(`\n⛔ TWG - Error occurred on \`replacer()\`:\n${((errorOnContent as Error).message)} in content:\n${content}\n`)
             return content
         }
     }

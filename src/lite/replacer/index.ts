@@ -13,13 +13,9 @@ export function replacer({ callee = "twg" }: ReplacerOptions = {}) {
 
         try {
             extractor(content, callee).forEach(largestObject => {
-                const filteredObject = (/:\s*(?:\d|[[('"`]|true|false)/g).test(largestObject)
-                    ? combiner(largestObject)
-                    : ""
-
                 try {
                     const parsedObject = parser(
-                        ...new Function(`return [${filteredObject}]`)() as ClassValue[]
+                        ...new Function(`return [${combiner(largestObject)}]`)() as ClassValue[]
                     )
                     content = content.replace(largestObject, `"${parsedObject}"`)
                 } catch { /* empty */ }
