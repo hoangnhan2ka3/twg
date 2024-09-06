@@ -40,6 +40,8 @@ Nothing yet!
 - Add `JSDoc` for `type/interface`.
 - Move and refactor `Custom separator` tests to new test files for `createTwg()` function.
 
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v4.0.1...v5.0.0>
+
 ## [4.0.1] - 2024-09-05
 
 ### Fixed
