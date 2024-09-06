@@ -100,7 +100,7 @@ What version should I use?
       <td>
         <ul>
           <li align="start">
-            <code>default</code> version seems to be suitable for almost base cases, promise that you don't need to handle very complex conditions, template literals or nesting itself/custom functions.
+            <code>default</code> version seems to be suitable for almost base cases, promise that you don't need to handle very complex conditions like ternary in template literal, or nesting itself/custom functions inside main object(s).
           </li>
           <li align="start">
             In the other hand, <code>extend</code> version is the most stable and powerful, it can handle almost any cases you can imagine (if not, please open an issue), your only trade-off is that it's a bit slower than <code>default</code> version (because of AST parsing).
@@ -147,6 +147,15 @@ Tested conditions
 
 <summary>Click to expand/collapse this section</summary>
 
+- 🔥 From `v5`:
+
+  - From now if you want to use custom `separator` option, you need to define the `separator` option in new `createTwg()` function (previously in the last Object of `twg()` function) and also in `replacer()` function like previous version.
+
+- 🔥 From `v4`:
+
+  - Make `extend` version (which previously called **AST** version) as optional entry point. From now if you want to use `extend` version, you need to install 4 more `@babel` dependencies, refer to docs.
+  - Default version now using `combiner()` which written in native JS to parse conditionals (use with limitations).
+
 - 🔥 From `v3.1.0`:
 
   - Supports nesting custom callee functions through `nestingCallee` option _(default version only)_.
@@ -156,7 +165,7 @@ Tested conditions
       DEFAULT: replacer({
         // Define options here, eg.:
         callee: "twg",
-        nestingCallee: ["clsx", "twg"]
+        nestingCallee: ["cn", "twg"]
       })
     }
     ```
@@ -307,16 +316,19 @@ import twg from "twg"
 
   See [how to use](../docs/usage.md).
 
-- If you need to override default `twg()` options:
+- If you need to override default `twg()` options, you need to use `createTwg()` function (not for lite version):
 
   ```js
-  twg(
-    //...,
-    {
-      separator: "-" // Always be the last Object
-    }
+  import { createTwg } from "twg"
+  // or
+  import createTwg from "twg"
+
+  createTwg({ separator: "_" })(
+    //...
   )
   ```
+
+  See [custom `separator`](../docs/options.md#-custom-separator).
 
 ### ⏩ `extend` version
 
@@ -394,20 +406,25 @@ import twg from "twg/extend"
 
   ```jsx
   import { twg } from "twg/extend/lite"
+  // or
+  import twg from "twg/extend/lite"
   ```
 
   See [how to use](../docs/usage.md).
 
-- If you need to override default `twg()` options:
+- If you need to override default `twg()` options, you need to use `createTwg()` function (not for lite version):
 
   ```js
-  twg(
-    //...,
-    {
-      separator: "-" // Always be the last Object
-    }
+  import { createTwg } from "twg/extend"
+  // or
+  import createTwg from "twg/extend"
+
+  createTwg({ separator: "_" })(
+    //...
   )
   ```
+
+  See [custom `separator`](../docs/options.md#-custom-separator).
 
 For more information, consider reading [custom options](../docs/options.md#-custom-options) ↗️ and [best practice](../docs/usage.md#best-practice-with-twmerge) ↗️.
 

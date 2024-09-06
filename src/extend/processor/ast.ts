@@ -9,7 +9,8 @@ import { type ReplacerOptions } from "src/extend/replacer"
 /**
  * Check whether consequent or alternate of a ternary conditional is a binding identifier.
  * @param {NodePath<types.Expression>} path consequent or alternate path of a ternary conditional.
- * @returns `boolean`
+ * @returns {boolean} `boolean`
+ * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
 function isExceptionCondition(path: NodePath<types.Expression>) {
     return !(path.isStringLiteral() || path.isTemplateLiteral() || path.isArrayExpression() || path.isObjectExpression())
@@ -18,12 +19,13 @@ function isExceptionCondition(path: NodePath<types.Expression>) {
 /**
  * Use AST to transform the conditionals, especially the `nesting` Object conditionals or `nesting` kinds of ternary conditionals.
  * @param {string} code input code.
- * @param {ReplacerOptions} options callee, nestingCallee, separator, debug. See [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-content#replacer-options).
- * @returns `string`
+ * @param {ReplacerOptions} options callee, nestingCallee, separator, debug. See [docs](https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#replacer-options).
+ * @returns {string} `string`
+ * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
 export function transformer(
     code: string,
-    options: ReplacerOptions
+    options: ReplacerOptions = {}
 ) {
     const ast = barser.parse(code, {
         sourceType: "module",

@@ -4,7 +4,8 @@ import { type ReplacerOptions } from "src/replacer"
  * Extracts the largest Object(s) inside the callee function.
  * @param content The content already provided by `content.files` in `tailwind.config`.
  * @param callee The name of the function to be scanned. Default is `twg`.
- * @returns `string[]`
+ * @returns {string[]} `string[]`
+ * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
 export function extractor(
     content: string,

@@ -164,6 +164,27 @@ Function     | What it does
   </div>
   ```
 
+  Please ensure that you have the right `tailwindCSS.experimental.classRegex` inside your [`settings.json`](https://code.visualstudio.com/docs/getstarted/settings#_settings-file-locations) file (up to your IDE, my case is VSCode). Below is my recommendation ([ref](https://github.com/tailwindlabs/tailwindcss-intellisense/issues/868#issuecomment-2016530820)):
+
+  ```json
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "(?:clsx|cn|twg|cva|classnames|classList.add)\\(([^)(]*(?:\\([^)(]*(?:\\([^)(]*(?:\\([^)(]*\\)[^)(]*)*\\)[^)(]*)*\\)[^)(]*)*)\\)",
+      "'([^']*)'"
+    ],
+    [
+      "(?:clsx|cn|twg|cva|classnames|classList.add)\\(([^)(]*(?:\\([^)(]*(?:\\([^)(]*(?:\\([^)(]*\\)[^)(]*)*\\)[^)(]*)*\\)[^)(]*)*)\\)",
+      "\"([^\"]*)\""
+    ],
+    [
+      "(?:clsx|cn|twg|cva|classnames|classList.add)\\(([^)(]*(?:\\([^)(]*(?:\\([^)(]*(?:\\([^)(]*\\)[^)(]*)*\\)[^)(]*)*\\)[^)(]*)*)\\)",
+      "`([^`]*)`"
+    ],
+  ]
+  ```
+
+  You can replace your custom `callee` by adding it into the union `|` inside each regex.
+
 ### ⏩ Performance
 
 - Yes of course, `twg` is slower than vanilla `clsx` because it uses `regex`s and `extractors` to find and replace the classes. But it's not that slow, it's still fast enough for you to use in your project. This project aim for the better developer-experience with Tailwind variants classes, not for the best performance.

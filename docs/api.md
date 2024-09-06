@@ -37,14 +37,34 @@
 
   _@param_ — **inputs**
 
-  Types: `(ClassValue | TWGOptions)[]`
+  Types: `ClassValue[]`
 
   ```js
   type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
+  ```
 
+- ### `createTwg(options)(...inputs)`
+
+  Exports: `module`, `default`
+
+  Returns: `(...inputs: ClassValue[]) => string`
+
+  _@param_ — **options**
+
+  Types: `TWGOptions`
+
+  ```js
   interface TWGOptions {
     separator?: string | false
   }
+  ```
+
+  _@param_ — **inputs**
+
+  Types: `ClassValue[]`
+
+  ```js
+  type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
   ```
 
 ---
@@ -112,14 +132,34 @@
 
   _@param_ — **inputs**
 
-  Types: `(ClassValue | TWGOptions)[]`
+  Types: `ClassValue[]`
 
   ```js
   type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
+  ```
 
+- ### `createTwg(options)(...inputs)`
+
+  Exports: `module`, `default`
+
+  Returns: `(...inputs: ClassValue[]) => string`
+
+  _@param_ — **options**
+
+  Types: `TWGOptions`
+
+  ```js
   interface TWGOptions {
     separator?: string | false
   }
+  ```
+
+  _@param_ — **inputs**
+
+  Types: `ClassValue[]`
+
+  ```js
+  type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
   ```
 
 ---

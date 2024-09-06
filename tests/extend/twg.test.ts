@@ -565,65 +565,6 @@ describe("twg()", () => {
         })
     })
 
-    describe("Custom separator:", () => {
-        it.each([
-            {
-                args: ["multiple classes", { var: "class" }],
-                expected: "multiple classes var-class"
-            }
-        ])('"$expected"', ({ args, expected }) => {
-            expect(twg(...args, { separator: "-" })).toBe(expected)
-        })
-
-        it.each([
-            {
-                args: ["multiple classes", { var: "class" }, { separator: "-" }],
-                expected: "multiple classes var-class"
-            }
-        ])('"$expected"', ({ args, expected }) => {
-            expect(twg(...args)).toBe(expected)
-        })
-
-        it.each([
-            {
-                args: ["multiple classes", { var: "class" }, { separator: "-" }],
-                expected: "multiple classes var-class separator--"
-            }
-        ])('"$expected"', ({ args, expected }) => {
-            expect(twg(...args, { separator: "-" })).toBe(expected)
-        })
-
-        it("Handles separator option in the last object:", () => {
-            expect(
-                twg(
-                    "multiple classes",
-                    {
-                        var1: "class",
-                        var2: "multiple classes"
-                    },
-                    {
-                        separator: "-"
-                    }
-                )
-            ).toBe("multiple classes var1-class var2-multiple var2-classes")
-        })
-
-        it("Handles separator option not in the last object:", () => {
-            expect(
-                twg(
-                    "multiple classes",
-                    {
-                        separator: "-"
-                    },
-                    {
-                        var1: "class",
-                        var2: "multiple classes"
-                    }
-                )
-            ).toBe("multiple classes separator:- var1:class var2:multiple var2:classes")
-        })
-    })
-
     /**
      * @borrows https://github.com/Noriller/easy-tailwind/blob/master/src/index.spec.ts#L80C3-L120C6
      */

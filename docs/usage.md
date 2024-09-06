@@ -482,7 +482,7 @@ Extend options:
 ```js
 // src/lib/utils.ts
 
-import { twg, type ClassValue } from "twg"
+import { createTwg, type ClassValue } from "twg"
 import { extendTailwindMerge } from "tailwind-merge"
 
 const twMerge = extendTailwindMerge<...>({
@@ -490,9 +490,10 @@ const twMerge = extendTailwindMerge<...>({
 })
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(twg(...inputs, {
-    separator: "-" // Always be the last Object
-  }))
+  return twMerge(createTwg({
+    // Define options here, eg.:
+    separator: "-"
+  })(...inputs))
 }
 ```
 

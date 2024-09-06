@@ -38,12 +38,12 @@ See [how to use](#-custom-separator).
 
 ### `replacer()` options
 
-| Options                    | Types              |       Default        | Description                                                                                                                                                                                                                                | Lite | Status |
-|:---------------------------|:-------------------|:--------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:------:|
-| `callee?`                  | string \| string[] |        "twg"         | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_                   |  ✅  |   ✅   |
-| `nestingCallee?`           | string \| string[] | `callee?` \|\| "twg" | The callee name that allow to be nested inside the main callee function. Useful when you have another custom utility function that handle specific kind of arguments. Default allows `"twg"` or the callee you defined in `callee` option. |  x   |   🧪   |
-| `separator?`<sup>[1]</sup> | string \| false    |         ":"          | The separator used to join the variant with classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. <sup>[1]</sup>Remember to sync this option with `separator` option in `twg()` option.                 |  x   |   ✅   |
-| `debug`                    | boolean            |         true         | Printing debug messages in console if there are any warnings or errors. If `false`, it will be silent                                                                                                                                      |  x   |   ✅   |
+| Options                    | Types              |  Default  | Description                                                                                                                                                                                                                                | Lite | Status |
+|:---------------------------|:-------------------|:---------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:------:|
+| `callee?`                  | string \| string[] |   "twg"   | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_                   |  ✅  |   ✅   |
+| `nestingCallee?`           | string \| string[] | `callee?` | The callee name that allow to be nested inside the main callee function. Useful when you have another custom utility function that handle specific kind of arguments. Default allows `"twg"` or the callee you defined in `callee` option. |  x   |   🧪   |
+| `separator?`<sup>[1]</sup> | string \| false    |    ":"    | The separator used to join the variant with classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. <sup>[1]</sup>Remember to sync this option with `separator` option in `twg()` option.                 |  x   |   ✅   |
+| `debug`                    | boolean            |   true    | Printing debug messages in console if there are any warnings or errors. If `false`, it will be silent                                                                                                                                      |  x   |   ✅   |
 
 See [how to use](#-custom-options).
 
@@ -184,13 +184,10 @@ Example with separator as `"_"`:
   ```js
   // src/lib/utils.ts
 
-  import { twg, type ClassValue } from "twg"
-  import { extendTailwindMerge } from "tailwind-merge"
+  import { createTwg, type ClassValue } from "twg"
 
   export function cn(...inputs: ClassValue[]) {
-    return twg(...inputs, {
-      separator: "_" // Always be the last Object
-    })
+    return createTwg({ separator: "_" })(...inputs)
   }
   ```
 

@@ -22,7 +22,7 @@ function toVal(mix: ClassValue): string {
             }
         } else {
             for (y in mix) {
-                if (mix[y] && typeof mix[y] !== "string" && typeof mix[y] !== "object") {
+                if (mix[y] && typeof mix[y] !== "string" && !Array.isArray(mix[y])) {
                     str && (str += " ")
                     str += y
                 } else {

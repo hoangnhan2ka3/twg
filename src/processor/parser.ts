@@ -3,8 +3,9 @@ import { type ClassValue, type TWGOptions } from "src/index"
 /**
  * Focusing on handling arrays and objects, looping them until all are flattened.
  * @param {ClassValue[]} args The inputs class values.
- * @param {TWGOptions} [options = {separator=":"}] separator. See [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options).
- * @returns `string[]`
+ * @param {TWGOptions} options See [docs](htt[]ps://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#twg-options).
+ * @returns {string[]} `string[]`
+ * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
 function reducer(args: ClassValue[], options?: TWGOptions) {
     return args.reduce<string[]>((acc, cur) => {
@@ -26,23 +27,18 @@ function reducer(args: ClassValue[], options?: TWGOptions) {
 
 /**
  * Transforms the inputs. Map key to each values inside the Object zones.
- * @param {TWGOptions} [options = {separator=":"}] separator. See [docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#twg-options).
+ * @param {TWGOptions} options See [docs](https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#twg-options).
  * @param {...ClassValue[]} args The inputs class values.
- * @returns `Record<string, (...args: ClassValue[]) => string> & ((...args: ClassValue[]) => string)`
+ * @returns {string} `Record<string, (...args: ClassValue[]) => string> & ((...args: ClassValue[]) => string)`
+ * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
 export function parser(options?: TWGOptions) {
-    const divider = (options?.separator !== undefined)
-        ? typeof options.separator === "string"
-            ? options.separator
-            : ""
-        : ":"
-
     return new Proxy((...args: ClassValue[]) => {
         return reducer(args, options).join(" ")
     }, {
         get: function (obj, key: string) {
             return key ? (...args: ClassValue[]) => reducer(args, options).map(
-                values => `${key}${divider}${values}`.trim()
+                values => `${key}${options?.separator ? options.separator : ""}${values}`.trim()
             ) : obj
         }
     }) as Record<string, (...args: ClassValue[]) => string> & ((...args: ClassValue[]) => string)

@@ -198,7 +198,8 @@ export default tseslint.config(
             "@stylistic/lines-around-comment": [1, {
                 "allowObjectStart": true,
                 "allowBlockStart": true,
-                "allowArrayStart": true
+                "allowArrayStart": true,
+                "allowInterfaceStart": true
             }],
 
             //! Line-breaks

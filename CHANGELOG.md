@@ -11,6 +11,35 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [5.0.0 🎉] - 2024-09-06
+
+### Breaking change
+
+- Use a more elegant way to handle `separator` option in `twg()` of both versions.
+- Add `createTwg()` API function.
+
+### Core change
+
+- From now if you want to use custom `separator` option, you need to define the `separator` option in new `createTwg()` function (previously in the last Object of `twg()` function) and also in `replacer()` function like previous version.
+- `twg()` function now being exported by using `createTwg()`.
+
+### Refactor
+
+- Sync `toVal()` function condition between `extend` and `extend/lite` version.
+- Remove `divider` constant processing in `parser()` function.
+- Refactor `JSDoc` for functions and fix typo.
+
+### Docs
+
+- Update `api.md` for new `createTwg()` API function.
+- Update bundle size section in docs.
+- Add recommendation for `tailwindCSS.experimental.classRegex` in `introduction.md`.
+
+### Chore
+
+- Add `JSDoc` for `type/interface`.
+- Move and refactor `Custom separator` tests to new test files for `createTwg()` function.
+
 ## [4.0.1] - 2024-09-05
 
 ### Fixed

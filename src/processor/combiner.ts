@@ -1,7 +1,8 @@
 /**
  * Return closed bracket from a given open bracket.
  * @param openBracket Open bracket as input string.
- * @returns `string`
+ * @returns {string} `string`
+ * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
 function getClosedBracket(openBracket: string) {
     const pairs = { "{": "}", "(": ")", "[": "]" } as Record<string, string>
@@ -11,7 +12,8 @@ function getClosedBracket(openBracket: string) {
 /**
  * Check whether the input string is identifier or call expression by first character of the string.
  * @param str Consequent or alternate of ternary expression.
- * @returns `boolean`
+ * @returns {boolean} `boolean`
+ * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
 function isIdentifierOrCallExpression(str: string) {
     return (/^\w/).test(str)
@@ -23,7 +25,8 @@ const replaceLogicalCondition = /(?:[!(\s])*\w+[)\s]*(?:[=!]==?[^&|?]+)?(?:&&|\|
 /**
  * Remove the conditional statement of logical and ternary expression. Then combine consequent with alternate of ternary expression.
  * @param {string} content The content that need to be parsed.
- * @returns `string`
+ * @returns {string} `string`
+ * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
 export function combiner(content: string) {
     content = content.replace(replaceLogicalCondition, "")
