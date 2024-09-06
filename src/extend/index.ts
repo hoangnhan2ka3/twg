@@ -92,8 +92,6 @@ export function createTwg(options: TWGOptions = {
  * @returns {string} `string`
  * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
-export function twg(...inputs: ClassValue[]) {
-    return createTwg()(...inputs)
-}
+export const twg = (...inputs: ClassValue[]) => createTwg()(...inputs)
 
 export default { createTwg, twg }

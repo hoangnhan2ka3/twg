@@ -11,6 +11,18 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [5.0.2] - 2024-09-06
+
+### Fixed
+
+- Sync `createTwg()` between `default` and `extend` version by using `const` instead of `function`.
+
+### Docs
+
+- Update bundle size shield links in npm `README.md`.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v5.0.1...v5.0.2>
+
 ## [5.0.1] - 2024-09-06
 
 ### Fixed
