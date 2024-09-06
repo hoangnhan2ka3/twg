@@ -16,19 +16,19 @@
 
 ### `replacer()` options
 
-| Options                    | Types              | Default | Description                                                                                                                                                                                                                | Lite | Status |
-|:---------------------------|:-------------------|:-------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:------:|
-| `callee?`                  | string \| string[] |  "twg"  | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_   |  ✅  |   ✅   |
-| `separator?`<sup>[1]</sup> | string \| false    |   ":"   | The separator used to join the variant with classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. <sup>[1]</sup>Remember to sync this option with `separator` option in `twg()` option. |  x   |   ✅   |
-| `debug`                    | boolean            |  true   | Printing debug messages in console if there are any warnings or errors. If `false`, it will be silent                                                                                                                      |  x   |   ✅   |
+| Options                    | Types              | Default | Description                                                                                                                                                                                                                 | Lite | Status |
+|:---------------------------|:-------------------|:-------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:------:|
+| `callee?`                  | string \| string[] |  "twg"  | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_    |  ✅  |   ✅   |
+| `separator?`<sup>[*]</sup> | string \| false    |   ":"   | The separator used to join the variant with classes. If `false`, you may need to write it manually, eg.: `{"before:": "flex"}`. <sup>[*]</sup>Remember to sync this option with `separator` option in `createTwg()` option. |  x   |   ✅   |
+| `debug`                    | boolean            |  true   | Printing debug messages in console if there are any warnings or errors. If `false`, it will be silent                                                                                                                       |  x   |   ✅   |
 
 See [how to use](#-custom-options).
 
-### `twg()` options
+### `createTwg()` options
 
-| Options                                   | Types           | Default | Description                                                                                                                                                                                                                                                                                                   | Lite | Status |
-|:------------------------------------------|:----------------|:-------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:------:|
-| `separator?`<sup>[1]</sup> <sup>[2]</sup> | string \| false |   ":"   | The separator used to join the variant with classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. <sup>[1]</sup>Remember to sync this option with `separator` option in `replacer()` option. <sup>[2]</sup>Put this option in the **LAST** object of the `twg()` function. |  x   |   ✅   |
+| Options                    | Types           | Default | Description                                                                                                                                                                                                                                  | Lite | Status |
+|:---------------------------|:----------------|:-------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:------:|
+| `separator?`<sup>[*]</sup> | string \| false |   ":"   | The separator used to join the variant with classes. If `false` or `empty string`, you may need to write it manually, eg.: `{"before:": "flex"}`. <sup>[*]</sup>Remember to sync this option with `separator` option in `replacer()` option. |  x   |   ✅   |
 
 See [how to use](#-custom-separator).
 
@@ -42,16 +42,16 @@ See [how to use](#-custom-separator).
 |:---------------------------|:-------------------|:---------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:------:|
 | `callee?`                  | string \| string[] |   "twg"   | The function name to use for detecting Tailwind classes. You can change it to whatever you defined in `lib/utils.ts`, eg. `cn`, `cx`, etc. or `["cn", "cx"]`. _(Name it as unique as possible or you'll have conflicts)_                   |  ✅  |   ✅   |
 | `nestingCallee?`           | string \| string[] | `callee?` | The callee name that allow to be nested inside the main callee function. Useful when you have another custom utility function that handle specific kind of arguments. Default allows `"twg"` or the callee you defined in `callee` option. |  x   |   🧪   |
-| `separator?`<sup>[1]</sup> | string \| false    |    ":"    | The separator used to join the variant with classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. <sup>[1]</sup>Remember to sync this option with `separator` option in `twg()` option.                 |  x   |   ✅   |
+| `separator?`<sup>[*]</sup> | string \| false    |    ":"    | The separator used to join the variant with classes. If `false`, you may need to write it manually, eg.: `{"before:": "flex"}`. <sup>[*]</sup>Remember to sync this option with `separator` option in `createTwg()` option.                |  x   |   ✅   |
 | `debug`                    | boolean            |   true    | Printing debug messages in console if there are any warnings or errors. If `false`, it will be silent                                                                                                                                      |  x   |   ✅   |
 
 See [how to use](#-custom-options).
 
-### `twg()` options
+### `createTwg()` options
 
-| Options                                   | Types           | Default | Description                                                                                                                                                                                                                                                                                                   | Lite | Status |
-|:------------------------------------------|:----------------|:-------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:------:|
-| `separator?`<sup>[1]</sup> <sup>[2]</sup> | string \| false |   ":"   | The separator used to join the variant with classes. If `false`, you may need to write it manually, eg.: `twg({"before:": "flex"})`. <sup>[1]</sup>Remember to sync this option with `separator` option in `replacer()` option. <sup>[2]</sup>Put this option in the **LAST** object of the `twg()` function. |  x   |   ✅   |
+| Options                    | Types           | Default | Description                                                                                                                                                                                                                                  | Lite | Status |
+|:---------------------------|:----------------|:-------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:------:|
+| `separator?`<sup>[*]</sup> | string \| false |   ":"   | The separator used to join the variant with classes. If `false` or `empty string`, you may need to write it manually, eg.: `{"before:": "flex"}`. <sup>[*]</sup>Remember to sync this option with `separator` option in `replacer()` option. |  x   |   ✅   |
 
 See [how to use](#-custom-separator).
 
@@ -150,7 +150,7 @@ See [how to use](#-custom-separator).
 Example with separator as `"_"`:
 
 > [!IMPORTANT]
-> You must define the `separator` option to **BOTH** `twg()` and `replacer()`.
+> You must define the `separator` option to **BOTH** `createTwg()` and `replacer()`.
 
 **1. In `replacer()` options:**
 
@@ -179,7 +179,7 @@ Example with separator as `"_"`:
   } satisfies Config
   ```
 
-**2. In `twg()` options:**
+**2. In `createTwg()` options:**
 
   ```js
   // src/lib/utils.ts

@@ -104,7 +104,7 @@ describe("createTwg()", () => {
                         var2: "multiple classes"
                     }
                 ],
-                expected: "multiple classes var1class var2multiple var2classes"
+                expected: "multiple classes var1:class var2:multiple var2:classes"
             },
             {
                 args: [
@@ -117,7 +117,7 @@ describe("createTwg()", () => {
                         var3: "other classes"
                     }
                 ],
-                expected: "multiple classes var1class var2multiple var2classes var3other var3classes"
+                expected: "multiple classes var1:class var2:multiple var2:classes var3:other var3:classes"
             }
         ])('"$expected"', ({ args, expected }) => {
             expect(createTwg()(...args)).toBe(expected)

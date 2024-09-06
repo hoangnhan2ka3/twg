@@ -63,7 +63,9 @@ function toVal(mix: ClassValue, options?: TWGOptions): string {
  * @returns {string} `(...inputs: ClassValue[]) => string`
  * @author lukeed <[reference](https://github.com/lukeed/clsx/blob/master/src/index.js#L30C1-L41C2)>
  */
-export function createTwg(options: TWGOptions = {}) {
+export function createTwg(options: TWGOptions = {
+    separator: ":"
+}) {
     return (...inputs: ClassValue[]) => {
         let i = 0,
             tmp: ClassValue,
@@ -91,7 +93,7 @@ export function createTwg(options: TWGOptions = {}) {
  * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
 export function twg(...inputs: ClassValue[]) {
-    return createTwg({ separator: ":" })(...inputs)
+    return createTwg()(...inputs)
 }
 
 export default { createTwg, twg }

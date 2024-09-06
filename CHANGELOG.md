@@ -11,6 +11,23 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [5.0.1] - 2024-09-06
+
+### Fixed
+
+- Fixed `createTwg()` misleading default `separator` option.
+
+### Docs
+
+- Rename `twg()` function to `createTwg()` in `options.md` because `options` parameter is not in `twg()` function anymore.
+- Update bundle size section in docs.
+
+### Chore
+
+- Update test cases for default `separator` option.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v5.0.0...v5.0.1>
+
 ## [5.0.0 🎉] - 2024-09-06
 
 ### Breaking change
