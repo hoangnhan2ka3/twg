@@ -42,7 +42,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 | 📍 Entry point                | 📦 Bundle | 📦 Gzip  |
 |-------------------------------|:---------:|:---------:|
-| `twg/extend`                  |   1.0kB   | **567B**  |
+| `twg/extend`                  |   1.0kB   | **565B**  |
 | `twg/extend/lite` 🪶          |   874B    | **492B**  |
 | `twg/extend/replacer`         |   2.4kB   | **1.1kB** |
 | `twg/extend/lite/replacer` 🪶 |   1.9kB   | **852B**  |
