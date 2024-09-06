@@ -32,9 +32,9 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 | 📍 Entry point                | 📦 Bundle | 📦 Gzip  |
 |-------------------------------|:---------:|:---------:|
-| `twg`                         |    1kB    | **558B**  |
+| `twg`                         |    936B   | **516B**  |
 | `twg/lite` 🪶                 |   763B    | **444B**  |
-| `twg/replacer`                |   2.7kB   | **1.4kB** |
+| `twg/replacer`                |   2.6kB   | **1.4kB** |
 | `twg/lite/replacer` 🪶        |   2.2kB   | **1.2kB** |
 
 </td>
@@ -42,9 +42,9 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 | 📍 Entry point                | 📦 Bundle | 📦 Gzip  |
 |-------------------------------|:---------:|:---------:|
-| `twg/extend`                  |   1.1kB   | **592B**  |
-| `twg/extend/lite` 🪶          |   875B    | **491B**  |
-| `twg/extend/replacer`         |   2.5kB   | **1.1kB** |
+| `twg/extend`                  |   1.0kB   | **566B**  |
+| `twg/extend/lite` 🪶          |   874B    | **492B**  |
+| `twg/extend/replacer`         |   2.4kB   | **1.1kB** |
 | `twg/extend/lite/replacer` 🪶 |   1.9kB   | **852B**  |
 
 </td>
