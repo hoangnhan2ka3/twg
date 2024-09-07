@@ -147,17 +147,17 @@ Tested conditions
 
 <summary>Click to expand/collapse this section</summary>
 
-- 🔥 From `v5`:
+- 🔥 From `v5.0.3`:
+  - Enable `tree-shaking` for the package.
 
+- 🔥 From `v5.0.0`:
   - From now if you want to use custom `separator` option, you need to define the `separator` option in new `createTwg()` function (previously in the last Object of `twg()` function) and also in `replacer()` function like previous version.
 
-- 🔥 From `v4`:
-
+- 🔥 From `v4.0.0`:
   - Make `extend` version (which previously called **AST** version) as optional entry point. From now if you want to use `extend` version, you need to install 4 more `@babel` dependencies, refer to docs.
   - Default version now using `combiner()` which written in native JS to parse conditionals (use with limitations).
 
 - 🔥 From `v3.1.0`:
-
   - Supports nesting custom callee functions through `nestingCallee` option _(default version only)_.
 
     ```js
@@ -173,7 +173,6 @@ Tested conditions
     **Usage:** see [custom `nestingCallee`](../docs/options.md#-custom-nestingcallee).
 
 - 🔥 From `v2.0.0`:
-
   - Supports native objects behavior like `clsx` (Key as classes and value as conditionals)
 
     ```jsx
@@ -479,6 +478,7 @@ If you have any ideas, feel free to open a [feature request](https://github.com/
 - [easy-tailwind](https://github.com/Noriller/easy-tailwind) ↗️
 - [clsx](https://github.com/lukeed/clsx) ↗️
 - [tailwind-merge](https://github.com/dcastil/tailwind-merge) ↗️
+- [`content.transform` API](https://tailwindcss.com/docs/content-configuration#transforming-source-files) ↗️
 
 ### Project starts on
 
