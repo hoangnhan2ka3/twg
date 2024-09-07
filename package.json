@@ -24,7 +24,8 @@
         "test": "jest",
         "lint": "tsc",
         "npm": "pnpm build && pnpm publish --access public",
-        "npm:beta": "pnpm build && pnpm publish --access public --tag beta"
+        "npm:beta": "pnpm build && pnpm publish --access public --tag beta",
+        "npm:remove-beta": "pnpm dist-tag rm twg beta"
     },
     "sideEffects": false,
     "files": [

@@ -267,6 +267,21 @@ describe("transformer()", () => {
                     )} />
                 `,
                 expected: `<div className={twg("multiple classes", "var1:other var1:multiple var1:classes var2:multiple var2:classes", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: conditional1 ? (utilClass1 ?? utilClass3()) : "other multiple classes",
+                            [classes.root]: (isAndOr1 && isAndOr2),
+                            var2: conditional2 === "true" ? "multiple classes" : utilClass2 || utilClass3(),
+                            [classes.menuOpen]: "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var1:other var1:multiple var1:classes var2:multiple var2:classes", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(transformer(contents, { callee: "twg", separator: ":" })).toBe(expected)
