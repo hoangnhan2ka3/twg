@@ -11,6 +11,22 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [5.0.3] - 2024-09-07
+
+### Core change
+
+- Add `"sideEffects": false` in `package.json` for tree shakable bundle.
+
+### Docs
+
+- Relocated recommendation for `tailwindCSS.experimental.classRegex` in `introduction.md`.
+
+### Chore
+
+- Bump dev dependencies version.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v5.0.2...v5.0.3>
+
 ## [5.0.2] - 2024-09-06
 
 ### Fixed

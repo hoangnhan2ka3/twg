@@ -117,7 +117,28 @@ Function     | What it does
 
   ![tailwindcss_intellisense_2](../public/tailwindcss_intellisense_2.webp)
 
-  At least it works? Right? So if you're OK with that, you're good to go.
+  > At least it works? Right? So if you're OK with that, you're good to go.
+
+  One more thing, please ensure that you have the right `tailwindCSS.experimental.classRegex` inside your [`settings.json`](https://code.visualstudio.com/docs/getstarted/settings#_settings-file-locations) file (up to your IDE, my case is VSCode). Below is my recommendation ([ref](https://github.com/tailwindlabs/tailwindcss-intellisense/issues/868#issuecomment-2016530820)):
+
+  ```json
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "(?:clsx|cn|twg|cva|classnames|classList.add)\\(([^)(]*(?:\\([^)(]*(?:\\([^)(]*(?:\\([^)(]*\\)[^)(]*)*\\)[^)(]*)*\\)[^)(]*)*)\\)",
+      "'([^']*)'"
+    ],
+    [
+      "(?:clsx|cn|twg|cva|classnames|classList.add)\\(([^)(]*(?:\\([^)(]*(?:\\([^)(]*(?:\\([^)(]*\\)[^)(]*)*\\)[^)(]*)*\\)[^)(]*)*)\\)",
+      "\"([^\"]*)\""
+    ],
+    [
+      "(?:clsx|cn|twg|cva|classnames|classList.add)\\(([^)(]*(?:\\([^)(]*(?:\\([^)(]*(?:\\([^)(]*\\)[^)(]*)*\\)[^)(]*)*\\)[^)(]*)*)\\)",
+      "`([^`]*)`"
+    ],
+  ]
+  ```
+
+  You can replace your custom `callee` by adding it into the union `|` inside each regex.
 
 ### ⏩ Remote utilities
 
@@ -163,27 +184,6 @@ Function     | What it does
     Hello, World!
   </div>
   ```
-
-  Please ensure that you have the right `tailwindCSS.experimental.classRegex` inside your [`settings.json`](https://code.visualstudio.com/docs/getstarted/settings#_settings-file-locations) file (up to your IDE, my case is VSCode). Below is my recommendation ([ref](https://github.com/tailwindlabs/tailwindcss-intellisense/issues/868#issuecomment-2016530820)):
-
-  ```json
-  "tailwindCSS.experimental.classRegex": [
-    [
-      "(?:clsx|cn|twg|cva|classnames|classList.add)\\(([^)(]*(?:\\([^)(]*(?:\\([^)(]*(?:\\([^)(]*\\)[^)(]*)*\\)[^)(]*)*\\)[^)(]*)*)\\)",
-      "'([^']*)'"
-    ],
-    [
-      "(?:clsx|cn|twg|cva|classnames|classList.add)\\(([^)(]*(?:\\([^)(]*(?:\\([^)(]*(?:\\([^)(]*\\)[^)(]*)*\\)[^)(]*)*\\)[^)(]*)*)\\)",
-      "\"([^\"]*)\""
-    ],
-    [
-      "(?:clsx|cn|twg|cva|classnames|classList.add)\\(([^)(]*(?:\\([^)(]*(?:\\([^)(]*(?:\\([^)(]*\\)[^)(]*)*\\)[^)(]*)*\\)[^)(]*)*)\\)",
-      "`([^`]*)`"
-    ],
-  ]
-  ```
-
-  You can replace your custom `callee` by adding it into the union `|` inside each regex.
 
 ### ⏩ Performance
 

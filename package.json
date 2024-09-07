@@ -1,6 +1,6 @@
 {
     "name": "twg",
-    "version": "5.0.2",
+    "version": "5.0.3",
     "description": "A utility function for grouping TailwindCSS variants.",
     "author": "Nguyễn Hoàng Nhân <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)",
     "homepage": "https://github.com/hoangnhan2ka3/twg",
@@ -26,6 +26,7 @@
         "npm": "pnpm build && pnpm publish --access public",
         "npm:beta": "pnpm build && pnpm publish --access public --tag beta"
     },
+    "sideEffects": false,
     "files": [
         "dist"
     ],
@@ -128,7 +129,7 @@
         "@babel/types": "^7.25.6",
         "@eslint/compat": "^1.1.1",
         "@eslint/eslintrc": "^3.1.0",
-        "@eslint/js": "^9.9.1",
+        "@eslint/js": "^9.10.0",
         "@stylistic/eslint-plugin": "^2.7.2",
         "@types/babel__generator": "^7.6.8",
         "@types/babel__traverse": "^7.20.6",
@@ -137,7 +138,7 @@
         "@types/node": "^22.5.4",
         "@typescript-eslint/eslint-plugin": "^8.4.0",
         "@typescript-eslint/parser": "^8.4.0",
-        "eslint": "^9.9.1",
+        "eslint": "^9.10.0",
         "eslint-import-resolver-typescript": "^3.6.3",
         "eslint-plugin-import": "^2.30.0",
         "eslint-plugin-import-newlines": "^1.4.0",
