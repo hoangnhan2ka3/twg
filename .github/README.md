@@ -138,7 +138,7 @@ Tested conditions
   - [`extend` version](#-extend-version)
 - [More on docs](#-docs)
 - [Changelog](#-changelog)
-- [Contributing](#%EF%B8%8F-contributing)
+- [Contributing](#-contributing)
 - [Credits](#-credits)
 
 ## 📰 News
@@ -428,7 +428,7 @@ import twg from "twg/extend"
 
 For more information, consider reading [custom options](../docs/options.md#-custom-options) ↗️ and [best practice](../docs/usage.md#best-practice-with-twmerge) ↗️.
 
-## 📖 Docs
+## 📚 Docs
 
 - [Usage / Use cases](../docs/usage.md) ↗️
   - [Usage](../docs/usage.md#-usage) ↗️
@@ -456,11 +456,17 @@ For more information, consider reading [custom options](../docs/options.md#-cust
 
 See [CHANGELOG.md](../CHANGELOG.md).
 
-## 🎗️ Contributing
+## 💎 Contributing
 
-### Issues
+### Bugs
 
 `twg` now work for me but maybe not for you in some edges. Consider opening an [issue](https://github.com/hoangnhan2ka3/twg/issues) if you have any problem with it that I can fix it ASAP. Or a [pull request](https://github.com/hoangnhan2ka3/twg/pulls) is welcome too.
+
+### Features
+
+If you have any ideas, feel free to open a [feature request](https://github.com/hoangnhan2ka3/twg/issues/new/choose) template or make a [pull request](https://github.com/hoangnhan2ka3/twg/pulls) to share your ideas.
+
+> For **Development** and more information on contributing please read [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 ### 💪 Work with me
 

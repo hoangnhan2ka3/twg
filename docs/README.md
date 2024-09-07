@@ -1,4 +1,4 @@
-# 📖 Docs
+# 📚 Docs
 
 - [Usage / Use cases](../docs/usage.md) ↗️
   - [Usage](../docs/usage.md#-usage) ↗️
