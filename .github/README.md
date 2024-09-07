@@ -120,8 +120,8 @@ Tested conditions
 
 | No. | Framework/Lib    | Version                     | Additional info                                                | Tester | Status |
 |:---:|:-----------------|:----------------------------|:---------------------------------------------------------------|:------:|:------:|
-| 1\. | `next`           | 15.0.0-canary.141           | With `--turbo` flag and `babel-plugin-react-compiler` enabled. | author |   ✅   |
-| 2\. | `react`          | 19.0.0-rc-d1afcb43-20240903 |                                                                | author |   ✅   |
+| 1\. | `next`           | 15.0.0-canary.144           | With `--turbo` flag and `babel-plugin-react-compiler` enabled. | author |   ✅   |
+| 2\. | `react`          | 19.0.0-rc-a03254bc-20240905 |                                                                | author |   ✅   |
 | 3\. | `tailwindcss`    | 3.4.10                      |                                                                | author |   ✅   |
 | 4\. | `tailwind-merge` | 2.5.2                       |                                                                | author |   ✅   |
 
