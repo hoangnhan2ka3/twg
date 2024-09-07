@@ -11,6 +11,18 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [5.0.5] - 2024-09-08
+
+### Core change
+
+- Added conditions to remove the `path` in case the `key` in `ObjectProperty` is not `Identifier` and `StringLiteral` for `extend` version.
+
+### Chore
+
+- Add more test cases for `extend` version.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v5.0.4...v5.0.5>
+
 ## [5.0.4] - 2024-09-07
 
 ### Docs

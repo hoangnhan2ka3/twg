@@ -61,6 +61,11 @@ export function transformer(
                                 innerPath.traverse({
                                     ObjectProperty(innerPath) {
                                         if (
+                                            !types.isStringLiteral(innerPath.node.key)
+                                            && !types.isIdentifier(innerPath.node.key)
+                                        ) {
+                                            innerPath.remove()
+                                        } else if (
                                             !innerPath.node.shorthand
                                             && !types.isStringLiteral(innerPath.node.value)
                                             && !types.isArrayExpression(innerPath.node.value)
