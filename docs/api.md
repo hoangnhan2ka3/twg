@@ -49,7 +49,7 @@
 
   Returns: `(...inputs: ClassValue[]) => string`
 
-  _@param_ — **options**
+  _@param_ — **[options](../docs/options.md#createtwg-options)**: separator
 
   Types: `TWGOptions`
 
@@ -144,7 +144,7 @@
 
   Returns: `(...inputs: ClassValue[]) => string`
 
-  _@param_ — **options**
+  _@param_ — **[options](../docs/options.md#createtwg-options)**: separator
 
   Types: `TWGOptions`
 
