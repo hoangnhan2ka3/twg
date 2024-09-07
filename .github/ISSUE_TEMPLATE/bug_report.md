@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Let us know about some broken functionality
+about: Submit a broken functionality.
 title: "[BUG] "
 labels: bug
 assignees: ""
