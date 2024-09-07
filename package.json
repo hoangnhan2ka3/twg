@@ -1,6 +1,6 @@
 {
     "name": "twg",
-    "version": "5.0.3",
+    "version": "5.0.4",
     "description": "A utility function for grouping TailwindCSS variants.",
     "author": "Nguyễn Hoàng Nhân <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)",
     "homepage": "https://github.com/hoangnhan2ka3/twg",
@@ -28,7 +28,10 @@
     },
     "sideEffects": false,
     "files": [
-        "dist"
+        "dist/*",
+        "*.ts",
+        "*.d.ts",
+        "*.d.mts"
     ],
     "main": "dist/index.js",
     "module": "dist/index.mjs",

@@ -11,6 +11,20 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [5.0.4] - 2024-09-07
+
+### Docs
+
+- Fix some typo and add more shields in `README.md`.
+
+### Chore
+
+- Update `files` field in `package.json`.
+- Added `ISSUE_TEMPLATE` to `.github` folder.
+- Update `LICENSE` file format.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v5.0.3...v5.0.4>
+
 ## [5.0.3] - 2024-09-07
 
 ### Core change
