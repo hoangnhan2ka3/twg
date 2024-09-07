@@ -75,20 +75,20 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 Version comparison
 </h3>
 
-| Features                                                                                               | `default` | `default/lite` | `extend` | `extend/lite` |
-|:-------------------------------------------------------------------------------------------------------|:---------:|:--------------:|:--------:|:-------------:|
-| Accept string, number, array, object                                                                   |     ✓     |       ✓        |    ✓     |       ✓       |
-| Accept template literal                                                                                |  partial  |    partial     |    ✓     |       ✓       |
-| Accept multiple outermost objects                                                                      |     ✓     |       ✓        |    ✓     |       ✓       |
-| Accept nesting objects, arrays                                                                         |     ✓     |       ✓        |    ✓     |       ✓       |
-| Accept nesting template literal                                                                        |  partial  |    partial     |    ✓     |       ✓       |
-| Accept nesting other callee functions inside main object(s)                                            |           |                |    ✓     |       ✓       |
-| Accept logical conditionals                                                                            |     ✓     |       ✓        |    ✓     |       ✓       |
-| Accept ternary conditionals                                                                            |  partial  |    partial     |    ✓     |       ✓       |
-| Accept native object behavior (key as classes and value as conditionals)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |           |                |    ✓     |       ✓       |
-| Compatible with wrappers                                                                               |     ✓     |       ✓        |    ✓     |       ✓       |
-| Fully customizable                                                                                     |     ✓     |    partial     |    ✓     |    partial    |
-| [Options](../docs/options.md) ↗️                                                                        |     3     |       1        |    4     |       1       |
+| Features                                                                 | `default` | `default/lite` | `extend` | `extend/lite` |
+|:------------------------------------------------------------------------ |:---------:|:--------------:|:--------:|:-------------:|
+| Accept string, number, array, object                                     |     ✓     |       ✓        |    ✓     |       ✓       |
+| Accept template literal                                                  |  partial  |    partial     |    ✓     |       ✓       |
+| Accept multiple outermost objects                                        |     ✓     |       ✓        |    ✓     |       ✓       |
+| Accept nesting objects, arrays                                           |     ✓     |       ✓        |    ✓     |       ✓       |
+| Accept nesting template literal                                          |  partial  |    partial     |    ✓     |       ✓       |
+| Accept nesting other callee functions inside main object(s)              |           |                |    ✓     |       ✓       |
+| Accept logical conditionals                                              |     ✓     |       ✓        |    ✓     |       ✓       |
+| Accept ternary conditionals                                              |  partial  |    partial     |    ✓     |       ✓       |
+| Accept native object behavior (key as classes and value as conditionals) |           |                |    ✓     |       ✓       |
+| Compatible with wrappers                                                 |     ✓     |       ✓        |    ✓     |       ✓       |
+| Fully customizable                                                       |     ✓     |    partial     |    ✓     |    partial    |
+| [Options](../docs/options.md) ↗️                                          |     3     |       1        |    4     |       1       |
 
 <h3 align="center">
 What version should I use?
