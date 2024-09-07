@@ -21,6 +21,7 @@ Nothing yet!
 
 - Update `files` field in `package.json`.
 - Added `ISSUE_TEMPLATE` to `.github` folder.
+- Add `CONTRIBUTING.md` file.
 - Update `LICENSE` file format.
 
 **Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v5.0.3...v5.0.4>
