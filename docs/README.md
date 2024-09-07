@@ -7,7 +7,7 @@
   - [Use cases](../docs/usage.md#-use-cases) ↗️
     - [Conditionals](../docs/usage.md#-conditionals) ↗️
     - [Nesting callee functions](../docs/usage.md#-nesting-callee-functions) ↗️
-  - [Combination](../docs/usage.md#-combination)
+  - [Combination](../docs/usage.md#-combination) ↗️
 - [Options](../docs/options.md) ↗️
   - [`replacer()` options](../docs/options.md#replacer-options) ↗️
   - [`twg` options](../docs/options.md#twg-options) ↗️
