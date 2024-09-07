@@ -19,7 +19,6 @@ Nothing yet!
 
 ### Chore
 
-- Update `files` field in `package.json`.
 - Added `ISSUE_TEMPLATE` to `.github` folder.
 - Add `CONTRIBUTING.md` file.
 - Update `LICENSE` file format.

@@ -28,10 +28,7 @@
     },
     "sideEffects": false,
     "files": [
-        "dist/*",
-        "*.ts",
-        "*.d.ts",
-        "*.d.mts"
+        "dist/*"
     ],
     "main": "dist/index.js",
     "module": "dist/index.mjs",
