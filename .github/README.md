@@ -15,6 +15,8 @@
   <a href="https://bundlephobia.com/result?p=twg"><img src="https://badgen.net/bundlephobia/tree-shaking/twg?label=tree-shaking" alt="Tree Shakable Supports"></a>
 </p>
 
+<h1 align="center">twg</h1>
+
 <p align="center">
 A more elegant way of writing Tailwind classes. Never need to repeating the same variants over and over again 🤯.
 </p>
