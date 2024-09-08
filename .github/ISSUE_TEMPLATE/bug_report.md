@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Submit a broken functionality.
-title: "[BUG] "
+title: "[🐛 BUG] "
 labels: bug
 assignees: ""
 ---

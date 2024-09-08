@@ -1,0 +1,39 @@
+title: "[💡 IDEAS] "
+labels: ["Share ideas for interesting features."]
+body:
+    - type: textarea
+        attributes:
+            label: Goals
+            description: Short list of what the feature request aims to address?
+            placeholder: "1. Short description of the goal"
+            value: |
+                1.
+                2.
+                3.
+        validations:
+            required: true
+    - type: textarea
+        attributes:
+            label: Non-Goals
+            description: Short list of what the feature request _does not_ aim to address?
+            placeholder: "1. Short description of the non-goal"
+            value: |
+                1.
+                2.
+                3.
+        validations:
+            required: false
+    - type: textarea
+        attributes:
+            label: Background
+            description: Discuss prior art, why do you think this feature is needed? Are there current alternatives?
+            placeholder: "I think this feature is needed because..."
+        validations:
+            required: true
+    - type: textarea
+        attributes:
+            label: Proposal
+            description: How should this feature be implemented? Are you interested in contributing?
+            placeholder: "I would like to implement this feature because..."
+        validations:
+            required: true
