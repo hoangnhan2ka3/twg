@@ -36,7 +36,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 <td>
 
 | 📍 Entry point                | 📦 Bundle | 📦 Gzip  |
-|-------------------------------|:---------:|:---------:|
+|:------------------------------|:---------:|:---------:|
 | `twg`                         |    920B   | **514B**  |
 | `twg/lite` 🪶                 |   763B    | **444B**  |
 | `twg/replacer`                |   2.6kB   | **1.4kB** |
@@ -46,7 +46,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 <td>
 
 | 📍 Entry point                | 📦 Bundle | 📦 Gzip  |
-|-------------------------------|:---------:|:---------:|
+|:------------------------------|:---------:|:---------:|
 | `twg/extend`                  |   1.0kB   | **565B**  |
 | `twg/extend/lite` 🪶          |   874B    | **492B**  |
 | `twg/extend/replacer`         |   2.5kB   | **1.1kB** |
