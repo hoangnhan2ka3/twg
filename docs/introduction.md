@@ -1,4 +1,8 @@
-# 🎉 Introduction
+<div align="center">
+  <img src="../public/twg_logo.webp" alt="twg logo" width="150px" height="150px">
+</div>
+
+<h1 align="center">🎉 Introduction</h1>
 
 ## 📌 Table of contents
 

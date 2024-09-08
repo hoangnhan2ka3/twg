@@ -11,6 +11,17 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [5.0.6] - 2024-09-08
+
+### Docs
+
+- Update `twg` thumbnail image.
+- Update `twg` logo in the start of every docs.
+
+### Chore
+
+- Update `twg` logo in the start of every markdown file.
+
 ## [5.0.5] - 2024-09-08
 
 ### Core change

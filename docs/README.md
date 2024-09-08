@@ -1,4 +1,8 @@
-# 📚 Docs
+<div align="center">
+  <img src="../public/twg_logo.webp" alt="twg logo" width="150px" height="150px">
+</div>
+
+<h1 align="center">📚 Docs</h1>
 
 - [Usage / Use cases](../docs/usage.md) ↗️
   - [Usage](../docs/usage.md#-usage) ↗️

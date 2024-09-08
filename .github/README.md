@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="../public/twg_logo.webp" alt="twg logo" width="250px" height="250px">
+  <img src="../public/twg_thumbnail.webp" alt="twg thumbnail">
 </div>
 
 <h1 align="center">twg</h1>
