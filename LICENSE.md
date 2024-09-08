@@ -1,4 +1,8 @@
-# The MIT License (MIT)
+<div align="center">
+  <img src="./public/twg_logo.webp" alt="twg logo" width="150px" height="150px">
+</div>
+
+<h1 align="center">The MIT License (MIT)</h1>
 
 Copyright (c) 2024 [hoangnhan2ka3](mailto:workwith.hnhan@gmail.com)
 
