@@ -2,12 +2,6 @@
 To make sure your PR is handled as smoothly as possible we request that you follow the checklist sections below.
 Choose the right checklist for the change(s) that you're making: -->
 
-## Description
-
-<!-- Please describe the changes you made here. -->
-
-Some description here...
-
 ## Checklist
 
 <!-- Please check the boxes by putting an x in the [ ] like so: [x] -->
@@ -17,6 +11,12 @@ Some description here...
 - [ ] I have searched the [issues](https://github.com/hoangnhan2ka3/twg/issues) and [pull requests](https://github.com/hoangnhan2ka3/twg/pulls) to make sure this is not a duplicate.
 
 <!-- If you have any other questions, please feel free to ask! -->
+
+## Description
+
+<!-- Please describe the changes you made here. -->
+
+Some description here...
 
 ## Resolves
 
