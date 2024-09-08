@@ -1,4 +1,8 @@
-![twg_thumbnail](../public/twg_thumbnail.webp)
+<div align="center">
+  <img src="../public/twg_logo.webp" alt="twg logo" width="250px" height="250px">
+</div>
+
+<h1 align="center">twg</h1>
 
 <p align="center">
   <a href="https://github.com/hoangnhan2ka3/twg/actions"><img src="https://img.shields.io/github/actions/workflow/status/hoangnhan2ka3/twg/tests.yml?branch=main&label=tests" alt="Tests Status"></a>
@@ -15,11 +19,13 @@
   <a href="https://bundlephobia.com/result?p=twg"><img src="https://badgen.net/bundlephobia/tree-shaking/twg?label=tree-shaking" alt="Tree Shakable Supports"></a>
 </p>
 
-<h1 align="center">twg</h1>
+<h3 align="center">
+🪥 A utility function for grouping TailwindCSS variants.
+</h3>
 
-<p align="center">
+<h4 align="center">
 A more elegant way of writing Tailwind classes. Never need to repeating the same variants over and over again 🤯.
-</p>
+</h4>
 
 ---
 
