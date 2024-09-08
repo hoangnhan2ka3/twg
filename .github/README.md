@@ -70,6 +70,8 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 - ✅ Customizable `callee` name and `separator`.
 - ✅ Compatible with wrappers like [`twMerge`](https://github.com/dcastil/tailwind-merge).
 - ✅ "Base" support for Tailwind CSS IntelliSense (IDEs extension), as well as [Hover Preview](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss#hover-preview).
+- ✅ 0 dependencies on `default` version.
+- ✅ Tree-shaking friendly.
 - ✅ Lite version.
 
 ---
@@ -472,10 +474,6 @@ If you have any ideas, feel free to open a [feature request](https://github.com/
 
 > For **Development** and more information on contributing please read [CONTRIBUTING.md](../CONTRIBUTING.md).
 
-### 💪 Work with me
-
-<https://www.linkedin.com/in/hoangnhan2ka3/>
-
 ## 🪪 Credits
 
 ### References
@@ -488,6 +486,10 @@ If you have any ideas, feel free to open a [feature request](https://github.com/
 ### Project starts on
 
 - August 15, 2024
+
+### 💪 Work with me
+
+<https://www.linkedin.com/in/hoangnhan2ka3/>
 
 ### Funding
 
