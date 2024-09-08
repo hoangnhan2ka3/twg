@@ -27,4 +27,4 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 ---
 
-For full & latest documentation, please refer to the [GitHub README](https://github.com/hoangnhan2ka3/twg).
+For full & latest documentation, please refer to the [GitHub README](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#readme).

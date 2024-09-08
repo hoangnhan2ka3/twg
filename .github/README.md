@@ -458,7 +458,7 @@ For more information, consider reading [custom options](../docs/options.md#-cust
 
 ## 🎉 Changelog
 
-See [CHANGELOG.md](../CHANGELOG.md).
+For full & latest update changelog, please refer to [CHANGELOG.md](../CHANGELOG.md).
 
 ## 💎 Contributing
 
