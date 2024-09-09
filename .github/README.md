@@ -105,7 +105,7 @@ Version comparison
 | [Options](../docs/options.md) ↗️                                          |     3     |       1        |    4     |       1       |
 
 <h3 align="center">
-What version should I use?
+Which version should I use?
 </h3>
 
 <div id="image-table" align="center">
