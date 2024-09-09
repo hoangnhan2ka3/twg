@@ -130,27 +130,3 @@ enforcement ladder](https://github.com/mozilla/diversity).
 For answers to common questions about this code of conduct, see the FAQ at
 <https://www.contributor-covenant.org/faq>. Translations are available at
 <https://www.contributor-covenant.org/translations>.
-
----
-
-<div align="center" width="100%">
-  <table>
-    <tr>
-      <th width="500px">
-        <div align="start">
-          <a href="https://github.com/hoangnhan2ka3/twg">< Back to main</a>
-        </div>
-      </th>
-      <th width="500px">
-        <div align="center">
-          MIT © <a href="https://github.com/hoangnhan2ka3">Nguyễn Hoàng Nhân</a>
-        </div>
-      </th>
-      <th width="500px">
-        <div align="end">
-          <a href="#-contributor-covenant-code-of-conduct">Scroll to top</a>
-        </div>
-      </th>
-    </tr>
-  </table>
-</div>
