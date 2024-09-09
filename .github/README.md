@@ -326,6 +326,8 @@ import twg from "twg"
 
   ```jsx
   import { twg } from "twg/lite"
+  // or
+  import twg from "twg/lite"
   ```
 
   See [how to use](../docs/usage.md).
