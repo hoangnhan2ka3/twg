@@ -117,7 +117,7 @@ Which version should I use?
             <code>default</code> version seems to be suitable for almost base cases, promise that you don't need to handle very complex conditions like ternary in template literal, or nesting itself/custom functions inside main object(s).
           </li>
           <li align="start">
-            In the other hand, <code>extend</code> version is the most stable and powerful, it can handle almost any cases you can imagine (if not, please open an issue), your only trade-off is that it's a bit slower than <code>default</code> version (because of AST parsing).
+            In the other hand, <code>extend</code> version is the most stable and powerful, it can handle almost any cases you can imagine (if not, please open an issue), your only trade-off is that it's a very little bit slower than <code>default</code> version (because of AST parsing).
           </li>
           <li align="start">
             I'm currently using <code>extend/lite</code> version.
