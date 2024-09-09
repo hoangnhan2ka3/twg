@@ -314,6 +314,8 @@ export default {
   }
   ```
 
+  See all [options](../docs/options.md#-default-version) and how to [custom options](../docs/options.md#-custom-options).
+
 **3. Use**
 
 ```jsx
@@ -329,8 +331,6 @@ import twg from "twg"
   // or
   import twg from "twg/lite"
   ```
-
-  See [how to use](../docs/usage.md).
 
 - If you need to override default `twg()` options, you need to use `createTwg()` function (not for lite version):
 
@@ -410,6 +410,8 @@ export default {
   }
   ```
 
+  See all [options](../docs/options.md#-extend-version) and how to [custom options](../docs/options.md#-custom-options).
+
 **3. Use**
 
 ```jsx
@@ -426,8 +428,6 @@ import twg from "twg/extend"
   import twg from "twg/extend/lite"
   ```
 
-  See [how to use](../docs/usage.md).
-
 - If you need to override default `twg()` options, you need to use `createTwg()` function (not for lite version):
 
   ```js
@@ -443,6 +443,8 @@ import twg from "twg/extend"
   See [custom `separator`](../docs/options.md#-custom-separator).
 
 For more information, consider reading [custom options](../docs/options.md#-custom-options) ↗️ and [best practice](../docs/usage.md#best-practice-with-twmerge) ↗️.
+
+See [how to use](../docs/usage.md) on docs 👇.
 
 ## 📚 Docs
 
