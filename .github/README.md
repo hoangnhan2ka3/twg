@@ -346,6 +346,8 @@ import twg from "twg"
 
   See [custom `separator`](../docs/options.md#-custom-separator).
 
+**DONE!**
+
 ### ⏩ `extend` version
 
 > [!NOTE]
@@ -441,6 +443,8 @@ import twg from "twg/extend"
   ```
 
   See [custom `separator`](../docs/options.md#-custom-separator).
+
+**DONE!**
 
 For more information, consider reading [custom options](../docs/options.md#-custom-options) ↗️ and [best practice](../docs/usage.md#best-practice-with-twmerge) ↗️.
 
