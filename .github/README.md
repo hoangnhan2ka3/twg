@@ -136,7 +136,7 @@ Tested conditions
 |:---:|:-----------------|:----------------------------|:---------------------------------------------------------------|:------:|:------:|
 | 1\. | `next`           | 15.0.0-canary.153           | With `--turbo` flag and `babel-plugin-react-compiler` enabled. | author |   ✅   |
 | 2\. | `react`          | 19.0.0-rc-94e652d5-20240912 |                                                                | author |   ✅   |
-| 3\. | `tailwindcss`    | 3.4.10                      |                                                                | author |   ✅   |
+| 3\. | `tailwindcss`    | 3.4.11                      |                                                                | author |   ✅   |
 | 4\. | `tailwind-merge` | 2.5.2                       |                                                                | author |   ✅   |
 
 </div>
