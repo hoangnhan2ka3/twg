@@ -84,6 +84,7 @@ describe("twg()", () => {
         const is_Ternary_1 = true
         const is_Ternary_2 = false
         const isUndefined = undefined
+        const isNull = null
         it.each([
             { args: ["multiple classes", { var: isAndOr1 && "class" }], expected: "multiple classes var:class" },
             { args: ["multiple classes", { var: isAndOr2 && "class" }], expected: "multiple classes" },
@@ -122,7 +123,7 @@ describe("twg()", () => {
             {
                 args: [
                     "multiple classes",
-                    null ?? {
+                    isNull ?? {
                         var: [
                             "multiple classes",
                             isAndOr2 && "another class"
@@ -621,7 +622,10 @@ describe("twg()", () => {
      * @borrows https://github.com/Noriller/easy-tailwind/blob/master/src/index.spec.ts#L122C3-L127C5
      */
     describe("Falsy cases:", () => {
-        it.each([false && "anything", undefined && "anything", null && "anything"])(
+        const isUndefined = undefined
+        const isNull = null
+
+        it.each([false && "anything", isUndefined && "anything", isNull && "anything"])(
             "Handles falsy values", (falsy) => {
                 expect(twg(falsy)).toBe("")
                 expect(liteTwg(falsy)).toBe("")
