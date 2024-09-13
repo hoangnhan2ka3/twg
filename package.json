@@ -22,7 +22,7 @@
     "scripts": {
         "build": "tsup",
         "test": "jest",
-        "lint": "tsc",
+        "lint": "tsc && eslint .",
         "npm": "pnpm build && pnpm publish --access public",
         "npm:beta": "pnpm build && pnpm publish --access public --tag beta",
         "npm:remove-beta": "pnpm dist-tag rm twg beta"
