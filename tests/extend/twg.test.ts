@@ -10,7 +10,9 @@ describe("twg()", () => {
             { args: [], expected: "" },
             { args: [""], expected: "" },
             { args: ["t"], expected: "t" },
+            { args: [0], expected: "" },
             { args: [1], expected: "1" },
+            { args: ["0"], expected: "0" },
             { args: ["1"], expected: "1" },
             { args: ["."], expected: "." },
             { args: [null], expected: "" },
@@ -39,7 +41,13 @@ describe("twg()", () => {
                     [true && "in", true && "array", false && "never"]
                 ],
                 expected: "multiple classes in array"
-            }
+            },
+            { args: [{ var: "" }], expected: "" },
+            { args: [{ "var": "" }], expected: "" },
+            { args: [{ "": "" }], expected: "" },
+            { args: [{ "": "class" }], expected: "class" },
+            { args: [{ "": "multiple classes" }], expected: "multiple classes" },
+            { args: [{ var1: { "var2": "multiple classes" } }], expected: "var1:var2:multiple var1:var2:classes" }
         ])('"$expected"', ({ args, expected }) => {
             expect(twg(...args)).toBe(expected)
             expect(liteTwg(...args)).toBe(expected)

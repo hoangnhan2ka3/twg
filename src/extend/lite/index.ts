@@ -21,19 +21,16 @@ function toVal(mix: ClassValue): string {
                 }
             }
         } else {
+            const s = str ? " " : ""
             for (y in mix) {
-                if (mix[y] && typeof mix[y] !== "string" && !Array.isArray(mix[y])) {
-                    str && (str += " ")
-                    str += y
+                if (mix[y] === true || (typeof mix[y] === "number" && mix[y] !== 0)) {
+                    str += s + y
                 } else {
                     i = true
                 }
             }
 
-            if (i) {
-                str && (str += " ")
-                str += parser(mix)
-            }
+            if (i) str += s + parser(mix)
         }
     }
     return str

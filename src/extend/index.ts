@@ -38,19 +38,16 @@ function toVal(mix: ClassValue, options?: TWGOptions): string {
                 }
             }
         } else {
+            const s = str ? " " : ""
             for (y in mix) {
-                if (mix[y] && typeof mix[y] !== "string" && !Array.isArray(mix[y])) {
-                    str && (str += " ")
-                    str += y
+                if (mix[y] === true || (typeof mix[y] === "number" && mix[y] !== 0)) {
+                    str += s + y
                 } else {
                     i = true
                 }
             }
 
-            if (i) {
-                str && (str += " ")
-                str += parser(options)(mix)
-            }
+            if (i) str += s + parser(options)(mix)
         }
     }
     return str

@@ -11,6 +11,26 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [5.0.9] - 2024-09-13
+
+### Core change
+
+- Remove unused `!innerPath.node.shorthand` condition in both `extend` and `extend/lite` version.
+- Better handling `nestingCallee` option in `extend` version.
+
+### Refactor
+
+- Refactor `toVal()` function logic in `extend` version.
+- Make `reducer()` function's filter more concise.
+
+### Chore
+
+- Bump `pnpm` version to `9.10.0`.
+- Update `pnpm-lock.yaml`.
+- Add more default test cases for `twg()` and `replacer()` function.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v5.0.8...v5.0.9>
+
 ## [5.0.8] - 2024-09-13
 
 ### Refactor

@@ -5,7 +5,7 @@ function reducer(args: ClassValue[]) {
         if (!cur) return acc
         if (typeof cur === "object") {
             for (const [key, values] of Object.entries(cur)) {
-                (Array.isArray(values) ? values.flat(Infinity) : [values]).forEach(
+                (Array.isArray(values) ? values.flat(1 / 0) : [values]).forEach(
                     value => acc.push(
                         (parser[key] as (...args: ClassValue[]) => string)(value as ClassValue)
                     )
@@ -15,7 +15,7 @@ function reducer(args: ClassValue[]) {
             acc.push(...String(cur).split(" "))
         }
         return acc
-    }, []).flat().filter(Boolean)
+    }, []).flat().filter(value => value !== "")
 }
 
 export const parser = new Proxy((...args: ClassValue[]) => {

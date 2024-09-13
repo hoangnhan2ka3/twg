@@ -77,8 +77,7 @@ export function transformer(
                                         ) {
                                             innerPath.remove()
                                         } else if (
-                                            !innerPath.node.shorthand
-                                            && !isStringLiteral(innerPath.node.value)
+                                            !isStringLiteral(innerPath.node.value)
                                             && !isArrayExpression(innerPath.node.value)
                                             && !isTemplateLiteral(innerPath.node.value)
                                         ) innerPath.node.value = stringLiteral("🚀")

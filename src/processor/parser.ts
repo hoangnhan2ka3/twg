@@ -22,7 +22,7 @@ function reducer(args: ClassValue[], options?: TWGOptions) {
             acc.push(...String(cur).split(" "))
         }
         return acc
-    }, []).flat().filter(Boolean)
+    }, []).flat().filter(value => value !== "")
 }
 
 /**

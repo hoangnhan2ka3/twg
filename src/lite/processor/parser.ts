@@ -15,7 +15,7 @@ function reducer(args: ClassValue[]) {
             acc.push(...String(cur).split(" "))
         }
         return acc
-    }, []).flat().filter(Boolean)
+    }, []).flat().filter(value => value !== "")
 }
 
 export const parser = new Proxy((...args: ClassValue[]) => {

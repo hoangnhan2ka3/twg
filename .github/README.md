@@ -45,20 +45,20 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 | 📍 Entry point                | 📦 Bundle | 📦 Gzip  |
 |:------------------------------|:---------:|:---------:|
-| `twg`                         |    920B   | **514B**  |
-| `twg/lite` 🪶                 |   763B    | **444B**  |
+| `twg`                         |    924B   | **514B**  |
+| `twg/lite` 🪶                 |   767B    | **443B**  |
 | `twg/replacer`                |   2.6kB   | **1.4kB** |
-| `twg/lite/replacer` 🪶        |   2.1kB   | **1.2kB** |
+| `twg/lite/replacer` 🪶        |   2.2kB   | **1.2kB** |
 
 </td>
 <td>
 
 | 📍 Entry point                | 📦 Bundle | 📦 Gzip  |
 |:------------------------------|:---------:|:---------:|
-| `twg/extend`                  |   1.0kB   | **565B**  |
-| `twg/extend/lite` 🪶          |   874B    | **492B**  |
-| `twg/extend/replacer`         |   2.4kB   | **1.1kB** |
-| `twg/extend/lite/replacer` 🪶 |   1.9kB   | **881B**  |
+| `twg/extend`                  |   1.0kB   | **572B**  |
+| `twg/extend/lite` 🪶          |   866B    | **498B**  |
+| `twg/extend/replacer`         |   2.5kB   | **1.1kB** |
+| `twg/extend/lite/replacer` 🪶 |   1.9kB   | **898B**  |
 
 </td>
 </tr>

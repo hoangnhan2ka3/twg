@@ -6,6 +6,14 @@ describe("replacer()", () => {
         it.each([
             {
                 contents: `
+                    <div className={twg({
+                        "": ""
+                    })} />
+                `,
+                expected: `<div className={twg("")} />;`
+            },
+            {
+                contents: `
                     <div className={twg(
                         "multiple classes",
                         {
@@ -1051,7 +1059,10 @@ describe("replacer()", () => {
                         className
                     )} />
                 `,
-                expected: `
+                expected: `<div className={twg("multiple classes", "var1:class var1:var2:multiple var1:var2:classes var1:var2:variant", "var3:multiple var3:classes", className)} />;`
+            },
+            {
+                contents: `
                     <div className={twg(
                         "multiple classes",
                         {
@@ -1060,7 +1071,7 @@ describe("replacer()", () => {
                                 {
                                     var2: [
                                         "multiple classes",
-                                        badgeVariants({ variant })
+                                        badgeVariants({ variant: primary })
                                     ]
                                 }
                             ]
@@ -1070,7 +1081,31 @@ describe("replacer()", () => {
                         },
                         className
                     )} />
-                `
+                `,
+                expected: `<div className={twg("multiple classes", "var1:class var1:var2:multiple var1:var2:classes var1:var2:variant", "var3:multiple var3:classes", className)} />;`
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "class",
+                                {
+                                    var2: [
+                                        "multiple classes",
+                                        badgeVariants({ variant: "primary" })
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            var3: "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg("multiple classes", "var1:class var1:var2:multiple var1:var2:classes var1:var2:variant:primary", "var3:multiple var3:classes", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
             expect(replacer({ nestingCallee: "badgeVariants" })(contents)).toBe(expected)
@@ -1168,6 +1203,90 @@ describe("replacer()", () => {
                                     var2: [
                                         "multiple classes",
                                         badgeVariants({ variant })
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            var3: "multiple classes"
+                        },
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "class",
+                                {
+                                    var2: [
+                                        "multiple classes",
+                                        badgeVariants({ variant: primary })
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            var3: "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "class",
+                                {
+                                    var2: [
+                                        "multiple classes",
+                                        badgeVariants({ variant: primary })
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            var3: "multiple classes"
+                        },
+                        className
+                    )} />
+                `
+            },
+            {
+                contents: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "class",
+                                {
+                                    var2: [
+                                        "multiple classes",
+                                        badgeVariants({ variant: "primary" })
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            var3: "multiple classes"
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        "multiple classes",
+                        {
+                            var1: [
+                                "class",
+                                {
+                                    var2: [
+                                        "multiple classes",
+                                        badgeVariants({ variant: "primary" })
                                     ]
                                 }
                             ]
