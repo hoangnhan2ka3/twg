@@ -13,10 +13,7 @@ function toVal(mix: ClassValue): string {
             for (; k < len; k++) {
                 if (mix[k]) {
                     y = toVal(mix[k] as ClassValue)
-                    if (y) {
-                        str && (str += " ")
-                        str += y
-                    }
+                    str += y && (str && " ") + y
                 }
             }
         } else {
@@ -36,10 +33,7 @@ export function twg(...inputs: ClassValue[]) {
         tmp = inputs[i]
         if (tmp) {
             x = toVal(tmp)
-            if (x) {
-                str && (str += " ")
-                str += x
-            }
+            str += x && (str && " ") + x
         }
     }
     return str

@@ -14,14 +14,11 @@ function toVal(mix: ClassValue): string {
             for (; k < len; k++) {
                 if (mix[k]) {
                     y = toVal(mix[k] as ClassValue)
-                    if (y) {
-                        str && (str += " ")
-                        str += y
-                    }
+                    str += y && (str && " ") + y
                 }
             }
         } else {
-            const s = str ? " " : ""
+            const s = str && " "
             for (y in mix) {
                 if (mix[y] === true || (typeof mix[y] === "number" && mix[y] !== 0)) {
                     str += s + y
@@ -46,10 +43,7 @@ export function twg(...inputs: ClassValue[]) {
         tmp = inputs[i]
         if (tmp) {
             x = toVal(tmp)
-            if (x) {
-                str && (str += " ")
-                str += x
-            }
+            str += x && (str && " ") + x
         }
     }
     return str

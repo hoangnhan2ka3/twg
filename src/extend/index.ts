@@ -26,19 +26,16 @@ function toVal(mix: ClassValue, options?: TWGOptions): string {
     if (typeof mix === "string" || typeof mix === "number") {
         str += String(mix)
     } else if (typeof mix === "object" && mix !== null) {
+        const s = str && " "
         if (Array.isArray(mix)) {
             const len = mix.length
             for (; k < len; k++) {
                 if (mix[k]) {
                     y = toVal(mix[k] as ClassValue, options)
-                    if (y) {
-                        str && (str += " ")
-                        str += y
-                    }
+                    str += y && (str && " ") + y
                 }
             }
         } else {
-            const s = str ? " " : ""
             for (y in mix) {
                 if (mix[y] === true || (typeof mix[y] === "number" && mix[y] !== 0)) {
                     str += s + y
@@ -73,10 +70,7 @@ export function createTwg(options: TWGOptions = {
             tmp = inputs[i]
             if (tmp) {
                 x = toVal(tmp, options)
-                if (x) {
-                    str && (str += " ")
-                    str += x
-                }
+                str += x && (str && " ") + x
             }
         }
         return str

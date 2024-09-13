@@ -11,6 +11,18 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [5.0.11] - 2024-09-14
+
+### Refactor
+
+- Refactor `toVal()` and `createTwg()` function's logic to use `&&` instead of `if` statement.
+
+### Chore
+
+- Update `JSDoc` for `toVal()` and `createTwg()` function.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v5.0.10...v5.0.11>
+
 ## [5.0.10] - 2024-09-14
 
 ### Docs

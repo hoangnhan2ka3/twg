@@ -16,7 +16,7 @@ export interface TWGOptions {
  * @param {ClassValue} mix The inputs class values.
  * @param {TWGOptions} options See [docs](https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#twg-options).
  * @returns {string} `string`
- * @author lukeed <[reference](https://github.com/lukeed/clsx/blob/master/src/index.js#L1C1-L28C2)>
+ * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
 function toVal(mix: ClassValue, options?: TWGOptions): string {
     let k = 0,
@@ -30,10 +30,7 @@ function toVal(mix: ClassValue, options?: TWGOptions): string {
             for (; k < len; k++) {
                 if (mix[k]) {
                     y = toVal(mix[k] as ClassValue, options)
-                    if (y) {
-                        str && (str += " ")
-                        str += y
-                    }
+                    str += y && (str && " ") + y
                 }
             }
         } else {
@@ -48,7 +45,7 @@ function toVal(mix: ClassValue, options?: TWGOptions): string {
  * @param {TWGOptions} options See [docs](https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#twg-options).
  * @param {...ClassValue[]} inputs The inputs class values.
  * @returns {string} `(...inputs: ClassValue[]) => string`
- * @author lukeed <[reference](https://github.com/lukeed/clsx/blob/master/src/index.js#L30C1-L41C2)>
+ * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
 export function createTwg(options: TWGOptions = {
     separator: ":"
@@ -63,10 +60,7 @@ export function createTwg(options: TWGOptions = {
             tmp = inputs[i]
             if (tmp) {
                 x = toVal(tmp, options)
-                if (x) {
-                    str && (str += " ")
-                    str += x
-                }
+                str += x && (str && " ") + x
             }
         }
         return str
