@@ -30,5 +30,5 @@ Follow these steps to get your code PR-ready:
 4. Run `pnpm install` in the repo root.
 5. Add your code and supporting tests.
 6. If this is a feature that requires doc changes, make as necessary.
-7. Update CHANGELOG.md. Following the existing format.
+7. Update `CHANGELOG.md`. Following the existing format.
 8. You're ready!
