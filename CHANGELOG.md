@@ -11,6 +11,19 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [5.0.10] - 2024-09-14
+
+### Docs
+
+- Update `Version comparison` table.
+- Update `bundle size` section in docs.
+
+### Chore
+
+- Remove unused `console.log` in `transformer()` function of `extend` version.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v5.0.9...v5.0.10>
+
 ## [5.0.9] - 2024-09-13
 
 ### Core change

@@ -58,7 +58,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 | `twg/extend`                  |   1.0kB   | **572B**  |
 | `twg/extend/lite` 🪶          |   866B    | **498B**  |
 | `twg/extend/replacer`         |   2.5kB   | **1.1kB** |
-| `twg/extend/lite/replacer` 🪶 |   1.9kB   | **898B**  |
+| `twg/extend/lite/replacer` 🪶 |   1.9kB   | **876B**  |
 
 </td>
 </tr>
