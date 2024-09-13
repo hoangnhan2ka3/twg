@@ -11,6 +11,18 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [5.0.7] - 2024-09-13
+
+### Docs
+
+- Sync npm `README.md` with GitHub `README.md`.
+
+### Chore
+
+- Bump `terser` and other dev dependencies version.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v5.0.6...v5.0.7>
+
 ## [5.0.6] - 2024-09-08
 
 ### Docs

@@ -29,9 +29,9 @@
 🪥 A utility function for grouping TailwindCSS variants.
 </h3>
 
-<h4 align="center">
+<p align="center">
 A more elegant way of writing Tailwind classes. Never need to repeating the same variants over and over again 🤯.
-</h4>
+</p>
 
 ---
 
