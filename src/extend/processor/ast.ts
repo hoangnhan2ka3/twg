@@ -58,7 +58,6 @@ export function transformer(
                                     innerPath.replaceWith(
                                         arrayExpression(innerPath.node.arguments as Expression[])
                                     )
-                                    console.log(generate(innerPath.node).code)
                                 }
                             })
                         }
