@@ -20,6 +20,7 @@ Nothing yet!
 ### Chore
 
 - Bump `terser` and other dev dependencies version.
+- Update tests for compatibility with `typescript@5.6.x`.
 
 **Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v5.0.6...v5.0.7>
 
