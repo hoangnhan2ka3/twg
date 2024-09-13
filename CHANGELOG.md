@@ -11,6 +11,14 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [5.0.8] - 2024-09-13
+
+### Refactor
+
+- Import exactly what is needed from `@babel` in `ast.ts` to improve tree-shaking.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v5.0.7...v5.0.8>
+
 ## [5.0.7] - 2024-09-13
 
 ### Docs

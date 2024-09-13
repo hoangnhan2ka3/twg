@@ -1,18 +1,28 @@
 import generate from "@babel/generator"
-import * as barser from "@babel/parser"
+import { parse } from "@babel/parser"
 import traverse, { type NodePath } from "@babel/traverse"
-import * as types from "@babel/types"
+import {
+    arrayExpression,
+    binaryExpression,
+    type Expression,
+    isArrayExpression,
+    isIdentifier,
+    isStringLiteral,
+    isTemplateLiteral,
+    type ObjectProperty,
+    stringLiteral
+} from "@babel/types"
 import { type ClassValue } from "src/extend"
 import { parser } from "src/extend/processor/parser"
 import { type ReplacerOptions } from "src/extend/replacer"
 
 /**
  * Check whether consequent or alternate of a ternary conditional is a binding identifier.
- * @param {NodePath<types.Expression>} path consequent or alternate path of a ternary conditional.
+ * @param {NodePath<Expression>} path consequent or alternate path of a ternary conditional.
  * @returns {boolean} `boolean`
  * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
-function isExceptionCondition(path: NodePath<types.Expression>) {
+function isExceptionCondition(path: NodePath<Expression>) {
     return !(path.isStringLiteral() || path.isTemplateLiteral() || path.isArrayExpression() || path.isObjectExpression())
 }
 
@@ -27,7 +37,7 @@ export function transformer(
     code: string,
     options: ReplacerOptions = {}
 ) {
-    const ast = barser.parse(code, {
+    const ast = parse(code, {
         sourceType: "module",
         plugins: ["jsx", "typescript"]
     })
@@ -46,7 +56,7 @@ export function transformer(
                             nestingCallees.forEach((name) => {
                                 if (innerPath.get("callee").isIdentifier({ name })) {
                                     innerPath.replaceWith(
-                                        types.arrayExpression(innerPath.node.arguments as types.Expression[])
+                                        arrayExpression(innerPath.node.arguments as Expression[])
                                     )
                                 }
                             })
@@ -59,7 +69,7 @@ export function transformer(
                             if (
                                 !innerPath.findParent(
                                     parentPath => parentPath.isObjectExpression() && parentPath.node === innerPath.node
-                                ) && !(innerPath.node.properties[0] as types.ObjectProperty).shorthand
+                                ) && !(innerPath.node.properties[0] as ObjectProperty).shorthand
                             ) {
                                 // 3. First parse ternary and logical conditionals
                                 innerPath.traverse({
@@ -70,8 +80,8 @@ export function transformer(
                                         innerPath.replaceWith(
                                             isExceptionCondition(innerPath.get("consequent")) ? innerPath.node.alternate
                                                 : isExceptionCondition(innerPath.get("alternate")) ? innerPath.node.consequent
-                                                    : innerPath.findParent((parent) => parent.isTemplateLiteral()) ? [innerPath.node.consequent, types.stringLiteral(" "), innerPath.node.alternate].reduce((acc, current) => types.binaryExpression("+", acc, current))
-                                                        : types.arrayExpression([innerPath.node.consequent, innerPath.node.alternate])
+                                                    : innerPath.findParent((parent) => parent.isTemplateLiteral()) ? [innerPath.node.consequent, stringLiteral(" "), innerPath.node.alternate].reduce((acc, current) => binaryExpression("+", acc, current))
+                                                        : arrayExpression([innerPath.node.consequent, innerPath.node.alternate])
                                         )
                                     }
                                 })
@@ -80,16 +90,16 @@ export function transformer(
                                 innerPath.traverse({
                                     ObjectProperty(innerPath) {
                                         if (
-                                            !types.isStringLiteral(innerPath.node.key)
-                                            && !types.isIdentifier(innerPath.node.key)
+                                            !isStringLiteral(innerPath.node.key)
+                                            && !isIdentifier(innerPath.node.key)
                                         ) {
                                             innerPath.remove()
                                         } else if (
                                             !innerPath.node.shorthand
-                                            && !types.isStringLiteral(innerPath.node.value)
-                                            && !types.isArrayExpression(innerPath.node.value)
-                                            && !types.isTemplateLiteral(innerPath.node.value)
-                                        ) innerPath.node.value = types.stringLiteral("🚀")
+                                            && !isStringLiteral(innerPath.node.value)
+                                            && !isArrayExpression(innerPath.node.value)
+                                            && !isTemplateLiteral(innerPath.node.value)
+                                        ) innerPath.node.value = stringLiteral("🚀")
                                     }
                                 })
 
@@ -98,7 +108,7 @@ export function transformer(
 
                                 try {
                                     // DONE. Final replace the original outer Object(s) with parsed one
-                                    innerPath.replaceWith(types.stringLiteral(
+                                    innerPath.replaceWith(stringLiteral(
                                         parser(options)(...new Function(
                                             `return [${largestObject}]`
                                         )() as ClassValue[])

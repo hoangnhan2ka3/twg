@@ -34,6 +34,7 @@
     //! Spell Checker
     "cSpell.words": [
         "barser",
+        "callees",
         "clsx",
         "compat",
         "hoangnhan",
@@ -50,7 +51,8 @@
         "tclass",
         "tclasses",
         "tseslint",
-        "tsup"
+        "tsup",
+        "webp"
     ],
     "typescript.tsdk": "node_modules\\typescript\\lib",
 }
