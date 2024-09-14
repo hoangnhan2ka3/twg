@@ -44,7 +44,7 @@
   Types: `ClassValue[]`
 
   ```js
-  type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
+  type ClassValue<T = string | string[] | bigint | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
   ```
 
 - ### `createTwg(options)(...inputs)`
@@ -68,7 +68,7 @@
   Types: `ClassValue[]`
 
   ```js
-  type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
+  type ClassValue<T = string | string[] | bigint | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
   ```
 
 ---
@@ -102,7 +102,7 @@
   Types: `ClassValue[]`
 
   ```js
-  type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
+  type ClassValue<T = string | string[] | bigint | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
   ```
 
 ---
@@ -139,7 +139,7 @@
   Types: `ClassValue[]`
 
   ```js
-  type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
+  type ClassValue<T = string | string[] | bigint | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
   ```
 
 - ### `createTwg(options)(...inputs)`
@@ -163,7 +163,7 @@
   Types: `ClassValue[]`
 
   ```js
-  type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
+  type ClassValue<T = string | string[] | bigint | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
   ```
 
 ---
@@ -197,7 +197,7 @@
   Types: `ClassValue[]`
 
   ```js
-  type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
+  type ClassValue<T = string | string[] | bigint | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
   ```
 
 ---
