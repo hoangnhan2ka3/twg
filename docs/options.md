@@ -183,6 +183,9 @@ Example with separator as `"_"`:
 
 **2. In `createTwg()` options:**
 
+> [!NOTE]
+> `twg()` is an alias of `createTwg()` function, that mean `twg()` is simply exported with default `createTwg()`'s `separator` option, which is `":"`. So if you want to custom the `separator`, you must define it in `createTwg()`, not in `twg()`.
+
   ```js
   // src/lib/utils.ts
 
@@ -224,6 +227,41 @@ Output (html):
 
   ```html
   <div class="size-92 relative grid place-items-center before_absolute before_inset-0 before_bg-red-500 before_hover_bg-blue-500 before_hover_text-yellow-500 aria-expanded_bg-red-500 aria-expanded_text-yellow-500">
+    Hello, World!
+  </div>
+  ```
+
+If `separator` option is set to `false`, you may manually define the separator yourself, eg.:
+
+  ```jsx
+  // HelloWorld.tsx
+
+  import { cn } from "@/lib/utils"
+
+  export function HelloWorld() {
+    return (
+      <div className={cn(
+        "size-92 relative grid place-items-center px-4 py-2",
+        {
+          "before:": [
+            "absolute inset-0 bg-red-500",
+            {
+              "hover:": "bg-blue-500 text-yellow-500"
+            }
+          ],
+          "text-": "lg red-500 pretty",
+        }
+      )}>
+        Hello, World!
+      </div>
+    )
+  }
+  ```
+
+Output (html):
+
+  ```html
+  <div class="size-92 relative grid place-items-center before:absolute before:inset-0 before:bg-red-500 before:hover:bg-blue-500 before:hover:text-yellow-500 text-lg text-red-500 text-pretty">
     Hello, World!
   </div>
   ```
