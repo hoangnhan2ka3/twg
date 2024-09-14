@@ -1,4 +1,4 @@
-import { type ClassValue } from "src"
+import { type ClassValue } from "src/index"
 import { transformer } from "src/extend/lite/processor/transformer"
 
 function toVal(mix: ClassValue, currentKey = "", key = ""): string {

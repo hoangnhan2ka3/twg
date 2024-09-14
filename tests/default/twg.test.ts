@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable no-constant-binary-expression */
 
-import { twg } from "src"
+import { twg } from "src/index"
 import { twg as liteTwg } from "src/lite"
 
 describe("twg()", () => {

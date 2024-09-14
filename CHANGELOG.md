@@ -11,7 +11,15 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
-## [6.0.0 🎉] - 2024-09-14
+## [6.0.1] - 2024-09-15
+
+### Fixed
+
+- Fixed misleading `src` module on bundle.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v6.0.0...v6.0.1>
+
+## [6.0.0 🎉] - 2024-09-15
 
 ### Breaking change
 

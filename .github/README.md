@@ -33,7 +33,7 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 | 📍 Entry point       | 📦 Bundle | 📦 Gzip  |
 |:---------------------|:---------:|:---------:|
-| `twg`                |   2753B   | **1445B** |
+| `twg`                |   2721B   | **1442B** |
 | `twg/lite` 🪶        |   2274B   | **1220B** |
 | `twg/extend`         |   2756B   | **1272B** |
 | `twg/extend/lite` 🪶 |   2138B   | **976B**  |

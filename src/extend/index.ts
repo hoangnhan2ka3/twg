@@ -1,5 +1,5 @@
-import { type ClassValue } from "src"
 import { transformer } from "src/extend/processor/transformer"
+import { type ClassValue } from "src/index"
 
 export interface TWGOptions {
     /**

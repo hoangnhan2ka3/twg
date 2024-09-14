@@ -1,4 +1,4 @@
-import { createTwg } from "src"
+import { createTwg } from "src/index"
 
 describe("createTwg()", () => {
     describe("Custom separator:", () => {

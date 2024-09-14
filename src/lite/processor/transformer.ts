@@ -1,4 +1,4 @@
-import { type ClassValue } from "src"
+import { type ClassValue } from "src/index"
 import { twg } from "src/lite"
 import { combiner } from "src/processor/combiner"
 import { extractor } from "src/processor/extractor"

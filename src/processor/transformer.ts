@@ -1,4 +1,4 @@
-import { type ClassValue, createTwg } from "src"
+import { type ClassValue, createTwg } from "src/index"
 import { combiner } from "src/processor/combiner"
 import { extractor } from "src/processor/extractor"
 
