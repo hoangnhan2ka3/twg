@@ -231,7 +231,19 @@ Output (html):
   </div>
   ```
 
-If `separator` option is set to `false`, you may manually define the separator yourself, eg.:
+If `separator` option is set to `false`, you may manually define the separator yourself:
+
+  ```js
+  // src/lib/utils.ts
+
+  import { createTwg, type ClassValue } from "twg"
+
+  export function cn(...inputs: ClassValue[]) {
+    return createTwg({ separator: false })(...inputs)
+  }
+  ```
+
+Example:
 
   ```jsx
   // HelloWorld.tsx
