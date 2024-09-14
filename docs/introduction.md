@@ -144,6 +144,8 @@
 
   You can replace your custom `callee` by adding it into the union `|` inside each regex.
 
+  Also check Tailwind official [`recommended VS Code settings`](https://github.com/tailwindlabs/tailwindcss-intellisense?tab=readme-ov-file#recommended-vs-code-settings).
+
 ### ⏩ Remote utilities
 
   You cannot use remote utilities like this:
