@@ -10,20 +10,20 @@ import {
     isIdentifier,
     isStringLiteral,
     isTemplateLiteral,
+    numericLiteral,
     type ObjectProperty,
     stringLiteral
 } from "@babel/types"
-import { type ClassValue } from "src/extend/lite"
-import { parser } from "src/extend/lite/processor/parser"
-import { type ReplacerOptions } from "src/extend/lite/replacer"
+import { type ClassValue, twg } from "src/extend/lite"
+import { type TransformerOptions } from "src/extend/lite/processor/transformer"
 
 function isExceptionCondition(path: NodePath<Expression>) {
     return !(path.isStringLiteral() || path.isTemplateLiteral() || path.isArrayExpression() || path.isObjectExpression())
 }
 
-export function transformer(
+export function parser(
     code: string,
-    callee: ReplacerOptions["callee"] = "twg"
+    callee: TransformerOptions["callee"] = "twg"
 ) {
     const ast = parse(code, {
         sourceType: "module",
@@ -80,13 +80,13 @@ export function transformer(
                                             !isStringLiteral(innerPath.node.value)
                                             && !isArrayExpression(innerPath.node.value)
                                             && !isTemplateLiteral(innerPath.node.value)
-                                        ) innerPath.node.value = stringLiteral("🚀")
+                                        ) innerPath.node.value = numericLiteral(1)
                                     }
                                 })
 
                                 try {
                                     innerPath.replaceWith(stringLiteral(
-                                        parser(...new Function(`return [${generate(innerPath.node).code}]`)() as ClassValue[])
+                                        twg(...new Function(`return [${generate(innerPath.node).code}]`)() as ClassValue[])
                                     ))
                                 } catch { return code }
                             }

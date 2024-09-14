@@ -27,8 +27,6 @@
 // HelloWorld.tsx
 
 import { twg } from "twg"
-// or
-import twg from "twg"
 
 export function HelloWorld() {
   return (
@@ -64,8 +62,6 @@ Output (html):
 // HelloWorld.tsx
 
 import { twg } from "twg"
-// or
-import twg from "twg"
 
 export function HelloWorld() {
   return (
@@ -430,7 +426,7 @@ You can use conditional like `&& | || | ??` _(logical)_ or `isFooBar === "twg" ?
   You will receive the following error unless you define the [`nestingCallee`](./options.md#-custom-nestingcallee) option:
 
   ```bash
-  ⚠️ TWG - Problem occurred on `replacer()`, please read the `Usage / Use cases` section on the docs carefully:
+  ⚠️ TWG - Problem occurred on `transformer()`, please read the `Usage / Use cases` section on the docs carefully:
   clsx is not defined in:
   twg("size-92 relative grid place-items-center px-4 py-2", {
     before: ["absolute inset-0", clsx("bg-red-500", "hover:bg-blue-500 hover:text-yellow-500", "active:border-2 active:border-white")]
@@ -448,9 +444,7 @@ You can use conditional like `&& | || | ??` _(logical)_ or `isFooBar === "twg" ?
 // tailwind.config.ts
 
 import { type Config } from "tailwindcss"
-import { replacer } from "twg/replacer"
-// or
-import replacer from "twg/replacer"
+import { transformer } from "twg"
 
 export default {
   content: {
@@ -459,7 +453,7 @@ export default {
       "./src/components/**/*.{ts,tsx}",
     ],
     transform: {
-      DEFAULT: replacer({
+      DEFAULT: transformer({
         callee: "cn"
       })
     }

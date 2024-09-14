@@ -31,42 +31,20 @@ A more elegant way of writing Tailwind classes. Never need to repeating the same
 
 <div align="center">
 
-<table>
-<tr>
-  <th>
-    <h3 align="center"><code>default</code> version</h3>
-  </th>
-  <th>
-    <h3 align="center"><code>extend</code> version</h3>
-  </th>
-</tr>
-<tr>
-<td>
+| 📍 Entry point       | 📦 Bundle | 📦 Gzip  |
+|:---------------------|:---------:|:---------:|
+| `twg`                |   2753B   | **1445B** |
+| `twg/lite` 🪶        |   2274B   | **1220B** |
+| `twg/extend`         |   2756B   | **1272B** |
+| `twg/extend/lite` 🪶 |   2138B   | **976B**  |
 
-| 📍 Entry point                | 📦 Bundle | 📦 Gzip  |
-|:------------------------------|:---------:|:---------:|
-| `twg`                         |    914B   | **511B**  |
-| `twg/lite` 🪶                 |   757B    | **439B**  |
-| `twg/replacer`                |   2.6kB   | **1.4kB** |
-| `twg/lite/replacer` 🪶        |   2.2kB   | **1.2kB** |
-
-</td>
-<td>
-
-| 📍 Entry point                | 📦 Bundle | 📦 Gzip  |
-|:------------------------------|:---------:|:---------:|
-| `twg/extend`                  |   1.0kB   | **568B**  |
-| `twg/extend/lite` 🪶          |   854B    | **493B**  |
-| `twg/extend/replacer`         |   2.5kB   | **1.1kB** |
-| `twg/extend/lite/replacer` 🪶 |   1.9kB   | **876B**  |
-
-</td>
-</tr>
-</table>
+_From `v6`, each entry already contains both `twg()` and `transformer()`<sup>[1]</sup> function_
 
 </div>
 
 ---
+
+<sup>[1]</sup>: Previously called `replacer()` function.
 
 ## 🗝️ Features
 
@@ -100,7 +78,7 @@ Version comparison
 | Accept nesting custom callee functions inside main object(s)             |           |                |    ✓     |               |
 | Accept logical conditionals                                              |     ✓     |       ✓        |    ✓     |       ✓       |
 | Accept ternary conditionals                                              |  partial  |    partial     |    ✓     |       ✓       |
-| Accept native object behavior (key as classes and value as conditionals) |           |                |    ✓     |       ✓       |
+| Accept native object behavior (key as classes and value as conditionals) |  partial  |    partial     |    ✓     |       ✓       |
 | Compatible with wrappers                                                 |     ✓     |       ✓        |    ✓     |       ✓       |
 | Fully customizable                                                       |     ✓     |    partial     |    ✓     |    partial    |
 | [Options](../docs/options.md) ↗️                                          |     3     |       1        |    4     |       1       |
@@ -162,11 +140,16 @@ Tested conditions
 
 <summary>Click to expand/collapse this section</summary>
 
+- 🔥 From `v6.0.0`:
+  - Rename `replacer()` function to `transformer()`.
+  - Remove `*/replacer` entry point, `transformer()` now is in the same entry point as `twg()`, also with `createTwg()` function. That means `transformer()` function will be combined/located in the same file with `twg()`, to take advantage of its API without rewrite it in another entry.
+  - ~25% lighter bundle size in overall.
+
 - 🔥 From `v5.0.3`:
   - Enable `tree-shaking` for the package.
 
 - 🔥 From `v5.0.0`:
-  - From now if you want to use custom `separator` option, you need to define the `separator` option in new `createTwg()` function (previously in the last Object of `twg()` function) and also in `replacer()` function like previous version.
+  - From now if you want to use custom `separator` option, you need to define the `separator` option in new `createTwg()` function (previously in the last Object of `twg()` function) and also in `transformer()` function like previous version.
 
 - 🔥 From `v4.0.0`:
   - Make `extend` version (which previously called **AST** version) as optional entry point. From now if you want to use `extend` version, you need to install 4 more `@babel` dependencies, refer to docs.
@@ -177,7 +160,7 @@ Tested conditions
 
     ```js
     transform: {
-      DEFAULT: replacer({
+      DEFAULT: transformer({
         // Define options here, eg.:
         callee: "twg",
         nestingCallee: ["cn", "twg"]
@@ -213,7 +196,7 @@ Tested conditions
 
   Same as default, but:
 
-  - Without any options API except for custom `callee` in [`replacer()` options](../docs/options.md#replacer-options).
+  - Without any options API except for custom `callee` in [`transformer()` options](../docs/options.md#transformer-options).
   - No `debug messages` (no console messages).
   - No `JSDoc` comments for each function.
   - 20 ~ 30% lighter.
@@ -274,9 +257,7 @@ npm install twg
 // tailwind.config.ts
 
 import { type Config } from "tailwindcss"
-import { replacer } from "twg/replacer"
-// or
-import replacer from "twg/replacer"
+import { transformer } from "twg"
 
 export default {
   content: {
@@ -285,7 +266,7 @@ export default {
       "./src/components/**/*.{ts,tsx}",
     ], // Move your old `content` to `content.files` like this
     transform: {
-      DEFAULT: replacer() // Put `replacer()` here
+      DEFAULT: transformer() // Put `transformer()` here
     }
   },
   // Other configurations...
@@ -297,18 +278,16 @@ export default {
   ```js
   // tailwind.config.ts
 
-  import { replacer } from "twg/lite/replacer"
-  // or
-  import replacer from "twg/lite/replacer"
+  import { transformer } from "twg/lite"
 
   // Rest like above
   ```
 
-- If you need to override default `replacer()` options:
+- If you need to override default `transformer()` options:
 
   ```js
   transform: {
-    DEFAULT: replacer({
+    DEFAULT: transformer({
       // Define options here, eg.:
       callee: "cn"
     })
@@ -321,24 +300,18 @@ export default {
 
 ```jsx
 import { twg } from "twg"
-// or
-import twg from "twg"
 ```
 
 - Lite version:
 
   ```jsx
   import { twg } from "twg/lite"
-  // or
-  import twg from "twg/lite"
   ```
 
 - If you need to override default `twg()` options, you need to use `createTwg()` function (not for lite version):
 
   ```js
   import { createTwg } from "twg"
-  // or
-  import createTwg from "twg"
 
   createTwg({ separator: "_" })(
     //...
@@ -372,9 +345,7 @@ npm install twg @babel/generator @babel/parser @babel/traverse @babel/types
 // tailwind.config.ts
 
 import { type Config } from "tailwindcss"
-import { replacer } from "twg/extend/replacer"
-// or
-import replacer from "twg/extend/replacer"
+import { transformer } from "twg/extend"
 
 export default {
   content: {
@@ -383,7 +354,7 @@ export default {
       "./src/components/**/*.{ts,tsx}",
     ], // Move your old `content` to `content.files` like this
     transform: {
-      DEFAULT: replacer() // Put `replacer()` here
+      DEFAULT: transformer() // Put `transformer()` here
     }
   },
   // Other configurations...
@@ -395,18 +366,16 @@ export default {
   ```js
   // tailwind.config.ts
 
-  import { replacer } from "twg/extend/lite/replacer"
-  // or
-  import replacer from "twg/extend/lite/replacer"
+  import { transformer } from "twg/extend/lite"
 
   // Rest like above
   ```
 
-- If you need to override default `replacer()` options:
+- If you need to override default `transformer()` options:
 
   ```js
   transform: {
-    DEFAULT: replacer({
+    DEFAULT: transformer({
       // Define options here, eg.:
       callee: "cn"
     })
@@ -419,24 +388,18 @@ export default {
 
 ```jsx
 import { twg } from "twg/extend"
-// or
-import twg from "twg/extend"
 ```
 
 - Lite version:
 
   ```jsx
   import { twg } from "twg/extend/lite"
-  // or
-  import twg from "twg/extend/lite"
   ```
 
 - If you need to override default `twg()` options, you need to use `createTwg()` function (not for lite version):
 
   ```js
   import { createTwg } from "twg/extend"
-  // or
-  import createTwg from "twg/extend"
 
   createTwg({ separator: "_" })(
     //...
@@ -462,7 +425,7 @@ See [how to use](../docs/usage.md) on docs 👇.
     - [Nesting callee functions](../docs/usage.md#-nesting-callee-functions) ↗️
   - [Combination](../docs/usage.md#-combination) ↗️
 - [Options](../docs/options.md) ↗️
-  - [`replacer()` options](../docs/options.md#replacer-options) ↗️
+  - [`transformer()` options](../docs/options.md#transformer-options) ↗️
   - [`twg` options](../docs/options.md#twg-options) ↗️
   - [Custom options](../docs/options.md#-custom-options) ↗️
     - [Custom `callee`](../docs/options.md#-custom-callee) ↗️

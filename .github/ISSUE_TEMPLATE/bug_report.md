@@ -16,7 +16,7 @@ Give a clear and concise description of what the bug is.
 
 ### 2. How are you using it?
 
-Describe how you are using `twg()` and `replacer()` in your codebase at the location where the bug may happening.
+Describe how you are using `twg()` and `transformer()` in your codebase at the location where the bug may happening.
 
 ### 3. Current behavior
 

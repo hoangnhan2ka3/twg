@@ -1,7 +1,7 @@
-import { transformer as liteTransformer } from "src/extend/lite/processor/ast"
-import { transformer } from "src/extend/processor/ast"
+import { parser as liteParser } from "src/extend/lite/processor/ast"
+import { parser } from "src/extend/processor/ast"
 
-describe("transformer()", () => {
+describe("parser()", () => {
     describe("General cases:", () => {
         it.each([
             {
@@ -96,8 +96,8 @@ describe("transformer()", () => {
                 expected: `twg("multiple classes", "var1:multiple var1:classes var1:var2:multiple var1:var2:classes var1:var2:multiple var1:var2:classes var1:var2:var3:multiple var1:var2:var3:classes var1:var2:var3:multiple var1:var2:var3:classes var1:var2:var3:var6:multiple var1:var2:var3:var6:classes var1:var2:var3:var7:multiple var1:var2:var3:var7:classes var1:var2:var3:var7:another var1:var2:var3:var7:class var1:var2:var3:var7:w-{{{ var1:var2:var3:var7:var9:multiple var1:var2:var3:var7:var9:classes var1:var2:var3:var7:var-10:multiple var1:var2:var3:var7:var-10:classes var1:var4:multiple var1:var4:classes var1:var4:multiple var1:var4:classes var1:var4:var5:multiple var1:var4:var5:classes var1:var4:var5:multiple var1:var4:var5:classes var1:var4:var5:another var1:var4:var5:class var1:var4:var5:var2:other var1:var4:var5:var2:multiple var1:var4:var5:var2:classes var1:var4:var5:var2:multiple var1:var4:var5:var2:classes var-4:multiple var-4:classes");`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(transformer(contents, { callee: "twg", separator: ":" })).toBe(expected)
-            expect(liteTransformer(contents, "twg")).toBe(expected)
+            expect(parser(contents, { callee: "twg", separator: ":" })).toBe(expected)
+            expect(liteParser(contents, "twg")).toBe(expected)
         })
     })
 
@@ -146,8 +146,8 @@ describe("transformer()", () => {
                 expected: `<div className={twg("multiple classes", "var1:other var1:multiple var1:classes var2:multiple var2:classes var3", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(transformer(contents, { callee: "twg", separator: ":" })).toBe(expected)
-            expect(liteTransformer(contents, "twg")).toBe(expected)
+            expect(parser(contents, { callee: "twg", separator: ":" })).toBe(expected)
+            expect(liteParser(contents, "twg")).toBe(expected)
         })
     })
 
@@ -182,8 +182,8 @@ describe("transformer()", () => {
                 expected: `<div className={twg("multiple classes", "var1:other var1:multiple var1:classes var2:multiple var2:classes var3", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(transformer(contents, { callee: "twg", separator: ":" })).toBe(expected)
-            expect(liteTransformer(contents, "twg")).toBe(expected)
+            expect(parser(contents, { callee: "twg", separator: ":" })).toBe(expected)
+            expect(liteParser(contents, "twg")).toBe(expected)
         })
     })
 
@@ -232,8 +232,8 @@ describe("transformer()", () => {
                 expected: `<div className={twg("multiple classes", "var1:other var1:multiple var1:classes var1:class var2:multiple var2:classes var2:avc var3:lorem var3:ipsum var3:class var3:other var3:multiple var3:class var3:other var3:class", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(transformer(contents, { callee: "twg", separator: ":" })).toBe(expected)
-            expect(liteTransformer(contents, "twg")).toBe(expected)
+            expect(parser(contents, { callee: "twg", separator: ":" })).toBe(expected)
+            expect(liteParser(contents, "twg")).toBe(expected)
         })
     })
 
@@ -284,8 +284,8 @@ describe("transformer()", () => {
                 expected: `<div className={twg("multiple classes", "var1:other var1:multiple var1:classes var2:multiple var2:classes", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(transformer(contents, { callee: "twg", separator: ":" })).toBe(expected)
-            expect(liteTransformer(contents, "twg")).toBe(expected)
+            expect(parser(contents, { callee: "twg", separator: ":" })).toBe(expected)
+            expect(liteParser(contents, "twg")).toBe(expected)
         })
     })
 })

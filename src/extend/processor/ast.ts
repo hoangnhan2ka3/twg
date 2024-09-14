@@ -9,12 +9,12 @@ import {
     isIdentifier,
     isStringLiteral,
     isTemplateLiteral,
+    numericLiteral,
     type ObjectProperty,
     stringLiteral
 } from "@babel/types"
-import { type ClassValue } from "src/extend"
-import { parser } from "src/extend/processor/parser"
-import { type ReplacerOptions } from "src/extend/replacer"
+import { type ClassValue, createTwg } from "src/extend"
+import { type TransformerOptions } from "src/extend/processor/transformer"
 
 /**
  * Check whether consequent or alternate of a ternary conditional is a binding identifier.
@@ -29,13 +29,13 @@ function isExceptionCondition(path: NodePath<Expression>) {
 /**
  * Use AST to transform the conditionals, especially the `nesting` Object conditionals or `nesting` kinds of ternary conditionals.
  * @param {string} code input code.
- * @param {ReplacerOptions} options callee, nestingCallee, separator, debug. See [docs](https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#replacer-options).
+ * @param {TransformerOptions} options callee, nestingCallee, separator, debug. See [docs](https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#transformer-options).
  * @returns {string} `string`
  * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
-export function transformer(
+export function parser(
     code: string,
-    options: ReplacerOptions = {}
+    options: TransformerOptions = {}
 ) {
     const ast = parse(code, {
         sourceType: "module",
@@ -98,7 +98,7 @@ export function transformer(
                                             !isStringLiteral(innerPath.node.value)
                                             && !isArrayExpression(innerPath.node.value)
                                             && !isTemplateLiteral(innerPath.node.value)
-                                        ) innerPath.node.value = stringLiteral("🚀")
+                                        ) innerPath.node.value = numericLiteral(1)
                                     }
                                 })
 
@@ -108,12 +108,12 @@ export function transformer(
                                 try {
                                     // DONE. Final replace the original outer Object(s) with parsed one
                                     innerPath.replaceWith(stringLiteral(
-                                        parser(options)(...new Function(
+                                        createTwg(options)(...new Function(
                                             `return [${largestObject}]`
                                         )() as ClassValue[])
                                     ))
                                 } catch (e) {
-                                    options.debug && console.warn(`\n⚠️ TWG - Problem occurred on \`replacer()\`, please read the \`Usage / Use cases\` section on the docs carefully:\n${((e as Error).message)} in:\n${largestObject}`)
+                                    options.debug && console.warn(`\n⚠️ TWG - Problem occurred on \`transformer()\`, please read the \`Usage / Use cases\` section on the docs carefully:\n${((e as Error).message)} in:\n${largestObject}`)
                                     return code
                                 }
                             }

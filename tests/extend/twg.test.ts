@@ -54,7 +54,7 @@ describe("twg()", () => {
         })
     })
 
-    // Only for testing, not for real usage because replacer() cannot handle remote classes
+    // Only for testing, not for real usage because transformer() cannot handle remote classes
     describe("Remote classes:", () => {
         const remoteSingleClass = ["class"]
         const remoteMultipleClasses = ["multiple classes"]

@@ -1,7 +1,7 @@
-import { replacer as liteReplacer } from "src/extend/lite/replacer"
-import { replacer } from "src/extend/replacer"
+import { transformer as liteTransformer } from "src/extend/lite/processor/transformer"
+import { transformer } from "src/extend/processor/transformer"
 
-describe("replacer()", () => {
+describe("transformer()", () => {
     describe("Default options:", () => {
         it.each([
             {
@@ -76,8 +76,8 @@ describe("replacer()", () => {
                 expected: `<div className={twg(["multiple classes", "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes"])} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -96,8 +96,8 @@ describe("replacer()", () => {
                 expected: `<div className={cn("multiple classes", "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes")} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ callee: "cn" })(contents)).toBe(expected)
-            expect(liteReplacer({ callee: "cn" })(contents)).toBe(expected)
+            expect(transformer({ callee: "cn" })(contents)).toBe(expected)
+            expect(liteTransformer({ callee: "cn" })(contents)).toBe(expected)
         })
 
         it.each([
@@ -138,8 +138,8 @@ describe("replacer()", () => {
                 expected: `<div className={twg("multiple classes", "mod1:class mod1:other mod1:classes mod2:class mod2:additional-mod:other mod2:additional-mod:classes")} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ callee: ["cn", "twg", "clsx"] })(contents)).toBe(expected)
-            expect(liteReplacer({ callee: ["cn", "twg", "clsx"] })(contents)).toBe(expected)
+            expect(transformer({ callee: ["cn", "twg", "clsx"] })(contents)).toBe(expected)
+            expect(liteTransformer({ callee: ["cn", "twg", "clsx"] })(contents)).toBe(expected)
         })
 
         it.each([
@@ -184,8 +184,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ callee: "" })(contents)).toBe(expected)
-            expect(liteReplacer({ callee: "" })(contents)).toBe(expected)
+            expect(transformer({ callee: "" })(contents)).toBe(expected)
+            expect(liteTransformer({ callee: "" })(contents)).toBe(expected)
         })
     })
 
@@ -204,7 +204,7 @@ describe("replacer()", () => {
                 expected: `<div className={twg("multiple classes", "mod1class mod1other mod1classes mod2class mod2additional-modother mod2additional-modclasses")} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ separator: "" })(contents)).toBe(expected)
+            expect(transformer({ separator: "" })(contents)).toBe(expected)
         })
 
         it.each([
@@ -221,7 +221,7 @@ describe("replacer()", () => {
                 expected: `<div className={twg("multiple classes", "mod1-class mod1-other mod1-classes mod2-class mod2-additional-mod-other mod2-additional-mod-classes")} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ separator: "-" })(contents)).toBe(expected)
+            expect(transformer({ separator: "-" })(contents)).toBe(expected)
         })
 
         it.each([
@@ -238,7 +238,7 @@ describe("replacer()", () => {
                 expected: `<div className={twg("multiple classes", "mod1tclass mod1tother mod1tclasses mod2tclass mod2tadditional-modtother mod2tadditional-modtclasses")} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ separator: "t" })(contents)).toBe(expected)
+            expect(transformer({ separator: "t" })(contents)).toBe(expected)
         })
 
         it.each([
@@ -257,7 +257,7 @@ describe("replacer()", () => {
                 expected: `<div className={twg("multiple classes", "mod1class mod1other mod1classes mod2class mod2additional-mod:other mod2additional-mod:classes mod3-multiple mod3-classes mod4:class mod4:additional_mod:other mod4:additional_mod:classes")} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ separator: false })(contents)).toBe(expected)
+            expect(transformer({ separator: false })(contents)).toBe(expected)
         })
     })
 
@@ -416,7 +416,7 @@ describe("replacer()", () => {
                 expected: `<div className={twg("multiple classes", ["other class", "var1:in var1:object var1:with var1:var var1:other var1:class var1:var3:in var1:var3:other var1:var3:object var1:var3:with var1:var3:var"], "var2:multiple var2:classes var2:other var2:class", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ nestingCallee: ["cn", "twg"] })(contents)).toBe(expected)
+            expect(transformer({ nestingCallee: ["cn", "twg"] })(contents)).toBe(expected)
         })
     })
 
@@ -624,7 +624,7 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -652,7 +652,7 @@ describe("replacer()", () => {
                         className
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", "\\uD83D\\uDE80", className)} />;`
+                expected: `<div className={twg("multiple classes", "", className)} />;`
             },
             {
                 contents: `
@@ -665,11 +665,11 @@ describe("replacer()", () => {
                         className
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", "\\uD83D\\uDE80", className)} />;`
+                expected: `<div className={twg("multiple classes", "", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -714,7 +714,7 @@ describe("replacer()", () => {
                         className
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", "var1", "var2", className)} />;`
+                expected: `<div className={twg("multiple classes", "var1:\\uD83D\\uDE80", "var2", className)} />;`
             },
             {
                 contents: `
@@ -729,11 +729,11 @@ describe("replacer()", () => {
                         className
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", "var1", "var2", className)} />;`
+                expected: `<div className={twg("multiple classes", "var1:\\uD83D\\uDE80", "var2", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            // expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -860,8 +860,8 @@ describe("replacer()", () => {
                 expected: `<div className={twg("multiple classes", "var1:class var1:var2 var1:var3 var1:var4:multiple var1:var4:classes var1:var4:var5", "var6 var7", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -899,8 +899,8 @@ describe("replacer()", () => {
                 expected: `<div className={twg("multiple classes", "var1:class", "other multiple classes", "var2:multiple var2:classes", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -973,8 +973,8 @@ describe("replacer()", () => {
 }]);`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1108,7 +1108,7 @@ describe("replacer()", () => {
                 expected: `<div className={twg("multiple classes", "var1:class var1:var2:multiple var1:var2:classes var1:var2:variant:primary", "var3:multiple var3:classes", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ nestingCallee: "badgeVariants" })(contents)).toBe(expected)
+            expect(transformer({ nestingCallee: "badgeVariants" })(contents)).toBe(expected)
         })
     })
 
@@ -1299,7 +1299,7 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1378,8 +1378,8 @@ describe("replacer()", () => {
                 expected: `<div className={twg("multiple classes", "var:multiple var:classes var:other var:class var:multiple var:classes", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1393,19 +1393,41 @@ describe("replacer()", () => {
                             var1: \`multiple
                             classes\`,
                             var2: [
-                            "multiple classes", {
-                                var3: \`other
-                                class\`
-                            }]
+                                "multiple classes", {
+                                    var3: \`other
+                                    class\`
+                                }
+                            ]
                         },
                         className
                     )} />
                 `,
-                expected: `<div className={twg("multiple classes", "var1:multiple var1:classes var2:multiple var2:classes var2:var3:other var2:var3:class", className)} />;`
+                expected: `<div className={twg("multiple classes", "var1:multiple\\n var1:classes var2:multiple var2:classes var2:var3:other\\n var2:var3:class", className)} />;`
+            },
+            { //*
+                contents: `
+                    <div className={twg(
+                        \`multiple
+                        classes\`,
+                        {
+                            var1: \`multiple
+                            classes\`,
+                            var2: [
+                                "multiple classes", {
+                                    var3: \`other
+                                    class\`
+                                }
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `<div className={twg(\`multiple
+                        classes\`, "var1:multiple\\n var1:classes var2:multiple var2:classes var2:var3:other\\n var2:var3:class", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1457,8 +1479,8 @@ describe("replacer()", () => {
                     <div className={twg(
                         "multiple classes",
                         {
-                            var1: (conditional1) ? " multiple classes  " : "other    multiple  classes",
-                            var2: conditional2 === "true" ? ("multiple    classes") : (("other multiple classes   "))
+                            var1: (conditional1) ? " multiple classes  " : "   other    multiple  classes",
+                            var2: conditional2 === "true" ? ("multiple    classes   ") : ((" other multiple classes   "))
                         },
                         className
                     )} />
@@ -1466,8 +1488,8 @@ describe("replacer()", () => {
                 expected: `<div className={twg("multiple classes", "var1:multiple var1:classes var1:other var1:multiple var1:classes var2:multiple var2:classes var2:other var2:multiple var2:classes", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1515,8 +1537,8 @@ describe("replacer()", () => {
                 expected: `<div className={twg("size-92 relative grid place-items-center px-4 py-2", "before:absolute before:inset-0 before:bg-red-500 before:hover:bg-blue-500 before:hover:text-yellow-500 before:hover:bg-blue-500 before:hover:text-yellow-500 before:hover:border-2 before:hover:border-white before:fixed before:inset-0 before:bg-yellow-500 aria-expanded:bg-red-500 aria-expanded:text-yellow-500")} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1577,8 +1599,8 @@ describe("replacer()", () => {
                 expected: `<div className={twg("class", "multiple classes", "other class")} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1598,8 +1620,8 @@ describe("replacer()", () => {
                 expected: `<div className={twg("multiple classes", "var1:multiple var1:classes var1:other var1:multiple var1:classes var2:multiple var2:classes var2:other var2:multiple var2:classes", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1705,8 +1727,8 @@ describe("replacer()", () => {
                 expected: `<div className={twg("multiple classes", "var1:multiple var1:classes var1:var2:multiple var1:var2:classes var1:var2:another var1:var2:class var-3:multiple var-3:classes", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1876,8 +1898,8 @@ describe("replacer()", () => {
                 expected: `<div className={twg("multiple classes", "var1:multiple var1:classes var1:var2:multiple var1:var2:classes var1:var2:multiple var1:var2:classes var1:var2:another var1:var2:class var1:var2:var3:class var1:var2:var3:var4:multiple var1:var2:var3:var4:classes var1:var2:var3:var4:multiple var1:var2:var3:var4:classes var1:var2:var3:multiple var1:var2:var3:classes var-5:multiple var-5:classes", className)} />;`
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 })

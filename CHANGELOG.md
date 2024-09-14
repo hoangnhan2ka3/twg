@@ -11,6 +11,33 @@ Undocumented APIs should be considered internal and may change without warning.
 
 Nothing yet!
 
+## [6.0.0 🎉] - 2024-09-14
+
+### Breaking change
+
+- Rename `replacer()` function to `transformer()`.
+- Remove `*/replacer` entry point, `transformer()` now is in the same entry point as `twg()`, also with `createTwg()` function. That means `transformer()` function will be combined/located in the same file with `twg()`, to take advantage of its API without rewrite it in another entry.
+
+### Core change
+
+- Deprecated `reducer()` and `parser()` functions because `twg()` can handle it now.
+- Change `toVal()` function's logic to handle mapping key with values process.
+- Add `bigint` to `ClassValue` type (related to [this]((https://github.com/lukeed/clsx/pull/96)) `clsx` issue).
+
+### Refactor
+
+- Change `native object` detecting convention from `"🚀"` to `1`.
+- Refactor some `JSDoc` for functions and fix typo.
+- Delete unused bracket pair in `combiner()` function.
+- Refactor `ClassValue` import path to `src/index` in every entry point.
+
+### Chore
+
+- Bump `@types/node` version to `v22.5.5`.
+- Add `benchmark` with `clsx`.
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v5.0.11...v6.0.0>
+
 ## [5.0.11] - 2024-09-14
 
 ### Refactor

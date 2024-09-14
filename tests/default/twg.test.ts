@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable no-constant-binary-expression */
 
-import { createTwg, twg } from "src"
+import { twg } from "src"
 import { twg as liteTwg } from "src/lite"
 
 describe("twg()", () => {
@@ -53,7 +53,7 @@ describe("twg()", () => {
         })
     })
 
-    // Only for testing, not for real usage because replacer() cannot handle remote classes
+    // Only for testing, not for real usage because transformer() cannot handle remote classes
     describe("Remote classes:", () => {
         const remoteSingleClass = ["class"]
         const remoteMultipleClasses = ["multiple classes"]
@@ -201,7 +201,7 @@ describe("twg()", () => {
         })
     })
 
-    // Only for testing, not for real usage because replacer() cannot handle remote booleans
+    // Only for testing, not for real usage because transformer() cannot handle remote booleans
     describe("Key as classes and value as conditionals:", () => {
         const isAndOr1 = true
         const isAndOr2 = false
@@ -314,6 +314,9 @@ describe("twg()", () => {
             { args: [{ "var": "class" }], expected: "var:class" },
             { //*
                 args: [{ "var1 var2": "class" }], expected: "var1 var2:class"
+            },
+            {
+                args: [{ var1: true }], expected: "var1:true"
             },
             {
                 args: [{ "var1 var2": true }], expected: "var1 var2:true"

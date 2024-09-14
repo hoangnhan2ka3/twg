@@ -13,7 +13,7 @@
     - [Nesting callee functions](../docs/usage.md#-nesting-callee-functions) ↗️
   - [Combination](../docs/usage.md#-combination) ↗️
 - [Options](../docs/options.md) ↗️
-  - [`replacer()` options](../docs/options.md#replacer-options) ↗️
+  - [`transformer()` options](../docs/options.md#transformer-options) ↗️
   - [`twg` options](../docs/options.md#twg-options) ↗️
   - [Custom options](../docs/options.md#-custom-options) ↗️
     - [Custom `callee`](../docs/options.md#-custom-callee) ↗️

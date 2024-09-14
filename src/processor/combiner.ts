@@ -80,7 +80,7 @@ export function combiner(content: string) {
                     continue
                 }
 
-                if (((/\w/).test(cEntry))) {
+                if ((/\w/).test(cEntry)) {
                     balance = 1
                     if (!(/[(\w)]/).test(char)) {
                         balance--
@@ -105,7 +105,7 @@ export function combiner(content: string) {
                     continue
                 }
 
-                if (((/\w/).test(aEntry))) {
+                if ((/\w/).test(aEntry)) {
                     balance = 1
                     if (!(/[(\w)]/).test(char)) {
                         balance--

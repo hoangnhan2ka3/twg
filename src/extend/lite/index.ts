@@ -1,53 +1,58 @@
-import { type ClassValue } from "src/extend/index"
-import { parser } from "src/extend/lite/processor/parser"
+import { type ClassValue } from "src"
+import { transformer } from "src/extend/lite/processor/transformer"
 
-function toVal(mix: ClassValue): string {
+function toVal(mix: ClassValue, currentKey = "", key = ""): string {
     let k = 0,
         y: string,
-        i = false,
         str = ""
+
+    const newKey = currentKey ? currentKey + (key ? ":" + key : "") : key
+    const n = newKey && newKey + ":"
+
     if (typeof mix === "string" || typeof mix === "number") {
-        str += mix.toString()
-    } else if (typeof mix === "object" && mix !== null) {
+        for (const part of mix.toString().split(" ").filter(part => part.trim() !== "")) {
+            str += (str && " ") + n + part
+        }
+    } else if (mix && typeof mix === "object") {
         if (Array.isArray(mix)) {
-            const len = mix.length
-            for (; k < len; k++) {
+            for (; k < mix.length; k++) {
                 if (mix[k]) {
-                    y = toVal(mix[k] as ClassValue)
-                    str += y && (str && " ") + y
+                    if (y = toVal(mix[k], newKey)) {
+                        str += (str && " ") + y
+                    }
                 }
             }
         } else {
-            const s = str && " "
             for (y in mix) {
-                if (mix[y] === true || (typeof mix[y] === "number" && mix[y] !== 0)) {
-                    str += s + y
-                } else {
-                    i = true
+                if (mix[y]) {
+                    const parts = y.trim().includes(" ")
+                        ? y.split(" ").map(part => n + part).join(" ")
+                        : n + y
+                    str += (str && " ") + ((typeof mix[y] === "boolean" || typeof mix[y] === "number")
+                        ? parts
+                        : toVal(mix[y] as ClassValue, newKey, y)
+                    )
                 }
             }
-
-            if (i) str += s + parser(mix)
         }
     }
     return str
 }
 
-export function twg(...inputs: ClassValue[]) {
+function twg(...inputs: ClassValue[]) {
     let i = 0,
         tmp: ClassValue,
         x: string,
         str = ""
     const len = inputs.length
     for (; i < len; i++) {
-        tmp = inputs[i]
-        if (tmp) {
-            x = toVal(tmp)
-            str += x && (str && " ") + x
+        if (tmp = inputs[i]) {
+            if (x = toVal(tmp)) {
+                str += (str && " ") + x
+            }
         }
     }
     return str
 }
 
-export { type ClassValue }
-export default twg
+export { type ClassValue, transformer, twg }

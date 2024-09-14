@@ -1,6 +1,6 @@
-import { transformer } from "src/extend/processor/ast"
+import { parser } from "src/extend/processor/ast"
 
-export interface ReplacerOptions {
+export interface TransformerOptions {
     /**
      * Callee name to be scanned.
      * @default "twg"
@@ -32,17 +32,17 @@ export interface ReplacerOptions {
 
 /**
  * Transforms the content before Tailwind scans/extracting its classes.
- * @param {ReplacerOptions} [options = {callee="twg", nestingCallee=undefined, separator=":", debug=true}] callee, nestingCallee, separator, debug. See [docs](https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#replacer-options).
+ * @param {TransformerOptions} [options = {callee="twg", nestingCallee=undefined, separator=":", debug=true}] callee, nestingCallee, separator, debug. See [docs](https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#transformer-options).
  * @param {string} content The content already provided by `content.files` in `tailwind.config`.
  * @returns {string} `(content: string) => string`
  * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
-export function replacer({
+export function transformer({
     callee = "twg",
     nestingCallee,
     separator = ":",
     debug = true
-}: ReplacerOptions = {}) {
+}: TransformerOptions = {}) {
     return (content: string) => {
         // 0. Check whether callee? is valid
         if (!callee) {
@@ -51,9 +51,7 @@ export function replacer({
         }
 
         try {
-            return transformer(content, { callee, nestingCallee, separator, debug })
+            return parser(content, { callee, nestingCallee, separator, debug })
         } catch { return content }
     }
 }
-
-export default replacer

@@ -1,9 +1,8 @@
-import { type ClassValue } from "src"
+import { type ClassValue, createTwg } from "src"
 import { combiner } from "src/processor/combiner"
 import { extractor } from "src/processor/extractor"
-import { parser } from "src/processor/parser"
 
-export interface ReplacerOptions {
+export interface TransformerOptions {
     /**
      * Callee name to be scanned.
      * @default "twg"
@@ -28,16 +27,16 @@ export interface ReplacerOptions {
 
 /**
  * Transforms the content before Tailwind scans/extracting its classes.
- * @param {ReplacerOptions} [options = {callee="twg", separator=":", debug=true}] callee, separator, debug. See [docs](https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#replacer-options).
+ * @param {TransformerOptions} [options = {callee="twg", separator=":", debug=true}] callee, separator, debug. See [docs](https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#transformer-options).
  * @param {string} content The content already provided by `content.files` in `tailwind.config`.
  * @returns {string} `(content: string) => string`
  * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
-export function replacer({
+export function transformer({
     callee = "twg",
     separator = ":",
     debug = true
-}: ReplacerOptions = {}) {
+}: TransformerOptions = {}) {
     return (content: string) => {
         // 0. Check whether callee? is valid
         if (!callee) {
@@ -51,23 +50,21 @@ export function replacer({
                 const filteredObject = combiner(largestObject)
                 try {
                     // 3. Parse the arguments inside through `parser()` API
-                    const parsedObject = parser({ separator })(
+                    const parsedObject = createTwg({ separator })(
                         ...new Function(`return [${filteredObject}]`)() as ClassValue[]
                     )
                     // 4. Replace the old largest object with parsed one
                     content = content.replace(largestObject, `"${parsedObject}"`)
                 } catch (errorParsing) {
-                    debug && console.warn(`\n⚠️ TWG - Problem occurred on \`replacer()\`:\n${((errorParsing as Error).message)} in:\n- ${largestObject}\nTrying to be transformed into:\n+ ${filteredObject}`)
+                    debug && console.warn(`\n⚠️ TWG - Problem occurred on \`transformer()\`:\n${((errorParsing as Error).message)} in:\n- ${largestObject}\nTrying to be transformed into:\n+ ${filteredObject}`)
                 }
             })
 
             // DONE. Return the processed content
             return content
         } catch (errorOnContent) {
-            debug && console.error(`\n⛔ TWG - Error occurred on \`replacer()\`:\n${((errorOnContent as Error).message)} in content:\n${content}\n`)
+            debug && console.error(`\n⛔ TWG - Error occurred on \`transformer()\`:\n${((errorOnContent as Error).message)} in content:\n${content}\n`)
             return content
         }
     }
 }
-
-export default replacer

@@ -1,0 +1,8 @@
+{
+    "private": true,
+    "devDependencies": {
+        "@types/benchmark": "^2.1.5",
+        "benchmark": "^2.1.4",
+        "clsx": "^2.1.1"
+    }
+}

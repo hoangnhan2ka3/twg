@@ -42,7 +42,8 @@ export default tseslint.config(
     {
         //? Default ESLint rules here
         rules: {
-            "no-unused-vars": 0
+            "no-unused-vars": 0,
+            "no-cond-assign": 0
         }
     },
     //* TypeScript Plugin

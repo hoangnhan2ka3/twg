@@ -9,7 +9,7 @@
 - [What is `twg`?](#-what-is-twg)
 - [Explanation](#%EF%B8%8F-explanation)
   - [`twg()`](#twg)
-  - [`replacer()`](#replacer)
+  - [`transformer()`](#transformer)
 - [Trade-offs](#-trade-offs)
   - [With `Tailwind CSS IntelliSense`](#-with-tailwind-css-intellisense)
   - [Remote utilities](#-remote-utilities)
@@ -34,13 +34,13 @@
 
 `twg` package has 02 main parts, same job but different purpose:
 
-Function     | What it does
--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-`twg()`      | Transform classes you typed in dev code to html classes in development or production env.
-`replacer()` | Transform classes you typed in dev code to normal classes and save in temp that Tailwind can scan _(the transformed code of this function does not affect anything in your end, just for Tailwind)_.
+| Function        | What it does                                                                                                                                                                                         |
+|:----------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `twg()`         | Transform classes you typed in dev code to html classes in development or production env.                                                                                                            |
+| `transformer()` | Transform classes you typed in dev code to normal classes and save in temp that Tailwind can scan _(the transformed code of this function does not affect anything in your end, just for Tailwind)_. |
 
 > [!IMPORTANT]
-> So, as example, if you want to use custom `separator` instead of default `":"`, you must provide the `separator` option to both `twg` and `replacer()`. One for your actual code and one for Tailwind. Got the idea 😉.
+> So, as example, if you want to use custom `separator` instead of default `":"`, you must provide the `separator` option to both `twg` and `transformer()`. One for your actual code and one for Tailwind. Got the idea 😉.
 
 - ### `twg()`
 
@@ -66,11 +66,11 @@ Function     | What it does
   </div>
   ```
 
-- ### `replacer()`
+- ### `transformer()`
 
-  More complex than `twg()`, `replacer()` uses `regex` and some `extractor` functions to _find > replace > put it right back_ to the original `content` (which is all [`content.files`](https://tailwindcss.com/docs/content-configuration#transforming-source-files)), eg.:
+  More complex than `twg()`, `transformer()` uses `regex` and some `extractor` functions to _find > replace > put it right back_ to the original `content` (which is all [`content.files`](https://tailwindcss.com/docs/content-configuration#transforming-source-files)), eg.:
 
-  > `replacer()` was used in Tailwind API `content.transform`, but why? We already have the right classes after the process of `twg()`, so why we need to do it again with `replacer()`?
+  > `transformer()` was used in Tailwind API `content.transform`, but why? We already have the right classes after the process of `twg()`, so why we need to do it again with `transformer()`?
   >
   > Well, Tailwind actually scans the classes in our `root code` files, not the already built code that we see in browser's inspect tool. That's why we cannot use [dynamic class names](https://tailwindcss.com/docs/content-configuration#dynamic-class-names)
   >
@@ -83,7 +83,7 @@ Function     | What it does
     {
       before: "absolute inset-0 bg-red-500",
       "aria-expanded": "bg-red-500 text-yellow-500",
-    } // <== replacer() just handle Object(s)
+    } // <== transformer() just handle Object(s)
   )}>
     Hello, World!
   </div>
@@ -169,7 +169,7 @@ Function     | What it does
   </div>
   ```
 
-  But no styles will be applied because the problem comes from the `replacer()` which cannot transform these remote utilities. **It just transforms what is already in its place**.
+  But no styles will be applied because the problem comes from the `transformer()` which cannot transform these remote utilities. **It just transforms what is already in its place**.
 
   Instead, you can end up with the whole object remote:
 

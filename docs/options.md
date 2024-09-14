@@ -18,7 +18,7 @@
 
 ## ⏩ `default` version
 
-### `replacer()` options
+### `transformer()` options
 
 | Options                    | Types              | Default | Description                                                                                                                                                                                                                 | Lite | Status |
 |:---------------------------|:-------------------|:-------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:------:|
@@ -32,7 +32,7 @@ See [how to use](#-custom-options).
 
 | Options                    | Types           | Default | Description                                                                                                                                                                                                                                  | Lite | Status |
 |:---------------------------|:----------------|:-------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:------:|
-| `separator?`<sup>[*]</sup> | string \| false |   ":"   | The separator used to join the variant with classes. If `false` or `empty string`, you may need to write it manually, eg.: `{"before:": "flex"}`. <sup>[*]</sup>Remember to sync this option with `separator` option in `replacer()` option. |  x   |   ✅   |
+| `separator?`<sup>[*]</sup> | string \| false |   ":"   | The separator used to join the variant with classes. If `false` or `empty string`, you may need to write it manually, eg.: `{"before:": "flex"}`. <sup>[*]</sup>Remember to sync this option with `separator` option in `transformer()` option. |  x   |   ✅   |
 
 See [how to use](#-custom-separator).
 
@@ -40,7 +40,7 @@ See [how to use](#-custom-separator).
 
 ## ⏩ `extend` version
 
-### `replacer()` options
+### `transformer()` options
 
 | Options                    | Types              |  Default  | Description                                                                                                                                                                                                                                | Lite | Status |
 |:---------------------------|:-------------------|:---------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:------:|
@@ -55,7 +55,7 @@ See [how to use](#-custom-options).
 
 | Options                    | Types           | Default | Description                                                                                                                                                                                                                                  | Lite | Status |
 |:---------------------------|:----------------|:-------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:------:|
-| `separator?`<sup>[*]</sup> | string \| false |   ":"   | The separator used to join the variant with classes. If `false` or `empty string`, you may need to write it manually, eg.: `{"before:": "flex"}`. <sup>[*]</sup>Remember to sync this option with `separator` option in `replacer()` option. |  x   |   ✅   |
+| `separator?`<sup>[*]</sup> | string \| false |   ":"   | The separator used to join the variant with classes. If `false` or `empty string`, you may need to write it manually, eg.: `{"before:": "flex"}`. <sup>[*]</sup>Remember to sync this option with `separator` option in `transformer()` option. |  x   |   ✅   |
 
 See [how to use](#-custom-separator).
 
@@ -65,13 +65,13 @@ See [how to use](#-custom-separator).
 
 ### ⏩ Custom `callee`
 
-**1. Change the `callee` option `replacer()` to the callee's name you want, eg. with `cn`:**
+**1. Change the `callee` option `transformer()` to the callee's name you want, eg. with `cn`:**
 
   ```js
   // tailwind.config.ts
 
   transform: {
-    DEFAULT: replacer({
+    DEFAULT: transformer({
       callee: "cn"
     })
   }
@@ -100,11 +100,11 @@ See [how to use](#-custom-separator).
 
 ### ⏩ Custom `nestingCallee`
 
-**1. Change the `nestingCallee` option on `replacer()` to the callee's name you want, eg.:**
+**1. Change the `nestingCallee` option on `transformer()` to the callee's name you want, eg.:**
 
   ```js
   transform: {
-    DEFAULT: replacer({
+    DEFAULT: transformer({
       // Define options here, eg.:
       callee: "twg",
       nestingCallee: ["clsx", "twg"]
@@ -154,17 +154,15 @@ See [how to use](#-custom-separator).
 Example with separator as `"_"`:
 
 > [!IMPORTANT]
-> You must define the `separator` option to **BOTH** `createTwg()` and `replacer()`.
+> You must define the `separator` option to **BOTH** `createTwg()` and `transformer()`.
 
-**1. In `replacer()` options:**
+**1. In `transformer()` options:**
 
   ```js
   // tailwind.config.ts
 
   import { type Config } from "tailwindcss"
-  import { replacer } from "twg/replacer"
-  // or
-  import replacer from "twg/replacer"
+  import { transformer } from "twg"
 
   export default {
     content: {
@@ -173,7 +171,7 @@ Example with separator as `"_"`:
         "./src/components/**/*.{ts,tsx}",
       ],
       transform: {
-        DEFAULT: replacer({
+        DEFAULT: transformer({
           callee: "cn",
           separator: "_" // Define `separator` here
         })
@@ -235,7 +233,7 @@ Output (html):
 Printing debug messages in console if there are any warnings or errors, eg.:
 
   ```bash
-  ⚠️ TWG - Problem occurred on `replacer()`:
+  ⚠️ TWG - Problem occurred on `transformer()`:
   utilities is not defined in:
   - { utilities }
   Trying to be transformed into:

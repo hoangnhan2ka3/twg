@@ -26,6 +26,7 @@
     },
     "include": [
         "**/*.ts",
+        "benchmark/index.mjs",
     ],
     "exclude": [
         "node_modules",

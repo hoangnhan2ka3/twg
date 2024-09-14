@@ -1,43 +1,52 @@
-import { type ClassValue } from "src/index"
-import { parser } from "src/lite/processor/parser"
+import { type ClassValue } from "src"
+import { transformer } from "src/lite/processor/transformer"
 
-function toVal(mix: ClassValue): string {
+function toVal(mix: ClassValue, currentKey = "", key = ""): string {
     let k = 0,
         y: string,
         str = ""
-    if (typeof mix === "string" || typeof mix === "number") {
-        str += mix.toString()
-    } else if (typeof mix === "object" && mix !== null) {
+
+    const newKey = currentKey ? currentKey + (key ? ":" + key : "") : key
+    const n = newKey && newKey + ":"
+
+    if (typeof mix !== "object") {
+        for (const part of String(mix).split(" ").filter(part => part.trim() !== "")) {
+            str += (str && " ") + n + part
+        }
+    } else if (mix && typeof mix === "object") {
         if (Array.isArray(mix)) {
-            const len = mix.length
-            for (; k < len; k++) {
+            for (; k < mix.length; k++) {
                 if (mix[k]) {
-                    y = toVal(mix[k] as ClassValue)
-                    str += y && (str && " ") + y
+                    if (y = toVal(mix[k], newKey)) {
+                        str += (str && " ") + y
+                    }
                 }
             }
         } else {
-            str += parser(mix)
+            for (y in mix) {
+                if (mix[y] || mix[y] === 0) {
+                    str += (str && " ") + toVal(mix[y] as ClassValue, newKey, y)
+                }
+            }
         }
     }
     return str
 }
 
-export function twg(...inputs: ClassValue[]) {
+function twg(...inputs: ClassValue[]) {
     let i = 0,
         tmp: ClassValue,
         x: string,
         str = ""
     const len = inputs.length
     for (; i < len; i++) {
-        tmp = inputs[i]
-        if (tmp) {
-            x = toVal(tmp)
-            str += x && (str && " ") + x
+        if (tmp = inputs[i]) {
+            if (x = toVal(tmp)) {
+                str += (str && " ") + x
+            }
         }
     }
     return str
 }
 
-export { type ClassValue }
-export default twg
+export { type ClassValue, transformer, twg }

@@ -1,6 +1,6 @@
 {
     "name": "twg",
-    "version": "5.0.11",
+    "version": "6.0.0",
     "description": "A utility function for grouping TailwindCSS variants.",
     "author": "Nguyễn Hoàng Nhân <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)",
     "homepage": "https://github.com/hoangnhan2ka3/twg",
@@ -46,16 +46,6 @@
                 "default": "./dist/index.js"
             }
         },
-        "./replacer": {
-            "import": {
-                "types": "./dist/replacer/index.d.mts",
-                "default": "./dist/replacer/index.mjs"
-            },
-            "require": {
-                "types": "./dist/replacer/index.d.ts",
-                "default": "./dist/replacer/index.js"
-            }
-        },
         "./lite": {
             "import": {
                 "types": "./dist/lite/index.d.mts",
@@ -64,16 +54,6 @@
             "require": {
                 "types": "./dist/lite/index.d.ts",
                 "default": "./dist/lite/index.js"
-            }
-        },
-        "./lite/replacer": {
-            "import": {
-                "types": "./dist/lite/replacer/index.d.mts",
-                "default": "./dist/lite/replacer/index.mjs"
-            },
-            "require": {
-                "types": "./dist/lite/replacer/index.d.ts",
-                "default": "./dist/lite/replacer/index.js"
             }
         },
         "./extend": {
@@ -86,16 +66,6 @@
                 "default": "./dist/extend/index.js"
             }
         },
-        "./extend/replacer": {
-            "import": {
-                "types": "./dist/extend/replacer/index.d.mts",
-                "default": "./dist/extend/replacer/index.mjs"
-            },
-            "require": {
-                "types": "./dist/extend/replacer/index.d.ts",
-                "default": "./dist/extend/replacer/index.js"
-            }
-        },
         "./extend/lite": {
             "import": {
                 "types": "./dist/extend/lite/index.d.mts",
@@ -104,16 +74,6 @@
             "require": {
                 "types": "./dist/extend/lite/index.d.ts",
                 "default": "./dist/extend/lite/index.js"
-            }
-        },
-        "./extend/lite/replacer": {
-            "import": {
-                "types": "./dist/extend/lite/replacer/index.d.mts",
-                "default": "./dist/lite/replacer/index.mjs"
-            },
-            "require": {
-                "types": "./dist/extend/lite/replacer/index.d.ts",
-                "default": "./dist/extend/lite/replacer/index.js"
             }
         }
     },
@@ -136,7 +96,7 @@
         "@types/babel__traverse": "^7.20.6",
         "@types/eslint": "^9.6.1",
         "@types/jest": "^29.5.13",
-        "@types/node": "^22.5.4",
+        "@types/node": "^22.5.5",
         "@typescript-eslint/eslint-plugin": "^8.5.0",
         "@typescript-eslint/parser": "^8.5.0",
         "eslint": "^9.10.0",

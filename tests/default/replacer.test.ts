@@ -1,7 +1,7 @@
-import { replacer as liteReplacer } from "src/lite/replacer"
-import { replacer } from "src/replacer"
+import { transformer as liteTransformer } from "src/lite/processor/transformer"
+import { transformer } from "src/processor/transformer"
 
-describe("replacer()", () => {
+describe("transformer()", () => {
     describe("Default options:", () => {
         it.each([
             {
@@ -93,8 +93,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -118,8 +118,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ callee: "cn" })(contents)).toBe(expected)
-            expect(liteReplacer({ callee: "cn" })(contents)).toBe(expected)
+            expect(transformer({ callee: "cn" })(contents)).toBe(expected)
+            expect(liteTransformer({ callee: "cn" })(contents)).toBe(expected)
         })
 
         it.each([
@@ -175,8 +175,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ callee: ["cn", "twg", "clsx"] })(contents)).toBe(expected)
-            expect(liteReplacer({ callee: ["cn", "twg", "clsx"] })(contents)).toBe(expected)
+            expect(transformer({ callee: ["cn", "twg", "clsx"] })(contents)).toBe(expected)
+            expect(liteTransformer({ callee: ["cn", "twg", "clsx"] })(contents)).toBe(expected)
         })
 
         it.each([
@@ -221,8 +221,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ callee: "" })(contents)).toBe(expected)
-            expect(liteReplacer({ callee: "" })(contents)).toBe(expected)
+            expect(transformer({ callee: "" })(contents)).toBe(expected)
+            expect(liteTransformer({ callee: "" })(contents)).toBe(expected)
         })
     })
 
@@ -246,7 +246,7 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ separator: "" })(contents)).toBe(expected)
+            expect(transformer({ separator: "" })(contents)).toBe(expected)
         })
 
         it.each([
@@ -268,7 +268,7 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ separator: "-" })(contents)).toBe(expected)
+            expect(transformer({ separator: "-" })(contents)).toBe(expected)
         })
 
         it.each([
@@ -290,7 +290,7 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ separator: "t" })(contents)).toBe(expected)
+            expect(transformer({ separator: "t" })(contents)).toBe(expected)
         })
 
         it.each([
@@ -314,7 +314,7 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer({ separator: false })(contents)).toBe(expected)
+            expect(transformer({ separator: false })(contents)).toBe(expected)
         })
     })
 
@@ -376,8 +376,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -450,8 +450,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -650,8 +650,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -704,8 +704,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -786,8 +786,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -909,8 +909,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1014,8 +1014,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1040,14 +1040,45 @@ describe("replacer()", () => {
                 expected: `
                     <div className={twg(
                         "multiple classes",
-                        "var1:multiple var1:classes var2:multiple var2:classes var2:var3:other var2:var3:class",
+                        "var1:multiple
+ var1:classes var2:multiple var2:classes var2:var3:other
+ var2:var3:class",
+                        className
+                    )} />
+                `
+            },
+            { //*
+                contents: `
+                    <div className={twg(
+                        \`multiple
+                        classes\`,
+                        {
+                            var1: \`multiple
+                            classes\`,
+                            var2: [
+                                "multiple classes", {
+                                    var3: \`other
+                                    class\`
+                                }
+                            ]
+                        },
+                        className
+                    )} />
+                `,
+                expected: `
+                    <div className={twg(
+                        \`multiple
+                        classes\`,
+                        "var1:multiple
+ var1:classes var2:multiple var2:classes var2:var3:other
+ var2:var3:class",
                         className
                     )} />
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1210,8 +1241,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1322,8 +1353,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1390,8 +1421,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1417,8 +1448,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1555,8 +1586,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 
@@ -1763,8 +1794,8 @@ describe("replacer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(replacer()(contents)).toBe(expected)
-            expect(liteReplacer()(contents)).toBe(expected)
+            expect(transformer()(contents)).toBe(expected)
+            expect(liteTransformer()(contents)).toBe(expected)
         })
     })
 })

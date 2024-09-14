@@ -15,18 +15,18 @@
 
 ## 💥 `default` version
 
-- ### `replacer({ /* options */ })(content)`
+- ### `transformer({ /* options */ })(content)`
 
-  Exports: `module`, `default`
+  Exports: `named`
 
   Returns: `(content: string) => string`
 
-  _@param_ — **[options](../docs/options.md#replacer-options)**: callee, separator, debug
+  _@param_ — **[options](../docs/options.md#transformer-options)**: callee, separator, debug
 
-  Types: `ReplacerOptions`
+  Types: `TransformerOptions`
 
   ```js
-  interface ReplacerOptions {
+  interface TransformerOptions {
     callee?: string | string[],
     separator?: string | false,
     debug?: boolean
@@ -35,7 +35,7 @@
 
 - ### `twg(...inputs)`
 
-  Exports: `module`, `default`
+  Exports: `named`
 
   Returns: `string`
 
@@ -49,7 +49,7 @@
 
 - ### `createTwg(options)(...inputs)`
 
-  Exports: `module`, `default`
+  Exports: `named`
 
   Returns: `(...inputs: ClassValue[]) => string`
 
@@ -75,25 +75,25 @@
 
 ## 💥 `default/lite` version
 
-- ### `replacer({ /* option */ })(content)`
+- ### `transformer({ /* option */ })(content)`
 
-  Exports: `module`, `default`
+  Exports: `named`
 
   Returns: `(content: string) => string`
 
-  _@param_ — **[option](../docs/options.md#replacer-options)**: callee
+  _@param_ — **[option](../docs/options.md#transformer-options)**: callee
 
-  Types: `ReplacerOptions`
+  Types: `TransformerOptions`
 
   ```js
-  interface ReplacerOptions {
+  interface TransformerOptions {
     callee?: string | string[],
   }
   ```
 
 - ### `twg(...inputs)`
 
-  Exports: `module`, `default`
+  Exports: `named`
 
   Returns: `string`
 
@@ -109,18 +109,18 @@
 
 ## 💥 `extend` version
 
-- ### `replacer({ /* options */ })(content)`
+- ### `transformer({ /* options */ })(content)`
 
-  Exports: `module`, `default`
+  Exports: `named`
 
   Returns: `(content: string) => string`
 
-  _@param_ — **[options](../docs/options.md#replacer-options)**: callee, nestingCallee, separator, debug
+  _@param_ — **[options](../docs/options.md#transformer-options)**: callee, nestingCallee, separator, debug
 
-  Types: `ReplacerOptions`
+  Types: `TransformerOptions`
 
   ```js
-  export interface ReplacerOptions {
+  export interface TransformerOptions {
     callee?: string | string[],
     nestingCallee?: string | string[],
     separator?: string | false,
@@ -130,7 +130,7 @@
 
 - ### `twg(...inputs)`
 
-  Exports: `module`, `default`
+  Exports: `named`
 
   Returns: `string`
 
@@ -144,7 +144,7 @@
 
 - ### `createTwg(options)(...inputs)`
 
-  Exports: `module`, `default`
+  Exports: `named`
 
   Returns: `(...inputs: ClassValue[]) => string`
 
@@ -170,25 +170,25 @@
 
 ## 💥 `extend/lite` version
 
-- ### `replacer({ /* option */ })(content)`
+- ### `transformer({ /* option */ })(content)`
 
-  Exports: `module`, `default`
+  Exports: `named`
 
   Returns: `(content: string) => string`
 
-  _@param_ — **[option](../docs/options.md#replacer-options)**: callee
+  _@param_ — **[option](../docs/options.md#transformer-options)**: callee
 
-  Types: `ReplacerOptions`
+  Types: `TransformerOptions`
 
   ```js
-  interface ReplacerOptions {
+  interface TransformerOptions {
     callee?: string | string[],
   }
   ```
 
 - ### `twg(...inputs)`
 
-  Exports: `module`, `default`
+  Exports: `named`
 
   Returns: `string`
 

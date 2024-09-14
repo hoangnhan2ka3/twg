@@ -1,4 +1,4 @@
-import { type ReplacerOptions } from "src/replacer"
+import { type TransformerOptions } from "src/processor/transformer"
 
 /**
  * Extracts the largest Object(s) inside the callee function.
@@ -9,7 +9,7 @@ import { type ReplacerOptions } from "src/replacer"
  */
 export function extractor(
     content: string,
-    callee: ReplacerOptions["callee"] = "twg"
+    callee: TransformerOptions["callee"] = "twg"
 ) {
     let [cDepth, oDepth, objectStart] = [0, 0, -1],
         inCallee = false,

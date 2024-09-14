@@ -6,6 +6,7 @@
 /docs
 /public
 /tests
+/benchmark
 *.test.ts
 *.spec.ts
 .github

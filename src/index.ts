@@ -1,8 +1,8 @@
-import { parser } from "src/processor/parser"
+import { transformer } from "src/processor/transformer"
 
-export type ClassValue<T = string | string[] | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
+type ClassValue<T = string | string[] | bigint | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
 
-export interface TWGOptions {
+interface TWGOptions {
     /**
      * The divider between the key and class values.
      * @default ":"
@@ -18,23 +18,34 @@ export interface TWGOptions {
  * @returns {string} `string`
  * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
-function toVal(mix: ClassValue, options?: TWGOptions): string {
+function toVal(mix: ClassValue, options?: TWGOptions, currentKey = "", key = ""): string {
     let k = 0,
         y: string,
         str = ""
-    if (typeof mix === "string" || typeof mix === "number") {
-        str += String(mix)
-    } else if (typeof mix === "object" && mix !== null) {
+
+    const separator = options?.separator ? options.separator : ""
+    const newKey = currentKey ? currentKey + (key ? separator + key : "") : key
+    const n = newKey && newKey + separator
+
+    if (mix && typeof mix === "object") {
         if (Array.isArray(mix)) {
-            const len = mix.length
-            for (; k < len; k++) {
+            for (; k < mix.length; k++) {
                 if (mix[k]) {
-                    y = toVal(mix[k] as ClassValue, options)
-                    str += y && (str && " ") + y
+                    if (y = toVal(mix[k], options, newKey)) {
+                        str += (str && " ") + y
+                    }
                 }
             }
         } else {
-            str += parser(options)(mix)
+            for (y in mix) {
+                if (mix[y] || mix[y] === 0) {
+                    str += (str && " ") + toVal(mix[y] as ClassValue, options, newKey, y)
+                }
+            }
+        }
+    } else {
+        for (const part of String(mix).split(" ").filter(part => part.trim() !== "")) {
+            str += (str && " ") + n + part
         }
     }
     return str
@@ -47,7 +58,7 @@ function toVal(mix: ClassValue, options?: TWGOptions): string {
  * @returns {string} `(...inputs: ClassValue[]) => string`
  * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
-export function createTwg(options: TWGOptions = {
+function createTwg(options: TWGOptions = {
     separator: ":"
 }) {
     return (...inputs: ClassValue[]) => {
@@ -57,10 +68,10 @@ export function createTwg(options: TWGOptions = {
             str = ""
         const len = inputs.length
         for (; i < len; i++) {
-            tmp = inputs[i]
-            if (tmp) {
-                x = toVal(tmp, options)
-                str += x && (str && " ") + x
+            if (tmp = inputs[i]) {
+                if (x = toVal(tmp, options)) {
+                    str += (str && " ") + x
+                }
             }
         }
         return str
@@ -73,6 +84,6 @@ export function createTwg(options: TWGOptions = {
  * @returns {string} `string`
  * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
-export const twg = (...inputs: ClassValue[]) => createTwg()(...inputs)
+const twg = (...inputs: ClassValue[]) => createTwg()(...inputs)
 
-export default { createTwg, twg }
+export { type ClassValue, createTwg, transformer, twg, type TWGOptions }
