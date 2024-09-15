@@ -74,7 +74,7 @@ Version comparison
 | Accept template literal                                                  |  partial  |    partial     |    ✓     |       ✓       |
 | Accept multiple outermost objects                                        |     ✓     |       ✓        |    ✓     |       ✓       |
 | Accept nesting objects, arrays                                           |     ✓     |       ✓        |    ✓     |       ✓       |
-| Accept nesting chosen functions inside main object(s)                    |           |                |    ✓     |       ✓       |
+| Accept nesting chosen callee inside main object(s)                       |           |                |    ✓     |       ✓       |
 | Accept nesting custom callee functions inside main object(s)             |           |                |    ✓     |               |
 | Accept logical conditionals                                              |     ✓     |       ✓        |    ✓     |       ✓       |
 | Accept ternary conditionals                                              |  partial  |    partial     |    ✓     |       ✓       |
