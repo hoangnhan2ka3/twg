@@ -88,7 +88,7 @@
 
   ```js
   interface TransformerOptions {
-    callee?: string | string[],
+    callee?: string | string[]
   }
   ```
 
@@ -183,7 +183,7 @@
 
   ```js
   interface TransformerOptions {
-    callee?: string | string[],
+    callee?: string | string[]
   }
   ```
 
