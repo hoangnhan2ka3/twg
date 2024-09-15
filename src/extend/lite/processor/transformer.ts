@@ -1,10 +1,10 @@
 import { parser } from "src/extend/lite/processor/ast"
 
-export interface TransformerOptions {
+interface TransformerOptions {
     callee?: string | string[]
 }
 
-export function transformer({ callee = "twg" }: TransformerOptions = {}) {
+function transformer({ callee = "twg" }: TransformerOptions = {}) {
     return (content: string) => {
         if (!callee) return content
 
@@ -13,3 +13,5 @@ export function transformer({ callee = "twg" }: TransformerOptions = {}) {
         } catch { return content }
     }
 }
+
+export { transformer, type TransformerOptions }

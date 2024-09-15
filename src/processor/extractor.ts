@@ -7,7 +7,7 @@ import { type TransformerOptions } from "src/processor/transformer"
  * @returns {string[]} `string[]`
  * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
-export function extractor(
+function extractor(
     content: string,
     callee: TransformerOptions["callee"] = "twg"
 ) {
@@ -59,3 +59,5 @@ export function extractor(
 
     return objects
 }
+
+export { extractor }

@@ -2,7 +2,7 @@ import { type ClassValue, createTwg } from "src/index"
 import { combiner } from "src/processor/combiner"
 import { extractor } from "src/processor/extractor"
 
-export interface TransformerOptions {
+interface TransformerOptions {
     /**
      * Callee name to be scanned.
      * @default "twg"
@@ -32,7 +32,7 @@ export interface TransformerOptions {
  * @returns {string} `(content: string) => string`
  * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
-export function transformer({
+function transformer({
     callee = "twg",
     separator = ":",
     debug = true
@@ -68,3 +68,5 @@ export function transformer({
         }
     }
 }
+
+export { transformer, type TransformerOptions }

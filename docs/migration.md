@@ -9,6 +9,7 @@
 - [`v5` to `v6`](#v5-to-v6)
   - [`transformer()` import path](#-transformer-old-replacer-import-path)
   - [`twg()` and `createTwg()` import](#-twg-and-createtwg-import)
+  - [`TransformerOptions` type](#-transformeroptions-type)
 - [`v4` to `v5`](#v4-to-v5)
   - [`separator` option](#-separator-option)
 
@@ -66,6 +67,20 @@
 
   ```js
   import { createTwg } from "twg"
+  ```
+
+- ### ⏩ `TransformerOptions` type
+
+  You can now import `TransformerOptions` (previously `ReplacerOptions`) type from each entry point.
+
+  ```js
+  import { type TransformerOptions } from "twg"
+  // or
+  import { type TransformerOptions } from "twg/lite"
+  // or
+  import { type TransformerOptions } from "twg/extend"
+  // or
+  import { type TransformerOptions } from "twg/extend/lite"
   ```
 
 ---

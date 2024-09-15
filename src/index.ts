@@ -1,4 +1,4 @@
-import { transformer } from "src/processor/transformer"
+import { transformer, type TransformerOptions } from "src/processor/transformer"
 
 type ClassValue<T = string | string[] | bigint | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
 
@@ -86,4 +86,4 @@ function createTwg(options: TWGOptions = {
  */
 const twg = (...inputs: ClassValue[]) => createTwg()(...inputs)
 
-export { type ClassValue, createTwg, transformer, twg, type TWGOptions }
+export { type ClassValue, createTwg, transformer, type TransformerOptions, twg, type TWGOptions }

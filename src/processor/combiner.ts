@@ -28,7 +28,7 @@ const replaceLogicalCondition = /(?:[!(\s])*\w+[)\s]*(?:[=!]==?[^&|?]+)?(?:&&|\|
  * @returns {string} `string`
  * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
-export function combiner(content: string) {
+function combiner(content: string) {
     content = content.replace(replaceLogicalCondition, "")
     if (!(/:\s*(?:\d|[[('"`]|true|false)/g).test(content)) return ""
     let matches = content.match(matchTernaryCondition)
@@ -147,3 +147,5 @@ export function combiner(content: string) {
     }
     return content
 }
+
+export { combiner }

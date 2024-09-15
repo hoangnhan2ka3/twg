@@ -21,7 +21,7 @@ function isExceptionCondition(path: NodePath<Expression>) {
     return !(path.isStringLiteral() || path.isTemplateLiteral() || path.isArrayExpression() || path.isObjectExpression())
 }
 
-export function parser(
+function parser(
     code: string,
     callee: TransformerOptions["callee"] = "twg"
 ) {
@@ -99,3 +99,5 @@ export function parser(
 
     return generate(ast).code
 }
+
+export { parser }

@@ -1,5 +1,5 @@
 import { type ClassValue } from "src/index"
-import { transformer } from "src/lite/processor/transformer"
+import { transformer, type TransformerOptions } from "src/lite/processor/transformer"
 
 function toVal(mix: ClassValue, currentKey = "", key = ""): string {
     let k = 0,
@@ -49,4 +49,4 @@ function twg(...inputs: ClassValue[]) {
     return str
 }
 
-export { type ClassValue, transformer, twg }
+export { type ClassValue, transformer, type TransformerOptions, twg }

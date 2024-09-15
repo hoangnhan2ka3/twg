@@ -99,7 +99,7 @@ Which version should I use?
             In the other hand, <code>extend</code> version is the most stable and powerful, it can handle almost any cases you can imagine (if not, please open an issue), your only trade-off is that it's a very little bit slower than <code>default</code> version (because of AST parsing).
           </li>
           <li align="start">
-            I'm currently using <code>extend/lite</code> version.
+            I think you should try with <code>default</code>, <code>default/lite</code> version first. BTW, I'm currently using <code>extend/lite</code> version.
           </li>
         </ul>
       </td>
@@ -139,6 +139,9 @@ Tested conditions
 <details>
 
 <summary>Click to expand/collapse this section</summary>
+
+- 🔥 From `v6.0.2`:
+  - Type `TransformerOptions` (previously `ReplacerOptions`) can now be imported from each entry point.
 
 - 🔥 From `v6.0.0`:
   - Rename `replacer()` function to `transformer()`.

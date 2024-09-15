@@ -10,6 +10,7 @@
 - [default/lite](#-defaultlite-version)
 - [extend](#-default-version)
 - [extend/lite](#-default-version)
+- [Types definition](#-types-definition)
 
 ---
 
@@ -199,6 +200,66 @@
   ```js
   type ClassValue<T = string | string[] | bigint | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
   ```
+
+---
+
+## 💥 Types definition
+
+- ### `ClassValue`
+
+  ```js
+  type ClassValue<T = string | string[] | bigint | number | boolean | null | undefined> = T | T[] | Record<string, unknown>
+  ```
+
+  Can be imported from:
+
+  - `twg`
+  - `twg/lite`
+  - `twg/extend`
+  - `twg/extend/lite`
+
+- ### `TransformerOptions`
+
+  `default` version:
+
+  ```js
+  interface TransformerOptions {
+    callee?: string | string[],
+    separator?: string | false,
+    debug?: boolean
+  }
+  ```
+
+  `extend` version:
+
+  ```js
+  interface TransformerOptions {
+    callee?: string | string[],
+    nestingCallee?: string | string[],
+    separator?: string | false,
+    debug?: boolean
+  }
+  ```
+
+  Can be imported from:
+
+  - `twg`
+  - `twg/lite`
+  - `twg/extend`
+  - `twg/extend/lite`
+
+- ### `TWGOptions`
+
+  ```js
+  interface TWGOptions {
+    separator?: string | false
+  }
+  ```
+
+  Can be imported from:
+
+  - `twg`
+  - `twg/extend`
 
 ---
 

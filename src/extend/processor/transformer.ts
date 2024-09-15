@@ -1,6 +1,6 @@
 import { parser } from "src/extend/processor/ast"
 
-export interface TransformerOptions {
+interface TransformerOptions {
     /**
      * Callee name to be scanned.
      * @default "twg"
@@ -37,7 +37,7 @@ export interface TransformerOptions {
  * @returns {string} `(content: string) => string`
  * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
-export function transformer({
+function transformer({
     callee = "twg",
     nestingCallee,
     separator = ":",
@@ -55,3 +55,5 @@ export function transformer({
         } catch { return content }
     }
 }
+
+export { transformer, type TransformerOptions }

@@ -1,13 +1,12 @@
-import { type ClassValue } from "src/index"
-import { twg } from "src/lite"
+import { type ClassValue, twg } from "src/lite"
 import { combiner } from "src/processor/combiner"
 import { extractor } from "src/processor/extractor"
 
-export interface TransformerOptions {
+interface TransformerOptions {
     callee?: string | string[]
 }
 
-export function transformer({ callee = "twg" }: TransformerOptions = {}) {
+function transformer({ callee = "twg" }: TransformerOptions = {}) {
     return (content: string) => {
         if (!callee) return content
 
@@ -25,3 +24,5 @@ export function transformer({ callee = "twg" }: TransformerOptions = {}) {
         } catch { return content }
     }
 }
+
+export { transformer, type TransformerOptions }

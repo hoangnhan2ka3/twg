@@ -9,9 +9,26 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
+Nothing yet!
+
+## [6.0.2] - 2024-09-15
+
+### Added
+
+- Type `TransformerOptions` (previously `ReplacerOptions`) can now be imported from each entry point.
+
+### Refactor
+
+- Refactor all `export` statement to the end of files due to `tsup` dts export issue.
+- Fixed some misleading `import` statement.
+
 ### Docs
 
 - Add [`Migration Guide`](./docs/migration.md) to docs.
+- Add `README.md` to `benchmark` folder.
+- Add `Types definition` section to [`api.md`](./docs/api.md#-types-definition).
+
+**Full Changelog**: <https://github.com/hoangnhan2ka3/twg/compare/v6.0.1...v6.0.2>
 
 ## [6.0.1] - 2024-09-15
 

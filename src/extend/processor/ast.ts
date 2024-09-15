@@ -33,7 +33,7 @@ function isExceptionCondition(path: NodePath<Expression>) {
  * @returns {string} `string`
  * @author hoangnhan2ka3 <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)
  */
-export function parser(
+function parser(
     code: string,
     options: TransformerOptions = {}
 ) {
@@ -126,3 +126,5 @@ export function parser(
 
     return generate(ast).code
 }
+
+export { parser }

@@ -1,4 +1,4 @@
-import { transformer } from "src/extend/processor/transformer"
+import { transformer, type TransformerOptions } from "src/extend/processor/transformer"
 import { type ClassValue } from "src/index"
 
 export interface TWGOptions {
@@ -91,4 +91,4 @@ function createTwg(options: TWGOptions = {
  */
 const twg = (...inputs: ClassValue[]) => createTwg()(...inputs)
 
-export { type ClassValue, createTwg, transformer, twg }
+export { type ClassValue, createTwg, transformer, type TransformerOptions, twg }
