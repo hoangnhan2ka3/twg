@@ -6,13 +6,11 @@
 
 ## 📌 Table of contents
 
-- [Usage](#-usage)
-  - [Basic usage](#-basic-usage)
-  - [Complex as ☠️ usage](#-complex-as-%EF%B8%8F-usage)
-- [Use cases](#-use-cases)
-  - [Conditionals](#-conditionals)
-  - [Nesting callee functions](#-nesting-callee-functions)
-- [Combination](#-combination)
+- [`v5` to `v6`](#v5-to-v6)
+  - [`transformer()` import path](#-transformer-old-replacer-import-path)
+  - [`twg()` and `createTwg()` import](#-twg-and-createtwg-import)
+- [`v4` to `v5`](#v4-to-v5)
+  - [`separator` option](#-separator-option)
 
 ---
 
@@ -138,7 +136,7 @@
       </th>
       <th width="500px">
         <div align="end">
-          <a href="#-migration-guide">Scroll to top</a>
+          <a href="#%EF%B8%8F-migration-guide">Scroll to top</a>
         </div>
       </th>
     </tr>
