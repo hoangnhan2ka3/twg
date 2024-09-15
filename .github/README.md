@@ -416,6 +416,7 @@ See [how to use](../docs/usage.md) on docs 👇.
 
 ## 📚 Docs
 
+- [Migration Guide](../docs/migration.md) ↗️
 - [Usage / Use cases](../docs/usage.md) ↗️
   - [Usage](../docs/usage.md#-usage) ↗️
     - [Basic usage](../docs/usage.md#-basic-usage) ↗️

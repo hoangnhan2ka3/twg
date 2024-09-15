@@ -9,7 +9,9 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
-Nothing yet!
+### Docs
+
+- Add [`Migration Guide`](./docs/migration.md) to docs.
 
 ## [6.0.1] - 2024-09-15
 

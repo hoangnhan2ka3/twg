@@ -4,6 +4,7 @@
 
 <h1 align="center">📚 Docs</h1>
 
+- [Migration Guide](../docs/migration.md) ↗️
 - [Usage / Use cases](../docs/usage.md) ↗️
   - [Usage](../docs/usage.md#-usage) ↗️
     - [Basic usage](../docs/usage.md#-basic-usage) ↗️
