@@ -241,6 +241,14 @@
   }
   ```
 
+  `default/lite` and `extend/lite` version:
+
+  ```js
+  interface TransformerOptions {
+    callee?: string | string[]
+  }
+  ```
+
   Can be imported from:
 
   - `twg`
