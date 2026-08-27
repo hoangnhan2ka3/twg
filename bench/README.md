@@ -22,7 +22,7 @@ pnpm build
 Then, make sure you are in the `benchmark` folder, if not, run (from the root folder):
 
 ```bash
-cd benchmark
+cd bench
 ```
 
 Then, install the dependencies by running:
