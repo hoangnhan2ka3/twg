@@ -1,5 +1,6 @@
-import { transformer } from "../dist/transformer.js"
 import Benchmark from "benchmark"
+
+import { transformer } from "../dist/transformer.js"
 
 const { Suite } = Benchmark
 

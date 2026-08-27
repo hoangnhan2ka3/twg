@@ -25,10 +25,10 @@ const addString = (state: WalkState, pfx: string, val: string) => {
     for (let i = 0, len = val.length; i < len; i++) {
         const charCode = val.charCodeAt(i)
         if (
-            charCode === 32 ||
-            charCode === 9 ||
-            charCode === 10 ||
-            charCode === 13
+            charCode === 32
+            || charCode === 9
+            || charCode === 10
+            || charCode === 13
         ) {
             hasSpace = true
             if (chunkStart !== -1) {
@@ -118,7 +118,9 @@ function walk(node: Node | null | undefined, pfx: string, state: WalkState) {
                     exactNextPfx = pfx + state.sep
                 } else {
                     exactNextPfx =
-                        pfx + keyStr + (keyStr.endsWith(state.sep) ? "" : state.sep)
+                        pfx
+                        + keyStr
+                        + (keyStr.endsWith(state.sep) ? "" : state.sep)
                 }
 
                 if (val.type === "Literal") {
@@ -144,9 +146,9 @@ function walk(node: Node | null | undefined, pfx: string, state: WalkState) {
                 }
 
                 if (
-                    val.type === "LogicalExpression" ||
-                    val.type === "ConditionalExpression" ||
-                    val.type === "SequenceExpression"
+                    val.type === "LogicalExpression"
+                    || val.type === "ConditionalExpression"
+                    || val.type === "SequenceExpression"
                 ) {
                     const lenBefore = state.out.length
                     walk(val, exactNextPfx, state)
@@ -158,9 +160,9 @@ function walk(node: Node | null | undefined, pfx: string, state: WalkState) {
                 }
 
                 if (
-                    val.type === "ObjectExpression" ||
-                    val.type === "ArrayExpression" ||
-                    val.type === "TemplateLiteral"
+                    val.type === "ObjectExpression"
+                    || val.type === "ArrayExpression"
+                    || val.type === "TemplateLiteral"
                 ) {
                     walk(val, exactNextPfx, state)
                     continue
@@ -200,4 +202,4 @@ function walk(node: Node | null | undefined, pfx: string, state: WalkState) {
     }
 }
 
-export { walk, type WalkState }
+export { type WalkState, walk }

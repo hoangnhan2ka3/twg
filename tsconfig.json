@@ -15,7 +15,8 @@
         "outDir": "./dist",
         "paths": {
             "src/*": ["./src/*"]
-        }
+        },
+        "types": ["vitest/globals", "node"]
     },
     "include": ["**/*.ts"],
     "exclude": ["node_modules"]

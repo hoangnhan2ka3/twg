@@ -186,9 +186,9 @@ describe("transformer()", () => {
                 `
             }
         ])('"$expected"', ({ contents, expected }) => {
-            expect(transformer({ callee: ["cn", "twg", "clsx"] })(contents)).toBe(
-                expected
-            )
+            expect(
+                transformer({ callee: ["cn", "twg", "clsx"] })(contents)
+            ).toBe(expected)
         })
 
         it.each([

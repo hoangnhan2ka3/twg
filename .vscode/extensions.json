@@ -2,9 +2,9 @@
     "recommendations": [
         "biomejs.biome",
         "formulahendry.code-runner",
-        "Orta.vscode-jest",
         "oxc.oxc-vscode",
         "TypeScriptTeam.native-preview",
+        "vitest.explorer",
         "YoavBls.pretty-ts-errors"
     ]
 }

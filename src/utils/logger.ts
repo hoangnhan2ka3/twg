@@ -1,4 +1,5 @@
 import { sep } from "node:path"
+
 import { name as BRAND_NAME } from "../../package.json"
 
 // #f279b6
@@ -8,7 +9,7 @@ const resetStr = "\x1B[0m"
 const identifier = `${BRAND_COLOR}[${BRAND_NAME.toUpperCase()}]${resetStr}`
 
 const flatten = (filePath: string): string => {
-    return filePath.replaceAll(process.cwd() + sep, "").replace(/\\/g, "/")
+    return filePath.replaceAll(process.cwd() + sep, "").replace(/\\/gu, "/")
 }
 
 function logger(
@@ -28,9 +29,10 @@ function logger(
 
     const snippet = content.slice(lineStart, lineEnd).trim()
 
-    const fileMsg = file
-        ? `\n      File: ${flatten(file)}:${lineNum.toString()}`
-        : `\n      Line: ${lineNum.toString()}`
+    const fileMsg =
+        file !== undefined && file !== ""
+            ? `\n      File: ${flatten(file)}:${lineNum.toString()}`
+            : `\n      Line: ${lineNum.toString()}`
 
     console.warn(
         `\n${identifier} Skip: ${(e as Error).message}${fileMsg}\n      Code: ${snippet}`

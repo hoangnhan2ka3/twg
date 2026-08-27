@@ -1,6 +1,6 @@
-import { walk, type WalkState } from "./lib/walker"
-import { logger } from "./utils/logger"
-import { Parser, type CallExpression, type Node, type Options } from "acorn"
+import { type CallExpression, type Node, type Options, Parser } from "acorn"
+import { type WalkState, walk } from "src/lib/walker"
+import { logger } from "src/utils/logger"
 
 class TWGParser extends Parser {
     static parseSingle(input: string, pos: number, options: Options): Node {
@@ -43,10 +43,9 @@ interface TransformerOptions {
 /**
  * Transforms the content before Tailwind scans/extracting its classes.
  *
- * @param options `callee`, `separator`, `debug`. See [docs](https://github.com/aimryoui/twg/blob/main/docs/options.md#transformer-options).
- * @param content The content already provided by `content.files` in `tailwind.config`.
- *
- * @returns A function that processes class values based on the options.
+ * @param {TransformerOptions} options `callee`, `separator`, `debug`. See
+ *   [docs](https://github.com/aimryoui/twg/blob/main/docs/options.md#transformer-options).
+ * @returns {(content: string) => string} A function that processes class values based on the options.
  */
 function transformer({
     callee = "twg",
@@ -57,13 +56,15 @@ function transformer({
         return (content: string) => content
     }
 
-    const validCallees = (Array.isArray(callee) ? callee : [callee]).filter(Boolean)
+    const validCallees = (Array.isArray(callee) ? callee : [callee]).filter(
+        Boolean
+    )
 
     if (validCallees.length === 0) {
         return (content: string) => content
     }
 
-    const regex = new RegExp(`\\b(?:${validCallees.join("|")})\\s*\\(`, "g")
+    const regex = new RegExp(`\\b(?:${validCallees.join("|")})\\s*\\(`, "gu")
     const sep = separator
     const ACORN_OPTS: Options = { ecmaVersion: "latest", sourceType: "module" }
 
@@ -89,7 +90,11 @@ function transformer({
             try {
                 state.out = ""
 
-                const ast = TWGParser.parseSingle(content, match.index, ACORN_OPTS)
+                const ast = TWGParser.parseSingle(
+                    content,
+                    match.index,
+                    ACORN_OPTS
+                )
 
                 if (ast.type !== "CallExpression") continue
 
@@ -101,8 +106,8 @@ function transformer({
                 }
 
                 output +=
-                    content.substring(lastProcessedIndex, match.index) +
-                    `"${state.out}"`
+                    content.substring(lastProcessedIndex, match.index)
+                    + `"${state.out}"`
 
                 lastProcessedIndex = endIndex
                 regex.lastIndex = endIndex
@@ -120,4 +125,4 @@ function transformer({
     }
 }
 
-export { transformer, type TransformerOptions }
+export { type TransformerOptions, transformer }

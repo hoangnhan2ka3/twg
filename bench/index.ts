@@ -1,10 +1,10 @@
-/* eslint-disable import-x/no-duplicates */
-import { twg } from "../dist/index.js"
 import Benchmark from "benchmark"
 import classcat from "classcat"
 import classNames from "classnames"
 import clsx from "clsx"
 import clsxLite from "clsx/lite"
+
+import { twg } from "../dist/index.js"
 
 const { Suite } = Benchmark
 
@@ -14,14 +14,14 @@ type ClsxLiteArgs = Parameters<typeof clsxLite>
 type ClasscatArg = Parameters<typeof classcat>[0]
 
 function bench(name: string, ...args: unknown[]): void {
-    console.log(`\n# ${name}`)
+    console.info(`\n# ${name}`)
     try {
         new Suite()
             .add("classnames", () => {
                 classNames(...(args as ClassNamesArgs))
             })
             .add("classcat ≠", () => {
-                classcat(args as ClasscatArg)
+                classcat(args)
             })
             .add("twg ≠", () => {
                 twg(...(args as Parameters<typeof twg>))

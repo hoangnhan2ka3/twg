@@ -2,8 +2,7 @@
     "extends": "../tsconfig.json",
     "compilerOptions": {
         "module": "nodenext",
-        "moduleResolution": "nodenext",
-        "baseUrl": "."
+        "moduleResolution": "nodenext"
     },
     "include": ["*.ts"]
 }

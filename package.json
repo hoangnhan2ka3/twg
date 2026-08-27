@@ -1,6 +1,6 @@
 {
     "name": "twg",
-    "version": "8.0.0",
+    "version": "8.0.0-beta.0",
     "description": "A utility function for grouping Tailwind CSS variants.",
     "keywords": [
         "classnames",
@@ -31,10 +31,11 @@
     "files": [
         "dist"
     ],
+    "type": "module",
     "sideEffects": false,
-    "main": "dist/index.js",
+    "main": "dist/index.cjs",
     "module": "dist/index.mjs",
-    "types": "dist/index.d.ts",
+    "types": "dist/index.d.mts",
     "exports": {
         ".": {
             "import": {
@@ -42,8 +43,8 @@
                 "default": "./dist/index.mjs"
             },
             "require": {
-                "types": "./dist/index.d.ts",
-                "default": "./dist/index.js"
+                "types": "./dist/index.d.cts",
+                "default": "./dist/index.cjs"
             }
         },
         "./transform": {
@@ -52,14 +53,14 @@
                 "default": "./dist/transformer.mjs"
             },
             "require": {
-                "types": "./dist/transformer.d.ts",
-                "default": "./dist/transformer.js"
+                "types": "./dist/transformer.d.cts",
+                "default": "./dist/transformer.cjs"
             }
         }
     },
     "scripts": {
-        "build": "tsup",
-        "test": "jest",
+        "build": "tsdown --config-loader unrun",
+        "test": "vitest run",
         "npm": "pnpm build && pnpm publish --access public",
         "npm:beta": "pnpm build && pnpm publish --access public --tag beta",
         "npm:remove-beta": "pnpm dist-tag rm twg beta",
@@ -79,27 +80,28 @@
         "@stylistic/eslint-plugin": "^5.10.0",
         "@types/eslint": "^9.6.1",
         "@types/estree": "^1.0.9",
-        "@types/jest": "^30.0.0",
         "@types/node": "^26.4.0",
         "@typescript-eslint/eslint-plugin": "^8.68.0",
         "@typescript-eslint/parser": "^8.68.0",
         "eslint": "^9.39.5",
         "eslint-plugin-simple-import-sort": "^12.1.1",
-        "jest": "^30.4.2",
         "jiti": "^2.7.0",
         "oxfmt": "^0.65.0",
         "oxlint": "^1.80.0",
         "oxlint-tsgolint": "^7.0.2001",
         "terser": "^5.51.1",
-        "ts-jest": "^29.4.12",
-        "ts-node": "^10.9.2",
-        "tsup": "^8.5.1",
+        "tsdown": "^0.22.14",
+        "tsx": "^4.23.12",
         "typescript": "^7.0.2",
-        "typescript-eslint": "^8.68.0"
+        "unrun": "^0.3.1",
+        "vitest": "^4.1.11"
+    },
+    "overrides": {
+        "rollup-plugin-dts": "^6.5.1"
     },
     "engines": {
-        "node": ">=6"
+        "node": "^24.15.0"
     },
     "packageManager": "pnpm@11.24.0",
-    "cjs": "dist/index.js"
+    "cjs": "dist/index.cjs"
 }

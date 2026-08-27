@@ -9,7 +9,22 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ## [Unreleased]
 
-- Nothing yet!
+## [8.0.0-beta.0] - 2026-08-27
+
+### Changed
+
+- Mirgate transformer logic to `oxc-parser` from `acorn`.
+- Migrate tests to `Vitest` from `Jest`.
+- Migrate bundler to `tsdown` from `tsup`.
+- Upgrade to `Typescript 7`.
+
+### Chore
+
+- Migrate formatting to `oxfmt` and `biome` (for imports and exports sorting) from `prettier`.
+- Migrate linting to `oxlint` from `eslint`.
+- Update JSdocs.
+- Update API documentations.
+- Bump dev dependencies version.
 
 ## [7.1.4] - 2026-03-01
 

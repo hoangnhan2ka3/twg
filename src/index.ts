@@ -22,14 +22,21 @@ interface TWGOptions {
  * Main API to handle several types of class values including string, number,
  * object, array, conditionals, map key to each values inside the Object zones.
  *
- * @param options `separator`. See [docs](https://github.com/aimryoui/twg/blob/main/docs/options.md#createtwg-options).
- * @param inputs A list of class values (strings, numbers, booleans, objects, arrays).
- *
- * @returns A function that processes class values based on the options.
+ * @param {TWGOptions} options `separator`. See
+ *   [docs](https://github.com/aimryoui/twg/blob/main/docs/options.md#createtwg-options).
+ * @returns {(...inputs: ClassValue[]) => string} A function that processes
+ *   class values based on the options.
  */
 function createTwg(options: TWGOptions = {}) {
     const separator = options.separator ?? ":"
 
+    /**
+     * Recursive processor.
+     *
+     * @param {ClassValue} mix The mixed value.
+     * @param {string} prefix The prefix string.
+     * @returns {string} The final string.
+     */
     function process(mix: ClassValue, prefix: string): string {
         if (!mix) return ""
 
@@ -38,14 +45,14 @@ function createTwg(options: TWGOptions = {}) {
             if (!prefix) return mix + ""
 
             const p = prefix.endsWith(separator) ? prefix : prefix + separator
-            return (mix + "").replace(/\S+/g, (val) => p + val)
+            return (mix + "").replace(/\S+/gu, (val) => p + val)
         }
 
         // 2. Arrays / Objects
         if (typeof mix === "object") {
             let k,
-                y,
-                str = ""
+                str = "",
+                y
 
             if (Array.isArray(mix)) {
                 const len = mix.length
@@ -64,20 +71,23 @@ function createTwg(options: TWGOptions = {}) {
                     if (!val) continue
 
                     let nextPfx: string
-                    if (!prefix) {
-                        nextPfx = k === "" ? separator : k
-                    } else {
+                    if (prefix) {
                         const p = prefix.endsWith(separator)
                             ? prefix
                             : prefix + separator
                         nextPfx = p + k
+                    } else {
+                        nextPfx = k === "" ? separator : k
                     }
 
                     if (val === true) {
                         str && (str += " ")
                         str += nextPfx
-                    } else if (typeof val === "string" || typeof val === "object") {
-                        if ((y = process(val as ClassValue, nextPfx))) {
+                    } else if (
+                        typeof val === "string"
+                        || typeof val === "object"
+                    ) {
+                        if ((y = process(val, nextPfx))) {
                             str && (str += " ")
                             str += y
                         }
@@ -95,12 +105,11 @@ function createTwg(options: TWGOptions = {}) {
 
     return function () {
         let i = 0,
+            str = "",
             tmp: ClassValue,
-            x,
-            str = ""
+            x
         const len = arguments.length
         for (; i < len; i++) {
-            // eslint-disable-next-line prefer-rest-params
             if ((tmp = arguments[i] as ClassValue)) {
                 if ((x = process(tmp, ""))) {
                     str && (str += " ")
@@ -113,13 +122,13 @@ function createTwg(options: TWGOptions = {}) {
 }
 
 /**
- * Utility function for grouping TailwindCSS variants on build time,
- * handle conditional logic, and more.
+ * Utility function for grouping TailwindCSS variants on build time, handle
+ * conditional logic, and more.
  *
- * @param inputs A list of class values (strings, numbers, booleans, objects, arrays).
- *
- * @returns The processed class string.
+ * @param {...ClassValue[]} inputs A list of class values (strings, numbers,
+ *   booleans, objects, arrays).
+ * @returns {string} The processed class string.
  */
 const twg = createTwg()
 
-export { type ClassValue, createTwg, twg, type TWGOptions }
+export { type ClassValue, createTwg, type TWGOptions, twg }
