@@ -6,7 +6,7 @@ labels: bug
 assignees: ""
 ---
 
-### 0. Read the [docs](https://github.com/hoangnhan2ka3/twg/tree/main/docs) carefully ↗️
+### 0. Read the [docs](https://github.com/aimryoui/twg/tree/main/docs) carefully ↗️
 
 <!-- If bugs happening before you can actually use the package, feel free to edit/remove the template. Otherwise, you should follow the template! -->
 

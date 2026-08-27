@@ -1,43 +1,39 @@
 {
     "name": "twg",
-    "version": "7.1.4",
+    "version": "8.0.0",
     "description": "A utility function for grouping Tailwind CSS variants.",
-    "author": "Nguyễn Hoàng Nhân <workwith.hnhan@gmail.com> (https://github.com/hoangnhan2ka3)",
-    "homepage": "https://github.com/hoangnhan2ka3/twg",
+    "keywords": [
+        "classnames",
+        "clsx",
+        "grouping tailwind variants",
+        "grouping variants",
+        "tailwind",
+        "tailwind variants grouping",
+        "tailwindcss",
+        "tvg",
+        "twg",
+        "variants grouping"
+    ],
+    "homepage": "https://github.com/aimryoui/twg",
+    "bugs": {
+        "url": "https://github.com/aimryoui/twg/issues"
+    },
+    "license": "MIT",
+    "author": "Nguyễn Hoàng Nhân <workwith.hnhan@gmail.com> (https://github.com/aimryoui)",
     "repository": {
         "type": "git",
-        "url": "https://github.com/hoangnhan2ka3/twg"
-    },
-    "bugs": {
-        "url": "https://github.com/hoangnhan2ka3/twg/issues"
+        "url": "https://github.com/aimryoui/twg"
     },
     "funding": {
         "type": "github",
-        "url": "https://github.com/sponsors/hoangnhan2ka3"
+        "url": "https://github.com/sponsors/aimryoui"
     },
-    "license": "MIT",
-    "packageManager": "pnpm@10.30.3",
-    "engines": {
-        "node": ">=6"
-    },
-    "scripts": {
-        "build": "tsup",
-        "test": "jest",
-        "npm": "pnpm build && pnpm publish --access public",
-        "npm:beta": "pnpm build && pnpm publish --access public --tag beta",
-        "npm:remove-beta": "pnpm dist-tag rm twg beta",
-        "format": "prettier --write .",
-        "format:check": "prettier --check .",
-        "lint": "eslint",
-        "lint:fix": "eslint --fix"
-    },
-    "sideEffects": false,
     "files": [
         "dist"
     ],
+    "sideEffects": false,
     "main": "dist/index.js",
     "module": "dist/index.mjs",
-    "cjs": "dist/index.js",
     "types": "dist/index.d.ts",
     "exports": {
         ".": {
@@ -61,44 +57,49 @@
             }
         }
     },
+    "scripts": {
+        "build": "tsup",
+        "test": "jest",
+        "npm": "pnpm build && pnpm publish --access public",
+        "npm:beta": "pnpm build && pnpm publish --access public --tag beta",
+        "npm:remove-beta": "pnpm dist-tag rm twg beta",
+        "format": "oxfmt --threads 8 && biome check --write",
+        "format:check": "oxfmt --check --threads 8 && biome check",
+        "lint": "oxlint --threads 8",
+        "lint:fix": "oxlint --fix --threads 8",
+        "check": "tsc --noEmit"
+    },
     "dependencies": {
-        "acorn": "^8.16.0"
+        "acorn": "^8.18.0",
+        "oxc-parser": "^0.147.0"
     },
     "devDependencies": {
-        "@eslint/js": "^9.39.3",
-        "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
-        "@stylistic/eslint-plugin": "^5.9.0",
+        "@biomejs/biome": "^2.5.10",
+        "@limegrass/eslint-plugin-import-alias": "^1.6.1",
+        "@stylistic/eslint-plugin": "^5.10.0",
         "@types/eslint": "^9.6.1",
-        "@types/estree": "^1.0.8",
+        "@types/estree": "^1.0.9",
         "@types/jest": "^30.0.0",
-        "@types/node": "^25.3.3",
-        "@typescript-eslint/eslint-plugin": "^8.56.1",
-        "@typescript-eslint/parser": "^8.56.1",
-        "eslint": "^9.39.3",
-        "eslint-config-prettier": "^10.1.8",
-        "eslint-import-resolver-typescript": "^4.4.4",
-        "eslint-plugin-import-x": "^4.16.1",
+        "@types/node": "^26.4.0",
+        "@typescript-eslint/eslint-plugin": "^8.68.0",
+        "@typescript-eslint/parser": "^8.68.0",
+        "eslint": "^9.39.5",
         "eslint-plugin-simple-import-sort": "^12.1.1",
-        "jest": "^30.2.0",
-        "jiti": "^2.6.1",
-        "prettier": "^3.8.1",
-        "terser": "^5.46.0",
-        "ts-jest": "^29.4.6",
+        "jest": "^30.4.2",
+        "jiti": "^2.7.0",
+        "oxfmt": "^0.65.0",
+        "oxlint": "^1.80.0",
+        "oxlint-tsgolint": "^7.0.2001",
+        "terser": "^5.51.1",
+        "ts-jest": "^29.4.12",
         "ts-node": "^10.9.2",
         "tsup": "^8.5.1",
-        "typescript": "^5.9.3",
-        "typescript-eslint": "^8.56.1"
+        "typescript": "^7.0.2",
+        "typescript-eslint": "^8.68.0"
     },
-    "keywords": [
-        "tailwindcss",
-        "tailwind",
-        "tailwind variants grouping",
-        "grouping tailwind variants",
-        "variants grouping",
-        "grouping variants",
-        "tvg",
-        "twg",
-        "clsx",
-        "classnames"
-    ]
+    "engines": {
+        "node": ">=6"
+    },
+    "packageManager": "pnpm@11.24.0",
+    "cjs": "dist/index.js"
 }

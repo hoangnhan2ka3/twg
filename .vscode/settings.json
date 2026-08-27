@@ -1,12 +1,34 @@
 {
     //* General
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit",
-        "source.fixAll.stylelint": "explicit",
-        "source.organizeImports": "never",
-        "source.addMissingImports": "explicit"
-    },
+    "files.eol": "\n",
     "git.followTagsWhenSync": true,
-    //* TypeScript Version
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "never",
+        "source.addMissingImports": "explicit",
+        "source.removeUnusedImports": "never",
+        //* Oxc
+        "source.fixAll.oxc": "explicit",
+        "source.format.oxc": "explicit",
+        //* Biome
+        "source.action.noDuplicateClasses.biome": "explicit",
+        "source.organizeImports.biome": "explicit",
+        "source.fixAll.biome": "explicit"
+    },
+    "editor.quickSuggestions": {
+        "strings": "on"
+    },
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    // TypeScript
+    "code-runner.executorMap": {
+        "typescript": "pnpx tsx"
+    },
+    "typescript.experimental.useTsgo": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "js/ts.tsdk.path": "node_modules\\typescript\\lib",
+    "[xml]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    }
 }

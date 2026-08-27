@@ -1,12 +1,12 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/hoangnhan2ka3/twg/main/public/twg_logo.webp" alt="twg logo" width="150px" height="150px">
+  <img src="https://raw.githubusercontent.com/aimryoui/twg/main/public/twg_logo.webp" alt="twg logo" width="150px" height="150px">
 </div>
 
 <h1 align="center">💎 Contributing</h1>
 
 ## Bug fixes
 
-Open issues can be found on the package's [GitHub issues](https://github.com/hoangnhan2ka3/twg/issues?q=is%3Aopen+is%3Aissue+label%3Abug) page with a `bug` label.
+Open issues can be found on the package's [GitHub issues](https://github.com/aimryoui/twg/issues?q=is%3Aopen+is%3Aissue+label%3Abug) page with a `bug` label.
 
 These are a great place to start contributing to the repo!
 
@@ -16,7 +16,7 @@ If the bug you want to work on doesn't have a related issue, open one, and attac
 
 ## New features
 
-Before adding any features, open a [Feature Proposal](https://github.com/hoangnhan2ka3/twg/issues/new/choose).
+Before adding any features, open a [Feature Proposal](https://github.com/aimryoui/twg/issues/new/choose).
 
 This will let anybody talk through your proposal API and/or implementation before you spend time on it.
 

@@ -6,9 +6,9 @@ Choose the right checklist for the change(s) that you're making: -->
 
 <!-- Please check the boxes by putting an x in the [ ] like so: [x] -->
 
-- [ ] I have read the [contributing guidelines](https://github.com/hoangnhan2ka3/twg/blob/main/CONTRIBUTING.md).
-- [ ] I have read the [docs](https://github.com/hoangnhan2ka3/twg/tree/main/docs).
-- [ ] I have searched the [issues](https://github.com/hoangnhan2ka3/twg/issues) and [pull requests](https://github.com/hoangnhan2ka3/twg/pulls) to make sure this is not a duplicate.
+- [ ] I have read the [contributing guidelines](https://github.com/aimryoui/twg/blob/main/CONTRIBUTING.md).
+- [ ] I have read the [docs](https://github.com/aimryoui/twg/tree/main/docs).
+- [ ] I have searched the [issues](https://github.com/aimryoui/twg/issues) and [pull requests](https://github.com/aimryoui/twg/pulls) to make sure this is not a duplicate.
 
 <!-- If you have any other questions, please feel free to ask! -->
 

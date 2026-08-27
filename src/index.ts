@@ -22,7 +22,7 @@ interface TWGOptions {
  * Main API to handle several types of class values including string, number,
  * object, array, conditionals, map key to each values inside the Object zones.
  *
- * @param options `separator`. See [docs](https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#createtwg-options).
+ * @param options `separator`. See [docs](https://github.com/aimryoui/twg/blob/main/docs/options.md#createtwg-options).
  * @param inputs A list of class values (strings, numbers, booleans, objects, arrays).
  *
  * @returns A function that processes class values based on the options.

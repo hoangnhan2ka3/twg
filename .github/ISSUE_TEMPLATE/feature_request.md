@@ -26,4 +26,4 @@ Add any other context or screenshots about the feature request here.
 
 ### Does `twg` support other frameworks/libraries than NextJs, React?
 
-In theory, yes. `twg` can also work with other frameworks/libraries using [`Tailwind CSS`](https://github.com/tailwindlabs/tailwindcss), but it's not [tested](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#tested-conditions) yet.
+In theory, yes. `twg` can also work with other frameworks/libraries using [`Tailwind CSS`](https://github.com/tailwindlabs/tailwindcss), but it's not [tested](https://github.com/aimryoui/twg?tab=readme-ov-file#tested-conditions) yet.

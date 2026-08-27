@@ -1,6 +1,5 @@
 packages:
   - bench
+dangerouslyAllowAllBuilds: true
+minimumReleaseAge: 0
 
-onlyBuiltDependencies:
-  - esbuild
-  - unrs-resolver

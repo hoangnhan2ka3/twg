@@ -504,7 +504,7 @@ export function cn(...inputs: ClassValue[]) {
       </th>
       <th width="500px">
         <div align="center">
-          MIT © <a href="https://github.com/hoangnhan2ka3">Nguyễn Hoàng Nhân</a>
+          MIT © <a href="https://github.com/aimryoui">Nguyễn Hoàng Nhân</a>
         </div>
       </th>
       <th width="500px">

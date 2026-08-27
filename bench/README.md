@@ -121,12 +121,12 @@ These are the results while running this directory's benchmark suite in Node v22
     <tr>
       <th width="500px">
         <div align="start">
-          <a href="https://github.com/hoangnhan2ka3/twg">< Back to main</a>
+          <a href="https://github.com/aimryoui/twg">< Back to main</a>
         </div>
       </th>
       <th width="500px">
         <div align="center">
-          MIT © <a href="https://github.com/hoangnhan2ka3">Nguyễn Hoàng Nhân</a>
+          MIT © <a href="https://github.com/aimryoui">Nguyễn Hoàng Nhân</a>
         </div>
       </th>
       <th width="500px">

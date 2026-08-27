@@ -1,0 +1,74 @@
+{
+    "$schema": "https://biomejs.dev/schemas/2.5.10/schema.json",
+    "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+    "files": { "ignoreUnknown": false },
+    "formatter": {
+        "enabled": false
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "preset": "none"
+        }
+    },
+    "css": {
+        "linter": {
+            "enabled": false
+        },
+        "assist": {
+            "enabled": false
+        }
+    },
+    "overrides": [
+        {
+            "includes": ["**/*.{ts,tsx}"],
+            "linter": {
+                "rules": {
+                    "correctness": {
+                        "noUnusedImports": {
+                            "level": "on",
+                            "fix": "safe"
+                        }
+                    },
+                    "style": {
+                        "useImportType": {
+                            "level": "warn",
+                            "options": { "style": "inlineType" }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "assist": {
+        "enabled": true,
+        "actions": {
+            "source": {
+                "useSortedProperties": "on",
+                "organizeImports": {
+                    "level": "on",
+                    "options": {
+                        "groups": [
+                            ":STYLE:",
+                            ":BLANK_LINE:",
+                            ":URL:",
+                            ":BLANK_LINE:",
+                            ":NODE:",
+                            ":BLANK_LINE:",
+                            ["react", "react-dom"],
+                            ["next", "next/**", "!next-*"],
+                            ":BLANK_LINE:",
+                            ":PACKAGE:",
+                            ":BLANK_LINE:",
+                            [":ALIAS:", "!~/**"],
+                            ":BLANK_LINE:",
+                            "~/**",
+                            ":BLANK_LINE:",
+                            ":PATH:"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

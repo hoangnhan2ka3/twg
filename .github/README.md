@@ -5,8 +5,8 @@
 <h1 align="center">twg</h1>
 
 <p align="center">
-  <a href="https://github.com/hoangnhan2ka3/twg/actions"><img src="https://badgen.net/github/checks/hoangnhan2ka3/twg/main?label=tests&color=f279b6" alt="Tests Status"></a>
-  <a href="https://github.com/hoangnhan2ka3/twg"><img src="https://badgen.net/github/stars/hoangnhan2ka3/twg?color=f279b6" alt="Repository stars"></a>
+  <a href="https://github.com/aimryoui/twg/actions"><img src="https://badgen.net/github/checks/aimryoui/twg/main?label=tests&color=f279b6" alt="Tests Status"></a>
+  <a href="https://github.com/aimryoui/twg"><img src="https://badgen.net/github/stars/aimryoui/twg?color=f279b6" alt="Repository stars"></a>
   <a href="https://bundlejs.com/?q=twg"><img src="https://badgen.net/bundlejs/min/twg?label=bundle&color=f279b6" alt="Bundle Size"></a>
   <a href="https://bundlejs.com/?q=twg"><img src="https://badgen.net/bundlejs/minzip/twg?label=gzip&color=f279b6" alt="Gzip Size"></a>
   <a href="https://www.npmjs.com/package/twg"><img src="https://badgen.net/npm/dt/twg?color=f279b6" alt="Total Downloads"></a>
@@ -209,11 +209,11 @@ For full & latest update changelog, please refer to [CHANGELOG.md](../CHANGELOG.
 
 ### Bugs
 
-`twg` now work for me but maybe not for you in some edges. Consider opening an [issue](https://github.com/hoangnhan2ka3/twg/issues) if you have any problem with it that I can fix it ASAP. Or a [pull request](https://github.com/hoangnhan2ka3/twg/pulls) is welcome too.
+`twg` now work for me but maybe not for you in some edges. Consider opening an [issue](https://github.com/aimryoui/twg/issues) if you have any problem with it that I can fix it ASAP. Or a [pull request](https://github.com/aimryoui/twg/pulls) is welcome too.
 
 ### Features
 
-If you have any ideas, feel free to open a [feature request](https://github.com/hoangnhan2ka3/twg/issues/new/choose) template or make a [pull request](https://github.com/hoangnhan2ka3/twg/pulls) to share your ideas.
+If you have any ideas, feel free to open a [feature request](https://github.com/aimryoui/twg/issues/new/choose) template or make a [pull request](https://github.com/aimryoui/twg/pulls) to share your ideas.
 
 > For **Development** and more information on contributing please read [CONTRIBUTING.md](../CONTRIBUTING.md).
 
@@ -232,13 +232,13 @@ If you have any ideas, feel free to open a [feature request](https://github.com/
 
 ### 💪 Work with me
 
-<https://www.linkedin.com/in/hoangnhan2ka3/>
+<https://www.linkedin.com/in/aimryoui/>
 
 ### Funding
 
-[![Donate me](https://img.shields.io/static/v1?label=Donate%20me&message=❤️&style=social)](https://github.com/sponsors/hoangnhan2ka3)
+[![Donate me](https://img.shields.io/static/v1?label=Donate%20me&message=❤️&style=social)](https://github.com/sponsors/aimryoui)
 
-<a href="https://www.buymeacoffee.com/hoangnhan2ka3"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=hoangnhan2ka3&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
+<a href="https://www.buymeacoffee.com/aimryoui"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=aimryoui&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
 
 ---
 
@@ -252,7 +252,7 @@ If you have any ideas, feel free to open a [feature request](https://github.com/
       </th>
       <th width="500px">
         <div align="center">
-          MIT © <a href="https://github.com/hoangnhan2ka3">Nguyễn Hoàng Nhân</a>
+          MIT © <a href="https://github.com/aimryoui">Nguyễn Hoàng Nhân</a>
         </div>
       </th>
       <th width="500px">

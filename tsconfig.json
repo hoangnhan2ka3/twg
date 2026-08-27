@@ -13,7 +13,6 @@
         "noUncheckedIndexedAccess": true,
         "noEmit": true,
         "outDir": "./dist",
-        "baseUrl": ".",
         "paths": {
             "src/*": ["./src/*"]
         }

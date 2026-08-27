@@ -1,8 +1,10 @@
 {
     "recommendations": [
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
+        "biomejs.biome",
+        "formulahendry.code-runner",
         "Orta.vscode-jest",
+        "oxc.oxc-vscode",
+        "TypeScriptTeam.native-preview",
         "YoavBls.pretty-ts-errors"
     ]
 }

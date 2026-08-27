@@ -28,7 +28,7 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ### Fixed
 
-- Refactor `transformer()` & `walker` function to improve performance. See [benchmark](https://github.com/hoangnhan2ka3/twg/blob/main/bench/README.md#transformer).
+- Refactor `transformer()` & `walker` function to improve performance. See [benchmark](https://github.com/aimryoui/twg/blob/main/bench/README.md#transformer).
 - Remove `tokenizer` function. Use custom `TWGParser` instead.
 
 ## [7.1.1] - 2026-02-15
@@ -46,7 +46,7 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ### Fixed
 
-- Refactor `createTwg()` & `transformer()` function to improve performance. See [benchmark](https://github.com/hoangnhan2ka3/twg/blob/main/bench/README.md).
+- Refactor `createTwg()` & `transformer()` function to improve performance. See [benchmark](https://github.com/aimryoui/twg/blob/main/bench/README.md).
 - More tests more fun.
 
 ## [7.0.1] - 2026-02-11
@@ -485,7 +485,7 @@ Undocumented APIs should be considered internal and may change without warning.
     - Currently work on _(.js, .ts, .jsx, .tsx)_ file only.
     - A bit slower, especially on the first time, when nothing is cached.
     - 4 more dependencies 😢
-- Supports native objects behavior like `clsx` (Key as classes and value as conditionals) [[docs](https://github.com/hoangnhan2ka3/twg?tab=readme-ov-file#-news)].
+- Supports native objects behavior like `clsx` (Key as classes and value as conditionals) [[docs](https://github.com/aimryoui/twg?tab=readme-ov-file#-news)].
 - Refactor lite version of `parser()` function to accept new objects behavior.
 
 ### Chore
@@ -618,53 +618,53 @@ Undocumented APIs should be considered internal and may change without warning.
 
 ### 🚀 First release
 
-[unreleased]: https://github.com/hoangnhan2ka3/twg/compare/7.1.4...HEAD
-[7.1.4]: https://github.com/hoangnhan2ka3/twg/compare/7.1.3...7.1.4
-[7.1.3]: https://github.com/hoangnhan2ka3/twg/compare/7.1.2...7.1.3
-[7.1.2]: https://github.com/hoangnhan2ka3/twg/compare/7.1.1...7.1.2
-[7.1.1]: https://github.com/hoangnhan2ka3/twg/compare/7.1.0...7.1.1
-[7.1.0]: https://github.com/hoangnhan2ka3/twg/compare/7.0.1...7.1.0
-[7.0.1]: https://github.com/hoangnhan2ka3/twg/compare/7.0.0...7.0.1
-[7.0.0]: https://github.com/hoangnhan2ka3/twg/compare/6.0.2...7.0.0
-[6.0.2]: https://github.com/hoangnhan2ka3/twg/compare/6.0.1...6.0.2
-[6.0.1]: https://github.com/hoangnhan2ka3/twg/compare/6.0.0...6.0.1
-[6.0.0]: https://github.com/hoangnhan2ka3/twg/compare/5.0.11...6.0.0
-[5.0.11]: https://github.com/hoangnhan2ka3/twg/compare/5.0.10...5.0.11
-[5.0.10]: https://github.com/hoangnhan2ka3/twg/compare/5.0.9...5.0.10
-[5.0.9]: https://github.com/hoangnhan2ka3/twg/compare/5.0.8...5.0.9
-[5.0.8]: https://github.com/hoangnhan2ka3/twg/compare/5.0.7...5.0.8
-[5.0.7]: https://github.com/hoangnhan2ka3/twg/compare/5.0.6...5.0.7
-[5.0.6]: https://github.com/hoangnhan2ka3/twg/compare/5.0.5...5.0.6
-[5.0.5]: https://github.com/hoangnhan2ka3/twg/compare/5.0.4...5.0.5
-[5.0.4]: https://github.com/hoangnhan2ka3/twg/compare/5.0.3...5.0.4
-[5.0.3]: https://github.com/hoangnhan2ka3/twg/compare/5.0.2...5.0.3
-[5.0.2]: https://github.com/hoangnhan2ka3/twg/compare/5.0.1...5.0.2
-[5.0.1]: https://github.com/hoangnhan2ka3/twg/compare/5.0.0...5.0.1
-[5.0.0]: https://github.com/hoangnhan2ka3/twg/compare/4.0.1...5.0.0
-[4.0.1]: https://github.com/hoangnhan2ka3/twg/compare/4.0.0...4.0.1
-[4.0.0]: https://github.com/hoangnhan2ka3/twg/compare/3.1.1...4.0.0
-[3.1.1]: https://github.com/hoangnhan2ka3/twg/compare/3.1.0...3.1.1
-[3.1.0]: https://github.com/hoangnhan2ka3/twg/compare/3.0.4...3.1.0
-[3.0.4]: https://github.com/hoangnhan2ka3/twg/compare/3.0.3...3.0.4
-[3.0.3]: https://github.com/hoangnhan2ka3/twg/compare/3.0.2...3.0.3
-[3.0.2]: https://github.com/hoangnhan2ka3/twg/compare/3.0.1...3.0.2
-[3.0.1]: https://github.com/hoangnhan2ka3/twg/compare/3.0.0...3.0.1
-[3.0.0]: https://github.com/hoangnhan2ka3/twg/compare/2.0.7...3.0.0
-[2.0.7]: https://github.com/hoangnhan2ka3/twg/compare/2.0.6...2.0.7
-[2.0.6]: https://github.com/hoangnhan2ka3/twg/compare/2.0.5...2.0.6
-[2.0.5]: https://github.com/hoangnhan2ka3/twg/compare/2.0.4...2.0.5
-[2.0.4]: https://github.com/hoangnhan2ka3/twg/compare/2.0.3...2.0.4
-[2.0.3]: https://github.com/hoangnhan2ka3/twg/compare/2.0.2...2.0.3
-[2.0.2]: https://github.com/hoangnhan2ka3/twg/compare/2.0.1...2.0.2
-[2.0.1]: https://github.com/hoangnhan2ka3/twg/compare/2.0.0...2.0.1
-[2.0.0]: https://github.com/hoangnhan2ka3/twg/compare/1.2.6...2.0.0
-[1.2.6]: https://github.com/hoangnhan2ka3/twg/compare/1.2.5...1.2.6
-[1.2.5]: https://github.com/hoangnhan2ka3/twg/compare/1.2.4...1.2.5
-[1.2.4]: https://github.com/hoangnhan2ka3/twg/compare/1.2.3...1.2.4
-[1.2.3]: https://github.com/hoangnhan2ka3/twg/compare/1.2.2...1.2.3
-[1.2.2]: https://github.com/hoangnhan2ka3/twg/compare/1.2.1...1.2.2
-[1.2.1]: https://github.com/hoangnhan2ka3/twg/compare/1.2.0...1.2.1
-[1.2.0]: https://github.com/hoangnhan2ka3/twg/compare/1.1.2...1.2.0
-[1.1.2]: https://github.com/hoangnhan2ka3/twg/compare/1.1.1...1.1.2
-[1.1.1]: https://github.com/hoangnhan2ka3/twg/compare/1.1.0...1.1.1
-[1.1.0]: https://github.com/hoangnhan2ka3/twg/compare/1.0.0...1.1.0
+[unreleased]: https://github.com/aimryoui/twg/compare/7.1.4...HEAD
+[7.1.4]: https://github.com/aimryoui/twg/compare/7.1.3...7.1.4
+[7.1.3]: https://github.com/aimryoui/twg/compare/7.1.2...7.1.3
+[7.1.2]: https://github.com/aimryoui/twg/compare/7.1.1...7.1.2
+[7.1.1]: https://github.com/aimryoui/twg/compare/7.1.0...7.1.1
+[7.1.0]: https://github.com/aimryoui/twg/compare/7.0.1...7.1.0
+[7.0.1]: https://github.com/aimryoui/twg/compare/7.0.0...7.0.1
+[7.0.0]: https://github.com/aimryoui/twg/compare/6.0.2...7.0.0
+[6.0.2]: https://github.com/aimryoui/twg/compare/6.0.1...6.0.2
+[6.0.1]: https://github.com/aimryoui/twg/compare/6.0.0...6.0.1
+[6.0.0]: https://github.com/aimryoui/twg/compare/5.0.11...6.0.0
+[5.0.11]: https://github.com/aimryoui/twg/compare/5.0.10...5.0.11
+[5.0.10]: https://github.com/aimryoui/twg/compare/5.0.9...5.0.10
+[5.0.9]: https://github.com/aimryoui/twg/compare/5.0.8...5.0.9
+[5.0.8]: https://github.com/aimryoui/twg/compare/5.0.7...5.0.8
+[5.0.7]: https://github.com/aimryoui/twg/compare/5.0.6...5.0.7
+[5.0.6]: https://github.com/aimryoui/twg/compare/5.0.5...5.0.6
+[5.0.5]: https://github.com/aimryoui/twg/compare/5.0.4...5.0.5
+[5.0.4]: https://github.com/aimryoui/twg/compare/5.0.3...5.0.4
+[5.0.3]: https://github.com/aimryoui/twg/compare/5.0.2...5.0.3
+[5.0.2]: https://github.com/aimryoui/twg/compare/5.0.1...5.0.2
+[5.0.1]: https://github.com/aimryoui/twg/compare/5.0.0...5.0.1
+[5.0.0]: https://github.com/aimryoui/twg/compare/4.0.1...5.0.0
+[4.0.1]: https://github.com/aimryoui/twg/compare/4.0.0...4.0.1
+[4.0.0]: https://github.com/aimryoui/twg/compare/3.1.1...4.0.0
+[3.1.1]: https://github.com/aimryoui/twg/compare/3.1.0...3.1.1
+[3.1.0]: https://github.com/aimryoui/twg/compare/3.0.4...3.1.0
+[3.0.4]: https://github.com/aimryoui/twg/compare/3.0.3...3.0.4
+[3.0.3]: https://github.com/aimryoui/twg/compare/3.0.2...3.0.3
+[3.0.2]: https://github.com/aimryoui/twg/compare/3.0.1...3.0.2
+[3.0.1]: https://github.com/aimryoui/twg/compare/3.0.0...3.0.1
+[3.0.0]: https://github.com/aimryoui/twg/compare/2.0.7...3.0.0
+[2.0.7]: https://github.com/aimryoui/twg/compare/2.0.6...2.0.7
+[2.0.6]: https://github.com/aimryoui/twg/compare/2.0.5...2.0.6
+[2.0.5]: https://github.com/aimryoui/twg/compare/2.0.4...2.0.5
+[2.0.4]: https://github.com/aimryoui/twg/compare/2.0.3...2.0.4
+[2.0.3]: https://github.com/aimryoui/twg/compare/2.0.2...2.0.3
+[2.0.2]: https://github.com/aimryoui/twg/compare/2.0.1...2.0.2
+[2.0.1]: https://github.com/aimryoui/twg/compare/2.0.0...2.0.1
+[2.0.0]: https://github.com/aimryoui/twg/compare/1.2.6...2.0.0
+[1.2.6]: https://github.com/aimryoui/twg/compare/1.2.5...1.2.6
+[1.2.5]: https://github.com/aimryoui/twg/compare/1.2.4...1.2.5
+[1.2.4]: https://github.com/aimryoui/twg/compare/1.2.3...1.2.4
+[1.2.3]: https://github.com/aimryoui/twg/compare/1.2.2...1.2.3
+[1.2.2]: https://github.com/aimryoui/twg/compare/1.2.1...1.2.2
+[1.2.1]: https://github.com/aimryoui/twg/compare/1.2.0...1.2.1
+[1.2.0]: https://github.com/aimryoui/twg/compare/1.1.2...1.2.0
+[1.1.2]: https://github.com/aimryoui/twg/compare/1.1.1...1.1.2
+[1.1.1]: https://github.com/aimryoui/twg/compare/1.1.0...1.1.1
+[1.1.0]: https://github.com/aimryoui/twg/compare/1.0.0...1.1.0

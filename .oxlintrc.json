@@ -1,0 +1,156 @@
+{
+    "$schema": "./node_modules/oxlint/configuration_schema.json",
+    "categories": {
+        "correctness": "warn",
+        "perf": "warn",
+        "pedantic": "error"
+    },
+    "env": {
+        "builtin": true,
+        "browser": true,
+        "node": true
+    },
+    "ignorePatterns": [
+        "**/node_modules/",
+        "**/.git/",
+        "dist/**",
+        "pnpm-lock.yaml"
+    ],
+    "options": {
+        "reportUnusedDisableDirectives": "warn",
+        "typeAware": true,
+        "typeCheck": true
+    },
+    "plugins": ["eslint", "typescript", "oxc", "jsdoc"],
+    "jsPlugins": [
+        "@stylistic/eslint-plugin",
+        "eslint-plugin-simple-import-sort",
+        "@limegrass/eslint-plugin-import-alias"
+    ],
+    "rules": {
+        //* Built-in
+        "no-unused-vars": [
+            "warn",
+            {
+                "args": "all",
+                "argsIgnorePattern": "^_",
+                "caughtErrorsIgnorePattern": "^_",
+                "destructuredArrayIgnorePattern": "^_",
+                "varsIgnorePattern": "^_"
+            }
+        ],
+        "max-depth": "off",
+        "max-lines": "off",
+        "max-lines-per-function": "off",
+        "no-inline-comments": "off",
+        "prefer-tag-over-role": "off",
+        "object-shorthand": "warn",
+
+        //* TypeScript
+        // recommended
+        "typescript/ban-ts-comment": "warn",
+        "typescript/no-empty-object-type": "warn",
+        "typescript/no-explicit-any": "warn",
+        "typescript/no-misused-promises": "warn",
+        "typescript/no-namespace": "warn",
+        "typescript/no-require-imports": "warn",
+        "typescript/no-unnecessary-type-assertion": "warn",
+        "typescript/no-unnecessary-type-constraint": "warn",
+        "typescript/no-unsafe-argument": "warn",
+        "typescript/no-unsafe-assignment": "warn",
+        "typescript/no-unsafe-call": "warn",
+        "typescript/no-unsafe-enum-comparison": "warn",
+        "typescript/no-unsafe-function-type": "warn",
+        "typescript/no-unsafe-member-access": "warn",
+        "typescript/no-unsafe-return": "warn",
+        "typescript/no-unused-expressions": "warn",
+        "typescript/only-throw-error": "warn",
+        "typescript/prefer-promise-reject-errors": "warn",
+        "typescript/require-await": "warn",
+        "typescript/restrict-plus-operands": "warn",
+        // strict
+        "typescript/no-confusing-void-expression": "warn",
+        "typescript/no-deprecated": "warn",
+        "typescript/no-dynamic-delete": "warn",
+        "typescript/no-extraneous-class": "warn",
+        "typescript/no-mixed-enums": "warn",
+        "typescript/no-non-null-asserted-nullish-coalescing": "warn",
+        "typescript/no-non-null-assertion": "warn",
+        "typescript/no-unnecessary-boolean-literal-compare": "warn",
+        "typescript/no-unnecessary-condition": "warn",
+        "typescript/no-unnecessary-template-expression": "warn",
+        "typescript/no-unnecessary-type-arguments": "warn",
+        "typescript/no-unnecessary-type-conversion": "warn",
+        "typescript/no-unnecessary-type-parameters": "warn",
+        "typescript/no-useless-constructor": "warn",
+        "typescript/no-useless-default-assignment": "warn",
+        "typescript/prefer-literal-enum-member": "warn",
+        "typescript/prefer-reduce-type-parameter": "warn",
+        "typescript/prefer-return-this-type": "warn",
+        "typescript/return-await": "warn",
+        "typescript/unified-signatures": "warn",
+        "typescript/use-unknown-in-catch-callback-variable": "warn",
+        // stylistic
+        "typescript/adjacent-overload-signatures": "warn",
+        "typescript/array-type": "warn",
+        "typescript/ban-tslint-comment": "warn",
+        "typescript/class-literal-property-style": "warn",
+        "typescript/consistent-generic-constructors": "warn",
+        "typescript/consistent-indexed-object-style": "warn",
+        "typescript/consistent-type-assertions": "warn",
+        "typescript/consistent-type-definitions": "warn",
+        "typescript/dot-notation": "warn",
+        "typescript/no-confusing-non-null-assertion": "warn",
+        "typescript/no-empty-function": "warn",
+        "typescript/no-inferrable-types": "warn",
+        "typescript/no-invalid-void-type": "warn",
+        "typescript/non-nullable-type-assertion-style": "warn",
+        "typescript/prefer-find": "warn",
+        "typescript/prefer-for-of": "warn",
+        "typescript/prefer-function-type": "warn",
+        "typescript/prefer-nullish-coalescing": "warn",
+        "typescript/prefer-optional-chain": "warn",
+        "typescript/prefer-regexp-exec": "warn",
+
+        "typescript/consistent-type-exports": "warn",
+        "typescript/prefer-readonly-parameter-types": "off",
+        "typescript/prefer-includes": "off",
+
+        //* Stylistic
+        "@stylistic/quotes": [
+            "warn",
+            "double",
+            // const backtick = `backtick` -> "backtick"
+            {
+                "avoidEscape": true,
+                "allowTemplateLiterals": "avoidEscape"
+            }
+        ]
+    },
+    "overrides": [
+        {
+            "files": ["**/*.{ts,tsx}"],
+            "rules": {
+                "no-empty-function": "off",
+
+                //* Import
+                // "simple-import-sort/exports": "warn",
+                "@limegrass/import-alias/import-alias": [
+                    "warn",
+                    {
+                        "isAllowBaseUrlResolvedImport": false,
+                        "aliasConfigPath": "./tsconfig.json"
+                    }
+                ],
+
+                // Console.log
+                "no-console": [
+                    "warn",
+                    {
+                        "allow": ["info", "warn", "error"]
+                    }
+                ]
+            }
+        }
+    ]
+}

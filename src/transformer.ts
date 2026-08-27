@@ -21,21 +21,21 @@ interface TransformerOptions {
      * Callee name to be scanned.
      *
      * @default "twg"
-     * @see {@link https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#-custom-callee}
+     * @see {@link https://github.com/aimryoui/twg/blob/main/docs/options.md#-custom-callee}
      */
     callee?: string | string[]
     /**
      * The divider between the key and class values.
      *
      * @default ":"
-     * @see {@link https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#-custom-separator}
+     * @see {@link https://github.com/aimryoui/twg/blob/main/docs/options.md#-custom-separator}
      */
     separator?: string
     /**
      * Printing debug messages in console if there are any warnings or errors.
      *
      * @default false
-     * @see {@link https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#-turn-on-debug}
+     * @see {@link https://github.com/aimryoui/twg/blob/main/docs/options.md#-turn-on-debug}
      */
     debug?: boolean
 }
@@ -43,7 +43,7 @@ interface TransformerOptions {
 /**
  * Transforms the content before Tailwind scans/extracting its classes.
  *
- * @param options `callee`, `separator`, `debug`. See [docs](https://github.com/hoangnhan2ka3/twg/blob/main/docs/options.md#transformer-options).
+ * @param options `callee`, `separator`, `debug`. See [docs](https://github.com/aimryoui/twg/blob/main/docs/options.md#transformer-options).
  * @param content The content already provided by `content.files` in `tailwind.config`.
  *
  * @returns A function that processes class values based on the options.
